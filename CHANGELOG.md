@@ -1,6 +1,11 @@
-## 0.2.2
+## 0.2.3
 22 July 2025
 
+- Updated documentation and added environment display utility
+- docs: simplified and updated project documentation
+- feat: exported getConfigPaths function in lib/config.js
+- feat: added new file lib/env-display.js for environment display utility
+- feat: integrated environment display utility in maiassnode.js
 - Added initial version of MAIASSNODE project with detailed documentation
 - feat: added .windsurf with detailed project overview and development guidelines
 - feat: added README.maiass.md with project summary and quick start guide
