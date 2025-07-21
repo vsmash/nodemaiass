@@ -23,6 +23,7 @@ console.log(colors.Aqua(`MAIASSNODE v${version}`));
 
 // Import env display utility
 import { displayEnvironmentVariables } from './lib/env-display.js';
+import { getGitInfo, displayGitInfo, validateBranchForOperations } from './lib/git-info.js';
 
 // Yargs CLI setup (stub)
 yargs(hideBin(process.argv))
@@ -35,20 +36,20 @@ yargs(hideBin(process.argv))
     return yargs
       .option('show-sensitive', {
         alias: 's',
-        describe: 'Show sensitive variables (tokens, keys) unmasked',
         type: 'boolean',
-        default: false
+        default: false,
+        description: 'Show sensitive variables unmasked'
       })
       .option('show-all', {
-        alias: 'a',
-        describe: 'Show all environment variables, not just MAIASS-specific',
+        alias: 'a', 
         type: 'boolean',
-        default: false
+        default: false,
+        description: 'Show all MAIASS environment variables'
       })
       .option('no-sources', {
-        describe: 'Hide config file source information',
         type: 'boolean',
-        default: false
+        default: false,
+        description: 'Hide configuration file source information'
       });
   }, (argv) => {
     displayEnvironmentVariables({
@@ -56,6 +57,58 @@ yargs(hideBin(process.argv))
       showAll: argv.showAll,
       showSources: !argv.noSources
     });
+  })
+  .command('git', 'Display git branch and repository information', (yargs) => {
+    return yargs
+      .option('no-remote', {
+        type: 'boolean',
+        default: false,
+        description: 'Hide remote repository information'
+      })
+      .option('no-author', {
+        type: 'boolean',
+        default: false,
+        description: 'Hide git author information'
+      })
+      .option('validate', {
+        alias: 'v',
+        type: 'boolean',
+        default: false,
+        description: 'Validate branch for MAIASS operations'
+      });
+  }, (argv) => {
+    const gitInfo = getGitInfo();
+    
+    if (!gitInfo) {
+      console.log(colors.Red(SYMBOLS.CROSS + ' Not in a git repository'));
+      process.exit(1);
+    }
+    
+    displayGitInfo(gitInfo, {
+      showRemote: !argv.noRemote,
+      showAuthor: !argv.noAuthor
+    });
+    
+    if (argv.validate) {
+      console.log();
+      const validation = validateBranchForOperations(gitInfo);
+      
+      if (validation.warnings.length > 0) {
+        console.log(colors.BYellow(SYMBOLS.WARNING + '  Warnings:'));
+        validation.warnings.forEach(warning => {
+          console.log(`  ${colors.Yellow(SYMBOLS.BULLET)} ${warning}`);
+        });
+        console.log();
+      }
+      
+      if (validation.recommendations.length > 0) {
+        console.log(colors.BCyan(SYMBOLS.INFO + ' Recommendations:'));
+        validation.recommendations.forEach(rec => {
+          console.log(`  ${colors.Cyan(SYMBOLS.BULLET)} ${rec}`);
+        });
+        console.log();
+      }
+    }
   })
   .demandCommand(1, 'You need at least one command before moving on')
   .help()
