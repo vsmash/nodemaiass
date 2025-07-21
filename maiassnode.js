@@ -21,12 +21,41 @@ const version = packageJson.version;
 
 console.log(colors.Aqua(`MAIASSNODE v${version}`));
 
+// Import env display utility
+import { displayEnvironmentVariables } from './lib/env-display.js';
+
 // Yargs CLI setup (stub)
 yargs(hideBin(process.argv))
   .scriptName('maiassnode')
   .usage('$0 <cmd> [args]')
   .command('hello', 'Print hello world', () => {}, () => {
     console.log(colors.BCyan('Hello from MAIASSNODE!'));
+  })
+  .command('env', 'Display environment variables', (yargs) => {
+    return yargs
+      .option('show-sensitive', {
+        alias: 's',
+        describe: 'Show sensitive variables (tokens, keys) unmasked',
+        type: 'boolean',
+        default: false
+      })
+      .option('show-all', {
+        alias: 'a',
+        describe: 'Show all environment variables, not just MAIASS-specific',
+        type: 'boolean',
+        default: false
+      })
+      .option('no-sources', {
+        describe: 'Hide config file source information',
+        type: 'boolean',
+        default: false
+      });
+  }, (argv) => {
+    displayEnvironmentVariables({
+      showSensitive: argv.showSensitive,
+      showAll: argv.showAll,
+      showSources: !argv.noSources
+    });
   })
   .demandCommand(1, 'You need at least one command before moving on')
   .help()
