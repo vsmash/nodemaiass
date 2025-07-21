@@ -1,2 +1,0 @@
-This is a test file to demonstrate the MAIASSNODE commit functionality.
-It includes AI-powered commit message generation and JIRA ticket integration.
