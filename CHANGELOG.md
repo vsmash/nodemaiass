@@ -1,6 +1,14 @@
-## 0.2.3
+## 0.2.4
 22 July 2025
 
+- Enhanced environment variable display and added new color options
+- feat: added new color options in colors.js
+- feat: improved environment variable display in env-display.js
+- feat: added new file maiass-variables.js for managing MAIASS environment variables
+- Refactored environment variable display logic
+- fix(lib): simplified display of MAIASS-specific variables
+- fix(lib): removed additional relevant variables from MAIASS display
+- fix(lib): adjusted displayAllEnvironmentVariables to show only MAIASS-prefixed vars
 - Updated documentation and added environment display utility
 - docs: simplified and updated project documentation
 - feat: exported getConfigPaths function in lib/config.js
