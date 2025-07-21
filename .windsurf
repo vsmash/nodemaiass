@@ -1,0 +1,92 @@
+# MAIASSNODE - Node.js Replica of MAIASS
+
+## Project Overview
+This is a Node.js replica of the MAIASS (Modular AI-Assisted Semantic Savant) intelligent Git workflow automation script. The original Bash script is located at `/Volumes/enigmadev/enigmadev/static/maiass-whole/maiass/maiass.sh`.
+
+## Key Information
+- **Original Script**: `/Volumes/enigmadev/enigmadev/static/maiass-whole/maiass/maiass.sh` (109KB+ Bash script)
+- **Node.js Version**: Modern ES module-based CLI using Node.js 23+
+- **Cross-Platform**: Supports Windows, macOS, and Linux with OS-appropriate config storage
+- **Environment Loading**: Multi-source fallback system (project → user → system → secure)
+
+## Project Structure
+```
+maiassnode/
+├── maiassnode.js          # Main CLI entry point (ES modules)
+├── nodemaiass.sh          # Shell wrapper for symlink (nma command)
+├── setup-env.js           # Interactive environment setup utility
+├── lib/
+│   ├── colors.js          # Chalk-based color output (v5+ compatible)
+│   └── config.js          # Cross-platform configuration system
+├── docs/
+│   ├── README.maiass.md   # Main documentation (KEEP UPDATED)
+│   ├── configuration.md   # Environment variable reference
+│   ├── setup.md          # Cross-platform setup guide
+│   ├── commands.md       # CLI command reference
+│   └── development.md    # Developer contribution guide
+└── package.json          # ES module project with type: "module"
+```
+
+## Development Guidelines
+
+### Documentation Policy
+**CRITICAL**: The `docs/README.maiass.md` file MUST be updated with every significant change to the project. This includes:
+- New features or commands
+- Configuration changes
+- Environment variable additions
+- Cross-platform compatibility updates
+- API changes
+
+### Porting from Original MAIASS
+When porting functionality from `/Volumes/enigmadev/enigmadev/static/maiass-whole/maiass/maiass.sh`:
+1. Identify the Bash function to port
+2. Extract core logic and convert to JavaScript/Node.js
+3. Add cross-platform support using `lib/config.js`
+4. Integrate with yargs CLI framework
+5. Update documentation in `docs/`
+6. Test on multiple platforms
+
+### Key Technical Details
+- **ES Modules**: All files use `import`/`export` syntax
+- **Chalk v5+**: Colors use `chalk.bold(chalk.cyan(text))` pattern
+- **Cross-Platform Paths**: Always use `path.join()` and OS-specific config dirs
+- **Environment Priority**: `.env` (cwd) → `.maiass.env` (home) → `config.env` → `secure.env`
+- **Secure Storage**: Sensitive vars (OpenAI tokens) stored in OS-appropriate secure locations
+
+### Current Status
+- ✅ Basic CLI structure with yargs
+- ✅ Cross-platform environment loading
+- ✅ Secure configuration storage
+- ✅ Color output system
+- ✅ Interactive setup utility
+- ✅ Comprehensive documentation
+- 🔄 Currently implementing: Additional commands from original MAIASS
+
+### Testing
+```bash
+# Basic functionality
+nma hello
+
+# Environment setup
+node setup-env.js
+
+# Development testing
+DEBUG=true nma hello
+```
+
+### Symlink Setup
+The `nodemaiass.sh` wrapper allows the CLI to be used via `nma` command:
+```bash
+ln -s ~/path/to/maiassnode/nodemaiass.sh ~/.local/bin/nma
+```
+
+## Related Files
+- Original MAIASS script: `/Volumes/enigmadev/enigmadev/static/maiass-whole/maiass/maiass.sh`
+- Original docs: `/Volumes/enigmadev/enigmadev/static/maiass-whole/maiass/docs/`
+- Test repository: `/Volumes/enigmadev/enigmadev/static/dummy-repos-for-tests/wordpress-repo`
+
+## Important Notes
+- This project uses modern Node.js features (ES modules, latest Chalk)
+- All configuration is cross-platform compatible
+- Documentation must be kept current with all changes
+- Original MAIASS functionality should be preserved while modernizing the implementation
