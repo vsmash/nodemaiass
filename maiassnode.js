@@ -4,16 +4,22 @@ import path from 'path';
 import fs from 'fs';
 import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';
-import dotenv from 'dotenv';
-dotenv.config({ path: path.resolve(process.env.HOME || '', '.maiass.env') });
-dotenv.config(); // fallback to .env in cwd
+import { loadEnvironmentConfig, ensureConfigDirectories } from './lib/config.js';
+
+// Load environment variables from multiple sources with cross-platform support
+ensureConfigDirectories();
+const envConfig = loadEnvironmentConfig();
 
 
 // Example: print version and a colorful welcome
 import colors from './lib/colors.js';
 
-const version = '0.1.0';
-console.log(colors.BCyan(`MAIASSNODE v${version}`));
+// get the version from package.json (ES module compatible)
+const __dirname = path.dirname(new URL(import.meta.url).pathname);
+const packageJson = JSON.parse(fs.readFileSync(path.join(__dirname, 'package.json')));
+const version = packageJson.version;
+
+console.log(colors.Aqua(`MAIASSNODE v${version}`));
 
 // Yargs CLI setup (stub)
 yargs(hideBin(process.argv))
