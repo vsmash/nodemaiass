@@ -1,7 +1,7 @@
 {
   "name": "maiassnode",
   "type": "module",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "description": "Node.js replica of maiass.sh intelligent Git workflow automation script",
   "main": "maiassnode.js",
   "bin": {
