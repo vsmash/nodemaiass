@@ -1,6 +1,10 @@
-## 0.2.4
+## 0.2.5
 22 July 2025
 
+- Improved visual presentation in terminal output
+- feat: added symbols.js for Unicode/ASCII fallbacks
+- refactor: integrated symbols into env-display.js for better readability
+- refactor: rearranged colors.js for consistency
 - Enhanced environment variable display and added new color options
 - feat: added new color options in colors.js
 - feat: improved environment variable display in env-display.js
