@@ -25,6 +25,8 @@ console.log(colors.Aqua(`MAIASSNODE v${version}`));
 import { displayEnvironmentVariables } from './lib/env-display.js';
 import { getGitInfo, displayGitInfo, validateBranchForOperations } from './lib/git-info.js';
 import { commitThis } from './lib/commit.js';
+import { handleConfigCommand } from './lib/config-command.js';
+import { SYMBOLS } from './lib/symbols.js';
 
 // Yargs CLI setup (stub)
 yargs(hideBin(process.argv))
@@ -117,30 +119,70 @@ yargs(hideBin(process.argv))
       }
     }
   })
-  .command('commit', 'Commit changes with AI-powered message generation', (yargs) => {
+  .command('commit', 'Commit changes with AI assistance', (yargs) => {
     return yargs
       .option('auto-stage', {
         alias: 'a',
         type: 'boolean',
-        default: false,
-        description: 'Automatically stage all changes without asking'
+        description: 'Automatically stage all changes before committing'
       })
       .option('commits-only', {
         alias: 'c',
         type: 'boolean',
-        default: false,
         description: 'Only handle commits, do not proceed to release pipeline'
       });
   }, async (argv) => {
-    const success = await commitThis({
+    await commitThis({
       autoStage: argv.autoStage,
       commitsOnly: argv.commitsOnly
     });
-    
-    if (!success) {
-      process.exit(1);
-    }
   })
+  .command('config [key]', 'Manage configuration settings', (yargs) => {
+    return yargs
+      .positional('key', {
+        describe: 'Configuration key to get/set (format: key or key=value)',
+        type: 'string'
+      })
+      .option('global', {
+        alias: 'g',
+        type: 'boolean',
+        description: 'Manage global user configuration (~/.maiass.env)'
+      })
+      .option('project', {
+        alias: 'p',
+        type: 'boolean',
+        description: 'Manage project configuration (./.env)'
+      })
+      .option('edit', {
+        alias: 'e',
+        type: 'boolean',
+        description: 'Open configuration file in editor'
+      })
+      .option('list', {
+        alias: 'l',
+        type: 'boolean',
+        description: 'Show only configured values (not defaults)'
+      })
+      .option('show-sensitive', {
+        alias: 's',
+        type: 'boolean',
+        description: 'Show sensitive values (tokens, passwords) in full'
+      })
+      .option('list-vars', {
+        type: 'boolean',
+        description: 'List all available configuration variables'
+      })
+      .example('nma config', 'Show all configuration values')
+      .example('nma config --global', 'Show global configuration')
+      .example('nma config --project', 'Show project configuration')
+      .example('nma config --global openai_token=abc123', 'Set global OpenAI token')
+      .example('nma config --project debug=true', 'Set project debug mode')
+      .example('nma config verbosity', 'Get verbosity setting')
+      .example('nma config --edit --global', 'Edit global config file')
+      .example('nma config --list-vars', 'List available variables');
+  }, async (argv) => {
+    await handleConfigCommand(argv);
+  })  
   .demandCommand(1, 'You need at least one command before moving on')
   .help()
   .argv;
