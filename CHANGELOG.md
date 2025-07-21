@@ -1,6 +1,10 @@
-## 0.2.5
+## 0.2.6
 22 July 2025
 
+- Added Git information extraction and display utility
+- feat: added a Git information utility in lib/git-info.js
+- feat: integrated Git information utility in maiassnode.js
+- feat: added Git info display and validation commands in CLI
 - Improved visual presentation in terminal output
 - feat: added symbols.js for Unicode/ASCII fallbacks
 - refactor: integrated symbols into env-display.js for better readability
