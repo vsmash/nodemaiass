@@ -1,6 +1,22 @@
-## 0.2.7
+## 0.2.8
 22 July 2025
 
+- Added bash script for commit
+- feat: added new committhis.sh bash script
+- feat: implemented nma commit function in script
+- Programmatically prepended JIRA ticket to commit message
+-  - feat: implemented logic to prepend JIRA ticket to edited message if not already present
+-  - feat: added condition to prepend JIRA ticket to AI suggestion when accepted as default
+- Improved commit message handling and command execution
+-  - feat: Added clean up to remove wrapping quotes from commit message suggestions
+-  - refactor: Rearranged console message display order in handleStagedCommit method
+-  - fix: Adjusted trimming behavior for git commands, preserving leading spaces for 'git status --porcelain' command
+-  - fix: Handle all exceptions/error scenarios during git command execution
+- 'Reconfigured environment variable load order and sources
+-  - feat: reversed file load order for environment variables
+-  - feat: added specific file load prioritization to environment configuration
+-  - fix(lib): improved environment variable source identification methods
+-  - clean: removed unnecessary test file'
 - Line 1 test
 - line 2 test
 - Line 3 test
