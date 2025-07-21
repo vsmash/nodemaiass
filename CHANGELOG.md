@@ -1,6 +1,9 @@
-## 0.2.6
+## 0.2.7
 22 July 2025
 
+- Line 1 test
+- line 2 test
+- Line 3 test
 - Added Git information extraction and display utility
 - feat: added a Git information utility in lib/git-info.js
 - feat: integrated Git information utility in maiassnode.js
