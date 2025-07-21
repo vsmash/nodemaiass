@@ -4,7 +4,6 @@ import path from 'path';
 import fs from 'fs';
 import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';
-import chalk from 'chalk';
 import dotenv from 'dotenv';
 dotenv.config({ path: path.resolve(process.env.HOME || '', '.maiass.env') });
 dotenv.config(); // fallback to .env in cwd
