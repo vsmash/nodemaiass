@@ -1,0 +1,16 @@
+{
+  "name": "maiassnode",
+  "version": "0.1.0",
+  "description": "Node.js replica of maiass.sh intelligent Git workflow automation script",
+  "main": "maiassnode.js",
+  "bin": {
+    "maiassnode": "./maiassnode.js"
+  },
+  "author": "Velvary Pty Ltd",
+  "license": "MIT",
+  "dependencies": {
+    "chalk": "^5.4.1",
+    "dotenv": "^16.4.5",
+    "yargs": "^17.7.2"
+  }
+}
