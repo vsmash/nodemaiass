@@ -24,6 +24,7 @@ console.log(colors.Aqua(`MAIASSNODE v${version}`));
 // Import env display utility
 import { displayEnvironmentVariables } from './lib/env-display.js';
 import { getGitInfo, displayGitInfo, validateBranchForOperations } from './lib/git-info.js';
+import { commitThis } from './lib/commit.js';
 
 // Yargs CLI setup (stub)
 yargs(hideBin(process.argv))
@@ -75,6 +76,11 @@ yargs(hideBin(process.argv))
         type: 'boolean',
         default: false,
         description: 'Validate branch for MAIASS operations'
+      })
+      .option('no-status', {
+        type: 'boolean',
+        default: false,
+        description: 'Hide git status information (staged/unstaged changes)'
       });
   }, (argv) => {
     const gitInfo = getGitInfo();
@@ -86,7 +92,8 @@ yargs(hideBin(process.argv))
     
     displayGitInfo(gitInfo, {
       showRemote: !argv.noRemote,
-      showAuthor: !argv.noAuthor
+      showAuthor: !argv.noAuthor,
+      showStatus: !argv.noStatus
     });
     
     if (argv.validate) {
@@ -108,6 +115,30 @@ yargs(hideBin(process.argv))
         });
         console.log();
       }
+    }
+  })
+  .command('commit', 'Commit changes with AI-powered message generation', (yargs) => {
+    return yargs
+      .option('auto-stage', {
+        alias: 'a',
+        type: 'boolean',
+        default: false,
+        description: 'Automatically stage all changes without asking'
+      })
+      .option('commits-only', {
+        alias: 'c',
+        type: 'boolean',
+        default: false,
+        description: 'Only handle commits, do not proceed to release pipeline'
+      });
+  }, async (argv) => {
+    const success = await commitThis({
+      autoStage: argv.autoStage,
+      commitsOnly: argv.commitsOnly
+    });
+    
+    if (!success) {
+      process.exit(1);
     }
   })
   .demandCommand(1, 'You need at least one command before moving on')
