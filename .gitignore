@@ -1,2 +1,8 @@
+# Environment and configuration files
 .env
 .env.*
+.env.maiass
+.env.maiass.*
+
+# Sensitive configuration
+*.backup.*

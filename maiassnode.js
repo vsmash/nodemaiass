@@ -146,12 +146,12 @@ yargs(hideBin(process.argv))
       .option('global', {
         alias: 'g',
         type: 'boolean',
-        description: 'Manage global user configuration (~/.maiass.env)'
+        description: 'Manage global user configuration (~/.env.maiass)'
       })
       .option('project', {
         alias: 'p',
         type: 'boolean',
-        description: 'Manage project configuration (./.env)'
+        description: 'Manage project configuration (./.env.maiass)'
       })
       .option('edit', {
         alias: 'e',
