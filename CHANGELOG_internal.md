@@ -1,3 +1,13 @@
+## 0.5.8
+24 July 2025
+
+-  (vsmsh)
+- 40c8bac VEL-405 Improved internal changelog extraction
+-   - feat: Changed commit log command to include full commit message and author name
+-   - fix: Improved error handling when failing to get commits for internal changelog
+-  (vsmsh)
+-  (vsmsh)
+
 ## 0.5.7
 24 July 2025
 
