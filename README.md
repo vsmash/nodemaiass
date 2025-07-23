@@ -35,6 +35,8 @@ nma --dry-run
 - **Branch strategy enforcement** (develop/staging/master)
 - **Merge conflict handling** and remote synchronization
 - **Git tag creation** for releases
+- **Automated changelog generation** with clean formatting
+- **Dual changelog system**: Main (user-facing) + Internal (developer-facing)
 
 ### ⚙️ **Flexible Configuration**
 - **Cross-platform config** (`.env.maiass` files)
@@ -147,6 +149,12 @@ MAIASS_STAGINGBRANCH=staging              # Default: staging
 # Workflow Settings
 MAIASS_DEBUG=true                         # Enable debug output
 MAIASS_VERBOSITY=normal                   # brief, normal, verbose
+MAIASS_AUTO_TAG_RELEASES=true             # Automatically tag releases (required for changelog)
+
+# Changelog Configuration
+MAIASS_CHANGELOG_PATH=CHANGELOG.md        # Main changelog file path
+MAIASS_CHANGELOG_NAME=CHANGELOG.md        # Main changelog file name
+MAIASS_CHANGELOG_INTERNAL_NAME=CHANGELOG_internal.md  # Internal changelog file name
 ```
 
 ## 🔄 Workflow Phases
@@ -175,6 +183,46 @@ MAIASSNODE orchestrates a 4-phase workflow:
 - Bumps semantic versions (major.minor.patch)
 - Updates multiple version files simultaneously
 - Creates git tags for releases
+- **Generates dual changelogs**:
+  - `CHANGELOG.md`: Clean, user-facing format with JIRA tickets stripped
+  - `CHANGELOG_internal.md`: Developer format with commit hashes, authors, and JIRA tickets
+- **Smart commit range detection**: Only includes commits since the last release tag
+- **Version replacement logic**: Replaces same-day patch versions instead of duplicating entries
+
+## 📝 Changelog System
+
+MAIASSNODE automatically generates two types of changelogs during version management:
+
+### Main Changelog (`CHANGELOG.md`)
+**User-facing format** with clean, readable entries:
+```markdown
+## 0.5.6
+24 July 2025
+
+- Update Maiass Pipeline functionality
+	- feat: imported path package in maiass-pipeline
+	- docs: added comment about commit message formatting
+- Updated commit message filtering for maiass-pipeline
+	- feat: added code to clean up commit messages
+	- fix: removed empty lines and trailing newlines from each commit
+```
+
+### Internal Changelog (`CHANGELOG_internal.md`)
+**Developer-facing format** with commit hashes, authors, and JIRA tickets:
+```markdown
+## 0.5.6
+Thursday, 24 July 2025
+
+- d7ddba9 VEL-405 Update Maiass Pipeline functionality (Developer Name)
+- 5ea6d03 VEL-405 Updated commit message filtering for maiass-pipeline (Developer Name)
+```
+
+### Changelog Features
+- **Smart commit detection**: Only includes commits since the last release tag
+- **Automatic filtering**: Excludes merge commits, version bumps, and irrelevant entries
+- **JIRA integration**: Strips JIRA tickets from main changelog, preserves in internal
+- **Version replacement**: Same-day patch versions replace previous entries instead of duplicating
+- **Clean formatting**: No double bullets or unwanted blank lines
 
 ## 🎨 Examples
 
