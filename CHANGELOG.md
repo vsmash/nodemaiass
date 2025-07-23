@@ -1,5 +1,9 @@
-## 0.5.3
+## 0.5.4
 24 July 2025
+
+- Updated version tagging in Maiass pipeline
+	- refactor: default to true for version tagging
+	- style: commented out previous implementation of version tagging
 
 - Refactoring of updateChangelog function
 	- feat: updated the changelog update function to use current version info
