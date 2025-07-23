@@ -1,5 +1,9 @@
-## 0.5.7
+## 0.5.8
 24 July 2025
+
+- Improved internal changelog extraction
+	- feat: Changed commit log command to include full commit message and author name
+	- fix: Improved error handling when failing to get commits for internal changelog
 
 - Update README and maiass-pipeline.js with changelog generation
 	- docs(README): add automated changelog generation to features and config instructions
