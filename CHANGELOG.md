@@ -1,5 +1,9 @@
-## 0.5.5
+## 0.5.6
 24 July 2025
+
+- Update Maiass Pipeline functionality
+	- feat: imported path package in maiass-pipeline
+	- docs: added comment about commit message formatting for internal changelog
 
 - Updated commit message filtering for maiass-pipeline
 	- feat: added code to clean up commit messages
