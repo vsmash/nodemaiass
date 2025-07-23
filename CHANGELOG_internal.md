@@ -1,3 +1,8 @@
+## 0.6.0
+24 July 2025
+
+- 2b36c93 VEL-405 Update to version 0.5.8 with changelog improvements and error handling   - feat: Changed git command for internal log in maiass-pipeline.js   - fix: Enhanced error handling for internal changelog extraction   - docs: Added details on automated changelog generation to README (vsmsh)
+
 ## 0.5.8
 24 July 2025
 
