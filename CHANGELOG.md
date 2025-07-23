@@ -1,5 +1,10 @@
-## 0.5.2
+## 0.5.3
 24 July 2025
+
+- Refactoring of updateChangelog function
+	- feat: updated the changelog update function to use current version info
+	- refactor: removed redundant git command execution for lastTag retrieval
+	- fix: adjusted console message while skipping changelog update due to lack of current version
 
 - Updated changelog and pipeline.js implementations
 	- refactor: altered indented bullet inclusion for changelogs to prevent double bullets
