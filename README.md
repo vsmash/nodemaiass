@@ -1,20 +1,294 @@
 # MAIASSNODE
 
-A Node.js replica of the MAIASS (Modular AI-Assisted Semantic Savant) intelligent Git workflow automation script.
+**Modular AI-Assisted Semantic Savant** - A modern Node.js implementation of the intelligent Git workflow automation tool.
 
-## Features (Planned)
-- Modular commands for Git workflow automation
-- Colorful CLI output
-- Environment variable and config file support
-- Extensible via Node.js modules
+[![Node.js](https://img.shields.io/badge/Node.js-23+-green.svg)](https://nodejs.org/)
+[![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![Version](https://img.shields.io/badge/Version-0.2.7-orange.svg)](package.json)
 
-## Quickstart
+## 🚀 Quick Start
 
-```sh
-npm install
-yarn link # or npm link
-maiassnode hello
+```bash
+# Run the complete MAIASS workflow
+nma
+
+# Commit changes only (skip version management)
+nma --commits-only
+
+# Bump patch version with git tag
+nma patch --tag
+
+# Preview changes without applying them
+nma --dry-run
 ```
 
-## License
-MIT
+## ✨ Features
+
+### 🤖 **AI-Powered Workflow**
+- **Smart commit messages** with OpenAI integration
+- **Intelligent branch detection** and validation
+- **Automated version bumping** with semantic versioning
+- **JIRA ticket integration** from branch names
+
+### 🔄 **Complete Git Workflow**
+- **4-phase pipeline**: Branch validation → Commit → Merge → Version
+- **Branch strategy enforcement** (develop/staging/master)
+- **Merge conflict handling** and remote synchronization
+- **Git tag creation** for releases
+
+### ⚙️ **Flexible Configuration**
+- **Cross-platform config** (`.env.maiass` files)
+- **Global and project-level** settings
+- **Environment variable** support
+- **Sensitive data masking** for security
+
+### 🛠️ **Developer Experience**
+- **Interactive prompts** with smart defaults
+- **Dry-run mode** for safe testing
+- **Comprehensive help** and examples
+- **Error handling** with clear messages
+
+## 📦 Installation
+
+### Prerequisites
+- **Node.js 23+** (latest stable)
+- **Git** command-line tools
+- **OpenAI API key** (optional, for AI features)
+
+### Install from Source
+```bash
+git clone https://github.com/vsmash/nodemaiass.git
+cd nodemaiass
+npm install
+npm link  # Makes 'nma' command available globally
+```
+
+## 🎯 Usage
+
+### Main Workflow Commands
+
+```bash
+# Complete MAIASS workflow with interactive prompts
+nma
+
+# Specific version bumps
+nma patch    # 1.0.0 → 1.0.1
+nma minor    # 1.0.0 → 1.1.0  
+nma major    # 1.0.0 → 2.0.0
+nma 2.1.0    # Set specific version
+
+# Workflow options
+nma --commits-only     # Only commit, skip version management
+nma --auto-stage       # Automatically stage all changes
+nma --dry-run          # Preview without making changes
+nma --force            # Skip confirmation prompts
+nma minor --tag        # Bump version and create git tag
+```
+
+### Individual Commands
+
+```bash
+# Commit workflow only
+nma commit --auto-stage
+
+# Version management only
+nma version patch --tag
+nma version --current    # Show current version info
+
+# Configuration management
+nma config                           # Show all config
+nma config --global                  # Show global config
+nma config --global openai_token=xyz # Set global config
+nma config --edit --project          # Edit project config
+
+# Git information
+nma git              # Show git status and branch info
+
+# Environment variables
+nma env              # Show MAIASS environment variables
+```
+
+## ⚙️ Configuration
+
+### Quick Setup
+
+1. **Enable AI features** (optional):
+   ```bash
+   # Set OpenAI API key globally
+   nma config --global openai_token=your_api_key_here
+   ```
+
+2. **Project-specific settings** (if needed):
+   ```bash
+   # Override branch names for projects using 'main'
+   nma config --project masterbranch=main
+   ```
+
+### Configuration Files
+
+MAIASSNODE uses `.env.maiass` files for configuration:
+
+- **Global**: `~/.env.maiass` (user-wide settings)
+- **Project**: `./.env.maiass` (project-specific overrides)
+
+### Common Configuration Variables
+
+```bash
+# AI Integration
+MAIASS_OPENAI_TOKEN=your_api_key_here
+MAIASS_OPENAI_MODE=ask                    # ask, autosuggest, off
+MAIASS_OPENAI_MODEL=gpt-4                 # AI model to use
+
+# Branch Configuration (only set if different from defaults)
+MAIASS_MASTERBRANCH=main                  # Default: master
+MAIASS_DEVELOPBRANCH=develop              # Default: develop
+MAIASS_STAGINGBRANCH=staging              # Default: staging
+
+# Workflow Settings
+MAIASS_DEBUG=true                         # Enable debug output
+MAIASS_VERBOSITY=normal                   # brief, normal, verbose
+```
+
+## 🔄 Workflow Phases
+
+MAIASSNODE orchestrates a 4-phase workflow:
+
+### 1. **Branch Detection & Validation**
+- Detects current branch and validates against workflow requirements
+- Auto-switches from master/staging to develop branch
+- Prompts for confirmation on release/master branches
+- Handles missing develop branch gracefully
+
+### 2. **Commit Workflow**
+- Detects staged and unstaged changes
+- Offers AI-powered commit message suggestions
+- Supports multi-line commit messages
+- Prepends JIRA ticket numbers from branch names
+
+### 3. **Merge to Develop**
+- Merges feature branches to develop for version management
+- Pulls latest changes from remote
+- Handles merge conflicts with clear error messages
+
+### 4. **Version Management**
+- Detects version files (package.json, composer.json, etc.)
+- Bumps semantic versions (major.minor.patch)
+- Updates multiple version files simultaneously
+- Creates git tags for releases
+
+## 🎨 Examples
+
+### Complete Feature Development Workflow
+```bash
+# On feature branch: feature/USER-123-new-login
+
+# 1. Complete workflow with minor version bump
+nma minor --tag
+
+# This will:
+# - Detect you're on a feature branch
+# - Run commit workflow with AI suggestions
+# - Merge to develop branch
+# - Bump minor version (1.0.0 → 1.1.0)
+# - Create git tag v1.1.0
+```
+
+### Quick Commit Without Version Management
+```bash
+# Just commit changes without version bumping
+nma --commits-only --auto-stage
+
+# With AI commit message
+nma commit
+```
+
+### Safe Testing
+```bash
+# Preview what would happen without making changes
+nma --dry-run patch
+
+# Check current version status
+nma version --current
+```
+
+## 🔧 Advanced Usage
+
+### Custom Version Files
+```bash
+# Configure custom version file
+nma config --project version_primary_file=VERSION.txt
+nma config --project version_primary_type=text
+```
+
+### Multiple Version Files
+```bash
+# Update multiple files with same version
+nma config --project version_secondary_files="src/version.js,docs/VERSION"
+```
+
+### AI Customization
+```bash
+# Different AI modes
+nma config --global openai_mode=autosuggest  # Auto-suggest without asking
+nma config --global openai_mode=off          # Disable AI
+
+# Custom commit message style
+nma config --global openai_commit_message_style=conventional
+```
+
+## 🐛 Troubleshooting
+
+### Common Issues
+
+**"Not in a git repository"**
+```bash
+# Ensure you're in a git repository
+git status
+```
+
+**"No version files detected"**
+```bash
+# Check for supported version files
+ls package.json composer.json VERSION
+
+# Or configure custom version file
+nma config --project version_primary_file=your-version-file
+```
+
+**"Failed to switch to develop branch"**
+```bash
+# Create develop branch if it doesn't exist
+git checkout -b develop
+```
+
+### Debug Mode
+```bash
+# Enable verbose debugging
+export MAIASS_DEBUG=true
+nma --dry-run
+```
+
+## 📚 Documentation
+
+- [Configuration Guide](docs/configuration.md)
+- [Workflow Guide](docs/workflow.md)
+- [API Reference](docs/api.md)
+- [Contributing](docs/contributing.md)
+
+## 🤝 Contributing
+
+Contributions are welcome! Please read our [Contributing Guide](docs/contributing.md) for details.
+
+## 📄 License
+
+MIT License - see [LICENSE](LICENSE) file for details.
+
+## 🙏 Acknowledgments
+
+- Original MAIASS bash script by [vsmash](https://github.com/vsmash)
+- OpenAI for AI-powered commit messages
+- Node.js and npm ecosystem
+
+---
+
+**Made with ❤️ by the MAIASS team**
