@@ -1,3 +1,8 @@
+## 0.5.7
+24 July 2025
+
+- 821494d VEL-405 Update README and maiass-pipeline.js with changelog generation   - docs(README): add automated changelog generation to features and config instructions   - docs(README): elaborate on dual changelog system, including format and features   - feat(maiass-pipeline.js): import fs/promises module for filesystem operations (vsmsh)
+
 ## 0.5.0
 Wednesday, 23 July 2025
 
