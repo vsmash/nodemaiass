@@ -1,5 +1,9 @@
-## 0.5.4
+## 0.5.5
 24 July 2025
+
+- Updated commit message filtering for maiass-pipeline
+	- feat: added code to clean up commit messages
+	- fix: removed empty lines and trailing newlines from each commit
 
 - Updated version tagging in Maiass pipeline
 	- refactor: default to true for version tagging
