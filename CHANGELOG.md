@@ -2,49 +2,49 @@
 23 July 2025
 
 - VEL-405 Updated changelog creation and formatting logic
-	- - feat: added logic to pull commit messages since last tag in changelog update
-	- - refactor: changed appending method to changelog file depending on commit history
-	- - feat: implemented commit message formatting for proper changelog display
-	- - fix: handled errors more gracefully during changelog update process
+	- feat: added logic to pull commit messages since last tag in changelog update
+	- refactor: changed appending method to changelog file depending on commit history
+	- feat: implemented commit message formatting for proper changelog display
+	- fix: handled errors more gracefully during changelog update process
 - VEL-404 Refactored version management and added auto-tagging feature
-	- - feat: added option for automatic version tagging based on environment config
-	- - refactor: refactored version tagging to include auto-tagging or user prompt
-	- - feat: included new MAIASS_AUTO_TAG_RELEASES environment variable
+	- feat: added option for automatic version tagging based on environment config
+	- refactor: refactored version tagging to include auto-tagging or user prompt
+	- feat: included new MAIASS_AUTO_TAG_RELEASES environment variable
 - VEL-404 Updated maiass-pipeline.js to return to the original branch after pipeline execution
-	- - feat: Added check for branch switch during pipeline operation and return to original branch if switched.
-	- - feat: Implemented log messages to display status of branch switching operation.
+	- feat: Added check for branch switch during pipeline operation and return to original branch if switched.
+	- feat: Implemented log messages to display status of branch switching operation.
 - Updated maiass-pipeline for better error handling
-	- - fix: improved Git error logging for Pull, Merge, Check Out and Push operations
-	- - feat: added detailed output results for git operations
-	- - fix: enhanced success condition checks for git operations
-	- - refactor: streamlined git command lines by embedding them in executeGitCommand calls
+	- fix: improved Git error logging for Pull, Merge, Check Out and Push operations
+	- feat: added detailed output results for git operations
+	- fix: enhanced success condition checks for git operations
+	- refactor: streamlined git command lines by embedding them in executeGitCommand calls
 - VEL-404 Improved git command execution and error handling
-	- - fix: remove 'git' from string in execSync call
-	- - feat: add error output for failed git commands
-	- - fix: append 'git' to branch and remote related commands
-	- - docs: clarify comments on branch switching function
+	- fix: remove 'git' from string in execSync call
+	- feat: add error output for failed git commands
+	- fix: append 'git' to branch and remote related commands
+	- docs: clarify comments on branch switching function
 - VEL-404 Improved version management in pipeline
-	- - feat: Added checkRemoteExists function to check if a git remote exists
-	- - feat: Implemented updateChangelog function to update the project's changelog with new version
-	- - refactor: Significantly expanded and refined the handleVersionManagement function to include creation of a release branch, updating of version files, committing changes, tagging and merging back to develop
-	- - feat: Integrated checkRemoteExists function in handleVersionManagement to allow for the pushing of release branches to remote
-	- - fix: Corrected error handling within handleVersionManagement to provide more specific and informative error messages
-	- - feat: Import and usage of bumpVersion and updateVersionFiles functions from version-manager in handleVersionManagement
+	- feat: Added checkRemoteExists function to check if a git remote exists
+	- feat: Implemented updateChangelog function to update the project's changelog with new version
+	- refactor: Significantly expanded and refined the handleVersionManagement function to include creation of a release branch, updating of version files, committing changes, tagging and merging back to develop
+	- feat: Integrated checkRemoteExists function in handleVersionManagement to allow for the pushing of release branches to remote
+	- fix: Corrected error handling within handleVersionManagement to provide more specific and informative error messages
+	- feat: Import and usage of bumpVersion and updateVersionFiles functions from version-manager in handleVersionManagement
 - VEL-404 Updated project documentation and configuration management
-	- - docs: restructured and enhanced the entire README file
-	- - feat: introduced detailed API guide with module descriptions
-	- - docs: updated configuration guide on environment variables
-	- - feat: added test helpers and error handling methods in api guide
+	- docs: restructured and enhanced the entire README file
+	- feat: introduced detailed API guide with module descriptions
+	- docs: updated configuration guide on environment variables
+	- feat: added test helpers and error handling methods in api guide
 - VEL-403 Updated environment file naming and .gitignore
-	- - feat: updated .gitignore to include new environment file formats
-	- - refactor: changed naming convention for environment files
-	- - refactor: modified environment file paths in core logic
-	- - refactor: updated command line arguments to match new environment file names
+	- feat: updated .gitignore to include new environment file formats
+	- refactor: changed naming convention for environment files
+	- refactor: modified environment file paths in core logic
+	- refactor: updated command line arguments to match new environment file names
 - VEL-403 Added configuration management
-	- - feat: added .gitignore to ignore environment files
-	- - feat: implemented configuration command handler
-	- - feat: introduced a configuration manager
-	- - feat: linked configuration command to main file
+	- feat: added .gitignore to ignore environment files
+	- feat: implemented configuration command handler
+	- feat: introduced a configuration manager
+	- feat: linked configuration command to main file
 
 ## 0.3.2
 23 July 2025
