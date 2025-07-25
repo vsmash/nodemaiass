@@ -1,5 +1,8 @@
-## 0.6.24
+## 0.6.25
 25 July 2025
+
+- Improved commit message filtering in Changelog updates
+	- fix: updated commit filtering regex in updateChangelog function
 
 - Refactored maiass-pipeline.js filter conditions
 	- refactor: simplified filtering conditions in updateChangelog function
