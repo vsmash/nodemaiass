@@ -1,5 +1,8 @@
-## 0.6.2
+## 0.6.3
 25 July 2025
+
+- Revert "VEL-405 Refactored changelog update function"
+- This reverts commit 74a774dd07178a666bbce867e06c7ba7b023dceb.
 
 - Refactored changelog update function
 	- feat: added execution of git command to get raw internal log

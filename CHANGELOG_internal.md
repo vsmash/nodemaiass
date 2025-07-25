@@ -1,3 +1,10 @@
+## 0.6.3
+25 July 2025
+
+- Merge branch 'feature/VEL-405_changelog_fixes' into develop (vsmsh)
+- Revert "VEL-405 Refactored changelog update function" (vsmsh)
+- Merge branch 'release/0.6.2' into develop (vsmsh)
+
 ## 0.6.1
 25 July 2025
 
