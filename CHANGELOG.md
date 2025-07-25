@@ -1,5 +1,11 @@
-## 0.6.3
+## 0.6.5
 25 July 2025
+
+- Updated CHANGELOG_internal.md
+	- docs: bumped version in CHANGELOG_internal.md
+	- feat: merged feature/VEL-405_changelog_fixes branch into develop
+- Revert "VEL-405 Refactor commit logging in changelog update pipeline"
+- This reverts commit 097ffbc05a462404ba5432e39c69db9a275c859b.
 
 - Revert "VEL-405 Refactored changelog update function"
 - This reverts commit 74a774dd07178a666bbce867e06c7ba7b023dceb.

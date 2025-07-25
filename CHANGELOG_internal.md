@@ -1,3 +1,11 @@
+## 0.6.5
+25 July 2025
+
+- Merge branch 'feature/VEL-405_changelog_fixes' into develop (vsmsh)
+- VEL-405 Updated CHANGELOG_internal.md   - docs: bumped version in CHANGELOG_internal.md   - feat: merged feature/VEL-405_changelog_fixes branch into develop (vsmsh)
+- Revert "VEL-405 Refactor commit logging in changelog update pipeline" (vsmsh)
+- Merge branch 'release/0.6.4' into develop (vsmsh)
+
 ## 0.6.4
 25 July 2025
 
