@@ -1,5 +1,17 @@
-## 0.6.22
+## 0.6.23
 25 July 2025
+
+- Updated Changelog and Maiass Pipeline code
+	- refactor: improved line filtering in maiass-pipeline.js
+	- refactor: simplified commit filtering logic in updateChangelog function
+	- feat: added check for existing changelog, creating new if non-existent
+	- feat: updated or prepended new entries based on version and date
+	- fix: resolved issue of new entries overwriting entire changelog
+	- refactor: updated variable names for clarity
+	- fix: modified git log command format in maiass-pipeline.js
+	- refactor: replaced const with let for commit message formatting
+	- style: improved readability of commit formats in maiass-pipeline.js
+	- docs: removed entries in CHANGELOG.md
 
 - Update line filters in maiass-pipeline.js
 	- refactor: improved filtering by adding dashAuthor and withSha conditions
