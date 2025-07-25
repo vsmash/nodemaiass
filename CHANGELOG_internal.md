@@ -1,5 +1,19 @@
-## 0.6.22
+## 0.6.23
 25 July 2025
+
+- (vsmsh) Merge branch 'feature/VEL-405_changelog_fixes' into develop
+- (vsmsh) VEL-405 Updated Changelog and Maiass Pipeline code
+	- refactor: improved line filtering in maiass-pipeline.js
+	- refactor: simplified commit filtering logic in updateChangelog function
+	- feat: added check for existing changelog, creating new if non-existent
+	- feat: updated or prepended new entries based on version and date
+	- fix: resolved issue of new entries overwriting entire changelog
+	- refactor: updated variable names for clarity
+	- fix: modified git log command format in maiass-pipeline.js
+	- refactor: replaced const with let for commit message formatting
+	- style: improved readability of commit formats in maiass-pipeline.js
+	- docs: removed entries in CHANGELOG.md
+- (vsmsh) Merge branch 'release/0.6.22' into develop
 
 - (vsmsh) Merge branch 'release/0.6.17' into develop
 - 99ba0c7 VEL-405 Updated Git log format in Maiass Pipeline
