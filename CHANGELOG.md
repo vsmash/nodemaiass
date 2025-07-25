@@ -1,5 +1,9 @@
-## 0.6.25
+## 0.6.26
 25 July 2025
+
+- Improved changelog update filtering
+	- refactor: improved readability by moving check for irrelevant commits directly into return statement
+	- fix: corrected regular expression to better identify JIRA tickets
 
 - Improved commit message filtering in Changelog updates
 	- fix: updated commit filtering regex in updateChangelog function
