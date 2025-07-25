@@ -1,5 +1,8 @@
-## 0.6.19
+## 0.6.21
 25 July 2025
+
+- Updated maiass-pipeline logic
+	- refactor: simplified commit filtering logic in updateChangelog function
 
 - Updated internal changelog creation logic
 	- feat: added check for existing changelog and create new if non-existent
