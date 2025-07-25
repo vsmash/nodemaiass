@@ -1,5 +1,8 @@
-## 0.6.23
+## 0.6.24
 25 July 2025
+
+- Refactored maiass-pipeline.js filter conditions
+	- refactor: simplified filtering conditions in updateChangelog function
 
 - Updated Changelog and Maiass Pipeline code
 	- refactor: improved line filtering in maiass-pipeline.js
