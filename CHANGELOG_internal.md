@@ -1,5 +1,10 @@
-## 0.6.23
+## 0.6.24
 25 July 2025
+
+- (vsmsh) Merge branch 'feature/VEL-405_changelog_fixes' into develop
+- (vsmsh) VEL-405 Refactored maiass-pipeline.js filter conditions
+	- refactor: simplified filtering conditions in updateChangelog function
+- (vsmsh) Merge branch 'release/0.6.23' into develop
 
 - (vsmsh) Merge branch 'feature/VEL-405_changelog_fixes' into develop
 - (vsmsh) VEL-405 Updated Changelog and Maiass Pipeline code
