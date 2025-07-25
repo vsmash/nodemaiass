@@ -1,5 +1,11 @@
-## 0.6.9
+## 0.6.14
 25 July 2025
+
+- Implemented several revisions to changelog updates
+	- feat: Added functionality for retrieving commit messages with author details
+	- fix: Resolved issues with commit message processing for the main changelog
+	- refactor: Modified how internal commit messages are extracted
+	- style: Cleaned up code for better readability and maintenance
 
 - (vsmsh) Merge branch 'feature/VEL-405_changelog_fixes' into develop
 - (vsmsh) VEL-405 Refactored main functionality in maiass-pipeline.js
