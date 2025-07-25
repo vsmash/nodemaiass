@@ -1,5 +1,9 @@
-## 0.6.21
+## 0.6.22
 25 July 2025
+
+- Update line filters in maiass-pipeline.js
+	- refactor: improved filtering by adding dashAuthor and withSha conditions
+	- refactor: updated return to use dashAuthor instead of shouldInclude for better accuracy
 
 - Updated maiass-pipeline logic
 	- refactor: simplified commit filtering logic in updateChangelog function

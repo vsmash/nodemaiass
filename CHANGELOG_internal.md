@@ -1,5 +1,11 @@
-## 0.6.21
+## 0.6.22
 25 July 2025
+
+- (vsmsh) Merge branch 'feature/VEL-405_changelog_fixes' into develop
+- (vsmsh) VEL-405 Update line filters in maiass-pipeline.js
+	- refactor: improved filtering by adding dashAuthor and withSha conditions
+	- refactor: updated return to use dashAuthor instead of shouldInclude for better accuracy
+- (vsmsh) Merge branch 'release/0.6.21' into develop
 
 - (vsmsh) Merge branch 'feature/VEL-405_changelog_fixes' into develop
 - (vsmsh) VEL-405 Updated maiass-pipeline logic
