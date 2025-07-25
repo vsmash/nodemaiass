@@ -1,5 +1,8 @@
-## 0.6.26
+## 0.6.27
 25 July 2025
+
+- Refactored changelog update function
+	- fix: updated regex to filter irrelevant commits in updateChangelog function
 
 - Improved changelog update filtering
 	- refactor: improved readability by moving check for irrelevant commits directly into return statement
