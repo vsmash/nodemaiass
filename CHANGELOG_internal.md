@@ -1,5 +1,14 @@
-## 0.6.27
+## 0.6.28
 25 July 2025
+
+- (vsmsh) VEL-405 Updated merging process in maiass-pipeline
+	- feat: added silent option to handleMergeToDevelop function
+	- feat: automated merge command reply when in silent mode
+- (vsmsh) VEL-405 Introduced silent mode for automated approval
+	- feat(lib): added silent mode for automated commit approval
+	- feat(lib): integrated silent mode into the command handler module
+	- feat(lib): integrated silent mode into the pipeline module
+	- feat(maiassnode.js): Added silent mode CLI option for automated prompts approval
 
 - (vsmsh) VEL-405 Refactored changelog update function
 	- fix: updated regex to filter irrelevant commits in updateChangelog function
