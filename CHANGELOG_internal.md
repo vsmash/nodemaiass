@@ -1,3 +1,11 @@
+## 0.6.15
+25 July 2025
+
+- 697c40e VEL-405 Improved formatting of commit messages and cleaned up CHANGELOG
+	- refactor(maiass-pipeline): replaced const with let for commit message formatting
+	- style(maiass-pipeline): improved readability of commit formats
+	- docs: removed entries in CHANGELOG.md (vsmsh)
+
 ## 0.6.14
 25 July 2025
 

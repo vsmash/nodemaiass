@@ -1,5 +1,10 @@
-## 0.6.14
+## 0.6.15
 25 July 2025
+
+- Improved formatting of commit messages and cleaned up CHANGELOG
+	- refactor(maiass-pipeline): replaced const with let for commit message formatting
+	- style(maiass-pipeline): improved readability of commit formats
+	- docs: removed entries in CHANGELOG.md
 
 - Implemented several revisions to changelog updates
 	- feat: Added functionality for retrieving commit messages with author details
