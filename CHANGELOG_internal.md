@@ -1,3 +1,10 @@
+## 0.6.1
+25 July 2025
+
+- Merge branch 'feature/VEL-405_changelog_fixes' into develop (vsmsh)
+- VEL-405 Improved log output in maiass-pipeline.js   - fix: Removed commit hash from internalLogResult output in maiass-pipeline.js (vsmsh)
+- Merge branch 'release/0.6.0' into develop (vsmsh)
+
 ## 0.6.0
 24 July 2025
 

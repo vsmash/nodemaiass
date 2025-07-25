@@ -1,3 +1,9 @@
+## 0.6.1
+25 July 2025
+
+- Improved log output in maiass-pipeline.js
+	- fix: Removed commit hash from internalLogResult output in maiass-pipeline.js
+
 ## 0.6.0
 24 July 2025
 
