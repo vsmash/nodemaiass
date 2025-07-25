@@ -157,11 +157,17 @@ yargs(hideBin(process.argv))
         type: 'boolean',
         description: 'Force operations without prompts'
       })
+      .option('silent', {
+        alias: 'y',
+        type: 'boolean',
+        description: 'Auto-answer yes to all prompts (pushes, AI suggestions, version bumps)'
+      })
       .example('nma', 'Run complete MAIASS workflow with prompts')
       .example('nma patch', 'Run workflow with patch version bump')
       .example('nma --commits-only', 'Only commit changes, skip version management')
       .example('nma minor --tag', 'Bump minor version and create git tag')
-      .example('nma --dry-run', 'Preview workflow without making changes');
+      .example('nma --dry-run', 'Preview workflow without making changes')
+      .example('nma --silent', 'Run workflow with auto-approval of all prompts');
   }, async (argv) => {
     await handleMaiassCommand(argv);
   })
