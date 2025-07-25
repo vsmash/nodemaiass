@@ -1,5 +1,8 @@
-## 0.6.16
+## 0.6.17
 25 July 2025
+
+- Updated Git log format in Maiass Pipeline
+	- fix: updated git log formatting in executeGitCommand for better readability
 
 - Updated maiass-pipeline.js
 	- fix: changed the format of internal log result in updateChangelog function

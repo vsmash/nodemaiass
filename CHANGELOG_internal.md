@@ -1,3 +1,9 @@
+## 0.6.17
+25 July 2025
+
+- 99ba0c7 VEL-405 Updated Git log format in Maiass Pipeline
+	- fix: updated git log formatting in executeGitCommand for better readability (vsmsh)
+
 ## 0.6.16
 25 July 2025
 
