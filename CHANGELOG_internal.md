@@ -1,3 +1,12 @@
+## 0.6.9
+25 July 2025
+
+- (vsmsh) Merge branch 'feature/VEL-405_changelog_fixes' into develop
+- (vsmsh) VEL-405 Refactored main functionality in maiass-pipeline.js
+-   - fix(maiass-pipeline): corrected commitMessages variable reference
+-   - docs(maiass-pipeline): added comment explaining commit message processing
+- (vsmsh) Merge branch 'release/0.6.8' into develop
+
 ## 0.6.5
 25 July 2025
 
