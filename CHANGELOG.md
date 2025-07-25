@@ -1,5 +1,11 @@
-## 0.6.18
+## 0.6.19
 25 July 2025
+
+- Updated internal changelog creation logic
+	- feat: added check for existing changelog and create new if non-existent
+	- feat: updated or prepended new entries based on version and date
+	- fix: resolved issue of new entries overwriting entire changelog
+	- refactor: updated variable names for clarity
 
 - Updated Git Command Execution in Maiass Pipeline
 	- fix: modified format of git log command in maiass-pipeline.js

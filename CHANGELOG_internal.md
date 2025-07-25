@@ -1,5 +1,13 @@
-## 0.6.18
+## 0.6.19
 25 July 2025
+
+- (vsmsh) Merge branch 'feature/VEL-405_changelog_fixes' into develop
+- (vsmsh) VEL-405 Updated internal changelog creation logic
+	- feat: added check for existing changelog and create new if non-existent
+	- feat: updated or prepended new entries based on version and date
+	- fix: resolved issue of new entries overwriting entire changelog
+	- refactor: updated variable names for clarity
+- (vsmsh) Merge branch 'release/0.6.18' into develop
 
 - (vsmsh) Merge branch 'feature/VEL-405_changelog_fixes' into develop
 - (vsmsh) VEL-405 Updated Git Command Execution in Maiass Pipeline
