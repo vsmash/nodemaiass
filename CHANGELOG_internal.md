@@ -1,3 +1,8 @@
+## 0.6.14
+25 July 2025
+
+- e340cfe VEL-405 Implemented several revisions to changelog updates   - feat: Added functionality for retrieving commit messages with author details   - fix: Resolved issues with commit message processing for the main changelog   - refactor: Modified how internal commit messages are extracted   - style: Cleaned up code for better readability and maintenance (vsmsh)
+
 ## 0.6.9
 25 July 2025
 
