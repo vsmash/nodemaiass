@@ -1,3 +1,9 @@
+## 0.7.1
+25 July 2025
+
+- Updated symbols.js
+	- feat: Added new emoji and ascii representations for symbols
+
 ## 0.6.28
 25 July 2025
 
