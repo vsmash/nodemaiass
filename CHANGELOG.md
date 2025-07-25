@@ -1,5 +1,8 @@
-## 0.6.15
+## 0.6.16
 25 July 2025
+
+- Updated maiass-pipeline.js
+	- fix: changed the format of internal log result in updateChangelog function
 
 - Improved formatting of commit messages and cleaned up CHANGELOG
 	- refactor(maiass-pipeline): replaced const with let for commit message formatting
