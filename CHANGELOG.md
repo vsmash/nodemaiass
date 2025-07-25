@@ -7,12 +7,6 @@
 	- refactor: Modified how internal commit messages are extracted
 	- style: Cleaned up code for better readability and maintenance
 
-- (vsmsh) Merge branch 'feature/VEL-405_changelog_fixes' into develop
-- (vsmsh) VEL-405 Refactored main functionality in maiass-pipeline.js
-	- fix(maiass-pipeline): corrected commitMessages variable reference
-	- docs(maiass-pipeline): added comment explaining commit message processing
-- (vsmsh) Merge branch 'release/0.6.8' into develop
-
 - Updated CHANGELOG_internal.md
 	- docs: bumped version in CHANGELOG_internal.md
 	- feat: merged feature/VEL-405_changelog_fixes branch into develop
