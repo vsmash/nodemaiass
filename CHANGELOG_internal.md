@@ -1,55 +1,17 @@
 ## 0.6.22
 25 July 2025
 
-- (vsmsh) Merge branch 'feature/VEL-405_changelog_fixes' into develop
-- (vsmsh) VEL-405 Update line filters in maiass-pipeline.js
-	- refactor: improved filtering by adding dashAuthor and withSha conditions
-	- refactor: updated return to use dashAuthor instead of shouldInclude for better accuracy
-- (vsmsh) Merge branch 'release/0.6.21' into develop
-
-- (vsmsh) Merge branch 'feature/VEL-405_changelog_fixes' into develop
-- (vsmsh) VEL-405 Updated maiass-pipeline logic
-	- refactor: simplified commit filtering logic in updateChangelog function
-- (vsmsh) Merge branch 'release/0.6.20' into develop
-
-- (vsmsh) Merge branch 'feature/VEL-405_changelog_fixes' into develop
-- (vsmsh) VEL-405 Updated internal changelog creation logic
-	- feat: added check for existing changelog and create new if non-existent
-	- feat: updated or prepended new entries based on version and date
-	- fix: resolved issue of new entries overwriting entire changelog
-	- refactor: updated variable names for clarity
-- (vsmsh) Merge branch 'release/0.6.18' into develop
-
-- (vsmsh) Merge branch 'feature/VEL-405_changelog_fixes' into develop
-- (vsmsh) VEL-405 Updated Git Command Execution in Maiass Pipeline
-	- fix: modified format of git log command in maiass-pipeline.js
 - (vsmsh) Merge branch 'release/0.6.17' into develop
-
-## 0.6.17
-25 July 2025
-
 - 99ba0c7 VEL-405 Updated Git log format in Maiass Pipeline
 	- fix: updated git log formatting in executeGitCommand for better readability (vsmsh)
-
-## 0.6.16
-25 July 2025
-
 - (vsmsh) Merge branch 'feature/VEL-405_changelog_fixes' into develop
 - (vsmsh) VEL-405 Updated maiass-pipeline.js
 	- fix: changed the format of internal log result in updateChangelog function
 - (vsmsh) Merge branch 'release/0.6.15' into develop
-
-## 0.6.15
-25 July 2025
-
 - 697c40e VEL-405 Improved formatting of commit messages and cleaned up CHANGELOG
 	- refactor(maiass-pipeline): replaced const with let for commit message formatting
 	- style(maiass-pipeline): improved readability of commit formats
 	- docs: removed entries in CHANGELOG.md (vsmsh)
-
-## 0.6.14
-25 July 2025
-
 - e340cfe VEL-405 Implemented several revisions to changelog updates   - feat: Added functionality for retrieving commit messages with author details   - fix: Resolved issues with commit message processing for the main changelog   - refactor: Modified how internal commit messages are extracted   - style: Cleaned up code for better readability and maintenance (vsmsh)
 
 ## 0.6.9
