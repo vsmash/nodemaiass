@@ -1,3 +1,11 @@
+## 0.6.16
+25 July 2025
+
+- (vsmsh) Merge branch 'feature/VEL-405_changelog_fixes' into develop
+- (vsmsh) VEL-405 Updated maiass-pipeline.js
+	- fix: changed the format of internal log result in updateChangelog function
+- (vsmsh) Merge branch 'release/0.6.15' into develop
+
 ## 0.6.15
 25 July 2025
 
