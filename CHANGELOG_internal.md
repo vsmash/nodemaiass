@@ -1,3 +1,11 @@
+## 0.6.18
+25 July 2025
+
+- (vsmsh) Merge branch 'feature/VEL-405_changelog_fixes' into develop
+- (vsmsh) VEL-405 Updated Git Command Execution in Maiass Pipeline
+	- fix: modified format of git log command in maiass-pipeline.js
+- (vsmsh) Merge branch 'release/0.6.17' into develop
+
 ## 0.6.17
 25 July 2025
 
