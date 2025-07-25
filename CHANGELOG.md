@@ -1,5 +1,11 @@
-## 0.6.1
+## 0.6.2
 25 July 2025
+
+- Refactored changelog update function
+	- feat: added execution of git command to get raw internal log
+	- refactor: changed how internal commit messages are processed and filtered
+	- refactor: improved formation of formatted internal commits
+	- refactor: updated writing to internalChangelog file
 
 - Improved log output in maiass-pipeline.js
 	- fix: Removed commit hash from internalLogResult output in maiass-pipeline.js
