@@ -1,4 +1,4 @@
-## 0.6.3
+## 0.6.4
 25 July 2025
 
 - Merge branch 'feature/VEL-405_changelog_fixes' into develop (vsmsh)
