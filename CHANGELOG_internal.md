@@ -1,5 +1,8 @@
-## 0.7.10
+## 0.7.11
 27 July 2025
+
+- (vsmsh) VEL-405 Refine devlog logs
+	- refactor: remove extra log from devlog for cleaner output
 
 - (vsmsh) VEL-405 Updated devlog.js to handle different parameters
 	- fix: corrected second parameter in devlog.sh command
