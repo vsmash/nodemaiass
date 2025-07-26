@@ -265,7 +265,7 @@ Object containing all configuration variable definitions:
     description: 'Enable debug mode',
     sensitive: false
   },
-  'MAIASS_OPENAI_TOKEN': {
+  'MAIASS_AI_TOKEN': {
     default: '',
     description: 'OpenAI API key for AI features',
     sensitive: true

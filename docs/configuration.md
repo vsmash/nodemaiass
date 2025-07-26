@@ -28,9 +28,9 @@ MAIASS_VERSION_PRIMARY_TYPE=json
 User-wide settings stored in your home directory:
 ```bash
 # AI Integration (sensitive - consider security)
-MAIASS_OPENAI_TOKEN=your_api_key_here
-MAIASS_OPENAI_MODE=ask
-MAIASS_OPENAI_MODEL=gpt-4
+MAIASS_AI_TOKEN=your_api_key_here
+MAIASS_AI_MODE=ask
+MAIASS_AI_MODEL=gpt-4
 
 # Global preferences
 MAIASS_DEBUG=false
@@ -71,7 +71,7 @@ You can also create/edit `.env.maiass` files directly:
 
 ```bash
 # Create global config
-echo "MAIASS_OPENAI_TOKEN=your_key" >> ~/.env.maiass
+echo "MAIASS_AI_TOKEN=your_key" >> ~/.env.maiass
 
 # Create project config
 echo "MAIASS_MASTERBRANCH=main" >> .env.maiass
@@ -82,14 +82,14 @@ echo "MAIASS_MASTERBRANCH=main" >> .env.maiass
 ### 🤖 AI Integration
 ```bash
 # OpenAI Configuration
-MAIASS_OPENAI_TOKEN=your_api_key_here          # OpenAI API key (sensitive)
-MAIASS_OPENAI_MODE=ask                         # ask, autosuggest, off
-MAIASS_OPENAI_MODEL=gpt-4                      # AI model to use
-MAIASS_OPENAI_TEMPERATURE=0.7                  # AI creativity (0.0-2.0)
-MAIASS_OPENAI_MAX_TOKENS=150                   # Max tokens for responses
-MAIASS_OPENAI_MAX_CHARACTERS=8000              # Max characters for requests
-MAIASS_OPENAI_COMMIT_MESSAGE_STYLE=bullet      # bullet, conventional, simple
-MAIASS_OPENAI_ENDPOINT=https://api.openai.com/v1/chat/completions
+MAIASS_AI_TOKEN=your_api_key_here          # OpenAI API key (sensitive)
+MAIASS_AI_MODE=ask                         # ask, autosuggest, off
+MAIASS_AI_MODEL=gpt-4                      # AI model to use
+MAIASS_AI_TEMPERATURE=0.7                  # AI creativity (0.0-2.0)
+MAIASS_AI_MAX_TOKENS=150                   # Max tokens for responses
+MAIASS_AI_MAX_CHARACTERS=8000              # Max characters for requests
+MAIASS_AI_COMMIT_MESSAGE_STYLE=bullet      # bullet, conventional, simple
+MAIASS_AI_ENDPOINT=https://api.openai.com/v1/chat/completions
 ```
 
 ### 🌿 Branch Configuration
@@ -152,7 +152,7 @@ Always store sensitive information securely:
 nma config --global openai_token=your_key
 
 # ❌ Avoid: Hardcoding in scripts
-export MAIASS_OPENAI_TOKEN=your_key
+export MAIASS_AI_TOKEN=your_key
 ```
 
 ### File Permissions

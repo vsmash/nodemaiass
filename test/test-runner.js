@@ -131,7 +131,7 @@ class TestUtils {
         env: {
           ...process.env,
           MAIASS_DEBUG: 'false', // Reduce noise in tests
-          MAIASS_OPENAI_MODE: 'off' // Disable AI for tests
+          MAIASS_AI_MODE: 'off' // Disable AI for tests
         }
       });
       
