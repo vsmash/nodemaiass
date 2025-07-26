@@ -137,9 +137,9 @@ MAIASSNODE uses `.env.maiass` files for configuration:
 
 ```bash
 # AI Integration
-MAIASS_OPENAI_TOKEN=your_api_key_here
-MAIASS_OPENAI_MODE=ask                    # ask, autosuggest, off
-MAIASS_OPENAI_MODEL=gpt-4                 # AI model to use
+MAIASS_AI_TOKEN=your_api_key_here
+MAIASS_AI_MODE=ask                    # ask, autosuggest, off
+MAIASS_AI_MODEL=gpt-4                 # AI model to use
 
 # Branch Configuration (only set if different from defaults)
 MAIASS_MASTERBRANCH=main                  # Default: master
