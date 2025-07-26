@@ -1,5 +1,11 @@
-## 0.7.4
+## 0.7.5
 27 July 2025
+
+- Integrate devlog functionality and improve commit and merge logging
+	- feat: added devlog functionality as a separate module
+	- feat: implemented commit logging to devlog in 'commit.js'
+	- feat: introduced merge logging in 'maiass-pipeline.js' within 'handleMergeToDevelop' and 'handleVersionManagement'
+	- feat: created 'devlog.js' file with multiple utility functions for development logging
 
 - Updated AI endpoint and configuration
 	- fix: Changed default AI endpoint in commit.js
