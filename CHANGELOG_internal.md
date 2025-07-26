@@ -1,5 +1,8 @@
-## 0.7.8
+## 0.7.9
 27 July 2025
+
+- (vsmsh) VEL-405 Refactored devlog command parameters
+	- fix: removed unused 'type' parameter from devlog.sh command execution in devlog.js
 
 - (vsmsh) VEL-405 Refactor logging and merging operations - refactor(devlog): switched execution from synchronous to asynchronous - fix(commit): handleStagedCommit now passes along the entire gitInfo object - refactor(devlog): replace default names with clearly outlined  attributes - feat(devlog): extractDevlogContext to separate gitInfo context extraction logic - feat(devlog): use extracted context in logCommit and logMerge functions - refactor(maiass-pipeline): pass along originalGitInfo to logMerge function in handleMergeToDevelop method
 
