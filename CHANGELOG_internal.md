@@ -1,5 +1,14 @@
-## 0.7.6
+## 0.7.7
 27 July 2025
+
+- (vsmsh) VEL-405 Refined debugging messages in devlog.js
+	- feat: added logging of messages to devlog.sh
+	- fix: corrected the error and debug message handling
+	- refactor: streamlined debug message print conditions
+- (vsmsh) VEL-405 Improve debug handling in devlog
+	- feat: introduced condition for command execution during debug
+	- refactor: reordered execSync command execution
+	- fix(devlog): revised handling for both debug and non-debug scenarios
 
 - (vsmsh) VEL-405 Improved output capture in devlog
 	- fix: replaced trim method in execSync command output capture in devlog.js
