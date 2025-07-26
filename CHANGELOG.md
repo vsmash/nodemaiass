@@ -1,5 +1,13 @@
-## 0.7.7
+## 0.7.8
 27 July 2025
+
+- Refactor logging and merging operations
+	- refactor(devlog): switched execution from synchronous to asynchronous
+	- fix(commit): handleStagedCommit now passes along the entire gitInfo object
+	- refactor(devlog): replace default names with clearly outlined  attributes
+	- feat(devlog): extractDevlogContext to separate gitInfo context extraction logic
+	- feat(devlog): use extracted context in logCommit and logMerge functions
+	- refactor(maiass-pipeline): pass along originalGitInfo to logMerge function in handleMergeToDevelop method
 
 - Refined debugging messages in devlog.js
 	- feat: added logging of messages to devlog.sh
