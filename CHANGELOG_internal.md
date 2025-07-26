@@ -1,5 +1,14 @@
-## 0.7.5
+## 0.7.6
 27 July 2025
+
+- (vsmsh) VEL-405 Improved output capture in devlog
+	- fix: replaced trim method in execSync command output capture in devlog.js
+	- feat: added functionality for logging full command result, including errors
+- (vsmsh) VEL-405 Modify devlog.js functionality
+	- refactor: changed console output behavior within logThis function
+	- feat: added silent execution of command for cleaner log display
+- (vsmsh) VEL-405 Added debug message for devlog.sh command execution
+	- feat: add debug message condition in devlog.js to show the executed command if MAIASS_DEBUG is set to true
 
 - (vsmsh) VEL-405 Integrate devlog functionality and improve commit and merge logging
 	- feat: added devlog functionality as a separate module
