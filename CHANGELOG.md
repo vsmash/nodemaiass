@@ -1,3 +1,11 @@
+## 0.7.3
+27 July 2025
+
+- Update project configuration and variables related to AI
+	- feat: renamed all occurrences of 'OPENAI' to 'AI' in variables and configuration files
+	- docs: updated README and documentations to reflect the changes made in configuration and variable names
+	- test: updated test setup to use the renamed AI_MODE configuration variable
+
 ## 0.7.1
 25 July 2025
 
