@@ -1,5 +1,10 @@
-## 0.7.3
+## 0.7.4
 27 July 2025
+
+- Updated AI endpoint and configuration
+	- fix: Changed default AI endpoint in commit.js
+	- docs: Removed MAIASS_AI_ENDPOINT from configuration.md
+	- refactor: Updated MAIASS variable references to non-branded AI in maiass-variables.js
 
 - Update project configuration and variables related to AI
 	- feat: renamed all occurrences of 'OPENAI' to 'AI' in variables and configuration files
