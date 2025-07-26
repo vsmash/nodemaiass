@@ -89,7 +89,6 @@ MAIASS_AI_TEMPERATURE=0.7                  # AI creativity (0.0-2.0)
 MAIASS_AI_MAX_TOKENS=150                   # Max tokens for responses
 MAIASS_AI_MAX_CHARACTERS=8000              # Max characters for requests
 MAIASS_AI_COMMIT_MESSAGE_STYLE=bullet      # bullet, conventional, simple
-MAIASS_AI_ENDPOINT=https://api.openai.com/v1/chat/completions
 ```
 
 ### 🌿 Branch Configuration
