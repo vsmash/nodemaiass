@@ -1,5 +1,8 @@
-## 0.7.9
+## 0.7.10
 27 July 2025
+
+- (vsmsh) VEL-405 Updated devlog.js to handle different parameters
+	- fix: corrected second parameter in devlog.sh command
 
 - (vsmsh) VEL-405 Refactored devlog command parameters
 	- fix: removed unused 'type' parameter from devlog.sh command execution in devlog.js
