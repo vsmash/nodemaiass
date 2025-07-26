@@ -1,5 +1,8 @@
-## 0.7.8
+## 0.7.9
 27 July 2025
+
+- Refactored devlog command parameters
+	- fix: removed unused 'type' parameter from devlog.sh command execution in devlog.js
 
 - Refactor logging and merging operations
 	- refactor(devlog): switched execution from synchronous to asynchronous
