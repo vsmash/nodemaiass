@@ -1,5 +1,10 @@
-## 0.9.3
+## 0.9.4
 27 July 2025
+
+- (vsmsh) MAI-7 Improved git release workflow
+	- feat: added write permissions for creating releases
+	- feat: extended checkout action for fetching all history and tags
+	- feat: enhanced mechanism for getting latest git tag with default value set when no tags found
 
 - (vsmsh) MAI-7 Update create-release.sh script and enhance branching flows
 	- feat: add current branch detection
