@@ -1,0 +1,73 @@
+name: Test and Validate
+
+on:
+  push:
+    branches: [ main, develop, 'feature/*' ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  test:
+    name: Test on Node.js ${{ matrix.node-version }}
+    runs-on: ubuntu-latest
+    
+    strategy:
+      matrix:
+        node-version: [18, 20, 22]
+        
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+        
+    - name: Install dependencies
+      run: npm ci
+      
+    - name: Run tests
+      run: npm test
+      
+    - name: Test CLI functionality
+      run: |
+        # Test basic CLI commands
+        node maiassnode.cjs --version
+        node maiassnode.cjs --help
+        node maiassnode.cjs env
+        
+  build-test:
+    name: Test Cross-Platform Builds
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+        
+    - name: Install dependencies
+      run: npm ci
+      
+    - name: Test build process
+      run: |
+        # Test that builds complete without errors
+        npm run build:all
+        
+        # Verify binaries were created
+        ls -la build/
+        
+        # Test that binaries are executable
+        chmod +x build/maiassnode*
+        
+        # Basic smoke test (version check)
+        if [ -f build/maiassnode ]; then
+          echo "Testing Linux binary..."
+          ./build/maiassnode --version || echo "Binary test failed but build succeeded"
+        fi

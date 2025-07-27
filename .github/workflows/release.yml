@@ -1,0 +1,159 @@
+name: Build and Release
+
+# Trigger only on pushes to main branch
+# Uses latest git tag as version basis and creates release with 'v' prefix
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:  # Keep manual trigger as backup
+    inputs:
+      version:
+        description: 'Version to release (e.g., 0.7.2)'
+        required: true
+        default: '0.7.2'
+
+jobs:
+  build:
+    name: Build Cross-Platform Binaries
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+        
+    - name: Install dependencies
+      run: npm ci
+      
+    - name: Build all platforms
+      run: npm run build:all
+      
+    - name: Create release assets
+      run: |
+        mkdir -p release-assets
+        cd release-assets
+        
+        # Copy and rename binaries with proper naming
+        cp ../build/maiassnode-x64 maiassnode-macos-intel
+        cp ../build/maiassnode-arm64 maiassnode-macos-arm64
+        cp ../build/maiassnode maiassnode-linux-x64
+        cp ../build/maiassnode.exe maiassnode-windows-x64.exe
+        
+        # Make binaries executable
+        chmod +x maiassnode-*
+        
+        # Create checksums
+        shasum -a 256 maiassnode-* > checksums.txt
+        
+        # List created files
+        ls -la
+        
+    - name: Upload build artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: release-binaries
+        path: release-assets/
+        retention-days: 30
+
+  release:
+    name: Create GitHub Release
+    needs: build
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags/v') || github.event_name == 'workflow_dispatch'
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Download build artifacts
+      uses: actions/download-artifact@v4
+      with:
+        name: release-binaries
+        path: release-assets/
+        
+    - name: Get version from latest git tag
+      id: version
+      run: |
+        if [ "${{ github.event_name }}" == "workflow_dispatch" ]; then
+          echo "version=${{ github.event.inputs.version }}" >> $GITHUB_OUTPUT
+          echo "tag_name=v${{ github.event.inputs.version }}" >> $GITHUB_OUTPUT
+        else
+          # Main branch push - get latest git tag as version
+          LATEST_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "0.0.0")
+          echo "version=$LATEST_TAG" >> $GITHUB_OUTPUT
+          echo "tag_name=v$LATEST_TAG" >> $GITHUB_OUTPUT
+          echo "Using latest git tag as version: $LATEST_TAG"
+        fi
+        
+    - name: Create Release
+      uses: softprops/action-gh-release@v1
+      with:
+        tag_name: ${{ steps.version.outputs.tag_name }}
+        name: "MAIASSNODE ${{ steps.version.outputs.version }} - Cross-Platform Release"
+        body: |
+          🎉 **Cross-platform release of MAIASSNODE!**
+          
+          AI-powered Git workflow automation tool now available for macOS, Linux, and Windows with self-contained binaries (no Node.js installation required).
+          
+          ## 🚀 Quick Install
+          
+          ### Universal Installer (Recommended)
+          ```bash
+          curl -fsSL https://raw.githubusercontent.com/vsmash/nodemaiass/main/scripts/install.sh | bash
+          ```
+          
+          ### Homebrew (macOS/Linux)
+          ```bash
+          brew tap vsmash/maiass
+          brew install maiassnode
+          ```
+          
+          ## 📦 Manual Download
+          
+          Choose your platform:
+          
+          ### macOS
+          - **Apple Silicon (M1/M2/M3):** [maiassnode-macos-arm64](https://github.com/vsmash/nodemaiass/releases/download/${{ steps.version.outputs.tag_name }}/maiassnode-macos-arm64)
+          - **Intel:** [maiassnode-macos-intel](https://github.com/vsmash/nodemaiass/releases/download/${{ steps.version.outputs.tag_name }}/maiassnode-macos-intel)
+          
+          ### Linux
+          - **x64:** [maiassnode-linux-x64](https://github.com/vsmash/nodemaiass/releases/download/${{ steps.version.outputs.tag_name }}/maiassnode-linux-x64)
+          
+          ### Windows
+          - **x64:** [maiassnode-windows-x64.exe](https://github.com/vsmash/nodemaiass/releases/download/${{ steps.version.outputs.tag_name }}/maiassnode-windows-x64.exe)
+          
+          ## ✨ What's New
+          
+          - ✅ **Cross-platform binaries** for macOS, Linux, Windows
+          - ✅ **Self-contained** - includes Node.js runtime (no installation required)
+          - ✅ **Universal installer** with automatic platform detection
+          - ✅ **Homebrew support** for easy installation
+          - ✅ **ARM64 support** for Apple Silicon Macs
+          
+          ## 🔐 Verification
+          
+          All binaries include SHA256 checksums for verification:
+          - **Checksums:** [checksums.txt](https://github.com/vsmash/nodemaiass/releases/download/${{ steps.version.outputs.tag_name }}/checksums.txt)
+          
+          ## 📋 System Requirements
+          
+          - **macOS:** 10.15+ (Intel or Apple Silicon)
+          - **Linux:** Most distributions (x64)
+          - **Windows:** 10+ (x64)
+          - **Dependencies:** None (Node.js included in binary)
+        files: |
+          release-assets/maiassnode-macos-intel
+          release-assets/maiassnode-macos-arm64
+          release-assets/maiassnode-linux-x64
+          release-assets/maiassnode-windows-x64.exe
+          release-assets/checksums.txt
+        draft: false
+        prerelease: false
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
