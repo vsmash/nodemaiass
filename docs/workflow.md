@@ -331,6 +331,111 @@ nma minor --tag
 git tag -a v1.3.0 -m "Release 1.3.0"
 ```
 
+## 🔌 WordPress Integration
+
+MAIASSNODE provides enhanced version management for WordPress plugins and themes, automatically updating PHP version constants alongside standard version files.
+
+### Plugin Version Management
+
+#### Setup
+```bash
+# In your .env.maiass file:
+MAIASS_PLUGIN_PATH=wp-content/plugins/my-awesome-plugin
+# Optional: Custom constant name (auto-generated if not specified)
+MAIASS_VERSION_CONSTANT=MY_AWESOME_PLUGIN_VERSION
+```
+
+#### Workflow
+```bash
+# Run version bump as usual
+nma minor
+
+# MAIASSNODE will automatically:
+# 1. Update package.json: "version": "1.3.0"
+# 2. Find main plugin file (my-awesome-plugin.php)
+# 3. Update/create: define('MY_AWESOME_PLUGIN_VERSION', '1.3.0');
+```
+
+#### Plugin File Detection
+MAIASSNODE intelligently finds your main plugin file:
+```bash
+# Looks for (in order):
+1. {plugin-name}.php     # my-awesome-plugin.php
+2. plugin.php            # Generic plugin file
+3. index.php             # Fallback option
+```
+
+### Theme Version Management
+
+#### Setup
+```bash
+# In your .env.maiass file:
+MAIASS_THEME_PATH=wp-content/themes/my-theme
+# Uses same MAIASS_VERSION_CONSTANT if specified
+```
+
+#### Workflow
+```bash
+nma patch
+
+# Updates functions.php with:
+define('MY_THEME_VERSION', '1.2.4');
+```
+
+### Automatic Constant Generation
+
+If `MAIASS_VERSION_CONSTANT` is not specified, MAIASSNODE generates it from your path:
+
+```bash
+# Plugin Examples:
+my-awesome-plugin     → MY_AWESOME_PLUGIN_VERSION
+wp-seo-optimizer      → WP_SEO_OPTIMIZER_VERSION
+simple.contact.form   → SIMPLE_CONTACT_FORM_VERSION
+
+# Theme Examples:
+twentythree-child     → TWENTYTHREE_CHILD_VERSION
+my-custom-theme       → MY_CUSTOM_THEME_VERSION
+```
+
+### WordPress + Standard Files
+
+MAIASSNODE updates both WordPress files AND standard version files:
+
+```bash
+# Single command updates:
+package.json          → "version": "1.3.0"
+VERSION              → 1.3.0
+plugin.php           → define('MY_PLUGIN_VERSION', '1.3.0');
+functions.php        → define('MY_THEME_VERSION', '1.3.0');
+```
+
+### Dry Run Testing
+
+```bash
+# Preview WordPress updates
+nma minor --dry-run
+
+# Output shows:
+# ℹ️ Would update WordPress plugin/theme versions (dry run)
+#   Plugin: wp-content/plugins/my-plugin (MY_PLUGIN_VERSION)
+#   Theme: wp-content/themes/my-theme (MY_THEME_VERSION)
+```
+
+### Path Flexibility
+
+```bash
+# Relative paths (from project root)
+MAIASS_PLUGIN_PATH=my-plugin
+MAIASS_THEME_PATH=themes/my-theme
+
+# Absolute paths
+MAIASS_PLUGIN_PATH=/var/www/wp-content/plugins/my-plugin
+
+# Direct file paths
+MAIASS_PLUGIN_PATH=wp-content/plugins/my-plugin/my-plugin.php
+MAIASS_THEME_PATH=wp-content/themes/my-theme/functions.php
+```
+
 ## 🤖 AI Integration Features
 
 ### Smart Commit Messages

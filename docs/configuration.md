@@ -114,6 +114,22 @@ MAIASS_VERSION_PATTERN_PHP=Version.*'([^']*)'  # PHP constant pattern
 MAIASS_VERSION_PATTERN_CSS=Version:.*([0-9.]+) # CSS comment pattern
 ```
 
+### 🔌 WordPress Integration
+```bash
+# WordPress Plugin Version Management
+MAIASS_PLUGIN_PATH=wp-content/plugins/my-plugin    # Path to plugin directory or main file
+MAIASS_VERSION_CONSTANT=MY_PLUGIN_VERSION           # Custom PHP version constant (optional)
+
+# WordPress Theme Version Management  
+MAIASS_THEME_PATH=wp-content/themes/my-theme        # Path to theme directory
+# Note: MAIASS_VERSION_CONSTANT applies to both plugins and themes
+
+# Examples:
+# MAIASS_PLUGIN_PATH="my-awesome-plugin"           # Relative path
+# MAIASS_PLUGIN_PATH="/var/www/wp-content/plugins/my-plugin"  # Absolute path
+# MAIASS_THEME_PATH="wp-content/themes/my-theme"   # Standard WP structure
+```
+
 ### 🔧 Workflow Settings
 ```bash
 # Core System
