@@ -2,6 +2,11 @@ name: Build and Release
 
 # Trigger only on pushes to main branch
 # Uses latest git tag as version basis and creates release with 'v' prefix
+
+permissions:
+  contents: write  # Required to create releases
+  actions: read
+
 on:
   push:
     branches:
@@ -70,7 +75,9 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
-      
+      with:
+        fetch-depth: 0  # Fetch all history and tags
+        
     - name: Download build artifacts
       uses: actions/download-artifact@v4
       with:
@@ -85,7 +92,17 @@ jobs:
           echo "tag_name=v${{ github.event.inputs.version }}" >> $GITHUB_OUTPUT
         else
           # Main branch push - get latest git tag as version
-          LATEST_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "0.0.0")
+          echo "Available tags:"
+          git tag --list --sort=-version:refname | head -10
+          
+          LATEST_TAG=$(git tag --list --sort=-version:refname | head -1)
+          if [ -z "$LATEST_TAG" ]; then
+            LATEST_TAG="0.0.0"
+            echo "No tags found, using default: $LATEST_TAG"
+          else
+            echo "Found latest tag: $LATEST_TAG"
+          fi
+          
           echo "version=$LATEST_TAG" >> $GITHUB_OUTPUT
           echo "tag_name=v$LATEST_TAG" >> $GITHUB_OUTPUT
           echo "Using latest git tag as version: $LATEST_TAG"
