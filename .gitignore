@@ -6,3 +6,24 @@
 
 # Sensitive configuration
 *.backup.*
+
+# Build artifacts and binaries
+build/
+release/
+*.exe
+maiassnode-*
+
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
