@@ -3,10 +3,52 @@
 
 set -e
 
+BRANCH=$(git rev-parse --abbrev-ref HEAD)
+git checkout develop
 VERSION=${1:-$(node -p "require('./package.json').version")}
 REPO="vsmash/nodemaiass"  # Update with your actual repo
-
+# get the current branch name
 echo "🚀 Creating GitHub release for version $VERSION"
+# ask choice: 1. merge develop into staging, 2. merge staging into main, 3. 1 then two, 4. exit
+read -p "Choose an option: 
+1. merge develop into staging
+2. merge staging into main
+3. 1 then two
+4. exit" -r choice
+
+if [ "$choice" = "1" ]; then
+    git checkout staging
+    git merge develop
+    git push
+elif [ "$choice" = "2" ]; then
+    git checkout main
+    git merge staging
+    git push
+    git checkout $BRANCH
+    echo "✅ Merged staging into main"
+    echo "back on branch: $BRANCH"
+elif [ "$choice" = "3" ]; then
+    git checkout staging
+    git merge develop
+    git push
+    git checkout main
+    git merge staging
+    git push
+    git checkout $BRANCH
+    echo "✅ Merged develop into staging and staging into main"
+    echo "back on branch: $BRANCH"  
+elif [ "$choice" = "4" ]; then
+    git checkout $BRANCH
+    echo "back on branch: $BRANCH"  
+    exit 0
+else
+    git checkout $BRANCH
+    echo "back on branch: $BRANCH"  
+    echo "Invalid choice"
+    exit 1
+fi
+exit 0
+
 
 # Build all binaries
 echo "📦 Building binaries for all platforms..."
