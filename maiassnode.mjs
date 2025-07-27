@@ -100,11 +100,16 @@ switch (command) {
     
   case 'version':
     (async () => {
+      // Get the bump type from the second argument (after 'version')
+      const bumpType = args[1]; // 'minor', 'major', 'patch', or specific version
+      
       const versionOptions = {
-        bump: getArgValue(args, '--bump'),
+        _: bumpType ? [bumpType] : [], // positionalArgs array expected by handleVersionCommand
+        'dry-run': args.includes('--dry-run'),
         tag: args.includes('--tag'),
-        dryRun: args.includes('--dry-run'),
-        tagMessage: getArgValue(args, '--tag-message')
+        'tag-message': getArgValue(args, '--tag-message'),
+        force: args.includes('--force'),
+        current: args.includes('--current')
       };
       await handleVersionCommand(versionOptions);
     })();
