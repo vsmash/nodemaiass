@@ -121,8 +121,8 @@ class TestUtils {
       input = ''
     } = options;
     
-    // Get the absolute path to maiassnode.mjs
-    const maiassnodePath = path.resolve(path.dirname(import.meta.url.replace('file://', '')), '../maiassnode.mjs');
+    // Get the absolute path to maiassnode.cjs (the actual entry point users run)
+    const maiassnodePath = path.resolve(path.dirname(import.meta.url.replace('file://', '')), '../maiassnode.cjs');
     
     return new Promise((resolve, reject) => {
       const child = spawn('node', [maiassnodePath, ...args], {
