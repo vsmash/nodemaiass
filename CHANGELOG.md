@@ -1,3 +1,9 @@
+## 0.9.2
+27 July 2025
+
+- Updated GitHub release workflow triggers
+	- fix(workflow): change release trigger condition to main branch update or workflow dispatch event
+
 ## 0.7.12
 27 July 2025
 
