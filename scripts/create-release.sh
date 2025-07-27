@@ -14,7 +14,8 @@ read -p "Choose an option:
 1. merge develop into staging
 2. merge staging into main
 3. 1 then two
-4. exit" -r choice
+4. exit
+" -r choice
 
 if [ "$choice" = "1" ]; then
     git checkout staging
