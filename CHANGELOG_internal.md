@@ -1,5 +1,11 @@
-## 0.9.2
+## 0.9.3
 27 July 2025
+
+- (vsmsh) MAI-7 Update create-release.sh script and enhance branching flows
+	- feat: add current branch detection
+	- feat: add options for merging branches
+	- feat: improve branch-switching handling in script
+	- fix: improve error handling for invalid user choice
 
 - (vsmsh) MAI-7 Updated GitHub release workflow triggers
 	- fix(workflow): change release trigger condition to main branch update or workflow dispatch event
