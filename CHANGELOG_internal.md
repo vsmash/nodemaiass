@@ -1,5 +1,9 @@
-## 0.9.5
+## 0.9.6
 27 July 2025
+
+- (vsmsh) MAI-7 Updated files to utilize common JS execution
+	- fix: replaced 'maiassnode.mjs' with 'maiassnode.cjs' in debug-git-test.js
+	- fix: changed file path for 'maiassnode.mjs' to 'maiassnode.cjs' in test-runner.js
 
 - (vsmsh) MAI-7 Updated test scripts to use .mjs node files
 	- fix: change reference from maiassnode.js to maiassnode.mjs in debug-git-test.js
