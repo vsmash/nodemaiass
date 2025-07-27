@@ -1,0 +1,214 @@
+# MAIASSNODE Installation Guide
+
+## 🚀 Quick Install (Recommended)
+
+### One-Line Install Script
+```bash
+curl -fsSL https://raw.githubusercontent.com/vsmash/nodemaiass/main/scripts/install.sh | bash
+```
+
+This automatically:
+- Detects your platform (macOS/Linux/Windows)
+- Downloads the correct binary
+- Installs to `/usr/local/bin/maiassnode`
+- Works without Node.js installed
+
+## 📦 Manual Installation Methods
+
+### Method 1: GitHub Releases (Self-Contained Binaries)
+
+**These binaries include Node.js runtime - no Node.js installation required!**
+
+#### macOS
+```bash
+# Apple Silicon (M1/M2/M3)
+curl -L https://github.com/vsmash/nodemaiass/releases/latest/download/maiassnode-macos-arm64 -o maiassnode
+chmod +x maiassnode
+./maiassnode --version
+
+# Intel
+curl -L https://github.com/vsmash/nodemaiass/releases/latest/download/maiassnode-macos-intel -o maiassnode
+chmod +x maiassnode
+./maiassnode --version
+```
+
+#### Linux
+```bash
+# x64
+curl -L https://github.com/vsmash/nodemaiass/releases/latest/download/maiassnode-linux-x64 -o maiassnode
+chmod +x maiassnode
+./maiassnode --version
+
+# ARM64 (Raspberry Pi, etc.)
+curl -L https://github.com/vsmash/nodemaiass/releases/latest/download/maiassnode-linux-arm64 -o maiassnode
+chmod +x maiassnode
+./maiassnode --version
+```
+
+#### Windows
+```powershell
+# x64
+Invoke-WebRequest -Uri "https://github.com/vsmash/nodemaiass/releases/latest/download/maiassnode-windows-x64.exe" -OutFile "maiassnode.exe"
+.\maiassnode.exe --version
+
+# ARM64
+Invoke-WebRequest -Uri "https://github.com/vsmash/nodemaiass/releases/latest/download/maiassnode-windows-arm64.exe" -OutFile "maiassnode.exe"
+.\maiassnode.exe --version
+```
+
+### Method 2: NPM Installation (⚠️ Node.js 18+ Required)
+
+**⚠️ WARNING FOR DEVELOPERS:** If you use `nvm` or work on projects with older Node versions, **avoid npm installation**. It will conflict with your project's Node version requirements.
+
+**Only use npm if:**
+- You're in a Node.js 18+ environment permanently
+- You don't use `nvm` or version switching
+- You understand the version conflict risks
+
+```bash
+# Global installation (only if Node.js 18+)
+npm install -g maiassnode
+maiassnode --version
+
+# Local installation (only if Node.js 18+)
+npm install maiassnode
+npx maiassnode --version
+```
+
+**Recommended instead:** Use the universal installer or Homebrew to avoid Node version conflicts.
+
+### Method 3: Homebrew (macOS/Linux) - Future
+
+```bash
+# Coming soon
+brew install maiassnode
+```
+
+### Method 4: Package Managers - Future
+
+```bash
+# Ubuntu/Debian (coming soon)
+sudo apt install maiassnode
+
+# CentOS/RHEL (coming soon)  
+sudo yum install maiassnode
+
+# Windows (coming soon)
+winget install maiassnode
+```
+
+## 🎯 Which Installation Method Should I Use?
+
+| Method | Best For | Pros | Cons |
+|--------|----------|------|------|
+| **Install Script** | **Developers (Recommended)** | ✅ Works with any Node version<br>✅ No Node.js conflicts<br>✅ One command | ❌ Requires internet |
+| **Homebrew** | **macOS/Linux developers** | ✅ Professional package manager<br>✅ No Node.js conflicts<br>✅ Easy updates | ❌ macOS/Linux only |
+| **GitHub Releases** | Manual control | ✅ No Node.js required<br>✅ Specific version control<br>✅ Offline capable | ❌ Manual platform selection |
+| **NPM Install** | ⚠️ **Node.js 18+ only** | ✅ Familiar workflow<br>✅ Integrates with npm | ❌ **Conflicts with nvm/older Node** |
+
+## 🔍 Verification
+
+After installation, verify it works:
+
+```bash
+# Check version
+maiassnode --version
+
+# Show help
+maiassnode --help
+
+# Test basic functionality
+maiassnode env
+```
+
+## 🛠️ Installation Locations
+
+| Method | Install Location | Command |
+|--------|------------------|---------|
+| Install Script | `/usr/local/bin/maiassnode` | `maiassnode` |
+| Manual Binary | Current directory | `./maiassnode` |
+| NPM Global | npm global bin directory | `maiassnode` |
+| NPM Local | `node_modules/.bin/` | `npx maiassnode` |
+
+## 🔧 Troubleshooting
+
+### "Command not found"
+```bash
+# Check if binary is in PATH
+which maiassnode
+
+# Add to PATH if needed (add to ~/.bashrc or ~/.zshrc)
+export PATH="/usr/local/bin:$PATH"
+```
+
+### "Permission denied"
+```bash
+# Make binary executable
+chmod +x maiassnode
+```
+
+### Node.js Version Issues (NPM install only)
+```bash
+# Check Node.js version
+node --version
+
+# If < 18.0.0, use binary installation instead
+curl -fsSL https://raw.githubusercontent.com/vsmash/nodemaiass/main/scripts/install.sh | bash
+```
+
+### Binary Won't Run
+- **macOS**: Allow in System Preferences > Security & Privacy
+- **Windows**: Windows Defender may flag unsigned executable
+- **Linux**: Ensure binary has execute permissions
+
+## 🚀 Development Installation
+
+For contributors and developers:
+
+```bash
+# Clone repository
+git clone https://github.com/vsmash/nodemaiass.git
+cd nodemaiass
+
+# Install dependencies
+npm install
+
+# Run locally
+./nodemaiass.sh --version
+
+# Install globally from source
+npm install -g .
+```
+
+## 📋 System Requirements
+
+### Binary Installation (Recommended)
+- **Operating System**: macOS 10.15+, Linux (most distros), Windows 10+
+- **Architecture**: x64 or ARM64
+- **Dependencies**: None (Node.js included)
+- **Disk Space**: ~50MB
+
+### NPM Installation
+- **Node.js**: 18.0.0 or higher
+- **NPM**: 8.0.0 or higher
+- **Operating System**: Any Node.js supported platform
+- **Disk Space**: ~5MB + Node.js
+
+## 🔄 Updating
+
+### Binary Installation
+```bash
+# Re-run install script
+curl -fsSL https://raw.githubusercontent.com/vsmash/nodemaiass/main/scripts/install.sh | bash
+```
+
+### NPM Installation
+```bash
+npm update -g maiassnode
+```
+
+## ❓ Support
+
+- **Documentation**: https://github.com/vsmash/nodemaiass
+- **Issues**: https://github.com/vsmash/nodemaiass/issues
+- **Discussions**: https://github.com/vsmash/nodemaiass/discussions
