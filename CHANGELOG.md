@@ -1,5 +1,8 @@
-## 0.7.11
+## 0.7.12
 27 July 2025
+
+- Changed command option in devlog.js
+	- fix: updated the second parameter from "0" to "?" in devlog.js command execution
 
 - Refine devlog logs
 	- refactor: remove extra log from devlog for cleaner output
