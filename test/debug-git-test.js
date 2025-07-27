@@ -42,7 +42,7 @@ console.log('Test repository created successfully');
 
 // Test individual git command
 console.log('\n=== Testing individual git command ===');
-const gitResult = spawn('node', [path.resolve('../maiassnode.js'), 'git'], {
+const gitResult = spawn('node', [path.resolve('../maiassnode.mjs'), 'git'], {
   cwd: repoPath,
   stdio: ['pipe', 'pipe', 'pipe']
 });
@@ -62,7 +62,7 @@ gitResult.on('close', (code) => {
   
   // Test pipeline command
   console.log('\n=== Testing pipeline command ===');
-  const pipelineResult = spawn('node', [path.resolve('../maiassnode.js'), '--dry-run', 'patch'], {
+  const pipelineResult = spawn('node', [path.resolve('../maiassnode.mjs'), '--dry-run', 'patch'], {
     cwd: repoPath,
     stdio: ['pipe', 'pipe', 'pipe']
   });
