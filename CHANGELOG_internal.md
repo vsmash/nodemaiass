@@ -1,5 +1,9 @@
-## 0.9.4
+## 0.9.5
 27 July 2025
+
+- (vsmsh) MAI-7 Updated test scripts to use .mjs node files
+	- fix: change reference from maiassnode.js to maiassnode.mjs in debug-git-test.js
+	- fix: modify path to maiassnode.mjs in test-runner.js
 
 - (vsmsh) MAI-7 Improved git release workflow
 	- feat: added write permissions for creating releases
