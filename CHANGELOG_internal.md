@@ -1,3 +1,54 @@
+## 0.7.12
+27 July 2025
+
+- (vsmsh) VEL-405 Changed command option in devlog.js
+	- fix: updated the second parameter from "0" to "?" in devlog.js command execution
+
+- (vsmsh) VEL-405 Refine devlog logs
+	- refactor: remove extra log from devlog for cleaner output
+
+- (vsmsh) VEL-405 Updated devlog.js to handle different parameters
+	- fix: corrected second parameter in devlog.sh command
+
+- (vsmsh) VEL-405 Refactored devlog command parameters
+	- fix: removed unused 'type' parameter from devlog.sh command execution in devlog.js
+
+- (vsmsh) VEL-405 Refactor logging and merging operations - refactor(devlog): switched execution from synchronous to asynchronous - fix(commit): handleStagedCommit now passes along the entire gitInfo object - refactor(devlog): replace default names with clearly outlined  attributes - feat(devlog): extractDevlogContext to separate gitInfo context extraction logic - feat(devlog): use extracted context in logCommit and logMerge functions - refactor(maiass-pipeline): pass along originalGitInfo to logMerge function in handleMergeToDevelop method
+
+- (vsmsh) VEL-405 Refined debugging messages in devlog.js
+	- feat: added logging of messages to devlog.sh
+	- fix: corrected the error and debug message handling
+	- refactor: streamlined debug message print conditions
+- (vsmsh) VEL-405 Improve debug handling in devlog
+	- feat: introduced condition for command execution during debug
+	- refactor: reordered execSync command execution
+	- fix(devlog): revised handling for both debug and non-debug scenarios
+
+- (vsmsh) VEL-405 Improved output capture in devlog
+	- fix: replaced trim method in execSync command output capture in devlog.js
+	- feat: added functionality for logging full command result, including errors
+- (vsmsh) VEL-405 Modify devlog.js functionality
+	- refactor: changed console output behavior within logThis function
+	- feat: added silent execution of command for cleaner log display
+- (vsmsh) VEL-405 Added debug message for devlog.sh command execution
+	- feat: add debug message condition in devlog.js to show the executed command if MAIASS_DEBUG is set to true
+
+- (vsmsh) VEL-405 Integrate devlog functionality and improve commit and merge logging
+	- feat: added devlog functionality as a separate module
+	- feat: implemented commit logging to devlog in 'commit.js'
+	- feat: introduced merge logging in 'maiass-pipeline.js' within 'handleMergeToDevelop' and 'handleVersionManagement'
+	- feat: created 'devlog.js' file with multiple utility functions for development logging
+
+- (vsmsh) VEL-405 Updated AI endpoint and configuration
+	- fix: Changed default AI endpoint in commit.js
+	- docs: Removed MAIASS_AI_ENDPOINT from configuration.md
+	- refactor: Updated MAIASS variable references to non-branded AI in maiass-variables.js
+
+- (vsmsh) VEL-405 Update project configuration and variables related to AI
+	- feat: renamed all occurrences of 'OPENAI' to 'AI' in variables and configuration files
+	- docs: updated README and documentations to reflect the changes made in configuration and variable names
+	- test: updated test setup to use the renamed AI_MODE configuration variable
+
 ## 0.7.1
 25 July 2025
 
