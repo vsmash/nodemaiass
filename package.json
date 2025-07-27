@@ -3,15 +3,60 @@
   "type": "module",
   "version": "0.7.1",
   "description": "Node.js replica of maiass.sh intelligent Git workflow automation script",
-  "main": "maiassnode.js",
+  "main": "maiassnode.cjs",
   "bin": {
-    "maiassnode": "./maiassnode.js"
+    "maiassnode": "./maiassnode.cjs"
   },
   "author": "Velvary Pty Ltd",
-  "license": "MIT",
+  "license": "GPL-3.0-only",
+  "engines": {
+    "node": ">=23.0.0"
+  },
+  "keywords": [
+    "git",
+    "automation",
+    "workflow",
+    "ai",
+    "commit",
+    "version",
+    "cli"
+  ],
+  "scripts": {
+    "start": "node maiassnode.mjs",
+    "build": "node build.js",
+    "build:all": "node build.js",
+    "build:macos": "pkg . --targets node18-macos-x64,node18-macos-arm64",
+    "build:linux": "pkg . --targets node18-linux-x64,node18-linux-arm64",
+    "build:windows": "pkg . --targets node18-win-x64,node18-win-arm64",
+    "test": "node test/test-runner.js"
+  },
   "dependencies": {
     "chalk": "^5.4.1",
     "dotenv": "^16.4.5",
     "yargs": "^17.7.2"
+  },
+  "devDependencies": {
+    "pkg": "^5.8.1"
+  },
+  "pkg": {
+    "scripts": [
+      "maiassnode.cjs",
+      "maiassnode.mjs",
+      "lib/**/*.js"
+    ],
+    "assets": [
+      "package.json",
+      "docs/**",
+      "config/**"
+    ],
+    "targets": [
+      "node18-macos-x64",
+      "node18-macos-arm64",
+      "node18-linux-x64",
+      "node18-linux-arm64",
+      "node18-win-x64",
+      "node18-win-arm64"
+    ],
+    "outputPath": "build"
   }
 }
