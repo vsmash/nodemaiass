@@ -32,7 +32,24 @@ import { SYMBOLS } from './lib/symbols.js';
 
 // Simple CLI setup for pkg compatibility
 const args = process.argv.slice(2);
-const command = args[0] || 'help';
+const firstArg = args[0];
+
+// Check if first argument is a version bump type
+const versionBumpTypes = ['major', 'minor', 'patch'];
+let command = 'maiass'; // Default to maiass workflow
+let versionBump = null;
+
+if (firstArg && versionBumpTypes.includes(firstArg)) {
+  // First arg is a version bump type, use it for maiass workflow
+  versionBump = firstArg;
+  command = 'maiass';
+} else if (firstArg && !firstArg.startsWith('-')) {
+  // First arg is a command
+  command = firstArg;
+} else {
+  // No command specified or starts with flag, default to maiass
+  command = 'maiass';
+}
 
 // Handle version flag
 if (args.includes('--version') || args.includes('-v')) {
@@ -42,20 +59,27 @@ if (args.includes('--version') || args.includes('-v')) {
 
 // Handle help flag
 if (args.includes('--help') || args.includes('-h') || command === 'help') {
-  console.log(`
-MAIASSNODE v${version}`);
-  console.log('Usage: maiassnode <command> [options]\n');
-  console.log('Commands:');
+  console.log(`\nMAIASSNODE v${version}`);
+  console.log('Usage: maiassnode [version-bump] [options]\n');
+  console.log('Version Bump (runs full MAIASS workflow):');
+  console.log('  nma                Run MAIASS workflow (default: patch bump)');
+  console.log('  nma minor          Run MAIASS workflow with minor version bump');
+  console.log('  nma major          Run MAIASS workflow with major version bump');
+  console.log('  nma patch          Run MAIASS workflow with patch version bump');
+  console.log('\nOther Commands:');
   console.log('  hello              Print hello world');
   console.log('  env                Display environment variables');
   console.log('  git                Display git information');
-  console.log('  commit             Commit workflow');
+  console.log('  commit             Commit workflow only');
   console.log('  version            Version management');
   console.log('  config             Manage configuration');
-  console.log('  maiass             Complete MAIASS workflow');
+  console.log('  maiass             Complete MAIASS workflow (explicit)');
   console.log('\nOptions:');
   console.log('  --version, -v      Show version');
   console.log('  --help, -h         Show help');
+  console.log('  --dry-run          Preview changes without executing');
+  console.log('  --commits-only     Only run commit workflow');
+  console.log('  --force            Force operations');
   process.exit(0);
 }
 
@@ -131,11 +155,15 @@ switch (command) {
   case 'maiass':
     (async () => {
       const maiassOptions = {
-        dryRun: args.includes('--dry-run'),
-        skipValidation: args.includes('--skip-validation'),
-        message: getArgValue(args, '--message') || getArgValue(args, '-m'),
-        bump: getArgValue(args, '--bump'),
-        tag: args.includes('--tag')
+        _: [], // positionalArgs array expected by handleMaiassCommand
+        'commits-only': args.includes('--commits-only'),
+        'auto-stage': args.includes('--auto-stage'),
+        'version-bump': versionBump || getArgValue(args, '--bump'), // Use detected version bump or --bump flag
+        'dry-run': args.includes('--dry-run'),
+        tag: args.includes('--tag'),
+        force: args.includes('--force'),
+        silent: args.includes('--silent'),
+        message: getArgValue(args, '--message') || getArgValue(args, '-m')
       };
       await handleMaiassCommand(maiassOptions);
     })();
