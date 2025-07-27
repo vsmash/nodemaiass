@@ -1,3 +1,17 @@
+## 0.9.7
+28 July 2025
+
+- (vsmsh) MAI-7 Enhanced Wordpress Integration and Debugging Information
+	- feat: expanded WordPress plugin and theme management functionality
+	- feat: added methods for updating version in WordPress theme style.css and PHP version constant
+	- feat: implemented version constant generator based on file path for WordPress plugins and themes
+	- feat: incorporated automatic generation of constants in WordPress update process
+	- feat: Implemented dry run mode for WordPress updates previewing
+	- feat: included expanded debugging information in configuration load and WordPress update functions
+	- fix: corrected list format in create-release.sh script
+	- docs: extensive descriptions and usage examples in workflow.md
+	- docs: provided configuration metro information for WordPress plugin/theme management in configuration.md
+
 ## 0.9.6
 27 July 2025
 
