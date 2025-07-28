@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// MAIASS: Modular AI-Assisted Semantic Savant
+// MAIASS: Modular AI-Assisted Semantic Scribe
 import path from 'path';
 import fs from 'fs';
 import yargs from 'yargs';
@@ -19,7 +19,6 @@ const __dirname = path.dirname(new URL(import.meta.url).pathname.replace(/^\/(\w
 const packageJson = JSON.parse(fs.readFileSync(path.join(__dirname, 'package.json')));
 const version = packageJson.version;
 
-logger.header(colors.BCyan('🌟'),`MAIASS v${version}`, colors.Blue);
 // display a horizontal line
 console.log(colors.BCyan('─'.repeat(50)));
 // Import env display utility

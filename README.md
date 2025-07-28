@@ -1,6 +1,6 @@
 # MAIASS
 
-**Modular AI-Assisted Semantic Savant** - A modern Node.js implementation of the intelligent Git workflow automation tool.
+**Modular AI-Assisted Semantic Scribe** - A modern Node.js implementation of the intelligent Git workflow automation tool.
 
 [![Node.js](https://img.shields.io/badge/Node.js-23+-green.svg)](https://nodejs.org/)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
