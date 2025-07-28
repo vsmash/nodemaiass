@@ -1,3 +1,13 @@
+## 1.0.2
+28 July 2025
+
+- (vsmsh) MAI-7 Updated logging systems in maiassnode and removed unnecessary logs
+	- refactor(maiassnode): replace console.log with the logger system for better output control
+	- refactor(maiassnode): change user prompts to use the logger system instead of console.log
+	- fix(maiassnode): correct comment typo on commit functionality script
+	- fix(maiass): remove unnecessary log commenting on ES module import success
+	- style(maiassnode): remove excess white spaces in commitThis function
+
 ## 0.9.7
 28 July 2025
 
