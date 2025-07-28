@@ -4,6 +4,7 @@ import path from 'path';
 import fs from 'fs';
 import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';
+import logger from './lib/logger.js';
 import { loadEnvironmentConfig, ensureConfigDirectories } from './lib/config.js';
 
 // Load environment variables from multiple sources with cross-platform support
@@ -18,8 +19,9 @@ const __dirname = path.dirname(new URL(import.meta.url).pathname.replace(/^\/(\w
 const packageJson = JSON.parse(fs.readFileSync(path.join(__dirname, 'package.json')));
 const version = packageJson.version;
 
-console.log(colors.Aqua(`MAIASS v${version}`));
-
+logger.header(colors.BCyan('🌟'),`MAIASS v${version}`, colors.Blue);
+// display a horizontal line
+console.log(colors.BCyan('─'.repeat(50)));
 // Import env display utility
 import { displayEnvironmentVariables } from './lib/env-display.js';
 import { getGitInfo, displayGitInfo, validateBranchForOperations } from './lib/git-info.js';
