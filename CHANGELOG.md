@@ -1,5 +1,8 @@
-## 1.0.4
+## 1.0.5
 28 July 2025
+
+- Added new color to colors.js
+	- feat: added bold lime color function to colors.js
 
 - Updated logger functionality
 	- feat: added bold parameter to logger methods
