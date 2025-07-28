@@ -1,5 +1,8 @@
-## 1.0.4
+## 1.0.5
 28 July 2025
+
+- (vsmsh) MAI-7 Added new color to colors.js
+	- feat: added bold lime color function to colors.js
 
 - (vsmsh) Updated logger functionality
 	- feat: added bold parameter to logger methods
