@@ -1,5 +1,11 @@
-## 1.0.12
+## 1.0.13
 28 July 2025
+
+- (vsmsh) MAI-7 Updated logging functionality and error handling
+	- refactor: replaced SYMBOLS.INFO with SYMBOLS.GEAR in logging messages
+	- feat: incorporated error handling using logger instead of console.error
+	- refactor: updated all console.log statements to use the logger module
+	- feat: added more descriptive log messages for git operations
 
 - (vsmsh) MAI-7 Refactored logging framework for enhanced error management
 	- feat(logger.js): added a debugging method to logger
