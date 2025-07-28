@@ -1,6 +1,6 @@
 # MAIASSNODE
 
-A powerful Node.js replica of the MAIASS (Modular AI-Assisted Semantic Savant) intelligent Git workflow automation script with enhanced WordPress integration and cross-platform packaging.
+A powerful Node.js replica of the MAIASS (Modular AI-Assisted Semantic Scribe) intelligent Git workflow automation script with enhanced WordPress integration and cross-platform packaging.
 
 ## Quick Start
 
