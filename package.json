@@ -1,7 +1,7 @@
 {
   "name": "maiass",
   "type": "module",
-  "version": "1.0.13",
+  "version": "1.0.14",
   "description": "MAIASS - Modular AI-Assisted Semantic Savant - Intelligent Git workflow automation",
   "main": "maiass.cjs",
   "bin": {

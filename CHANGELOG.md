@@ -1,5 +1,8 @@
-## 1.0.13
+## 1.0.14
 28 July 2025
+
+- Updated logger symbol in pipeline
+	- refactor: changed logger symbol from INFO to GEAR in maiass-pipeline.js
 
 - Updated logging functionality and error handling
 	- refactor: replaced SYMBOLS.INFO with SYMBOLS.GEAR in logging messages
