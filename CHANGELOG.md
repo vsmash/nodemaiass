@@ -1,5 +1,13 @@
-## 1.0.5
+## 1.0.6
 28 July 2025
+
+- Updated style and behavior of logger
+	- style(logger): changed text color to bright yellow
+	- refactor(logger): removed MAIASS_PREFIX from aisuggestion log method
+- Updated logger functionality
+	- feat: added aisuggestion method to logger.js
+- Improved logging in commit.js
+	- fix: updated logging call for aiSuggestion
 
 - Added new color to colors.js
 	- feat: added bold lime color function to colors.js
