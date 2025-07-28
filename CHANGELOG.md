@@ -1,5 +1,22 @@
-## 1.0.7
+## 1.0.8
 28 July 2025
+
+- Updated logger and main packages
+	- refactor: Changed log.info to log.aisuggestion in commit.js
+	- feat: Imported logger from './lib/logger.js'
+	- refactor: Replaced console.log with logger.header in maiass.mjs file
+	- style: Changed text color to bright yellow in logger
+	- refactor: Removed MAIASS_PREFIX from aisuggestion log method
+	- feat: Added aisuggestion method to logger.js
+	- fix: Updated logging call for aiSuggestion
+	- feat: Added bold lime color function to colors.js
+	- refactor: Version and description update in package.json
+- Updated documentation and code to reflect changes in project name
+	- docs: Updated README, documentation, and scripts to change name to "Semantic Scribe"
+	- refactor: Updated JavaScript files to change project name display to "Semantic Scribe"
+	- feat: Added new symbol 'maiassdot' in symbols.js
+	- refactor: Removed logger.header line in maiass.mjs
+	- fix: Updated project description in package.json
 
 - Refactor log method in commit.js
 	- refactor: changed log.info to log.aisuggestion in commit.js
