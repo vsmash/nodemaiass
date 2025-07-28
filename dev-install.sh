@@ -1,10 +1,11 @@
 #!/bin/bash
-# Development install/uninstall script for MAIASSNODE testing
+# Development install/uninstall script for MAIASS testing
+# This script helps with development and testing of the MAIASS tool
 
 set -e  # Exit on any error
 
-PACKAGE_NAME="maiassnode"
-GLOBAL_BIN_PATH="/usr/local/bin/maiassnode"
+PACKAGE_NAME="maiass"
+GLOBAL_BIN_PATH="/usr/local/bin/maiass"
 
 # Colors for output
 RED='\033[0;31m'
@@ -32,7 +33,7 @@ print_error() {
 
 # Function to check if package is globally installed
 is_globally_installed() {
-    npm list -g $PACKAGE_NAME 2>/dev/null | grep -q $PACKAGE_NAME
+    command -v "$PACKAGE_NAME" >/dev/null 2>&1
 }
 
 # Function to install globally
@@ -43,11 +44,11 @@ install_global() {
         print_success "Global installation completed"
         
         # Verify installation
-        if command -v maiassnode >/dev/null 2>&1; then
-            print_success "Command 'maiassnode' is available in PATH"
-            maiassnode --version
+        if command -v "$PACKAGE_NAME" >/dev/null 2>&1; then
+            print_success "Command '$PACKAGE_NAME' is available in PATH"
+            "$PACKAGE_NAME" --version
         else
-            print_warning "Command 'maiassnode' not found in PATH, but npm install succeeded"
+            print_warning "Command '$PACKAGE_NAME' not found in PATH, but npm install succeeded"
         fi
     else
         print_error "Global installation failed"
@@ -60,14 +61,14 @@ uninstall_global() {
     print_status "Uninstalling $PACKAGE_NAME globally..."
     
     if is_globally_installed; then
-        if npm uninstall -g $PACKAGE_NAME; then
+        if npm uninstall -g "$PACKAGE_NAME"; then
             print_success "Global uninstallation completed"
         else
             print_error "Global uninstallation failed"
             return 1
         fi
     else
-        print_warning "Package is not globally installed"
+        print_warning "Package '$PACKAGE_NAME' is not globally installed"
     fi
     
     # Clean up any remaining symlinks or binaries
@@ -123,18 +124,19 @@ show_status() {
     fi
     
     # Check command availability
-    if command -v maiassnode >/dev/null 2>&1; then
-        print_success "Command 'maiassnode' available in PATH"
-        echo "  Location: $(which maiassnode)"
+    if command -v "$PACKAGE_NAME" >/dev/null 2>&1; then
+        print_success "Command '$PACKAGE_NAME' available in PATH"
+        echo "  Location: $(which "$PACKAGE_NAME")"
     else
-        print_warning "Command 'maiassnode' not available in PATH"
+        print_warning "Command '$PACKAGE_NAME' not available in PATH"
     fi
     
     # Check local files
     echo -e "\n${BLUE}📁 Local Files Status${NC}"
     echo "===================="
     
-    files=("maiassnode.cjs" "maiassnode.mjs" "nodemaiass.sh" "package.json")
+    # List of files that should exist
+    files=("maiass.cjs" "maiass.mjs" "maiass.sh" "package.json")
     for file in "${files[@]}"; do
         if [ -f "$file" ]; then
             print_success "$file exists"
@@ -162,9 +164,9 @@ run_tests() {
         print_warning "test-install.sh not found, running basic tests..."
         
         # Basic test
-        if command -v maiassnode >/dev/null 2>&1; then
-            print_status "Testing global command..."
-            maiassnode --version
+        if command -v "$PACKAGE_NAME" >/dev/null 2>&1; then
+            print_status "Running tests..."
+            "$PACKAGE_NAME" --version
         fi
         
         # Local test

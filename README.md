@@ -1,4 +1,4 @@
-# MAIASSNODE
+# MAIASS
 
 **Modular AI-Assisted Semantic Savant** - A modern Node.js implementation of the intelligent Git workflow automation tool.
 
@@ -10,13 +10,16 @@
 
 ```bash
 # Run the complete MAIASS workflow
-nma
+maiass
 
 # Commit changes only (skip version management)
-nma --commits-only
+maiass --commits-only
 
-# Bump patch version with git tag
-nma patch --tag
+# Bump version with git tag
+maiass patch --tag
+
+# For development testing (local version)
+./devmyass
 
 # Preview changes without applying them
 nma --dry-run
@@ -74,40 +77,43 @@ npm link  # Makes 'nma' command available globally
 nma
 
 # Specific version bumps
-nma patch    # 1.0.0 → 1.0.1
-nma minor    # 1.0.0 → 1.1.0  
-nma major    # 1.0.0 → 2.0.0
-nma 2.1.0    # Set specific version
+maiass patch    # 1.0.0 → 1.0.1
+maiass minor    # 1.0.0 → 1.1.0
+maiass major    # 1.0.0 → 2.0.0
+maiass 2.1.0    # Set specific version
 
 # Workflow options
-nma --commits-only     # Only commit, skip version management
-nma --auto-stage       # Automatically stage all changes
-nma --dry-run          # Preview without making changes
-nma --force            # Skip confirmation prompts
-nma minor --tag        # Bump version and create git tag
+maiass --commits-only     # Only commit, skip version management
+maiass --auto-stage       # Automatically stage all changes
+maiass --dry-run          # Preview without making changes
+maiass --force            # Skip confirmation prompts
+maiass minor --tag        # Bump version and create git tag
 ```
 
 ### Individual Commands
 
 ```bash
-# Commit workflow only
-nma commit --auto-stage
+# Commit changes
+maiass commit
 
-# Version management only
-nma version patch --tag
-nma version --current    # Show current version info
+# Version management
+maiass version [major|minor|patch|version]
 
-# Configuration management
-nma config                           # Show all config
-nma config --global                  # Show global config
-nma config --global openai_token=xyz # Set global config
-nma config --edit --project          # Edit project config
+# Configuration
+maiass config list
+maiass config get <key>
+maiass config set <key> <value>
+
+# Environment info
+maiass env
 
 # Git information
-nma git              # Show git status and branch info
+maiass git-info
+maiass git              # Show git status and branch info
 
 # Environment variables
-nma env              # Show MAIASS environment variables
+maiass env              # Show current environment
+maiass env --json       # Show environment as JSON
 ```
 
 ## ⚙️ Configuration

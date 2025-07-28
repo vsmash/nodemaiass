@@ -1,11 +1,11 @@
 {
-  "name": "maiassnode",
+  "name": "maiass",
   "type": "module",
-  "version": "0.9.7",
-  "description": "Node.js replica of maiass.sh intelligent Git workflow automation script",
-  "main": "maiassnode.cjs",
+  "version": "1.0.0",
+  "description": "MAIASS - Modular AI-Assisted Semantic Savant - Intelligent Git workflow automation",
+  "main": "maiass.cjs",
   "bin": {
-    "maiassnode": "./maiassnode.cjs"
+    "maiass": "./maiass.cjs"
   },
   "author": "Velvary Pty Ltd",
   "license": "GPL-3.0-only",

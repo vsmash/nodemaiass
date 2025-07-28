@@ -1,5 +1,5 @@
 #!/bin/bash
-# Universal installer script for MAIASSNODE
+# MAIASS Installer Script
 # Downloads and installs the appropriate binary for the current platform
 
 set -e

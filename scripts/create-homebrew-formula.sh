@@ -4,10 +4,10 @@
 set -e
 
 # Configuration
-REPO="vsmash/nodemaiass"
+REPO="vsmash/maiass"
 VERSION=$(node -p "require('./package.json').version")
 FORMULA_DIR="Formula"
-FORMULA_FILE="$FORMULA_DIR/maiassnode.rb"
+FORMULA_FILE="$FORMULA_DIR/maiass.rb"
 
 # Colors
 RED='\033[0;31m'
@@ -21,8 +21,8 @@ print_success() { echo -e "${GREEN}✅ $1${NC}"; }
 print_warning() { echo -e "${YELLOW}⚠️  $1${NC}"; }
 print_error() { echo -e "${RED}❌ $1${NC}"; }
 
-echo "🍺 Creating Homebrew Formula for MAIASSNODE v$VERSION"
-echo "=================================================="
+echo "🍺 Creating Homebrew Formula for MAIASS v$VERSION"
+echo "=============================================="
 
 # Ensure release directory exists and has binaries
 if [ ! -d "release" ]; then
@@ -42,9 +42,23 @@ fi
 print_status "Reading SHA256 hashes from checksums.txt..."
 
 # Extract hashes (format: hash  filename)
-INTEL_SHA=$(grep "maiassnode-macos-intel" release/checksums.txt | cut -d' ' -f1)
-ARM64_SHA=$(grep "maiassnode-macos-arm64" release/checksums.txt | cut -d' ' -f1)
-LINUX_SHA=$(grep "maiassnode-linux-x64" release/checksums.txt | cut -d' ' -f1)
+if [ -f "release/maiass-macos-intel" ]; then
+      INTEL_SHA=$(shasum -a 256 "release/maiass-macos-intel" | cut -d' ' -f1)
+      echo "✅ Found Intel binary (SHA256: ${INTEL_SHA:0:8}...)"
+  fi
+
+  if [ -f "release/maiass-macos-arm64" ]; then
+      ARM64_SHA=$(shasum -a 256 "release/maiass-macos-arm64" | cut -d' ' -f1)
+      echo "✅ Found ARM64 binary (SHA256: ${ARM64_SHA:0:8}...)"
+  fi
+
+  if [ -f "release/maiass-linux-x64" ]; then
+      LINUX_SHA=$(shasum -a 256 "release/maiass-linux-x64" | cut -d' ' -f1)
+      echo "✅ Found Linux binary (SHA256: ${LINUX_SHA:0:8}...)"
+  else
+      print_error "Linux binary not found in release/"
+      exit 1
+  fi
 
 if [ -z "$INTEL_SHA" ] || [ -z "$ARM64_SHA" ] || [ -z "$LINUX_SHA" ]; then
     print_error "Could not extract all required SHA256 hashes"
@@ -61,35 +75,38 @@ print_status "Linux SHA256: $LINUX_SHA"
 print_status "Generating Homebrew formula..."
 
 cat > "$FORMULA_FILE" << EOF
-class Maiassnode < Formula
-  desc "AI-powered Git workflow automation tool"
+class Maiass < Formula
+  desc "MAIASS: Modular AI-Assisted Semantic Savant - CLI tool for AI-assisted development"
   homepage "https://github.com/$REPO"
+  url "https://github.com/$REPO/archive/refs/tags/v#{version}.tar.gz"
   version "$VERSION"
+  sha256 ""
   license "MIT"
+
+  depends_on "node"
 
   on_macos do
     if Hardware::CPU.intel?
-      url "https://github.com/$REPO/releases/download/v#{version}/maiassnode-macos-intel"
+      url "https://github.com/$REPO/releases/download/v#{version}/maiass-macos-intel"
       sha256 "$INTEL_SHA"
     else
-      url "https://github.com/$REPO/releases/download/v#{version}/maiassnode-macos-arm64"
+      url "https://github.com/$REPO/releases/download/v#{version}/maiass-macos-arm64"
       sha256 "$ARM64_SHA"
     end
   end
 
   on_linux do
-    url "https://github.com/$REPO/releases/download/v#{version}/maiassnode-linux-x64"
+    url "https://github.com/$REPO/releases/download/v#{version}/maiass-linux-x64"
     sha256 "$LINUX_SHA"
   end
 
   def install
-    # The downloaded file is the binary itself
-    bin.install Dir["maiassnode*"].first => "maiassnode"
+    bin.install Dir["maiass-*"].first => "maiass"
   end
 
   test do
-    system "#{bin}/maiassnode", "--version"
-    system "#{bin}/maiassnode", "--help"
+    system "#{bin}/maiass", "--version"
+    system "#{bin}/maiass", "--help"
   end
 end
 EOF
