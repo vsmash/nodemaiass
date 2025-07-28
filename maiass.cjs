@@ -16,7 +16,7 @@
     }
     
     const module = await import('./maiass.mjs');
-    console.log('ES module imported successfully');
+    // console.log('ES module imported successfully');
   } catch (error) {
     console.error('Error starting maiass:');
     console.error('Error type:', error.constructor.name);
