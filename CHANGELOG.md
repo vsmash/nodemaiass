@@ -1,5 +1,12 @@
-## 1.0.6
+## 1.0.7
 28 July 2025
+
+- Refactor log method in commit.js
+	- refactor: changed log.info to log.aisuggestion in commit.js
+- Updated logging in maiass.mjs
+	- feat: imported logger from './lib/logger.js'
+	- refactor: replaced console.log with logger.header for displaying version
+	- chore: added a blue colored horizontal line for better UI
 
 - Updated style and behavior of logger
 	- style(logger): changed text color to bright yellow
