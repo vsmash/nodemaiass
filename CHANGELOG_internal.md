@@ -1,5 +1,12 @@
-## 1.0.8
+## 1.0.11
 28 July 2025
+
+- (vsmsh) MAI-7 Updated logging in maiass-pipeline.js
+	- refactor: replaced console.log with logger for better debuguity
+	- refactor: replaced console.error with logger.error for better error tracking
+	- refactor: replaced console.success with logger.success for improved success message tracking
+	- refactor: refined logger messages
+	- refactor: streamlined calls to use git commands through logger functionality
 
 - (vsmsh) MAI-7 Updated logger and main packages
 	- refactor: Changed log.info to log.aisuggestion in commit.js
