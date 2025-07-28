@@ -1,5 +1,9 @@
-## 1.0.3
+## 1.0.4
 28 July 2025
+
+- Updated logger functionality
+	- feat: added bold parameter to logger methods
+	- fix: updated color selection based on boldness
 
 - Updated message in maiass-command.js
 	- fix: corrected application name in thank you message
