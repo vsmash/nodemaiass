@@ -1,5 +1,11 @@
-## 1.0.15
+## 1.0.16
 28 July 2025
+
+- Removed unused binary build files and tweaked logging in maiass-pipeline.js
+	- chore: deleted maiassnode-arm64 build file
+	- chore: deleted maiassnode-x64 build file
+	- refactor: remove redundant logging line in validateAndHandleBranching
+	- style: changed logger output color to blue for 'Phase 1: Branch Detection and Validation' message
 
 - Implemented AI symbol and updated AI message identifier
 	- feat(symbols): added new 'brain' symbol for AI
