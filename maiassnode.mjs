@@ -59,13 +59,13 @@ if (args.includes('--version') || args.includes('-v')) {
 
 // Handle help flag
 if (args.includes('--help') || args.includes('-h') || command === 'help') {
-  console.log(`\nMAIASSNODE v${version}`);
-  console.log('Usage: maiassnode [version-bump] [options]\n');
+  console.log(`\nMAIASS v${version}`);
+  console.log('Usage: maiass [version-bump] [options]\n');
   console.log('Version Bump (runs full MAIASS workflow):');
-  console.log('  nma                Run MAIASS workflow (default: patch bump)');
-  console.log('  nma minor          Run MAIASS workflow with minor version bump');
-  console.log('  nma major          Run MAIASS workflow with major version bump');
-  console.log('  nma patch          Run MAIASS workflow with patch version bump');
+  console.log('  maiass             Run MAIASS workflow (default: patch bump)');
+  console.log('  maiass minor       Run MAIASS workflow with minor version bump');
+  console.log('  maiass major       Run MAIASS workflow with major version bump');
+  console.log('  maiass patch       Run MAIASS workflow with patch version bump');
   console.log('\nOther Commands:');
   console.log('  hello              Print hello world');
   console.log('  env                Display environment variables');
@@ -86,7 +86,7 @@ if (args.includes('--help') || args.includes('-h') || command === 'help') {
 // Command routing
 switch (command) {
   case 'hello':
-    console.log(colors.BCyan('Hello from MAIASSNODE!'));
+    console.log(colors.BCyan('Hello from MAIASS!'));
     break;
     
   case 'env':

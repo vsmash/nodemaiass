@@ -6,7 +6,7 @@ echo "=================================================================="
 
 # Test 1: Node.js direct execution
 echo -e "\n1️⃣ Testing Node.js direct execution:"
-if node maiassnode.cjs --version; then
+if node maiass.cjs --version; then
     echo "✅ Node.js execution works"
 else
     echo "❌ Node.js execution failed"
@@ -14,7 +14,7 @@ fi
 
 # Test 2: Shell script wrapper
 echo -e "\n2️⃣ Testing shell script wrapper:"
-if ./nodemaiass.sh --version; then
+if ./maiass.sh --version; then
     echo "✅ Shell script wrapper works"
 else
     echo "❌ Shell script wrapper failed"
@@ -22,25 +22,25 @@ fi
 
 # Test 3: Built binaries
 echo -e "\n3️⃣ Testing built binaries:"
-if [ -f "build/maiassnode-arm64" ]; then
-    echo "ARM64 binary exists ($(ls -lh build/maiassnode-arm64 | awk '{print $5}'))"
+if [ -f "build/maiass-arm64" ]; then
+    echo "ARM64 binary exists ($(ls -lh build/maiass-arm64 | awk '{print $5}'))"
     # Note: Binary has pkg issue but demonstrates cross-platform build capability
 else
     echo "❌ ARM64 binary not found"
 fi
 
-if [ -f "build/maiassnode-x64" ]; then
-    echo "x64 binary exists ($(ls -lh build/maiassnode-x64 | awk '{print $5}'))"
+if [ -f "build/maiass-x64" ]; then
+    echo "x64 binary exists ($(ls -lh build/maiass-x64 | awk '{print $5}'))"
 else
     echo "❌ x64 binary not found"
 fi
 
 # Test 4: Package installation
 echo -e "\n4️⃣ Testing package installation:"
-if npm list -g maiassnode 2>/dev/null | grep -q maiassnode; then
+if npm list -g @vsmash/maiass 2>/dev/null | grep -q @vsmash/maiass; then
     echo "✅ Package is globally installed"
     echo "Test global command:"
-    maiassnode --version
+    maiass --version
 else
     echo "ℹ️ Package not globally installed (run 'npm install -g .' to install)"
 fi

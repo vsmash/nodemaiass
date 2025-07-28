@@ -67,25 +67,25 @@ echo "Available build files:"
 ls -la ../build/
 
 # macOS (these are created by pkg)
-if [ -f ../build/maiassnode-x64 ]; then
-    cp ../build/maiassnode-x64 maiassnode-macos-intel
+if [ -f ../build/maiass-x64 ]; then
+    cp ../build/maiass-x64 maiass-macos-intel
     echo "✅ Copied macOS Intel binary"
 fi
 
-if [ -f ../build/maiassnode-arm64 ]; then
-    cp ../build/maiassnode-arm64 maiassnode-macos-arm64
+if [ -f ../build/maiass-arm64 ]; then
+    cp ../build/maiass-arm64 maiass-macos-arm64
     echo "✅ Copied macOS ARM64 binary"
 fi
 
-# The generic 'maiassnode' file might be Linux - let's use it for Linux x64
-if [ -f ../build/maiassnode ]; then
-    cp ../build/maiassnode maiassnode-linux-x64
-    echo "✅ Copied Linux x64 binary (from generic maiassnode)"
+# The generic 'maiass' file might be Linux - let's use it for Linux x64
+if [ -f ../build/maiass ]; then
+    cp ../build/maiass maiass-linux-x64
+    echo "✅ Copied Linux x64 binary (from generic maiass)"
 fi
 
 # Windows
-if [ -f ../build/maiassnode.exe ]; then
-    cp ../build/maiassnode.exe maiassnode-windows-x64.exe
+if [ -f ../build/maiass.exe ]; then
+    cp ../build/maiass.exe maiass-windows-x64.exe
     echo "✅ Copied Windows x64 binary"
 fi
 
@@ -94,12 +94,12 @@ fi
 echo "⚠️  Note: pkg may not create separate ARM64 binaries for Linux/Windows"
 echo "⚠️  Consider running separate builds or using CI for complete coverage"
 
-# Make binaries executable
-chmod +x maiassnode-*
+# Make binaries executable and create checksums
+chmod +x maiass-*
 
 # Create checksums
-echo "🔐 Creating checksums..."
-shasum -a 256 maiassnode-* > checksums.txt
+echo "🔒 Creating checksums..."
+shasum -a 256 maiass-* > checksums.txt
 
 echo "✅ Release assets prepared in ./release/"
 echo ""
@@ -115,23 +115,32 @@ echo ""
 echo "# Universal Installer (Recommended - Auto-detects platform)"
 echo "curl -fsSL https://raw.githubusercontent.com/$REPO/main/scripts/install.sh | bash"
 echo ""
-echo "# Manual Installation:"
+echo "📝 Sample download instructions for users:"
 echo ""
-echo "# macOS Intel"
-echo "curl -L https://github.com/$REPO/releases/download/v$VERSION/maiassnode-macos-intel -o maiassnode"
-echo "chmod +x maiassnode"
-echo "./maiassnode --version"
+
+# macOS Intel
+echo "macOS Intel (x64):"
+echo "curl -L https://github.com/$REPO/releases/download/v$VERSION/maiass-macos-intel -o maiass"
+echo "chmod +x maiass"
+echo "./maiass --version"
 echo ""
-echo "# macOS Apple Silicon"  
-echo "curl -L https://github.com/$REPO/releases/download/v$VERSION/maiassnode-macos-arm64 -o maiassnode"
-echo "chmod +x maiassnode"
-echo "./maiassnode --version"
+
+# macOS ARM64
+echo "macOS ARM64 (M1/M2):"
+echo "curl -L https://github.com/$REPO/releases/download/v$VERSION/maiass-macos-arm64 -o maiass"
+echo "chmod +x maiass"
+echo "./maiass --version"
 echo ""
-echo "# Linux x64"
-echo "curl -L https://github.com/$REPO/releases/download/v$VERSION/maiassnode-linux-x64 -o maiassnode"
-echo "chmod +x maiassnode"
-echo "./maiassnode --version"
+
+# Linux x64
+echo "Linux x64:"
+echo "curl -L https://github.com/$REPO/releases/download/v$VERSION/maiass-linux-x64 -o maiass"
+echo "chmod +x maiass"
+echo "./maiass --version"
 echo ""
-echo "# Windows x64 (PowerShell)"
-echo "Invoke-WebRequest -Uri \"https://github.com/$REPO/releases/download/v$VERSION/maiassnode-windows-x64.exe\" -OutFile \"maiassnode.exe\""
-echo ".\\maiassnode.exe --version"
+
+# Windows x64
+echo "Windows x64 (PowerShell):"
+echo "Invoke-WebRequest -Uri \"https://github.com/$REPO/releases/download/v$VERSION/maiass-windows-x64.exe\" -OutFile \"maiass.exe\""
+echo ".\\maiass.exe --version"
+echo ""
