@@ -1,5 +1,14 @@
-## 1.0.11
+## 1.0.12
 28 July 2025
+
+- (vsmsh) MAI-7 Refactored logging framework for enhanced error management
+	- feat(logger.js): added a debugging method to logger
+	- feat(devlog.js, version-manager.js): replaced console.log with custom logger methods
+	- fix(version-manager.js): managed exceptions for file reading/navigating errors
+- (vsmsh) MAI-7 Updated logging in maiass-pipeline.js
+	- feat: replaced console.log with a logger
+	- feat: started logging current branch and version information
+	- fix: replaced console.error with logger for error handling
 
 - (vsmsh) MAI-7 Updated logging in maiass-pipeline.js
 	- refactor: replaced console.log with logger for better debuguity
