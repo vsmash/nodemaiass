@@ -1,5 +1,12 @@
-## 1.0.14
+## 1.0.15
 28 July 2025
+
+- (vsmsh) MAI-7 Implemented AI symbol and updated AI message identifier
+	- feat(symbols): added new 'brain' symbol for AI
+	- refactor(commit): changed AI suggestion message symbol from 'INFO' to 'BRAIN'
+- (vsmsh) MAI-7 Improved logging output symbolism
+	- feat: introduced distinct symbols for different logging operations
+	- refactor: replaced standard logging symbols with detailed ones for merging, pulling and pushing actions
 
 - (vsmsh) MAI-7 Updated logger symbol in pipeline
 	- refactor: changed logger symbol from INFO to GEAR in maiass-pipeline.js
