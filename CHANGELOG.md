@@ -1,5 +1,8 @@
-## 1.0.2
+## 1.0.3
 28 July 2025
+
+- Updated message in maiass-command.js
+	- fix: corrected application name in thank you message
 
 - Updated logging systems in maiassnode and removed unnecessary logs
 	- refactor(maiassnode): replace console.log with the logger system for better output control
