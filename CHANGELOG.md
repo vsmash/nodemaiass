@@ -1,5 +1,12 @@
-## 1.0.17
+## 1.0.18
 31 July 2025
+
+- Refactored code related to user prompts and session usage
+	- feat: introduced enhanced credit display
+	- feat: added warning before every AI suggestion
+	- fix: improved Ctrl+C handling in raw and readline interfaces
+	- feat: added AI usage breakdown details
+	- feat: added low credit warning
 
 - Improved debug mode and enhanced documentation
 	- fix: updated context title in .windsurf
