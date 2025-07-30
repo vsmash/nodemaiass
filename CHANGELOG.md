@@ -1,5 +1,19 @@
-## 1.0.19
+## 1.0.22
 31 July 2025
+
+- Improved MAIASS functionalities and user experience
+	- feat: added new color functions  and  in colors.js
+	- refact: removed redundant logic and enhanced error messages related to AI API request in commit.js
+	- feat: added credit usage breakdown with details in commit.js
+	- chore: updated project context title in .windsurf
+	- docs: added 'Debug Mode Token Validation' section in README.maiass.md
+	- feat: created new file CREDIT_IMPROVEMENTS.md outlining credit display enhancements and other safety features
+- Updated pertinently the logger, refined API interaction, and more
+	- feat: Revamped logger for better debugging
+	- feat: Altered handling of requests to API with enhanced timeouts, error handling, and logging
+	- fix: Directed error feedback to match with the new Logger usage replacing previous console errors
+	- chore: Removed compatibility with pkg from CommonJs
+	- fix: Broadened error notifications for AI suggestion failures. Added stack if available and specific error handling for common network issues.
 
 - Refined commit messaging and added new color functions
 	- feat: added new color functions in colors.js
