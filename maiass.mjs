@@ -4,12 +4,22 @@ import path from 'path';
 import fs from 'fs';
 import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';
-import logger from './lib/logger.js';
+import { initLogger, logger } from './lib/logger.js';
 import { loadEnvironmentConfig, ensureConfigDirectories } from './lib/config.js';
 
 // Load environment variables from multiple sources with cross-platform support
 ensureConfigDirectories();
 const envConfig = loadEnvironmentConfig();
+
+// Initialize logger with environment variables
+initLogger(envConfig);
+
+// Add a visible debug message
+const debugLine = '─'.repeat(60);
+logger.debug(debugLine);
+logger.debug('DEBUG MODE ENABLED - VERBOSE LOGGING ACTIVE');
+logger.debug('MAIASS_DEBUG is set to: ' + (envConfig.MAIASS_DEBUG || 'false'));
+logger.debug(debugLine);
 
 // Example: print version and a colorful welcome
 import colors from './lib/colors.js';
