@@ -10,6 +10,10 @@ import { loadEnvironmentConfig, ensureConfigDirectories } from './lib/config.js'
 ensureConfigDirectories();
 const envConfig = loadEnvironmentConfig();
 
+// Display API token validation in debug mode
+import { displayTokenValidation } from './lib/token-validator.js';
+displayTokenValidation();
+
 
 // Example: print version and a colorful welcome
 import colors from './lib/colors.js';
