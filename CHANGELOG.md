@@ -1,3 +1,12 @@
+## 1.0.17
+31 July 2025
+
+- Improved debug mode and enhanced documentation
+	- fix: updated context title in .windsurf
+	- docs: added explanation for Debug Mode Token Validation in README
+	- feat: introduced new token-validator.js for debugging API tokens
+	- feat: integrated token-validator in main application (maiassnode.mjs)
+
 ## 1.0.16
 28 July 2025
 
