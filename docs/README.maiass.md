@@ -81,6 +81,24 @@ Configuration is loaded from multiple sources with the following priority (highe
 3. `config.env` in OS config directory
 4. `secure.env` in OS secure directory (sensitive vars)
 
+### Debug Mode Token Validation
+
+When `MAIASS_DEBUG=true` is set, MAIASSNODE will display detailed API token validation during initialization:
+
+```bash
+# Enable debug mode to see token validation
+MAIASS_DEBUG=true nma hello
+```
+
+The debug output shows:
+- **File loading status** for each environment file
+- **API token validation** for `MAIASS_AI_TOKEN` and `OPENAI_API_KEY`
+- **Token status indicators**: ✓ (valid), ⚠ (warning), ✗ (invalid), - (not found)
+- **Masked token previews** (first 8 characters) for security
+- **Final token resolution** showing which tokens are active after all files are loaded
+
+This helps troubleshoot configuration issues and verify that API tokens are properly loaded from the correct environment files.
+
 ## License
 
 MIT - Copyright (c) 2025 Velvary Pty Ltd

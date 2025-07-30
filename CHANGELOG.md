@@ -1,5 +1,33 @@
-## 1.0.15
+## 1.0.19
+31 July 2025
+
+- Refined commit messaging and added new color functions
+	- feat: added new color functions in colors.js
+	- fix: improved token counting mechanism in commit.js
+	- feat: added blueOnWhite logging property in logger.js
+	- style: modified how log messages are presented in commit.js
+
+- Refactored code related to user prompts and session usage
+	- feat: introduced enhanced credit display
+	- feat: added warning before every AI suggestion
+	- fix: improved Ctrl+C handling in raw and readline interfaces
+	- feat: added AI usage breakdown details
+	- feat: added low credit warning
+
+- Improved debug mode and enhanced documentation
+	- fix: updated context title in .windsurf
+	- docs: added explanation for Debug Mode Token Validation in README
+	- feat: introduced new token-validator.js for debugging API tokens
+	- feat: integrated token-validator in main application (maiassnode.mjs)
+
+## 1.0.16
 28 July 2025
+
+- Removed unused binary build files and tweaked logging in maiass-pipeline.js
+	- chore: deleted maiassnode-arm64 build file
+	- chore: deleted maiassnode-x64 build file
+	- refactor: remove redundant logging line in validateAndHandleBranching
+	- style: changed logger output color to blue for 'Phase 1: Branch Detection and Validation' message
 
 - Implemented AI symbol and updated AI message identifier
 	- feat(symbols): added new 'brain' symbol for AI
