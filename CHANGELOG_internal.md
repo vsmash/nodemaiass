@@ -1,5 +1,11 @@
-## 1.0.18
+## 1.0.19
 31 July 2025
+
+- (vsmsh) Refined commit messaging and added new color functions
+	- feat: added new color functions in colors.js
+	- fix: improved token counting mechanism in commit.js
+	- feat: added blueOnWhite logging property in logger.js
+	- style: modified how log messages are presented in commit.js
 
 - (vsmsh) Refactored code related to user prompts and session usage
 	- feat: introduced enhanced credit display
