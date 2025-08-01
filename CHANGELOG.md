@@ -1,5 +1,18 @@
-## 1.2.3
+## 1.2.4
 1 August 2025
+
+- Removed unneeded test files
+	- feat: Deleted test-credit-display.js
+	- feat: Deleted test-file.txt
+	- feat: Removed test-install.sh
+	- feat: Erased test.env
+- Renamed internal changelog file
+	- refactor: renamed CHANGELOG_internal_bak.md to CHANGELOG_internal.md
+- Stop creating new internal changelog if not existent
+	- refactor: removed CHANGELOG_internal.md
+	- refactor(maiass-pipeline): stopped creating new internal changelog if it doesn't exist
+- Update internal CHANGELOG file
+	- refactor: renamed CHANGELOG_internal.md to CHANGELOG_internal_bak.md
 
 - Renamed internal changelog file
 	- refactor: renamed CHANGELOG_internal_bak.md to CHANGELOG_internal.md
