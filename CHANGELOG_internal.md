@@ -1,5 +1,12 @@
-## 5.2.5
+## 5.2.6
 2 August 2025
+
+- (vsmsh) MAI-7 Updated feature name and implemented version update checker
+	- refactor: Changed feature name from 'AI-Assisted Semantic Savant' to 'AI-Augmented Semantic Scribe'
+	- fix: Adjusted associated references in documentation and code for the new feature name
+	- feat: Added functionality to check for version updates from the GitHub releases
+	- fix: Updated brew configuration to correctly define augmented semantic scribe
+	- feat: Updated package.json with new version and adjusted description.
 
 - (vsmsh) MAI-7 Project Maintenance and Improvement
 	- feat: Added GPL-3.0-only license
