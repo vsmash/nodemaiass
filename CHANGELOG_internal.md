@@ -1,5 +1,7 @@
-## 1.0.33
+## 1.0.34
 1 August 2025
+
+- Version bump
 
 - (vsmsh) MAI-7 Improved handling of commit logs
 	- refactor: updated condition for executing changelog commits processing
