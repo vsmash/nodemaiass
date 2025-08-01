@@ -1,5 +1,9 @@
-## 1.0.23
+## 1.0.24
 1 August 2025
+
+- (vsmsh) MAI-7 Updated install script
+	- fix: corrected repository path in install.sh
+	- feat: updated binary name in install.sh
 
 - (vsmsh) MAI-7 Enhanced AI key management and added machine fingerprinting
 	- feat: Added functionality to auto-create anonymous subscriptions if no API key exists
