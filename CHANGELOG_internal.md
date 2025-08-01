@@ -1,5 +1,23 @@
-## 1.0.26
+## 1.0.27
 1 August 2025
+
+- (vsmsh) MAI-7 Refactored pipeline.js logic and improved debugging
+	- feat: added condition to handle user-cancelled merges gracefully in runMaiassPipeline function
+	- refactor: replaced console.debug with logger.debug for better logging in branchExists function
+- (vsmsh) MAI-7 Improved commit and pipeline handling
+	- feat: display git status in detailed format
+	- feat: enhanced handling for unstaged/untracked changes
+	- fix(lib): improved messaging and error handling for different commit states
+	- feat: added conditionals to handle commit workflow cancellation and uncommitted changes in pipeline mode
+	- feat: included additional exit points in various commit/pipeline stages
+	- feat: handle clean working directory state check after commit workflow
+- (vsmsh) MAI-7 Refactor input utility methods
+	- refactor: moved getSingleCharInput and getMultiLineInput to input-utils.js
+	- fix: autoformatted user prompts for increased visibility
+	- refactor: cleaned up manage input methods in commit.js
+	- refactor: removed color formatting from prompt calling methods in maiass-pipeline.js
+- (vsmsh) MAI-7 Updated Maiass pipeline logic
+	- feat: Added line to pause execution in handleMergeToDevelop function
 
 - (vsmsh) MAI-7 Updated logger functionality and streamlined pipeline code
 	- feat: added BWhite logging method in logger.js
