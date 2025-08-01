@@ -1,3 +1,12 @@
+## 1.0.23
+1 August 2025
+
+- Enhanced AI key management and added machine fingerprinting
+	- feat: Added functionality to auto-create anonymous subscriptions if no API key exists
+	- feat: Added new module for generating a unique machine fingerprint for abuse prevention
+	- refactor: Updated API requests to include the machine fingerprint
+	- test: Created test file for credit display functionality
+
 ## 1.0.22
 31 July 2025
 
