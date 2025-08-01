@@ -12,4 +12,6 @@ devlog.csv
 .DS_Store*
 scripts/
 CREDIT_IMPROVEMENTS.md
+HOMEBREW_TAP_SETUP.md
 .business_rules*
+scripts/create*

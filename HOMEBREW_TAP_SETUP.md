@@ -25,13 +25,13 @@ cp Formula/maiass.rb /path/to/homebrew-maiass/Formula/
 
 ```bash
 # Add your tap
-brew tap vsmash/nodemaiass
+brew tap vsmash/maiass
 
 # Install maiass
 brew install maiass
 
 # Or install directly
-brew install vsmash/nodemaiass/maiass
+brew install vsmash/maiass/maiass
 ```
 
 ## 5. Updating Formula
