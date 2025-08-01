@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// MAIASS: Modular AI-Assisted Semantic Scribe
+// MAIASS: Modular AI-Augmented Semantic Scribe
 import path from 'path';
 import fs from 'fs';
 import yargs from 'yargs';

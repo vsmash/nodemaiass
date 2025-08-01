@@ -4,7 +4,7 @@
 - (vsmsh) MAI-7 Project Maintenance and Improvement
 	- feat: Added GPL-3.0-only license
 	- fix: Adjusted package version according to recent changes
-	- feat: Added new Modular AI-Assisted Semantic Savant feature to the project
+	- feat: Added new Modular AI-Augmented Semantic Scribe feature to the project
 	- doc: Overhauled README with updated descriptions and examples
 	- fix: Updated brew configuration to correctly tap into maiass instead of nodemaiass
 	- refactor: Deleted old maiassnode.rb file

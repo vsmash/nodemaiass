@@ -1,5 +1,5 @@
 # 🫏 MAIASS (Node.js Edition)
-**Modular AI-Assisted Semantic Savant** - Cross-platform Node.js implementation
+**Modular AI-Augmented Semantic Scribe** - Cross-platform Node.js implementation
 
 [![Node.js](https://img.shields.io/badge/Node.js-23+-green.svg)](https://nodejs.org/)
 [![License](https://img.shields.io/badge/License-GPL--3.0-blue.svg)](LICENSE)

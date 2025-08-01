@@ -7,7 +7,7 @@ This guide explains how MAIASS orchestrates your Git workflow from commit to rel
 MAIASS follows a structured 4-phase workflow that automates common Git operations:
 
 1. **Branch Detection & Validation** - Ensures you're on the right branch
-2. **Commit Workflow** - AI-assisted commit creation
+2. **Commit Workflow** - AI-augmented commit creation
 3. **Merge to Develop** - Consolidates changes for version management
 4. **Version Management** - Semantic versioning and tagging
 
