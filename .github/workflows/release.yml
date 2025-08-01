@@ -45,16 +45,18 @@ jobs:
         cd release-assets
         
         # Copy and rename binaries with proper naming
-        cp ../build/maiassnode-x64 maiassnode-macos-intel
-        cp ../build/maiassnode-arm64 maiassnode-macos-arm64
-        cp ../build/maiassnode maiassnode-linux-x64
-        cp ../build/maiassnode.exe maiassnode-windows-x64.exe
+        cp ../build/maiass-macos-x64 maiass-macos-intel
+        cp ../build/maiass-macos-arm64 maiass-macos-arm64
+        cp ../build/maiass-linux-x64 maiass-linux-x64
+        cp ../build/maiass-linux-arm64 maiass-linux-arm64
+        cp ../build/maiass-win-x64.exe maiass-windows-x64.exe
+        cp ../build/maiass-win-arm64.exe maiass-windows-arm64.exe
         
         # Make binaries executable
-        chmod +x maiassnode-*
+        chmod +x maiass-*
         
         # Create checksums
-        shasum -a 256 maiassnode-* > checksums.txt
+        shasum -a 256 maiass-* > checksums.txt
         
         # List created files
         ls -la
@@ -104,7 +106,7 @@ jobs:
           fi
           
           echo "version=$LATEST_TAG" >> $GITHUB_OUTPUT
-          echo "tag_name=v$LATEST_TAG" >> $GITHUB_OUTPUT
+          echo "tag_name=$LATEST_TAG" >> $GITHUB_OUTPUT
           echo "Using latest git tag as version: $LATEST_TAG"
         fi
         
@@ -112,9 +114,9 @@ jobs:
       uses: softprops/action-gh-release@v1
       with:
         tag_name: ${{ steps.version.outputs.tag_name }}
-        name: "MAIASSNODE ${{ steps.version.outputs.version }} - Cross-Platform Release"
+        name: "maiass ${{ steps.version.outputs.version }} - Cross-Platform Release"
         body: |
-          🎉 **Cross-platform release of MAIASSNODE!**
+          🎉 **Cross-platform release of maiass!**
           
           AI-powered Git workflow automation tool now available for macOS, Linux, and Windows with self-contained binaries (no Node.js installation required).
           
@@ -128,7 +130,7 @@ jobs:
           ### Homebrew (macOS/Linux)
           ```bash
           brew tap vsmash/maiass
-          brew install maiassnode
+          brew install maiass
           ```
           
           ## 📦 Manual Download
@@ -136,14 +138,14 @@ jobs:
           Choose your platform:
           
           ### macOS
-          - **Apple Silicon (M1/M2/M3):** [maiassnode-macos-arm64](https://github.com/vsmash/nodemaiass/releases/download/${{ steps.version.outputs.tag_name }}/maiassnode-macos-arm64)
-          - **Intel:** [maiassnode-macos-intel](https://github.com/vsmash/nodemaiass/releases/download/${{ steps.version.outputs.tag_name }}/maiassnode-macos-intel)
+          - **Apple Silicon (M1/M2/M3):** [maiass-macos-arm64](https://github.com/vsmash/nodemaiass/releases/download/${{ steps.version.outputs.tag_name }}/maiass-macos-arm64)
+          - **Intel:** [maiass-macos-intel](https://github.com/vsmash/nodemaiass/releases/download/${{ steps.version.outputs.tag_name }}/maiass-macos-intel)
           
           ### Linux
-          - **x64:** [maiassnode-linux-x64](https://github.com/vsmash/nodemaiass/releases/download/${{ steps.version.outputs.tag_name }}/maiassnode-linux-x64)
+          - **x64:** [maiass-linux-x64](https://github.com/vsmash/nodemaiass/releases/download/${{ steps.version.outputs.tag_name }}/maiass-linux-x64)
           
           ### Windows
-          - **x64:** [maiassnode-windows-x64.exe](https://github.com/vsmash/nodemaiass/releases/download/${{ steps.version.outputs.tag_name }}/maiassnode-windows-x64.exe)
+          - **x64:** [maiass-windows-x64.exe](https://github.com/vsmash/nodemaiass/releases/download/${{ steps.version.outputs.tag_name }}/maiass-windows-x64.exe)
           
           ## ✨ What's New
           
@@ -165,10 +167,12 @@ jobs:
           - **Windows:** 10+ (x64)
           - **Dependencies:** None (Node.js included in binary)
         files: |
-          release-assets/maiassnode-macos-intel
-          release-assets/maiassnode-macos-arm64
-          release-assets/maiassnode-linux-x64
-          release-assets/maiassnode-windows-x64.exe
+          release-assets/maiass-macos-intel
+          release-assets/maiass-macos-arm64
+          release-assets/maiass-linux-x64
+          release-assets/maiass-linux-arm64
+          release-assets/maiass-windows-x64.exe
+          release-assets/maiass-windows-arm64.exe
           release-assets/checksums.txt
         draft: false
         prerelease: false
