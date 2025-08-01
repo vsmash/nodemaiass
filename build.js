@@ -30,12 +30,25 @@ const platformNames = {
 function buildForTarget(target) {
   console.log(colors.BBlue(`Building for ${platformNames[target]}...`));
   
+  // Map target to output filename
+  const outputNames = {
+    'node18-macos-x64': 'maiassnode-macos-x64',
+    'node18-macos-arm64': 'maiassnode-macos-arm64',
+    'node18-linux-x64': 'maiassnode-linux-x64',
+    'node18-linux-arm64': 'maiassnode-linux-arm64',
+    'node18-win-x64': 'maiassnode-win-x64.exe',
+    'node18-win-arm64': 'maiassnode-win-arm64.exe'
+  };
+  
+  const outputName = outputNames[target];
+  const outputPath = `build/${outputName}`;
+  
   try {
-    execSync(`npx pkg . --target ${target}`, {
+    execSync(`npx pkg . --target ${target} --output ${outputPath}`, {
       stdio: 'inherit',
       encoding: 'utf8'
     });
-    console.log(colors.Green(`✓ Successfully built for ${platformNames[target]}`));
+    console.log(colors.Green(`✓ Successfully built for ${platformNames[target]} -> ${outputName}`));
     return true;
   } catch (error) {
     console.log(colors.Red(`✗ Failed to build for ${platformNames[target]}: ${error.message}`));
@@ -47,8 +60,16 @@ function main() {
   console.log(colors.Aqua('MAIASS Cross-Platform Build'));
   console.log(colors.White('Building binaries for all supported platforms...\n'));
 
-  // Ensure build directory exists
-  if (!fs.existsSync('build')) {
+  // Ensure build directory exists and is clean
+  if (fs.existsSync('build')) {
+    // Clean the build directory
+    const files = fs.readdirSync('build');
+    for (const file of files) {
+      if (file !== '.DS_Store') {
+        fs.unlinkSync(path.join('build', file));
+      }
+    }
+  } else {
     fs.mkdirSync('build');
   }
 

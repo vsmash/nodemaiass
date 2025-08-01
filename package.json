@@ -40,8 +40,6 @@
   },
   "pkg": {
     "scripts": [
-      "maiass.cjs",
-      "maiass.mjs",
       "lib/**/*.js"
     ],
     "assets": [
