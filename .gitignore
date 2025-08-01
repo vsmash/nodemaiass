@@ -11,7 +11,7 @@
 build/
 release/
 *.exe
-maiassnode-*
+maiass-*
 maiass-
 
 # Node.js

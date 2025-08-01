@@ -11,4 +11,5 @@ devlog.csv
 .windsurf
 .DS_Store*
 scripts/
-
+CREDIT_IMPROVEMENTS.md
+.business_rules*

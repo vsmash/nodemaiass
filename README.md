@@ -134,7 +134,7 @@ maiass env --json       # Show environment as JSON
 
 ### Configuration Files
 
-MAIASSNODE uses `.env.maiass` files for configuration:
+MAIASS uses `.env.maiass` files for configuration:
 
 - **Global**: `~/.env.maiass` (user-wide settings)
 - **Project**: `./.env.maiass` (project-specific overrides)
@@ -165,7 +165,7 @@ MAIASS_CHANGELOG_INTERNAL_NAME=CHANGELOG_internal.md  # Internal changelog file 
 
 ## 🔄 Workflow Phases
 
-MAIASSNODE orchestrates a 4-phase workflow:
+MAIASS orchestrates a 4-phase workflow:
 
 ### 1. **Branch Detection & Validation**
 - Detects current branch and validates against workflow requirements
@@ -197,7 +197,7 @@ MAIASSNODE orchestrates a 4-phase workflow:
 
 ## 📝 Changelog System
 
-MAIASSNODE automatically generates two types of changelogs during version management:
+MAIASS automatically generates two types of changelogs during version management:
 
 ### Main Changelog (`CHANGELOG.md`)
 **User-facing format** with clean, readable entries:

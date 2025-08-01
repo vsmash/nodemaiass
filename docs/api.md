@@ -1,6 +1,6 @@
 # API Reference
 
-This document provides detailed API reference for MAIASSNODE's internal modules and functions.
+This document provides detailed API reference for MAIASS's internal modules and functions.
 
 ## 📦 Core Modules
 
@@ -405,4 +405,4 @@ Configuration and Git information is cached appropriately:
 
 ---
 
-**💡 Pro Tip**: Use TypeScript definitions for better IDE support and type safety when integrating MAIASSNODE into your projects.
+**💡 Pro Tip**: Use TypeScript definitions for better IDE support and type safety when integrating MAIASS into your projects.

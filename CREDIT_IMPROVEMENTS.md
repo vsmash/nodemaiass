@@ -124,4 +124,4 @@ To test these improvements:
 ✅ **Reliable Exit**: Ctrl+C works consistently across all prompts  
 ✅ **Model Transparency**: Shows which AI model processed the request
 
-The enhanced credit-based pricing system from maiass-proxy now integrates seamlessly with maiassnode, providing users with comprehensive billing information and improved user experience.
+The enhanced credit-based pricing system from maiass-proxy now integrates seamlessly with maiass, providing users with comprehensive billing information and improved user experience.

@@ -2,7 +2,7 @@
 
 ## Overview
 
-MAIASSNODE has different Node.js version requirements depending on how it's installed and used.
+MAIASS has different Node.js version requirements depending on how it's installed and used.
 
 ## Compatibility Matrix
 
@@ -15,7 +15,7 @@ MAIASSNODE has different Node.js version requirements depending on how it's inst
 
 ## Why Node.js 18+ is Required
 
-MAIASSNODE uses modern JavaScript features that require Node.js 18+:
+MAIASS uses modern JavaScript features that require Node.js 18+:
 
 1. **ES Modules with `import.meta.url`** - Available in Node.js 14.14.0+
 2. **Top-level await** - Stable in Node.js 14.8.0+
@@ -29,12 +29,12 @@ MAIASSNODE uses modern JavaScript features that require Node.js 18+:
 **Recommended: Use Built Binaries**
 ```bash
 # Download the appropriate binary for your platform
-./maiassnode-macos-arm64 --version    # macOS Apple Silicon
-./maiassnode-macos-x64 --version      # macOS Intel
-./maiassnode-linux-arm64 --version    # Linux ARM64
-./maiassnode-linux-x64 --version      # Linux x64
-./maiassnode-win-x64.exe --version    # Windows x64
-./maiassnode-win-arm64.exe --version  # Windows ARM64
+./maiass-macos-arm64 --version    # macOS Apple Silicon
+./maiass-macos-x64 --version      # macOS Intel
+./maiass-linux-arm64 --version    # Linux ARM64
+./maiass-linux-x64 --version      # Linux x64
+./maiass-win-x64.exe --version    # Windows x64
+./maiass-win-arm64.exe --version  # Windows ARM64
 ```
 
 **Why this works:**
@@ -47,14 +47,14 @@ MAIASSNODE uses modern JavaScript features that require Node.js 18+:
 **All methods work:**
 ```bash
 # Global installation
-npm install -g maiassnode
-maiassnode --version
+npm install -g maiass
+maiass --version
 
 # Shell wrapper
 ./nodemaiass.sh --version
 
 # Direct Node.js
-node maiassnode.cjs --version
+node maiass.cjs --version
 ```
 
 ### For Development Teams with Mixed Node.js Versions
@@ -69,7 +69,7 @@ node maiassnode.cjs --version
 # Install Node.js 18+ for this project only
 nvm install 18
 nvm use 18
-npm install -g maiassnode
+npm install -g maiass
 ```
 
 ## Testing Node.js Compatibility
@@ -81,7 +81,7 @@ node --version
 
 ### Test Compatibility
 ```bash
-# Test if your Node.js version supports MAIASSNODE
+# Test if your Node.js version supports MAIASS
 node -e "console.log('Node.js version:', process.version); import('./maiass.mjs').then(() => console.log('✅ Compatible')).catch(e => console.log('❌ Not compatible:', e.message))"
 ```
 
@@ -123,7 +123,7 @@ For maximum compatibility, we recommend distributing built binaries:
 
 ## Future Compatibility
 
-MAIASSNODE will maintain compatibility with:
+MAIASS will maintain compatibility with:
 - **Current LTS Node.js versions** (18, 20, 22)
 - **Built binaries** will always be self-contained
 - **Modern JavaScript features** for better performance and maintainability

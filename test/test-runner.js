@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 /**
- * MAIASSNODE Test Runner
+ * MAIASS Test Runner
  * Comprehensive testing framework for the MAIASS pipeline
  */
 
@@ -15,7 +15,7 @@ import { SYMBOLS } from '../lib/symbols.js';
 // Test configuration
 const TEST_CONFIG = {
   timeout: 30000, // 30 seconds per test
-  tempDir: path.join(os.tmpdir(), 'maiassnode-tests'),
+  tempDir: path.join(os.tmpdir(), 'maiass-tests'),
   verbose: process.env.MAIASS_TEST_VERBOSE === 'true',
   keepTempFiles: process.env.MAIASS_TEST_KEEP_FILES === 'true'
 };
@@ -111,7 +111,7 @@ class TestUtils {
   }
   
   /**
-   * Execute MAIASSNODE command in test environment
+   * Execute MAIASS command in test environment
    */
   static async runMaiassCommand(args, options = {}) {
     const {
@@ -121,11 +121,11 @@ class TestUtils {
       input = ''
     } = options;
     
-    // Get the absolute path to maiassnode.cjs (the actual entry point users run)
-    const maiassnodePath = path.resolve(path.dirname(import.meta.url.replace('file://', '')), '../maiassnode.cjs');
+    // Get the absolute path to maiass.cjs (the actual entry point users run)
+    const maiassPath = path.resolve(path.dirname(import.meta.url.replace('file://', '')), '../maiass.cjs');
     
     return new Promise((resolve, reject) => {
-      const child = spawn('node', [maiassnodePath, ...args], {
+      const child = spawn('node', [maiassPath, ...args], {
         cwd,
         stdio: ['pipe', 'pipe', 'pipe'],
         env: {
@@ -557,7 +557,7 @@ pipelineTests.test('should handle dry-run mode', async () => {
  * Main test runner
  */
 async function runAllTests() {
-  console.log(colors.BCyan(`${SYMBOLS.ROCKET} MAIASSNODE Test Suite`));
+  console.log(colors.BCyan(`${SYMBOLS.ROCKET} MAIASS Test Suite`));
   console.log(colors.Gray(`Starting comprehensive testing...`));
   
   // Ensure temp directory exists

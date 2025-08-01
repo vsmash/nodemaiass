@@ -1,0 +1,15 @@
+# Exclude development files from release archives
+*.md export-ignore
+node_modules/ export-ignore
+.github/ export-ignore
+test/ export-ignore
+docs/ export-ignore
+scripts/ export-ignore
+.env* export-ignore
+.gitignore export-ignore
+.pkgignore export-ignore
+vitest.config.js export-ignore
+package-lock.json export-ignore
+devlog.csv export-ignore
+build/ export-ignore
+dist/ export-ignore

@@ -126,7 +126,7 @@ Create a new GitHub repository named: \`homebrew-maiass\`
 \`\`\`
 homebrew-maiass/
 ├── Formula/
-│   └── maiassnode.rb
+│   └── maiass.rb
 └── README.md
 \`\`\`
 
@@ -135,7 +135,7 @@ homebrew-maiass/
 Copy the generated formula to your tap repository:
 
 \`\`\`bash
-cp Formula/maiassnode.rb /path/to/homebrew-maiass/Formula/
+cp Formula/maiass.rb /path/to/homebrew-maiass/Formula/
 \`\`\`
 
 ## 4. Users Install With
@@ -144,11 +144,11 @@ cp Formula/maiassnode.rb /path/to/homebrew-maiass/Formula/
 # Add your tap
 brew tap $REPO
 
-# Install maiassnode
-brew install maiassnode
+# Install maiass
+brew install maiass
 
 # Or install directly
-brew install $REPO/maiassnode
+brew install $REPO/maiass
 \`\`\`
 
 ## 5. Updating Formula
@@ -158,7 +158,7 @@ When you release a new version:
 1. Update version in package.json
 2. Run ./scripts/create-release.sh
 3. Run ./scripts/create-homebrew-formula.sh
-4. Copy updated Formula/maiassnode.rb to homebrew-maiass repo
+4. Copy updated Formula/maiass.rb to homebrew-maiass repo
 5. Commit and push
 
 ## 6. Formula Validation
@@ -166,9 +166,9 @@ When you release a new version:
 Test your formula locally:
 
 \`\`\`bash
-brew install --build-from-source Formula/maiassnode.rb
-brew test maiassnode
-brew audit --strict maiassnode
+brew install --build-from-source Formula/maiass.rb
+brew test maiass
+brew audit --strict maiass
 \`\`\`
 EOF
 
@@ -179,7 +179,7 @@ print_success "🎉 Homebrew formula ready!"
 echo ""
 echo "Next steps:"
 echo "1. Create GitHub repository: homebrew-maiass"
-echo "2. Copy Formula/maiassnode.rb to the tap repository"
-echo "3. Users can install with: brew install $REPO/maiassnode"
+echo "2. Copy Formula/maiass.rb to the tap repository"
+echo "3. Users can install with: brew install $REPO/maiass"
 echo ""
 echo "See HOMEBREW_TAP_SETUP.md for detailed instructions"

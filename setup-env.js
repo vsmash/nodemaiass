@@ -16,7 +16,7 @@ function prompt(question) {
 }
 
 async function setupEnvironment() {
-  console.log('🔧 MAIASSNODE Environment Setup');
+  console.log('🔧 MAIASS Environment Setup');
   console.log('===============================\n');
   
   ensureConfigDirectories();
@@ -55,7 +55,7 @@ async function setupEnvironment() {
   
   // Write secure env file
   if (openaiKey.trim()) {
-    const secureContent = `# Sensitive environment variables for MAIASSNODE
+    const secureContent = `# Sensitive environment variables for MAIASS
 # This file is stored in a secure OS-specific location
 OPENAI_API_KEY=${openaiKey.trim()}
 `;
@@ -64,7 +64,7 @@ OPENAI_API_KEY=${openaiKey.trim()}
   }
   
   // Write general config file
-  const configContent = `# General configuration for MAIASSNODE
+  const configContent = `# General configuration for MAIASS
 # This file contains non-sensitive settings
 DEFAULT_BRANCH=${defaultBranch}
 DEVELOP_BRANCH=${developBranch}

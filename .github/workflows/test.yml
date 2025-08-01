@@ -34,9 +34,9 @@ jobs:
     - name: Test CLI functionality
       run: |
         # Test basic CLI commands
-        node maiassnode.cjs --version
-        node maiassnode.cjs --help
-        node maiassnode.cjs env
+        node maiass.cjs --version
+        node maiass.cjs --help
+        node maiass.cjs env
         
   build-test:
     name: Test Cross-Platform Builds
@@ -64,10 +64,10 @@ jobs:
         ls -la build/
         
         # Test that binaries are executable
-        chmod +x build/maiassnode*
+        chmod +x build/maiass*
         
         # Basic smoke test (version check)
-        if [ -f build/maiassnode ]; then
+        if [ -f build/maiass ]; then
           echo "Testing Linux binary..."
-          ./build/maiassnode --version || echo "Binary test failed but build succeeded"
+          ./build/maiass --version || echo "Binary test failed but build succeeded"
         fi

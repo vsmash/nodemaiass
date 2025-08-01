@@ -1,12 +1,12 @@
 # Development Guide
 
-Guide for contributing to and extending MAIASSNODE.
+Guide for contributing to and extending MAIASS.
 
 ## Project Structure
 
 ```
-maiassnode/
-├── maiassnode.js          # Main CLI entry point
+maiass/
+├── maiass.js          # Main CLI entry point
 ├── nodemaiass.sh          # Shell wrapper script
 ├── setup-env.js           # Environment setup utility
 ├── lib/
@@ -33,7 +33,7 @@ maiassnode/
 ```bash
 # Clone and install
 git clone <repo>
-cd maiassnode
+cd maiass
 npm install
 
 # Make executable
@@ -46,7 +46,7 @@ chmod +x setup-env.js
 
 ### Adding New Commands
 
-1. **Add command to yargs configuration** in `maiassnode.js`:
+1. **Add command to yargs configuration** in `maiass.js`:
 
 ```javascript
 .command('newcmd', 'Description', (yargs) => {

@@ -7,7 +7,7 @@ set -e
 # Configuration
 REPO="vsmash/maiass"
 INSTALL_DIR="/usr/local/bin"
-BINARY_NAME="maiassnode"
+BINARY_NAME="maiass"
 
 # Colors for output
 RED='\033[0;31m'
@@ -75,7 +75,7 @@ get_latest_version() {
 install_binary() {
     local platform=$1
     local version=$2
-    local binary_name="maiassnode-${platform}"
+    local binary_name="maiass-${platform}"
     
     if [ "$platform" = "windows-x64" ] || [ "$platform" = "windows-arm64" ]; then
         binary_name="${binary_name}.exe"
@@ -110,11 +110,11 @@ install_binary() {
         sudo mv "$temp_file" "$install_path"
     fi
     
-    print_success "MAIASSNODE installed successfully!"
+    print_success "MAIASS installed successfully!"
     print_status "Testing installation..."
     
-    if command -v maiassnode >/dev/null 2>&1; then
-        maiassnode --version
+    if command -v maiass >/dev/null 2>&1; then
+        maiass --version
         print_success "Installation verified!"
     else
         print_warning "Binary installed but not in PATH. You may need to restart your terminal."
@@ -124,7 +124,7 @@ install_binary() {
 
 # Main installation process
 main() {
-    echo "🔧 MAIASSNODE Universal Installer"
+    echo "🔧 MAIASS Universal Installer"
     echo "================================="
     
     # Detect platform
@@ -138,10 +138,10 @@ main() {
     print_status "Latest version: $version"
     
     # Check if already installed
-    if command -v maiassnode >/dev/null 2>&1; then
+    if command -v maiass >/dev/null 2>&1; then
         local current_version
-        current_version=$(maiassnode --version 2>/dev/null | head -1 | awk '{print $2}' || echo "unknown")
-        print_warning "MAIASSNODE $current_version is already installed"
+        current_version=$(maiass --version 2>/dev/null | head -1 | awk '{print $2}' || echo "unknown")
+        print_warning "MAIASS $current_version is already installed"
         
         echo "Continue with installation? [y/N]"
         read -r response
@@ -158,10 +158,10 @@ main() {
     print_success "🎉 Installation complete!"
     echo ""
     echo "Usage:"
-    echo "  maiassnode --help      # Show help"
-    echo "  maiassnode --version   # Show version"
-    echo "  maiassnode commit      # Run commit workflow"
-    echo "  maiassnode env         # Show environment"
+    echo "  maiass --help      # Show help"
+    echo "  maiass --version   # Show version"
+    echo "  maiass commit      # Run commit workflow"
+    echo "  maiass env         # Show environment"
     echo ""
     echo "Documentation: https://github.com/$REPO"
 }

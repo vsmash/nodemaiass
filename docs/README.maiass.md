@@ -1,4 +1,4 @@
-# MAIASSNODE
+# MAIASS
 
 A powerful Node.js replica of the MAIASS (Modular AI-Assisted Semantic Scribe) intelligent Git workflow automation script with enhanced WordPress integration and cross-platform packaging.
 
@@ -39,7 +39,7 @@ nma
 
 ## WordPress Integration
 
-MAIASSNODE provides seamless WordPress theme and plugin version management:
+MAIASS provides seamless WordPress theme and plugin version management:
 
 ```bash
 # Configure WordPress integration in .env.maiass
@@ -83,7 +83,7 @@ Configuration is loaded from multiple sources with the following priority (highe
 
 ### Debug Mode Token Validation
 
-When `MAIASS_DEBUG=true` is set, MAIASSNODE will display detailed API token validation during initialization:
+When `MAIASS_DEBUG=true` is set, MAIASS will display detailed API token validation during initialization:
 
 ```bash
 # Enable debug mode to see token validation
