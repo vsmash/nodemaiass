@@ -5,7 +5,7 @@
 set -e
 
 # Configuration
-REPO="vsmash/nodemaiass"
+REPO="vsmash/maiass"
 INSTALL_DIR="/usr/local/bin"
 BINARY_NAME="maiassnode"
 
