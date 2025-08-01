@@ -9,4 +9,5 @@ test/
 *.spec.js
 devlog.csv
 .windsurf
+.DS_Store*
 
