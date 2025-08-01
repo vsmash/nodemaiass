@@ -1,5 +1,16 @@
-## 1.0.30
+## 1.0.31
 1 August 2025
+
+- (vsmsh) MAI-7 Updated version tagging workflow
+	- feat: added options for version bump and tagcreation in handleMergeToDevelop
+	- feat: added functionality to decide tagging strategy
+	- feat: Split release handling into simple bump and full release branch workflow
+	- feat: Simple bump updates version and skips release branch and tagging
+	- feat: Full release workflow includes release branch creation and tagging
+	- feat: Updated return message with workflow used
+	- fix: Made failure messages in git operations more consistent
+	- chore: Removed redundant and commented out code sections.
+	- style: Cleaned up logging and commenting for readability improvement
 
 - (vsmsh) MAI-7 Refactor commit handler
 	- refactor(lib): removed verbosity check in handleStagedCommit function
