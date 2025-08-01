@@ -3,8 +3,8 @@
 ## Current Status: You ARE Shipping Node.js (with binaries)
 
 Your built binaries already include Node.js runtime:
-- `maiassnode-arm64` = Your code + Node.js 18 runtime (45MB)
-- `maiassnode-x64` = Your code + Node.js 18 runtime (50MB)
+- `maiass-arm64` = Your code + Node.js 18 runtime (45MB)
+- `maiass-x64` = Your code + Node.js 18 runtime (50MB)
 
 These work **completely independently** of user's Node.js installation.
 
@@ -28,7 +28,7 @@ These work **completely independently** of user's Node.js installation.
 **What you have now:**
 ```bash
 npm run build:all  # Creates self-contained binaries
-./build/maiassnode-arm64 --version  # Works anywhere
+./build/maiass-arm64 --version  # Works anywhere
 ```
 
 **Pros:**
@@ -49,12 +49,12 @@ npm run build:all  # Creates self-contained binaries
 ```javascript
 // package.json
 {
-  "name": "maiassnode",
+  "name": "maiass",
   "scripts": {
     "postinstall": "node download-node-runtime.js"
   },
   "bin": {
-    "maiassnode": "./bin/maiassnode-wrapper.js"
+    "maiass": "./bin/maiass-wrapper.js"
   }
 }
 ```
@@ -84,12 +84,12 @@ FROM node:18-alpine
 COPY . /app
 WORKDIR /app
 RUN npm install
-ENTRYPOINT ["node", "maiassnode.cjs"]
+ENTRYPOINT ["node", "maiass.cjs"]
 ```
 
 **Usage:**
 ```bash
-docker run -v $(pwd):/workspace maiassnode --version
+docker run -v $(pwd):/workspace maiass --version
 ```
 
 **Pros:**
@@ -113,7 +113,7 @@ echo "18" > .nvmrc
 #!/bin/bash
 nvm install
 nvm use
-npm install -g maiassnode
+npm install -g maiass
 ```
 
 **Pros:**
@@ -130,7 +130,7 @@ npm install -g maiassnode
 
 Your current approach with built binaries is **optimal** for your use case:
 
-### Why Built Binaries are Best for MAIASSNODE
+### Why Built Binaries are Best for MAIASS
 
 1. **Git Workflow Tool**: Users want it to "just work"
 2. **Cross-platform**: Single solution for all platforms
@@ -144,12 +144,12 @@ You can offer **both** distribution methods:
 
 ```bash
 # For developers who prefer npm
-npm install -g maiassnode
+npm install -g maiass
 
 # For users who want zero dependencies
-curl -L https://github.com/user/maiassnode/releases/download/v0.7.1/maiassnode-linux-x64 -o maiassnode
-chmod +x maiassnode
-./maiassnode --version
+curl -L https://github.com/user/maiass/releases/download/v0.7.1/maiass-linux-x64 -o maiass
+chmod +x maiass
+./maiass --version
 ```
 
 ## Size Comparison
@@ -162,7 +162,7 @@ chmod +x maiassnode
 
 ## Conclusion
 
-**You ARE already shipping Node.js** with your built binaries - this is the best approach for a Git workflow tool like MAIASSNODE.
+**You ARE already shipping Node.js** with your built binaries - this is the best approach for a Git workflow tool like MAIASS.
 
 The reason most npm packages don't ship Node.js is:
 1. **Size constraints** - Would make every package huge

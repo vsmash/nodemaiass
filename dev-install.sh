@@ -231,7 +231,7 @@ case "$1" in
         show_status
         ;;
     *)
-        echo -e "${BLUE}🔧 MAIASSNODE Development Install/Test Script${NC}"
+        echo -e "${BLUE}🔧 MAIASS Development Install/Test Script${NC}"
         echo "============================================="
         echo ""
         echo "Usage: $0 [command]"

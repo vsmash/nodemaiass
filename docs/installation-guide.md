@@ -1,4 +1,4 @@
-# MAIASSNODE Installation Guide
+# MAIASS Installation Guide
 
 ## 🚀 Quick Install (Recommended)
 
@@ -10,7 +10,7 @@ curl -fsSL https://raw.githubusercontent.com/vsmash/nodemaiass/main/scripts/inst
 This automatically:
 - Detects your platform (macOS/Linux/Windows)
 - Downloads the correct binary
-- Installs to `/usr/local/bin/maiassnode`
+- Installs to `/usr/local/bin/maiass`
 - Works without Node.js installed
 
 ## 📦 Manual Installation Methods
@@ -22,38 +22,38 @@ This automatically:
 #### macOS
 ```bash
 # Apple Silicon (M1/M2/M3)
-curl -L https://github.com/vsmash/nodemaiass/releases/latest/download/maiassnode-macos-arm64 -o maiassnode
-chmod +x maiassnode
-./maiassnode --version
+curl -L https://github.com/vsmash/nodemaiass/releases/latest/download/maiass-macos-arm64 -o maiass
+chmod +x maiass
+./maiass --version
 
 # Intel
-curl -L https://github.com/vsmash/nodemaiass/releases/latest/download/maiassnode-macos-intel -o maiassnode
-chmod +x maiassnode
-./maiassnode --version
+curl -L https://github.com/vsmash/nodemaiass/releases/latest/download/maiass-macos-intel -o maiass
+chmod +x maiass
+./maiass --version
 ```
 
 #### Linux
 ```bash
 # x64
-curl -L https://github.com/vsmash/nodemaiass/releases/latest/download/maiassnode-linux-x64 -o maiassnode
-chmod +x maiassnode
-./maiassnode --version
+curl -L https://github.com/vsmash/nodemaiass/releases/latest/download/maiass-linux-x64 -o maiass
+chmod +x maiass
+./maiass --version
 
 # ARM64 (Raspberry Pi, etc.)
-curl -L https://github.com/vsmash/nodemaiass/releases/latest/download/maiassnode-linux-arm64 -o maiassnode
-chmod +x maiassnode
-./maiassnode --version
+curl -L https://github.com/vsmash/nodemaiass/releases/latest/download/maiass-linux-arm64 -o maiass
+chmod +x maiass
+./maiass --version
 ```
 
 #### Windows
 ```powershell
 # x64
-Invoke-WebRequest -Uri "https://github.com/vsmash/nodemaiass/releases/latest/download/maiassnode-windows-x64.exe" -OutFile "maiassnode.exe"
-.\maiassnode.exe --version
+Invoke-WebRequest -Uri "https://github.com/vsmash/nodemaiass/releases/latest/download/maiass-windows-x64.exe" -OutFile "maiass.exe"
+.\maiass.exe --version
 
 # ARM64
-Invoke-WebRequest -Uri "https://github.com/vsmash/nodemaiass/releases/latest/download/maiassnode-windows-arm64.exe" -OutFile "maiassnode.exe"
-.\maiassnode.exe --version
+Invoke-WebRequest -Uri "https://github.com/vsmash/nodemaiass/releases/latest/download/maiass-windows-arm64.exe" -OutFile "maiass.exe"
+.\maiass.exe --version
 ```
 
 ### Method 2: NPM Installation (⚠️ Node.js 18+ Required)
@@ -67,12 +67,12 @@ Invoke-WebRequest -Uri "https://github.com/vsmash/nodemaiass/releases/latest/dow
 
 ```bash
 # Global installation (only if Node.js 18+)
-npm install -g maiassnode
-maiassnode --version
+npm install -g maiass
+maiass --version
 
 # Local installation (only if Node.js 18+)
-npm install maiassnode
-npx maiassnode --version
+npm install maiass
+npx maiass --version
 ```
 
 **Recommended instead:** Use the universal installer or Homebrew to avoid Node version conflicts.
@@ -81,20 +81,20 @@ npx maiassnode --version
 
 ```bash
 # Coming soon
-brew install maiassnode
+brew install maiass
 ```
 
 ### Method 4: Package Managers - Future
 
 ```bash
 # Ubuntu/Debian (coming soon)
-sudo apt install maiassnode
+sudo apt install maiass
 
 # CentOS/RHEL (coming soon)  
-sudo yum install maiassnode
+sudo yum install maiass
 
 # Windows (coming soon)
-winget install maiassnode
+winget install maiass
 ```
 
 ## 🎯 Which Installation Method Should I Use?
@@ -112,30 +112,30 @@ After installation, verify it works:
 
 ```bash
 # Check version
-maiassnode --version
+maiass --version
 
 # Show help
-maiassnode --help
+maiass --help
 
 # Test basic functionality
-maiassnode env
+maiass env
 ```
 
 ## 🛠️ Installation Locations
 
 | Method | Install Location | Command |
 |--------|------------------|---------|
-| Install Script | `/usr/local/bin/maiassnode` | `maiassnode` |
-| Manual Binary | Current directory | `./maiassnode` |
-| NPM Global | npm global bin directory | `maiassnode` |
-| NPM Local | `node_modules/.bin/` | `npx maiassnode` |
+| Install Script | `/usr/local/bin/maiass` | `maiass` |
+| Manual Binary | Current directory | `./maiass` |
+| NPM Global | npm global bin directory | `maiass` |
+| NPM Local | `node_modules/.bin/` | `npx maiass` |
 
 ## 🔧 Troubleshooting
 
 ### "Command not found"
 ```bash
 # Check if binary is in PATH
-which maiassnode
+which maiass
 
 # Add to PATH if needed (add to ~/.bashrc or ~/.zshrc)
 export PATH="/usr/local/bin:$PATH"
@@ -144,7 +144,7 @@ export PATH="/usr/local/bin:$PATH"
 ### "Permission denied"
 ```bash
 # Make binary executable
-chmod +x maiassnode
+chmod +x maiass
 ```
 
 ### Node.js Version Issues (NPM install only)
@@ -204,7 +204,7 @@ curl -fsSL https://raw.githubusercontent.com/vsmash/nodemaiass/main/scripts/inst
 
 ### NPM Installation
 ```bash
-npm update -g maiassnode
+npm update -g maiass
 ```
 
 ## ❓ Support

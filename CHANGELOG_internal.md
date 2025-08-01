@@ -358,11 +358,11 @@
 	-
 
 - (vsmsh) MAI-7 Improved application naming and documentation
-	- refactor: renamed maiassnode.mjs to maiass.mjs
+	- refactor: renamed maiass.mjs to maiass.mjs
 	- docs: updated command references in cross-platform documentation
 	- docs: updated command references in node compatibility documentation
 	- build: modified references in package.json script section and pkg property
-	- refactor: removed maiassnode.mjs file from the project
+	- refactor: removed maiass.mjs file from the project
 
 - (vsmsh) MAI-7 Updated install script
 	- fix: corrected repository path in install.sh
@@ -408,14 +408,14 @@
 	- fix: updated context title in .windsurf
 	- docs: added explanation for Debug Mode Token Validation in README
 	- feat: introduced new token-validator.js for debugging API tokens
-	- feat: integrated token-validator in main application (maiassnode.mjs)
+	- feat: integrated token-validator in main application (maiass.mjs)
 
 ## 1.0.16
 28 July 2025
 
 - (vsmsh) MAI-7 Removed unused binary build files and tweaked logging in maiass-pipeline.js
-	- chore: deleted maiassnode-arm64 build file
-	- chore: deleted maiassnode-x64 build file
+	- chore: deleted maiass-arm64 build file
+	- chore: deleted maiass-x64 build file
 	- refactor: remove redundant logging line in validateAndHandleBranching
 	- style: changed logger output color to blue for 'Phase 1: Branch Detection and Validation' message
 
@@ -493,12 +493,12 @@
 - (vsmsh) Updated message in maiass-command.js
 	- fix: corrected application name in thank you message
 
-- (vsmsh) MAI-7 Updated logging systems in maiassnode and removed unnecessary logs
-	- refactor(maiassnode): replace console.log with the logger system for better output control
-	- refactor(maiassnode): change user prompts to use the logger system instead of console.log
-	- fix(maiassnode): correct comment typo on commit functionality script
+- (vsmsh) MAI-7 Updated logging systems in maiass and removed unnecessary logs
+	- refactor(maiass): replace console.log with the logger system for better output control
+	- refactor(maiass): change user prompts to use the logger system instead of console.log
+	- fix(maiass): correct comment typo on commit functionality script
 	- fix(maiass): remove unnecessary log commenting on ES module import success
-	- style(maiassnode): remove excess white spaces in commitThis function
+	- style(maiass): remove excess white spaces in commitThis function
 
 ## 0.9.7
 28 July 2025
@@ -518,12 +518,12 @@
 27 July 2025
 
 - (vsmsh) MAI-7 Updated files to utilize common JS execution
-	- fix: replaced 'maiassnode.mjs' with 'maiassnode.cjs' in debug-git-test.js
-	- fix: changed file path for 'maiassnode.mjs' to 'maiassnode.cjs' in test-runner.js
+	- fix: replaced 'maiass.mjs' with 'maiass.cjs' in debug-git-test.js
+	- fix: changed file path for 'maiass.mjs' to 'maiass.cjs' in test-runner.js
 
 - (vsmsh) MAI-7 Updated test scripts to use .mjs node files
-	- fix: change reference from maiassnode.js to maiassnode.mjs in debug-git-test.js
-	- fix: modify path to maiassnode.mjs in test-runner.js
+	- fix: change reference from maiass.js to maiass.mjs in debug-git-test.js
+	- fix: modify path to maiass.mjs in test-runner.js
 
 - (vsmsh) MAI-7 Improved git release workflow
 	- feat: added write permissions for creating releases
@@ -606,7 +606,7 @@
 	- feat(lib): added silent mode for automated commit approval
 	- feat(lib): integrated silent mode into the command handler module
 	- feat(lib): integrated silent mode into the pipeline module
-	- feat(maiassnode.js): Added silent mode CLI option for automated prompts approval
+	- feat(maiass.js): Added silent mode CLI option for automated prompts approval
 
 - (vsmsh) VEL-405 Refactored changelog update function
 	- fix: updated regex to filter irrelevant commits in updateChangelog function

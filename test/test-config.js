@@ -1,5 +1,5 @@
 /**
- * Test configuration for MAIASSNODE
+ * Test configuration for MAIASS
  */
 
 export const TEST_CONFIG = {

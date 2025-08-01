@@ -1,10 +1,10 @@
 # Configuration Guide
 
-MAIASSNODE uses a flexible configuration system based on `.env.maiass` files and environment variables. This guide covers all configuration options and best practices.
+MAIASS uses a flexible configuration system based on `.env.maiass` files and environment variables. This guide covers all configuration options and best practices.
 
 ## 🏗️ Configuration System Overview
 
-MAIASSNODE uses `.env.maiass` files for configuration with a clear hierarchy:
+MAIASS uses `.env.maiass` files for configuration with a clear hierarchy:
 
 - **Project**: `./.env.maiass` (highest priority)
 - **Global**: `~/.env.maiass` (user-wide settings)

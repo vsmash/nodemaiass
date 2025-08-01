@@ -1,6 +1,6 @@
 # Cross-Platform Setup
 
-MAIASSNODE is designed to work seamlessly across Windows, macOS, and Linux with appropriate configuration storage for each platform.
+MAIASS is designed to work seamlessly across Windows, macOS, and Linux with appropriate configuration storage for each platform.
 
 ## Installation
 
@@ -52,12 +52,12 @@ For easy access, create a symlink:
 
 ### macOS/Linux
 ```bash
-ln -s /path/to/maiassnode/nodemaiass.sh ~/.local/bin/nma
+ln -s /path/to/maiass/nodemaiass.sh ~/.local/bin/nma
 ```
 
 ### Windows (PowerShell as Admin)
 ```powershell
-New-Item -ItemType SymbolicLink -Path "C:\Windows\System32\nma.cmd" -Target "C:\path\to\maiassnode\nodemaiass.sh"
+New-Item -ItemType SymbolicLink -Path "C:\Windows\System32\nma.cmd" -Target "C:\path\to\maiass\nodemaiass.sh"
 ```
 
 ## Verification

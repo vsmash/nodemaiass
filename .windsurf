@@ -18,7 +18,7 @@ Node.js replica of MAIASS Bash script (`/Volumes/enigmadev/enigmadev/static/maia
 - **CLI**: yargs-based command structure
 
 ### Key Files
-- `maiassnode.js` - Main CLI entry (ES modules)
+- `maiass.js` - Main CLI entry (ES modules)
 - `lib/config.js` - Cross-platform environment loading
 - `lib/colors.js` - Chalk v5+ color utilities
 - `docs/README.maiass.md` - **MUST KEEP UPDATED**

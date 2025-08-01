@@ -1,6 +1,6 @@
 # Cross-Platform Support
 
-MAIASSNODE is designed to work seamlessly across macOS, Linux, and Windows on both Intel and ARM architectures.
+MAIASS is designed to work seamlessly across macOS, Linux, and Windows on both Intel and ARM architectures.
 
 ## Supported Platforms
 
@@ -50,12 +50,12 @@ npm run build:windows
 
 ### Output
 Built binaries will be placed in the `build/` directory with platform-specific names:
-- `maiassnode-macos` (Intel)
-- `maiassnode-macos-arm64` (Apple Silicon)
-- `maiassnode-linux` (x64)
-- `maiassnode-linux-arm64` (ARM64)
-- `maiassnode-win.exe` (x64)
-- `maiassnode-win-arm64.exe` (ARM64)
+- `maiass-macos` (Intel)
+- `maiass-macos-arm64` (Apple Silicon)
+- `maiass-linux` (x64)
+- `maiass-linux-arm64` (ARM64)
+- `maiass-win.exe` (x64)
+- `maiass-win-arm64.exe` (ARM64)
 
 ## Platform-Specific Notes
 
@@ -66,7 +66,7 @@ Built binaries will be placed in the `build/` directory with platform-specific n
 
 ### Linux
 - Requires Git to be installed
-- May need to make the binary executable: `chmod +x maiassnode-linux`
+- May need to make the binary executable: `chmod +x maiass-linux`
 - ARM64 builds work on Raspberry Pi 4+ and other ARM64 systems
 
 ### macOS
@@ -76,12 +76,12 @@ Built binaries will be placed in the `build/` directory with platform-specific n
 
 ## Configuration
 
-MAIASSNODE uses `.env.maiass` files for configuration, which work identically across all platforms. The configuration system automatically handles platform-specific paths and environment variables.
+MAIASS uses `.env.maiass` files for configuration, which work identically across all platforms. The configuration system automatically handles platform-specific paths and environment variables.
 
 ## Troubleshooting
 
 ### Binary Won't Run
-1. **Linux/macOS**: Ensure the binary is executable (`chmod +x maiassnode-*`)
+1. **Linux/macOS**: Ensure the binary is executable (`chmod +x maiass-*`)
 2. **Windows**: Run as Administrator if needed
 3. **All platforms**: Verify Git is installed and accessible
 
@@ -111,7 +111,7 @@ npm start
 
 ## Distribution
 
-When distributing MAIASSNODE:
+When distributing MAIASS:
 1. Build for all target platforms using `npm run build`
 2. Test each binary on its target platform
 3. Include platform-specific installation instructions

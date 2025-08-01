@@ -1,10 +1,10 @@
 # Workflow Guide
 
-This guide explains how MAIASSNODE orchestrates your Git workflow from commit to release, providing a complete understanding of the 4-phase pipeline.
+This guide explains how MAIASS orchestrates your Git workflow from commit to release, providing a complete understanding of the 4-phase pipeline.
 
 ## 🔄 MAIASS Pipeline Overview
 
-MAIASSNODE follows a structured 4-phase workflow that automates common Git operations:
+MAIASS follows a structured 4-phase workflow that automates common Git operations:
 
 1. **Branch Detection & Validation** - Ensures you're on the right branch
 2. **Commit Workflow** - AI-assisted commit creation
@@ -314,7 +314,7 @@ nma major
 
 ### Multiple Version Files
 ```bash
-# MAIASSNODE can update multiple files:
+# MAIASS can update multiple files:
 package.json     → "version": "1.3.0"
 composer.json    → "version": "1.3.0"
 VERSION.txt      → 1.3.0
@@ -333,7 +333,7 @@ git tag -a v1.3.0 -m "Release 1.3.0"
 
 ## 🔌 WordPress Integration
 
-MAIASSNODE provides enhanced version management for WordPress plugins and themes, automatically updating PHP version constants alongside standard version files.
+MAIASS provides enhanced version management for WordPress plugins and themes, automatically updating PHP version constants alongside standard version files.
 
 ### Plugin Version Management
 
@@ -350,14 +350,14 @@ MAIASS_VERSION_CONSTANT=MY_AWESOME_PLUGIN_VERSION
 # Run version bump as usual
 nma minor
 
-# MAIASSNODE will automatically:
+# MAIASS will automatically:
 # 1. Update package.json: "version": "1.3.0"
 # 2. Find main plugin file (my-awesome-plugin.php)
 # 3. Update/create: define('MY_AWESOME_PLUGIN_VERSION', '1.3.0');
 ```
 
 #### Plugin File Detection
-MAIASSNODE intelligently finds your main plugin file:
+MAIASS intelligently finds your main plugin file:
 ```bash
 # Looks for (in order):
 1. {plugin-name}.php     # my-awesome-plugin.php
@@ -384,7 +384,7 @@ define('MY_THEME_VERSION', '1.2.4');
 
 ### Automatic Constant Generation
 
-If `MAIASS_VERSION_CONSTANT` is not specified, MAIASSNODE generates it from your path:
+If `MAIASS_VERSION_CONSTANT` is not specified, MAIASS generates it from your path:
 
 ```bash
 # Plugin Examples:
@@ -399,7 +399,7 @@ my-custom-theme       → MY_CUSTOM_THEME_VERSION
 
 ### WordPress + Standard Files
 
-MAIASSNODE updates both WordPress files AND standard version files:
+MAIASS updates both WordPress files AND standard version files:
 
 ```bash
 # Single command updates:
@@ -482,7 +482,7 @@ nma config --global openai_mode=off
 
 **Merge Conflicts:**
 ```bash
-# MAIASSNODE detects conflicts
+# MAIASS detects conflicts
 ❌ Failed to merge: Merge conflict in src/app.js
 
 # Manual resolution required:

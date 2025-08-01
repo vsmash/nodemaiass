@@ -1,6 +1,6 @@
 # CLI Commands
 
-MAIASSNODE provides a set of commands for Git workflow automation and project management.
+MAIASS provides a set of commands for Git workflow automation and project management.
 
 ## Available Commands
 

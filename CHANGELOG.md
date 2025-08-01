@@ -317,11 +317,11 @@
 	- -
 
 - Improved application naming and documentation
-	- refactor: renamed maiassnode.mjs to maiass.mjs
+	- refactor: renamed maiass.mjs to maiass.mjs
 	- docs: updated command references in cross-platform documentation
 	- docs: updated command references in node compatibility documentation
 	- build: modified references in package.json script section and pkg property
-	- refactor: removed maiassnode.mjs file from the project
+	- refactor: removed maiass.mjs file from the project
 
 - Updated install script
 	- fix: corrected repository path in install.sh
@@ -367,14 +367,14 @@
 	- fix: updated context title in .windsurf
 	- docs: added explanation for Debug Mode Token Validation in README
 	- feat: introduced new token-validator.js for debugging API tokens
-	- feat: integrated token-validator in main application (maiassnode.mjs)
+	- feat: integrated token-validator in main application (maiass.mjs)
 
 ## 1.0.16
 28 July 2025
 
 - Removed unused binary build files and tweaked logging in maiass-pipeline.js
-	- chore: deleted maiassnode-arm64 build file
-	- chore: deleted maiassnode-x64 build file
+	- chore: deleted maiass-arm64 build file
+	- chore: deleted maiass-x64 build file
 	- refactor: remove redundant logging line in validateAndHandleBranching
 	- style: changed logger output color to blue for 'Phase 1: Branch Detection and Validation' message
 
@@ -452,12 +452,12 @@
 - Updated message in maiass-command.js
 	- fix: corrected application name in thank you message
 
-- Updated logging systems in maiassnode and removed unnecessary logs
-	- refactor(maiassnode): replace console.log with the logger system for better output control
-	- refactor(maiassnode): change user prompts to use the logger system instead of console.log
-	- fix(maiassnode): correct comment typo on commit functionality script
+- Updated logging systems in maiass and removed unnecessary logs
+	- refactor(maiass): replace console.log with the logger system for better output control
+	- refactor(maiass): change user prompts to use the logger system instead of console.log
+	- fix(maiass): correct comment typo on commit functionality script
 	- fix(maiass): remove unnecessary log commenting on ES module import success
-	- style(maiassnode): remove excess white spaces in commitThis function
+	- style(maiass): remove excess white spaces in commitThis function
 
 ## 0.9.7
 28 July 2025
@@ -477,12 +477,12 @@
 27 July 2025
 
 - Updated files to utilize common JS execution
-	- fix: replaced 'maiassnode.mjs' with 'maiassnode.cjs' in debug-git-test.js
-	- fix: changed file path for 'maiassnode.mjs' to 'maiassnode.cjs' in test-runner.js
+	- fix: replaced 'maiass.mjs' with 'maiass.cjs' in debug-git-test.js
+	- fix: changed file path for 'maiass.mjs' to 'maiass.cjs' in test-runner.js
 
 - Updated test scripts to use .mjs node files
-	- fix: change reference from maiassnode.js to maiassnode.mjs in debug-git-test.js
-	- fix: modify path to maiassnode.mjs in test-runner.js
+	- fix: change reference from maiass.js to maiass.mjs in debug-git-test.js
+	- fix: modify path to maiass.mjs in test-runner.js
 
 - Improved git release workflow
 	- feat: added write permissions for creating releases
@@ -571,7 +571,7 @@
 	- feat(lib): added silent mode for automated commit approval
 	- feat(lib): integrated silent mode into the command handler module
 	- feat(lib): integrated silent mode into the pipeline module
-	- feat(maiassnode.js): Added silent mode CLI option for automated prompts approval
+	- feat(maiass.js): Added silent mode CLI option for automated prompts approval
 
 - Refactored changelog update function
 	- fix: updated regex to filter irrelevant commits in updateChangelog function
@@ -974,7 +974,7 @@
 - Line 3 test
 - Added Git information extraction and display utility
 - feat: added a Git information utility in lib/git-info.js
-- feat: integrated Git information utility in maiassnode.js
+- feat: integrated Git information utility in maiass.js
 - feat: added Git info display and validation commands in CLI
 - Improved visual presentation in terminal output
 - feat: added symbols.js for Unicode/ASCII fallbacks
@@ -992,11 +992,11 @@
 - docs: simplified and updated project documentation
 - feat: exported getConfigPaths function in lib/config.js
 - feat: added new file lib/env-display.js for environment display utility
-- feat: integrated environment display utility in maiassnode.js
-- Added initial version of MAIASSNODE project with detailed documentation
+- feat: integrated environment display utility in maiass.js
+- Added initial version of MAIASS project with detailed documentation
 - feat: added .windsurf with detailed project overview and development guidelines
 - feat: added README.maiass.md with project summary and quick start guide
-- feat: added commands.md with available and planned commands for MAIASSNODE
+- feat: added commands.md with available and planned commands for MAIASS
 - feat: added configuration.md with details on environment variable loading and setup
 - feat: added development.md with code style guide, testing instructions, and contribution guidelines
 - feat: added setup.md with installation, environment setup, and troubleshooting instructions
@@ -1010,5 +1010,5 @@
 - #	package.json
 - Updated code for better module management and removed unnecessary imports
 - refactor(lib): switched from module.exports to export default in colors.js
-- refactor(maiassnode): removed unnecessary chalk import
+- refactor(maiass): removed unnecessary chalk import
 - feat(package): added "type": "module" to package.json
