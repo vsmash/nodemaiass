@@ -1,5 +1,27 @@
-## 1.2.6
+## 1.2.7
 1 August 2025
+
+- Updated script files
+	- fix(build.js): corrected project name in build script
+	- feat(.pkgignore): added scripts/ path to package ignore list
+- Added .DS_Store to .pkgignore
+	- feat: ignore .DS_Store files in packaging
+- Updated package building and release script
+	- feat: added .pkgignore to exclude development files from builds
+	- feat(package.json): included relevant files to assets in package.json
+	- fix(scripts): removed premature exit command from create-release.sh
+- Removed unneeded test files
+	- feat: Deleted test-credit-display.js
+	- feat: Deleted test-file.txt
+	- feat: Removed test-install.sh
+	- feat: Erased test.env
+- Renamed internal changelog file
+	- refactor: renamed CHANGELOG_internal_bak.md to CHANGELOG_internal.md
+- Stop creating new internal changelog if not existent
+	- refactor: removed CHANGELOG_internal.md
+	- refactor(maiass-pipeline): stopped creating new internal changelog if it doesn't exist
+- Update internal CHANGELOG file
+	- refactor: renamed CHANGELOG_internal.md to CHANGELOG_internal_bak.md
 
 - Added .DS_Store to .pkgignore
 	- feat: ignore .DS_Store files in packaging
