@@ -1,5 +1,24 @@
-## 1.0.25
+## 1.0.26
 1 August 2025
+
+- (vsmsh) MAI-7 Updated logger functionality and streamlined pipeline code
+	- feat: added BWhite logging method in logger.js
+	- refactor: simplified logger usage in maiass-pipeline.js
+- (vsmsh) MAI-7 Updated logging methods in maiass-pipeline.js
+	- fix(code): replaced logger.White with logger.log.BWhite for currentBranch output
+- (vsmsh) MAI-7 Updated color configurations and trimming functions
+	- feat(lib/colors.js): add BSoftPink and SoftPink color definitions
+	- fix(lib/commit.js): trim whitespace from edited and AI suggested commit messages
+	- refactor(lib/logger.js): changed MAIASS branding color to BSoftPink and modified log settings
+- (vsmsh) MAI-7 Refined logging and prompting capabilities, added new config options
+	- feat(lib): introduced 'critical' and 'prompt' log levels
+	- feat(lib): added shouldLog function based on verbosity in logger.js
+	- refactor(lib): replaced certain log.info calls with log.critical in commit.js
+	- refactor(lib): changed MAIASS_PREFIX icon in logger.js
+	- feat(lib): added 'autoSwitch' variable to control version mgmt in maiass-pipeline.js
+	- feat(lib): introduced new symbol 'maiassass' in symbols.js
+	- feat: added new command line options '--commits-only, -c' and '--auto-stage, -a' in maiass.mjs
+	-
 
 - (vsmsh) MAI-7 Improved application naming and documentation
 	- refactor: renamed maiassnode.mjs to maiass.mjs
