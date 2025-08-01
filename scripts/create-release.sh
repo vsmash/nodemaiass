@@ -66,9 +66,11 @@ ls -la ../build/
 
 # Copy all the properly named binaries
 cp ../build/maiass-macos-x64 maiass-macos-intel
-cp ../build/maiass-macos-arm64 maiass-macos-arm64
+cp ../build/maiass-macos-arm64 maiass-macos-arm64  
 cp ../build/maiass-linux-x64 maiass-linux-x64
+cp ../build/maiass-linux-arm64 maiass-linux-arm64
 cp ../build/maiass-win-x64.exe maiass-windows-x64.exe
+cp ../build/maiass-win-arm64.exe maiass-windows-arm64.exe
 
 echo "✅ Copied all release binaries"
 
