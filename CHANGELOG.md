@@ -64,9 +64,6 @@
 	- fix: revised 'No relevant commits found for changelog' behavior to skip changelog update
 	- fix: changed treatment for absent internal changelog commits from version bump entry to skipping update
 	- style: moved formattedCommits definition closer to its usage in updateInternalChangelog function
-
-- Version bump
-
 - Updated warning messages and handling for empty commits
 	- fix: revised 'No relevant commits found for changelog' behavior to skip changelog update
 	- fix: changed treatment for absent internal changelog commits from version bump entry to skipping update
