@@ -10,4 +10,5 @@ test/
 devlog.csv
 .windsurf
 .DS_Store*
+scripts/
 
