@@ -1,5 +1,12 @@
-## 1.0.24
+## 1.0.25
 1 August 2025
+
+- Improved application naming and documentation
+	- refactor: renamed maiassnode.mjs to maiass.mjs
+	- docs: updated command references in cross-platform documentation
+	- docs: updated command references in node compatibility documentation
+	- build: modified references in package.json script section and pkg property
+	- refactor: removed maiassnode.mjs file from the project
 
 - Updated install script
 	- fix: corrected repository path in install.sh
