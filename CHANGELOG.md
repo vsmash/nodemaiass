@@ -1,5 +1,37 @@
-## 1.1.6
+## 1.1.7
 1 August 2025
+
+- Updated maiass-pipeline.js to improve git commit handling
+	- feat: modified method of acquiring latest git tag
+	- feat: introduced fallback for no git tags to get all commits
+	- feat: added filtering logic to exclude empty commit message lines
+	- refactor: removed default 'Version bump' for lack of formatted commits
+	- refactor: improved git logs command flexibility for main and internal changelogs
+	- refactor: replaced hardcoded last tag with dynamically fetched git tag
+- Updated Changelog and Behavior Fixes
+	- docs: updated CHANGELOG.md content
+	- fix: revised behavior for empty commits in changelog
+	- fix: adjusted treatment for absent internal changelog commits
+- Refined changelog update process
+	- fix: made log warnings more precise about changelog updates when no commits present
+	- refactor: modified changelog generation process to add formatted commits selectively
+	- refactor: mirrored these changes for updateInternalChangelog function as well
+- Updated Changelog and Warning Messages
+	- docs: revised Changelog for version 1.1.3
+	- fix: updated warning messages and skip behavior for empty commits
+- Refactored changelog update logic
+	- feat: Added conditional logic for updating changelog regardless of relevant commits
+	- refactor: Reconfigured message formatting of commit messages
+	- fix: Adjusted logic for handling of internal changelogs
+- Improved Maiass pipeline logging and branch handling
+	- refactor: replaced logger with log in Maiass pipeline
+	- feat: added cache for finalBranch and originalBranch to avoid repeating git calls
+	- feat: included logging for final branch after attempted switch
+	- refactor: encapsulated debug file writing logic within try-catch block to prevent blocking of pipeline completion
+- Updated warning messages and handling for empty commits
+	- fix: revised 'No relevant commits found for changelog' behavior to skip changelog update
+	- fix: changed treatment for absent internal changelog commits from version bump entry to skipping update
+	- style: moved formattedCommits definition closer to its usage in updateInternalChangelog function
 
 - Version bump
 
