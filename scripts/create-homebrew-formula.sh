@@ -80,11 +80,8 @@ class Maiass < Formula
   homepage "https://github.com/$REPO"
   url "https://github.com/$REPO/archive/refs/tags/#{version}.tar.gz"
   version "$VERSION"
-  sha256 ""
+
   license "GPL-3.0-only"
-
-  depends_on "node"
-
   on_macos do
     if Hardware::CPU.intel?
       url "https://github.com/$REPO/releases/download/#{version}/maiass-macos-intel"
@@ -102,6 +99,9 @@ class Maiass < Formula
 
   def install
     bin.install Dir["maiass-*"].first => "maiass"
+    bin.install_symlink "maiass" => "myass"
+    bin.install_symlink "maiass" => "miass"
+
   end
 
   test do
