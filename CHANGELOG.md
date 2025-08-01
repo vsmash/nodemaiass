@@ -1,5 +1,119 @@
-## 5.2.6
+## 5.2.7
 2 August 2025
+
+- Update MAIASS homebrew formula and script
+	- fix: update maiass sha256 checksum in homebrew formula
+	- refactor: remove superfluous 'v' from download URLs in homebrew formula and shells script
+- Updated feature name and implemented version update checker
+	- refactor: Changed feature name from 'AI-Assisted Semantic Savant' to 'AI-Augmented Semantic Scribe'
+	- fix: Adjusted associated references in documentation and code for the new feature name
+	- feat: Added functionality to check for version updates from the GitHub releases
+	- fix: Updated brew configuration to correctly define augmented semantic scribe
+	- feat: Updated package.json with new version and adjusted description.
+- Project Maintenance and Improvement
+	- feat: Added GPL-3.0-only license
+	- fix: Adjusted package version according to recent changes
+	- feat: Added new Modular AI-Assisted Semantic Savant feature to the project
+	- doc: Overhauled README with updated descriptions and examples
+	- fix: Updated brew configuration to correctly tap into maiass instead of nodemaiass
+	- refactor: Deleted old maiassnode.rb file
+	- feat: Modified Homebrew setup script to accommodate updates
+	- doc: Ignored additional files (HOMEBREW_TAP_SETUP.md, script creations) on .pkgignore
+	- doc: Copied updated maiass.rb Homebrew formula to homebrew
+- Set release ignore rules, enhance release and pkgignore files
+	- feat: created .gitattributes to manage release ignoring rules
+	- docs(release.yml): added note for using binary downloads not source code archives
+	- feat(.pkgignore): added more rules to pkgignore
+	- docs(RELEASE_TEMPLATE.md): updated version numbers, added Linux ARM64 support and repeated note about binary downloads
+- Updated script and test files to reflect name change of main script
+	- refactor: Updated name of CLI script from "maiassnode" to "maiass"
+	- refactor: Revised file directories in scripts and tests to reflect new script name
+	- docs: Updated documentation for script usage and module interactions based on new name
+- Updated GitHub actions and documentation for cross-platform release
+	- feat: updated filenames from "maiassnode" to "maiass" in copying & renaming step
+	- feat: added executable permissions for "maiass" binaries
+	- feat: updated shasum command from "maiassnode" to "maiass"
+	- fix: revised tag name message format in echo command logic
+	- fix: changed value of name from "MAIASSNODE" to "maiass" in release action
+	- docs: updated references from "maiassnode" to "maiass" in description and download links
+	- feat: added references to maiass-linux-arm64 and maiass-windows-arm64.exe in release files
+- Updated release script for additional platforms
+	- feat: Added support for MacOS ARM64 in release script
+	- feat: Added support for Linux ARM64 in release script
+	- feat: Added support for Windows ARM64 in release script
+- Refactoring script and file names
+	- refactor: updated output file names in build.js
+	- refactor: modify repo path in create-release.sh
+	- refactor: adjusted names when copying binaries in create-release.sh
+	- refactor: changed executable file names in create-release.sh
+- Refactoring build process and release script
+	- feat(build.js): mapped targets to output filenames
+	- feat(build.js): improved build directory check and cleanup
+	- fix(package.json): removed unused scripts in pkg section
+	- feat(scripts/create-release.sh): refactored release binaries copy process
+	- fix(scripts/create-release.sh): updated chmod and shasum commands to match new filenames
+	- cleanup(scripts/create-release.sh): removed unnecessary comments and conditions
+- Updated script files
+	- fix(build.js): corrected project name in build script
+	- feat(.pkgignore): added scripts/ path to package ignore list
+- Added .DS_Store to .pkgignore
+	- feat: ignore .DS_Store files in packaging
+- Updated package building and release script
+	- feat: added .pkgignore to exclude development files from builds
+	- feat(package.json): included relevant files to assets in package.json
+	- fix(scripts): removed premature exit command from create-release.sh
+- Removed unneeded test files
+	- feat: Deleted test-credit-display.js
+	- feat: Deleted test-file.txt
+	- feat: Removed test-install.sh
+	- feat: Erased test.env
+- Renamed internal changelog file
+	- refactor: renamed CHANGELOG_internal_bak.md to CHANGELOG_internal.md
+- Stop creating new internal changelog if not existent
+	- refactor: removed CHANGELOG_internal.md
+	- refactor(maiass-pipeline): stopped creating new internal changelog if it doesn't exist
+- Update internal CHANGELOG file
+	- refactor: renamed CHANGELOG_internal.md to CHANGELOG_internal_bak.md
+- Improved command line user input handling and commit message suggestion
+	- feat: added handling for invalid user inputs during commit message creation
+	- refactor: improved visibility of user prompts and data handling during single character input collection
+	- fix: resolve process exiting prematurely by maintaining original raw mode state during input collection
+- Update Changelog file
+	- fix: revised 'No relevant commits found for changelog' behavior
+	- fix: updated treatment for absence of internal changelog commits from version bump entry
+	- style: relocated formattedCommits definition in updateInternalChangelog function
+	- remove: deleted 'Version bump' line
+- Updated maiass-pipeline.js to improve git commit handling
+	- feat: modified method of acquiring latest git tag
+	- feat: introduced fallback for no git tags to get all commits
+	- feat: added filtering logic to exclude empty commit message lines
+	- refactor: removed default 'Version bump' for lack of formatted commits
+	- refactor: improved git logs command flexibility for main and internal changelogs
+	- refactor: replaced hardcoded last tag with dynamically fetched git tag
+- Updated Changelog and Behavior Fixes
+	- docs: updated CHANGELOG.md content
+	- fix: revised behavior for empty commits in changelog
+	- fix: adjusted treatment for absent internal changelog commits
+- Refined changelog update process
+	- fix: made log warnings more precise about changelog updates when no commits present
+	- refactor: modified changelog generation process to add formatted commits selectively
+	- refactor: mirrored these changes for updateInternalChangelog function as well
+- Updated Changelog and Warning Messages
+	- docs: revised Changelog for version 1.1.3
+	- fix: updated warning messages and skip behavior for empty commits
+- Refactored changelog update logic
+	- feat: Added conditional logic for updating changelog regardless of relevant commits
+	- refactor: Reconfigured message formatting of commit messages
+	- fix: Adjusted logic for handling of internal changelogs
+- Improved Maiass pipeline logging and branch handling
+	- refactor: replaced logger with log in Maiass pipeline
+	- feat: added cache for finalBranch and originalBranch to avoid repeating git calls
+	- feat: included logging for final branch after attempted switch
+	- refactor: encapsulated debug file writing logic within try-catch block to prevent blocking of pipeline completion
+- Updated warning messages and handling for empty commits
+	- fix: revised 'No relevant commits found for changelog' behavior to skip changelog update
+	- fix: changed treatment for absent internal changelog commits from version bump entry to skipping update
+	- style: moved formattedCommits definition closer to its usage in updateInternalChangelog function
 
 - Updated feature name and implemented version update checker
 	- refactor: Changed feature name from 'AI-Assisted Semantic Savant' to 'AI-Augmented Semantic Scribe'
