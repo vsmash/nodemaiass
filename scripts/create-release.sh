@@ -100,27 +100,27 @@ echo ""
 
 # macOS Intel
 echo "macOS Intel (x64):"
-echo "curl -L https://github.com/$REPO/releases/download/v$VERSION/maiass-macos-intel -o maiass"
+echo "curl -L https://github.com/$REPO/releases/download/$VERSION/maiass-macos-intel -o maiass"
 echo "chmod +x maiass"
 echo "./maiass --version"
 echo ""
 
 # macOS ARM64
 echo "macOS ARM64 (M1/M2):"
-echo "curl -L https://github.com/$REPO/releases/download/v$VERSION/maiass-macos-arm64 -o maiass"
+echo "curl -L https://github.com/$REPO/releases/download/$VERSION/maiass-macos-arm64 -o maiass"
 echo "chmod +x maiass"
 echo "./maiass --version"
 echo ""
 
 # Linux x64
 echo "Linux x64:"
-echo "curl -L https://github.com/$REPO/releases/download/v$VERSION/maiass-linux-x64 -o maiass"
+echo "curl -L https://github.com/$REPO/releases/download/$VERSION/maiass-linux-x64 -o maiass"
 echo "chmod +x maiass"
 echo "./maiass --version"
 echo ""
 
 # Windows x64
 echo "Windows x64 (PowerShell):"
-echo "Invoke-WebRequest -Uri \"https://github.com/$REPO/releases/download/v$VERSION/maiass-windows-x64.exe\" -OutFile \"maiass.exe\""
+echo "Invoke-WebRequest -Uri \"https://github.com/$REPO/releases/download/$VERSION/maiass-windows-x64.exe\" -OutFile \"maiass.exe\""
 echo ".\\maiass.exe --version"
 echo ""
