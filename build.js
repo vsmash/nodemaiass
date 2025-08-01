@@ -32,12 +32,12 @@ function buildForTarget(target) {
   
   // Map target to output filename
   const outputNames = {
-    'node18-macos-x64': 'maiassnode-macos-x64',
-    'node18-macos-arm64': 'maiassnode-macos-arm64',
-    'node18-linux-x64': 'maiassnode-linux-x64',
-    'node18-linux-arm64': 'maiassnode-linux-arm64',
-    'node18-win-x64': 'maiassnode-win-x64.exe',
-    'node18-win-arm64': 'maiassnode-win-arm64.exe'
+    'node18-macos-x64': 'maiass-macos-x64',
+    'node18-macos-arm64': 'maiass-macos-arm64',
+    'node18-linux-x64': 'maiass-linux-x64',
+    'node18-linux-arm64': 'maiass-linux-arm64',
+    'node18-win-x64': 'maiass-win-x64.exe',
+    'node18-win-arm64': 'maiass-win-arm64.exe'
   };
   
   const outputName = outputNames[target];
