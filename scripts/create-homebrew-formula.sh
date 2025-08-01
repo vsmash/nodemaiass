@@ -81,7 +81,7 @@ class Maiass < Formula
   url "https://github.com/$REPO/archive/refs/tags/v#{version}.tar.gz"
   version "$VERSION"
   sha256 ""
-  license "MIT"
+  license "GPL-3.0-only"
 
   depends_on "node"
 
@@ -112,6 +112,8 @@ end
 EOF
 
 print_success "Homebrew formula created: $FORMULA_FILE"
+cp "$FORMULA_FILE" "../homebrew-maiass/$FORMULA_FILE"
+
 
 # Create tap repository instructions
 cat > "HOMEBREW_TAP_SETUP.md" << EOF
