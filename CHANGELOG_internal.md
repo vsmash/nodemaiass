@@ -1,5 +1,13 @@
-## 1.0.31
+## 1.0.33
 1 August 2025
+
+- (vsmsh) MAI-7 Improved handling of commit logs
+	- refactor: updated condition for executing changelog commits processing
+	- feat: added proceed action when no commits are found
+	- refactor: modified commit processing only to execute if commits exist
+	- feat: added version bump fallback for change logs with no commits
+	- refactor: unified fallback to version bump when no changelogs are found
+	- feat: added tool's capability to create version bump entry for internal changelog
 
 - (vsmsh) MAI-7 Updated version tagging workflow
 	- feat: added options for version bump and tagcreation in handleMergeToDevelop
