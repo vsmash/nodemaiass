@@ -1,5 +1,19 @@
-## 1.0.28
+## 1.0.29
 1 August 2025
+
+- Updated default parameter in executeGitCommand function
+	- refactor: changed silent's default value from false to 'pipe' in executeGitCommand
+- Enhancements to Logging and Error Management in the MAIASS system
+	- feat: implemented a debug buffer system for logging sessions in logger.js
+	- feat: added methods to initialize a debugging session, add entries to the buffer and retrieve it
+	- feat: ability to write debug content to a temporary file
+	- feat: ability to retrieve current debug session info in logger.js
+	- refactor: enhanced error logging in logger.js to include debug buffer
+	- feat: added logging side-effect to executeGitCommand() in maiass-pipeline.js for better output tracking
+	- feat: improved error management in executeGitCommand() function
+	- feat: debug information are now written to a file when there's an error
+- Refactor log handling in version-manager
+	- refactor: replaced console.log with logger.debug for .env.maiass content display
 
 - Refactor configuration handling
 	- refactor: revised parameter order in  in  to include global option
