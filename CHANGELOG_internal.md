@@ -1,5 +1,10 @@
-## 1.0.27
+## 1.0.28
 1 August 2025
+
+- (vsmsh) MAI-7 Refactor configuration handling
+	- refactor: revised parameter order in  in  to include global option
+	- feat: added  option in  in  to allow global key value setting
+	- feat: updated  in  to use  method for determining the config path based on  option
 
 - (vsmsh) MAI-7 Refactored pipeline.js logic and improved debugging
 	- feat: added condition to handle user-cancelled merges gracefully in runMaiassPipeline function
