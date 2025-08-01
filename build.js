@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Cross-platform build script for maiassnode
+ * Cross-platform build script for maiass
  * Builds binaries for all supported platforms and architectures
  */
 
@@ -44,7 +44,7 @@ function buildForTarget(target) {
 }
 
 function main() {
-  console.log(colors.Aqua('MAIASSNODE Cross-Platform Build'));
+  console.log(colors.Aqua('MAIASS Cross-Platform Build'));
   console.log(colors.White('Building binaries for all supported platforms...\n'));
 
   // Ensure build directory exists
