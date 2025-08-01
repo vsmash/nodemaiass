@@ -1,4 +1,4 @@
-# maiass v0.7.1 - Cross-Platform Release
+# MAIASS v1.0.0 - Cross-Platform Release
 
 🎉 **First cross-platform release of maiass!** 
 
@@ -68,6 +68,7 @@ All binaries include SHA256 checksums for verification:
 
 - **macOS:** 10.15+ (Intel or Apple Silicon)
 - **Linux:** Most distributions (x64)
+- **Raspberry Pi / Linux ARM64**
 - **Windows:** 10+ (x64)
 - **Dependencies:** None (Node.js included in binary)
 
@@ -76,6 +77,10 @@ All binaries include SHA256 checksums for verification:
 - **Documentation:** https://github.com/vsmash/maiass
 - **Issues:** https://github.com/vsmash/maiass/issues
 - **Discussions:** https://github.com/vsmash/maiass/discussions
+
+## 📝 Note
+
+**Use the binary downloads above** - the "Source code" archives below are for development only and don't include the self-contained executables.
 
 ---
 

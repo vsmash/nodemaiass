@@ -166,6 +166,10 @@ jobs:
           - **Linux:** Most distributions (x64)
           - **Windows:** 10+ (x64)
           - **Dependencies:** None (Node.js included in binary)
+          
+          ## 📝 Note
+          
+          **Use the binary downloads above** - the "Source code" archives below are for development only and don't include the self-contained executables.
         files: |
           release-assets/maiass-macos-intel
           release-assets/maiass-macos-arm64
