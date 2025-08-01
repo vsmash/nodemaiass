@@ -1,5 +1,11 @@
-## 1.2.1
+## 1.2.2
 1 August 2025
+
+- Stop creating new internal changelog if not existent
+	- refactor: removed CHANGELOG_internal.md
+	- refactor(maiass-pipeline): stopped creating new internal changelog if it doesn't exist
+- Update internal CHANGELOG file
+	- refactor: renamed CHANGELOG_internal.md to CHANGELOG_internal_bak.md
 
 - Update internal CHANGELOG file
 	- refactor: renamed CHANGELOG_internal.md to CHANGELOG_internal_bak.md
