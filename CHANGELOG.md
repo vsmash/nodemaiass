@@ -1,3 +1,8 @@
+## 1.1.0
+1 August 2025
+
+- Version bump
+
 ## 1.0.34
 1 August 2025
 
