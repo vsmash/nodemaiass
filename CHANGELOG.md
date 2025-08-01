@@ -1,5 +1,8 @@
-## 1.2.0
+## 1.2.1
 1 August 2025
+
+- Update internal CHANGELOG file
+	- refactor: renamed CHANGELOG_internal.md to CHANGELOG_internal_bak.md
 
 - Improved command line user input handling and commit message suggestion
 	- feat: added handling for invalid user inputs during commit message creation
