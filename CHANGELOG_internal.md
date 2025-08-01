@@ -1,3 +1,81 @@
+## 5.2.5
+2 August 2025
+
+- (vsmsh) MAI-7 Project Maintenance and Improvement
+	- feat: Added GPL-3.0-only license
+	- fix: Adjusted package version according to recent changes
+	- feat: Added new Modular AI-Assisted Semantic Savant feature to the project
+	- doc: Overhauled README with updated descriptions and examples
+	- fix: Updated brew configuration to correctly tap into maiass instead of nodemaiass
+	- refactor: Deleted old maiassnode.rb file
+	- feat: Modified Homebrew setup script to accommodate updates
+	- doc: Ignored additional files (HOMEBREW_TAP_SETUP.md, script creations) on .pkgignore
+	- doc: Copied updated maiass.rb Homebrew formula to homebrew
+- (vsmsh) Bumped version to 1.2.12
+- (vsmsh) MAI-7 Set release ignore rules, enhance release and pkgignore files
+	- feat: created .gitattributes to manage release ignoring rules
+	- docs(release.yml): added note for using binary downloads not source code archives
+	- feat(.pkgignore): added more rules to pkgignore
+	- docs(RELEASE_TEMPLATE.md): updated version numbers, added Linux ARM64 support and repeated note about binary downloads
+- (vsmsh) MAI-7 Updated script and test files to reflect name change of main script
+	- refactor: Updated name of CLI script from "maiassnode" to "maiass"
+	- refactor: Revised file directories in scripts and tests to reflect new script name
+	- docs: Updated documentation for script usage and module interactions based on new name
+- (vsmsh) Bumped version to 1.2.11
+- (vsmsh) MAI-7 Updated GitHub actions and documentation for cross-platform release
+	- feat: updated filenames from "maiassnode" to "maiass" in copying & renaming step
+	- feat: added executable permissions for "maiass" binaries
+	- feat: updated shasum command from "maiassnode" to "maiass"
+	- fix: revised tag name message format in echo command logic
+	- fix: changed value of name from "MAIASSNODE" to "maiass" in release action
+	- docs: updated references from "maiassnode" to "maiass" in description and download links
+	- feat: added references to maiass-linux-arm64 and maiass-windows-arm64.exe in release files
+- (vsmsh) Bumped version to 1.2.10
+- (vsmsh) MAI-7 Updated release script for additional platforms
+	- feat: Added support for MacOS ARM64 in release script
+	- feat: Added support for Linux ARM64 in release script
+	- feat: Added support for Windows ARM64 in release script
+- (vsmsh) Bumped version to 1.2.9
+- (vsmsh) MAI-7 Refactoring script and file names
+	- refactor: updated output file names in build.js
+	- refactor: modify repo path in create-release.sh
+	- refactor: adjusted names when copying binaries in create-release.sh
+	- refactor: changed executable file names in create-release.sh
+- (vsmsh) Bumped version to 1.2.8
+- (vsmsh) MAI-7 Refactoring build process and release script
+	- feat(build.js): mapped targets to output filenames
+	- feat(build.js): improved build directory check and cleanup
+	- fix(package.json): removed unused scripts in pkg section
+	- feat(scripts/create-release.sh): refactored release binaries copy process
+	- fix(scripts/create-release.sh): updated chmod and shasum commands to match new filenames
+	- cleanup(scripts/create-release.sh): removed unnecessary comments and conditions
+- (vsmsh) Bumped version to 1.2.7
+- (vsmsh) MAI-7 Updated script files - fix(build.js): corrected project name in build script - feat(.pkgignore): added scripts/ path to package ignore list
+- (vsmsh) Bumped version to 1.2.6
+- (vsmsh) MAI-7 Added .DS_Store to .pkgignore
+	- feat: ignore .DS_Store files in packaging
+- (vsmsh) Bumped version to 1.2.5
+- (vsmsh) MAI-7 Updated package building and release script
+	- feat: added .pkgignore to exclude development files from builds
+	- feat(package.json): included relevant files to assets in package.json
+	- fix(scripts): removed premature exit command from create-release.sh
+- (vsmsh) Bumped version to 1.2.4
+- (vsmsh) Removed unneeded test files
+	- feat: Deleted test-credit-display.js
+	- feat: Deleted test-file.txt
+	- feat: Removed test-install.sh
+	- feat: Erased test.env
+- (vsmsh) Bumped version to 1.2.3
+- (vsmsh) MAI-7 Renamed internal changelog file
+	- refactor: renamed CHANGELOG_internal_bak.md to CHANGELOG_internal.md
+- (vsmsh) Bumped version to 1.2.2
+- (vsmsh) MAI-7 Stop creating new internal changelog if not existent
+	- refactor: removed CHANGELOG_internal.md
+	- refactor(maiass-pipeline): stopped creating new internal changelog if it doesn't exist
+- (vsmsh) Bumped version to 1.2.1
+- (vsmsh) MAI-7 Update internal CHANGELOG file
+	- refactor: renamed CHANGELOG_internal.md to CHANGELOG_internal_bak.md
+
 ## 1.2.12
 2 August 2025
 
