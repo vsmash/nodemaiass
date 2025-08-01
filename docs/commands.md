@@ -32,7 +32,7 @@ The following commands are planned to replicate functionality from the original 
 - `nma status` - Show project and Git status
 
 ### AI Integration
-- `nma commit` - AI-assisted commit message generation
+- `nma commit` - AI-augmented commit message generation
 - `nma review` - AI code review suggestions
 
 ## Command Structure

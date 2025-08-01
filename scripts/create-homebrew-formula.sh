@@ -76,7 +76,7 @@ print_status "Generating Homebrew formula..."
 
 cat > "$FORMULA_FILE" << EOF
 class Maiass < Formula
-  desc "MAIASS: Modular AI-Assisted Semantic Scribe - CLI tool for AI-assisted development"
+  desc "MAIASS: Modular AI-Augmented Semantic Scribe - CLI tool for AI-augmented development"
   homepage "https://github.com/$REPO"
   url "https://github.com/$REPO/archive/refs/tags/v#{version}.tar.gz"
   version "$VERSION"
