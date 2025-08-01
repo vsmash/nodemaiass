@@ -82,7 +82,7 @@ node --version
 ### Test Compatibility
 ```bash
 # Test if your Node.js version supports MAIASSNODE
-node -e "console.log('Node.js version:', process.version); import('./maiassnode.mjs').then(() => console.log('✅ Compatible')).catch(e => console.log('❌ Not compatible:', e.message))"
+node -e "console.log('Node.js version:', process.version); import('./maiass.mjs').then(() => console.log('✅ Compatible')).catch(e => console.log('❌ Not compatible:', e.message))"
 ```
 
 ## Binary Distribution Strategy
