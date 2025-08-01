@@ -64,40 +64,20 @@ echo "📋 Preparing release assets..."
 echo "Available build files:"
 ls -la ../build/
 
-# macOS (these are created by pkg)
-if [ -f ../build/maiass-x64 ]; then
-    cp ../build/maiass-x64 maiass-macos-intel
-    echo "✅ Copied macOS Intel binary"
-fi
+# Copy all the properly named binaries
+cp ../build/maiassnode-macos-x64 maiassnode-macos-intel
+cp ../build/maiassnode-macos-arm64 maiassnode-macos-arm64
+cp ../build/maiassnode-linux-x64 maiassnode-linux-x64
+cp ../build/maiassnode-win-x64.exe maiassnode-windows-x64.exe
 
-if [ -f ../build/maiass-arm64 ]; then
-    cp ../build/maiass-arm64 maiass-macos-arm64
-    echo "✅ Copied macOS ARM64 binary"
-fi
-
-# The generic 'maiass' file might be Linux - let's use it for Linux x64
-if [ -f ../build/maiass ]; then
-    cp ../build/maiass maiass-linux-x64
-    echo "✅ Copied Linux x64 binary (from generic maiass)"
-fi
-
-# Windows
-if [ -f ../build/maiass.exe ]; then
-    cp ../build/maiass.exe maiass-windows-x64.exe
-    echo "✅ Copied Windows x64 binary"
-fi
-
-# Note: pkg seems to only build one binary per platform type
-# We may need to run separate builds for different architectures
-echo "⚠️  Note: pkg may not create separate ARM64 binaries for Linux/Windows"
-echo "⚠️  Consider running separate builds or using CI for complete coverage"
+echo "✅ Copied all release binaries"
 
 # Make binaries executable and create checksums
-chmod +x maiass-*
+chmod +x maiassnode-*
 
 # Create checksums
 echo "🔒 Creating checksums..."
-shasum -a 256 maiass-* > checksums.txt
+shasum -a 256 maiassnode-* > checksums.txt
 
 echo "✅ Release assets prepared in ./release/"
 echo ""
