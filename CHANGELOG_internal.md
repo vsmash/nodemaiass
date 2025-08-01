@@ -1,5 +1,7 @@
-## 1.1.1
+## 1.1.3
 1 August 2025
+
+- Version bump
 
 - (vsmsh) MAI-7 Updated warning messages and handling for empty commits
 	- fix: revised 'No relevant commits found for changelog' behavior to skip changelog update
