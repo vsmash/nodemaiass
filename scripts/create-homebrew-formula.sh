@@ -78,7 +78,7 @@ cat > "$FORMULA_FILE" << EOF
 class Maiass < Formula
   desc "MAIASS: Modular AI-Augmented Semantic Scribe - CLI tool for AI-augmented development"
   homepage "https://github.com/$REPO"
-  url "https://github.com/$REPO/archive/refs/tags/v#{version}.tar.gz"
+  url "https://github.com/$REPO/archive/refs/tags/#{version}.tar.gz"
   version "$VERSION"
   sha256 ""
   license "GPL-3.0-only"
@@ -87,16 +87,16 @@ class Maiass < Formula
 
   on_macos do
     if Hardware::CPU.intel?
-      url "https://github.com/$REPO/releases/download/v#{version}/maiass-macos-intel"
+      url "https://github.com/$REPO/releases/download/#{version}/maiass-macos-intel"
       sha256 "$INTEL_SHA"
     else
-      url "https://github.com/$REPO/releases/download/v#{version}/maiass-macos-arm64"
+      url "https://github.com/$REPO/releases/download/#{version}/maiass-macos-arm64"
       sha256 "$ARM64_SHA"
     end
   end
 
   on_linux do
-    url "https://github.com/$REPO/releases/download/v#{version}/maiass-linux-x64"
+    url "https://github.com/$REPO/releases/download/#{version}/maiass-linux-x64"
     sha256 "$LINUX_SHA"
   end
 
