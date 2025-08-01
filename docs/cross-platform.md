@@ -100,7 +100,7 @@ For development across platforms:
 
 ```bash
 # Run directly with Node.js (cross-platform)
-node maiassnode.mjs
+node maiass.mjs
 
 # Run tests
 npm test

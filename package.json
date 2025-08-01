@@ -22,7 +22,7 @@
     "cli"
   ],
   "scripts": {
-    "start": "node maiassnode.mjs",
+    "start": "node maiass.mjs",
     "build": "node build.js",
     "build:all": "node build.js",
     "build:macos": "pkg . --targets node18-macos-x64,node18-macos-arm64",
@@ -40,8 +40,8 @@
   },
   "pkg": {
     "scripts": [
-      "maiassnode.cjs",
-      "maiassnode.mjs",
+      "maiass.cjs",
+      "maiass.mjs",
       "lib/**/*.js"
     ],
     "assets": [
