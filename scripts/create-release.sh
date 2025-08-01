@@ -48,8 +48,6 @@ else
     echo "Invalid choice"
     exit 1
 fi
-exit 0
-
 
 # Build all binaries
 echo "📦 Building binaries for all platforms..."

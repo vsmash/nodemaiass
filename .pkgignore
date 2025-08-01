@@ -1,0 +1,12 @@
+# Exclude internal changelog from builds
+CHANGELOG_internal.md
+
+# Exclude other development files
+*.log
+.env*
+test/
+*.test.js
+*.spec.js
+devlog.csv
+.windsurf
+
