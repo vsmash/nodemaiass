@@ -1,8 +1,6 @@
 ## 1.1.3
 1 August 2025
 
-- Version bump
-
 - Updated warning messages and handling for empty commits
 	- fix: revised 'No relevant commits found for changelog' behavior to skip changelog update
 	- fix: changed treatment for absent internal changelog commits from version bump entry to skipping update
