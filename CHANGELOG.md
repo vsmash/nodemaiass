@@ -1,5 +1,14 @@
-## 1.0.29
+## 1.0.30
 1 August 2025
+
+- Refactor commit handler
+	- refactor(lib): removed verbosity check in handleStagedCommit function
+- Simplified debug check in handleStagedCommit function
+	- fix(lib): remove unnecessary condition from debug check
+- Improved git command handling and added debug verbosity
+	- fix: changed default silent parameter value in executeGitCommand function
+	- feat: added function to display git push command under debug verbosity
+	- refactor: adjusted conditional check within handleStagedCommit function
 
 - Updated default parameter in executeGitCommand function
 	- refactor: changed silent's default value from false to 'pipe' in executeGitCommand
