@@ -6,7 +6,7 @@ set -e
 BRANCH=$(git rev-parse --abbrev-ref HEAD)
 git checkout develop
 VERSION=${1:-$(node -p "require('./package.json').version")}
-REPO="vsmash/nodemaiass"  # Update with your actual repo
+REPO="vsmash/maiass"  # Update with your actual repo
 # get the current branch name
 echo "🚀 Creating GitHub release for version $VERSION"
 # ask choice: 1. merge develop into staging, 2. merge staging into main, 3. 1 then two, 4. exit
@@ -65,19 +65,19 @@ echo "Available build files:"
 ls -la ../build/
 
 # Copy all the properly named binaries
-cp ../build/maiassnode-macos-x64 maiassnode-macos-intel
-cp ../build/maiassnode-macos-arm64 maiassnode-macos-arm64
-cp ../build/maiassnode-linux-x64 maiassnode-linux-x64
-cp ../build/maiassnode-win-x64.exe maiassnode-windows-x64.exe
+cp ../build/maiass-macos-x64 maiass-macos-intel
+cp ../build/maiass-macos-arm64 maiass-macos-arm64
+cp ../build/maiass-linux-x64 maiass-linux-x64
+cp ../build/maiass-win-x64.exe maiass-windows-x64.exe
 
 echo "✅ Copied all release binaries"
 
 # Make binaries executable and create checksums
-chmod +x maiassnode-*
+chmod +x maiass-*
 
 # Create checksums
 echo "🔒 Creating checksums..."
-shasum -a 256 maiassnode-* > checksums.txt
+shasum -a 256 maiass-* > checksums.txt
 
 echo "✅ Release assets prepared in ./release/"
 echo ""
