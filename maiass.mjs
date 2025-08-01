@@ -83,6 +83,8 @@ if (args.includes('--help') || args.includes('-h') || command === 'help') {
   console.log('  config             Manage configuration');
   console.log('  version            Manage version information');
   console.log('\nOptions:');
+  console.log('  --commits-only, -c Generate AI commits without version management');
+  console.log('  --auto-stage, -a   Automatically stage all changes');
   console.log('  --help, -h         Show this help message');
   console.log('  --version, -v      Show version');
   console.log('  --dry-run          Run without making changes');
