@@ -24,41 +24,53 @@ print_error() { echo -e "${RED}❌ $1${NC}"; }
 echo "🍺 Creating Homebrew Formula for MAIASS v$VERSION"
 echo "=============================================="
 
-# Ensure release directory exists and has binaries
-if [ ! -d "release" ]; then
-    print_error "Release directory not found. Run ./scripts/create-release.sh first"
+# Check if GitHub release exists
+print_status "Verifying GitHub release $VERSION exists..."
+if ! curl -s "https://api.github.com/repos/$REPO/releases/tags/$VERSION" | grep -q "tag_name"; then
+    print_error "GitHub release $VERSION not found. Create the release first."
+    print_status "Run: ./scripts/create-release.sh"
     exit 1
 fi
 
 # Create Formula directory
 mkdir -p "$FORMULA_DIR"
 
-# Get SHA256 hashes from checksums.txt
-if [ ! -f "release/checksums.txt" ]; then
-    print_error "checksums.txt not found. Run ./scripts/create-release.sh first"
-    exit 1
+print_status "Reading SHA256 hashes from actual GitHub release..."
+
+# Download and calculate SHA256 from actual GitHub release files
+INTEL_SHA=""
+ARM64_SHA=""
+LINUX_SHA=""
+
+# Download and hash Intel binary
+print_status "Downloading and hashing Intel binary..."
+if curl -L -o "temp-intel" "https://github.com/$REPO/releases/download/$VERSION/maiass-macos-intel" 2>/dev/null; then
+    INTEL_SHA=$(shasum -a 256 "temp-intel" | cut -d' ' -f1)
+    echo "✅ Intel SHA256: ${INTEL_SHA:0:8}..."
+    rm "temp-intel"
+else
+    print_error "Failed to download Intel binary from GitHub release"
 fi
 
-print_status "Reading SHA256 hashes from checksums.txt..."
+# Download and hash ARM64 binary
+print_status "Downloading and hashing ARM64 binary..."
+if curl -L -o "temp-arm64" "https://github.com/$REPO/releases/download/$VERSION/maiass-macos-arm64" 2>/dev/null; then
+    ARM64_SHA=$(shasum -a 256 "temp-arm64" | cut -d' ' -f1)
+    echo "✅ ARM64 SHA256: ${ARM64_SHA:0:8}..."
+    rm "temp-arm64"
+else
+    print_error "Failed to download ARM64 binary from GitHub release"
+fi
 
-# Extract hashes (format: hash  filename)
-if [ -f "release/maiass-macos-intel" ]; then
-      INTEL_SHA=$(shasum -a 256 "release/maiass-macos-intel" | cut -d' ' -f1)
-      echo "✅ Found Intel binary (SHA256: ${INTEL_SHA:0:8}...)"
-  fi
-
-  if [ -f "release/maiass-macos-arm64" ]; then
-      ARM64_SHA=$(shasum -a 256 "release/maiass-macos-arm64" | cut -d' ' -f1)
-      echo "✅ Found ARM64 binary (SHA256: ${ARM64_SHA:0:8}...)"
-  fi
-
-  if [ -f "release/maiass-linux-x64" ]; then
-      LINUX_SHA=$(shasum -a 256 "release/maiass-linux-x64" | cut -d' ' -f1)
-      echo "✅ Found Linux binary (SHA256: ${LINUX_SHA:0:8}...)"
-  else
-      print_error "Linux binary not found in release/"
-      exit 1
-  fi
+# Download and hash Linux binary
+print_status "Downloading and hashing Linux binary..."
+if curl -L -o "temp-linux" "https://github.com/$REPO/releases/download/$VERSION/maiass-linux-x64" 2>/dev/null; then
+    LINUX_SHA=$(shasum -a 256 "temp-linux" | cut -d' ' -f1)
+    echo "✅ Linux SHA256: ${LINUX_SHA:0:8}..."
+    rm "temp-linux"
+else
+    print_error "Failed to download Linux binary from GitHub release"
+fi
 
 if [ -z "$INTEL_SHA" ] || [ -z "$ARM64_SHA" ] || [ -z "$LINUX_SHA" ]; then
     print_error "Could not extract all required SHA256 hashes"

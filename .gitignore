@@ -29,3 +29,5 @@ yarn-error.log*
 ehthumbs.db
 Thumbs.db
 Formula/maiass.rb
+# Code signing certificates
+certs/

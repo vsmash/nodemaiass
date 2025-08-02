@@ -53,6 +53,24 @@ fi
 echo "📦 Building binaries for all platforms..."
 npm run build:all
 
+# Code sign macOS binaries (if on macOS)
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    echo "🔐 Code signing macOS binaries..."
+    if ./scripts/codesign.sh; then
+        echo "✅ macOS code signing completed"
+    else
+        echo "⚠️ macOS code signing failed, continuing with unsigned binaries"
+    fi
+fi
+
+# Code sign Windows binaries (cross-platform with osslsigncode)
+echo "🔐 Code signing Windows binaries..."
+if ./scripts/codesign-windows.sh; then
+    echo "✅ Windows code signing completed"
+else
+    echo "⚠️ Windows code signing failed, continuing with unsigned binaries"
+fi
+
 # Create release directory
 mkdir -p release
 cd release
