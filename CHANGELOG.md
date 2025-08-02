@@ -1,5 +1,24 @@
-## 5.3.4
+## 5.3.5
 2 August 2025
+
+- Improved code signing and binary hashing
+	- feat(scripts): added advanced options to code signing in codesign.sh
+	- feat(scripts): added Gatekeeper assessment to code signing in codesign.sh
+	- refactor(scripts): changed binary hashing to archive hashing in create-homebrew-formula.sh
+	- refactor(scripts): changed binary links to archive links in create-homebrew-formula.sh
+	- feat(scripts): added binary archiving in create-release.sh
+	- feat(scripts): added Gatekeeper assessment in create-release.sh
+	- refactor(scripts): added archive hashing in create-release.sh
+	- docs(scripts): updated next steps instructions in create-release.sh
+- Upgrade to release process and checksum generation
+	- feat: added new checksums for various platforms in checksums.txt
+	- fix(scripts): revised create-homebrew-formula.sh to prefer x64 over intel
+	- fix(scripts): amended copy command in create-release.sh from "maiass-macos-intel" to "maiass-macos-x64"
+	- feat(scripts): incorporated code signature verification in create-release.sh for macOS binaries
+- Updated binary hashing in Homebrew formula creation
+	- feat: updated script to download and hash binaries from actual GitHub release
+	- fix: improved error handling if binary download fails
+	- refactor: clarity improvements to status and error messages
 
 - Upgrade to release process and checksum generation
 	- feat: added new checksums for various platforms in checksums.txt
