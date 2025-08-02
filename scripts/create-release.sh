@@ -83,7 +83,7 @@ echo "Available build files:"
 ls -la ../build/
 
 # Copy all the properly named binaries
-cp ../build/maiass-macos-x64 maiass-macos-intel
+cp ../build/maiass-macos-x64 maiass-macos-x64
 cp ../build/maiass-macos-arm64 maiass-macos-arm64  
 cp ../build/maiass-linux-x64 maiass-linux-x64
 cp ../build/maiass-linux-arm64 maiass-linux-arm64
@@ -91,6 +91,19 @@ cp ../build/maiass-win-x64.exe maiass-windows-x64.exe
 cp ../build/maiass-win-arm64.exe maiass-windows-arm64.exe
 
 echo "✅ Copied all release binaries"
+
+# Verify code signatures on macOS binaries
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    echo "🔍 Verifying code signatures on macOS binaries..."
+    for binary in maiass-macos-*; do
+        if codesign -dv "$binary" 2>/dev/null; then
+            echo "✅ $binary is properly signed"
+        else
+            echo "❌ $binary is NOT signed - this will cause issues!"
+            exit 1
+        fi
+    done
+fi
 
 # Make binaries executable and create checksums
 chmod +x maiass-*
