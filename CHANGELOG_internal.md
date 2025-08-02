@@ -1,5 +1,18 @@
-## 5.3.7
+## 5.3.8
 2 August 2025
+
+- (vsmsh) Refactored build scripts for standalone file usage
+	- refactor: updated package.json to use  for , , and  input
+	- refactor: removed unused > pkg@5.8.1 > Error! Entry file/directory is expected   Pass --help to see usage information scripts and assets configuration in package.json
+	- refactor: altered  to require  for PKG and Nexe builds
+	- refactor: removed platform loop in  and built for each specific platform with updated standalone references
+	- refactor: adjusted Bun build process in  to handle standalone file and renamed platform outputs
+- (vsmsh) Bumped version to 5.3.7
+- (vsmsh) Update dependencies and configurations
+	- chore: upgraded package version from 0.7.1 to 5.3.6
+	- chore: switched maiass bin from .mjs to .cjs
+	- chore: added nexe as a devDependency
+	- chore: added several new devDependencies including webpack and ajv packages
 
 - (vsmsh) Update dependencies and configurations
 	- chore: upgraded package version from 0.7.1 to 5.3.6
