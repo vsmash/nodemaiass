@@ -1,5 +1,25 @@
-## 5.3.0
+## 5.3.1
 2 August 2025
+
+- Updated maiass.sh and nodemaiass.sh scripts
+	- fix: updated node command to use .cjs modules in maiass.sh and nodemaiass.sh scripts
+- Updated script for Homebrew formula creation and added binary file for testing
+	- refactor(scripts): change process for retrieving SHA256 hashes in Homebrew script
+	- feat: added new test binary file
+- Updated code signing for macOS and Windows binaries
+	- feat: added certificate files to .gitignore
+	- feat: added code signing for .exe files in build.js
+	- docs: created new detailed documents on code signing for both platforms
+	- feat: added new scripts for code signing and signature verification for individual binaries
+- Updated .gitignore and removed unused Formula file
+	- feat: added 'Formula/maiass.rb' to .gitignore
+	- fix: deleted unused 'Formula/maiass.rb' file
+- Update Maiass formula and related scripts
+	- feat: updated Maiass version in brew formula to 5.2.7
+	- fix: remodeled URL structure in Maiass formula and creation script
+	- feat: added new symlink names for main MAIASS tool
+	- fix: streamlined 'create-homebrew-formula.sh' layout
+	- fix: updated URL patterns in 'create-release.sh' removing v from version tag
 
 - Updated code signing for macOS and Windows binaries
 	- feat: added certificate files to .gitignore
