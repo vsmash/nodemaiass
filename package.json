@@ -1,7 +1,7 @@
 {
   "name": "maiass",
   "type": "module",
-  "version": "5.3.6",
+  "version": "5.3.7",
   "description": "MAIASS - Modular AI-Augmented Semantic Scribe - Intelligent Git workflow automation",
   "main": "maiass.cjs",
   "bin": {
@@ -68,7 +68,7 @@
     "output": "maiass",
     "targets": [
       "mac-x64-18.16.0",
-      "mac-arm64-18.16.0", 
+      "mac-arm64-18.16.0",
       "linux-x64-18.16.0",
       "linux-arm64-18.16.0",
       "windows-x64-18.16.0",
