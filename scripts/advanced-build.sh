@@ -26,21 +26,22 @@ mkdir -p "$BUILD_DIR"
 
 # Function to build with PKG (current method)
 build_with_pkg() {
-    echo -e "\n${YELLOW}📦 Building with PKG (Node.js bundling)...${NC}"
+    echo -e "
+${YELLOW}📦 Building with PKG (Node.js bundling)...${NC}"
     
-    # Ensure CommonJS compatibility
-    if [ ! -f "maiass.cjs" ]; then
-        echo -e "${RED}❌ maiass.cjs not found. Please convert from ESM first.${NC}"
+    # Ensure standalone version exists
+    if [ ! -f "maiass-standalone.cjs" ]; then
+        echo -e "${RED}❌ maiass-standalone.cjs not found.${NC}"
         exit 1
     fi
     
-    # Build for all platforms
-    npx pkg . --targets node18-macos-x64,node18-macos-arm64,node18-linux-x64,node18-linux-arm64,node18-win-x64,node18-win-arm64 --out-path "$BUILD_DIR/pkg"
+    # Build for all platforms using the standalone version directly
+    npx pkg maiass-standalone.cjs --targets node18-macos-x64,node18-macos-arm64,node18-linux-x64,node18-linux-arm64,node18-win-x64,node18-win-arm64 --out-path "$BUILD_DIR/pkg"
     
     # Rename files to match expected format
     cd "$BUILD_DIR/pkg"
-    for file in maiass-*; do
-        platform=$(echo "$file" | sed 's/maiass-//')
+    for file in maiass-standalone-*; do
+        platform=$(echo "$file" | sed 's/maiass-standalone-//')
         case "$platform" in
             "macos-x64") mv "$file" "maiass-macos-x64" ;;
             "macos-arm64") mv "$file" "maiass-macos-arm64" ;;
@@ -61,27 +62,25 @@ build_with_nexe() {
     
     mkdir -p "$BUILD_DIR/nexe"
     
-    # Build for each platform
-    declare -A nexe_targets=(
-        ["macos-x64"]="mac-x64-18.16.0"
-        ["macos-arm64"]="mac-arm64-18.16.0"
-        ["linux-x64"]="linux-x64-18.16.0"
-        ["linux-arm64"]="linux-arm64-18.16.0"
-        ["windows-x64"]="windows-x64-18.16.0"
-        ["windows-arm64"]="windows-arm64-18.16.0"
-    )
+    # Build for each platform individually (macOS compatible)
+    echo -e "Building for macos-x64..."
+    npx nexe maiass-standalone.cjs --target "mac-x64-18.16.0" --output "$BUILD_DIR/nexe/maiass-macos-x64" --verbose
     
-    for platform in "${!nexe_targets[@]}"; do
-        target="${nexe_targets[$platform]}"
-        output="$BUILD_DIR/nexe/maiass-$platform"
-        
-        if [[ "$platform" == *"windows"* ]]; then
-            output="$output.exe"
-        fi
-        
-        echo -e "Building for $platform..."
-        npx nexe maiass.cjs --target "$target" --output "$output" --verbose
-    done
+    echo -e "Building for macos-arm64..."
+    npx nexe maiass-standalone.cjs --target "mac-arm64-18.16.0" --output "$BUILD_DIR/nexe/maiass-macos-arm64" --verbose
+    
+    echo -e "Building for linux-x64..."
+    npx nexe maiass-standalone.cjs --target "linux-x64-18.16.0" --output "$BUILD_DIR/nexe/maiass-linux-x64" --verbose
+    
+    echo -e "Building for linux-arm64..."
+    npx nexe maiass-standalone.cjs --target "linux-arm64-18.16.0" --output "$BUILD_DIR/nexe/maiass-linux-arm64" --verbose
+    
+    echo -e "Building for windows-x64..."
+    npx nexe maiass-standalone.cjs --target "windows-x64-18.16.0" --output "$BUILD_DIR/nexe/maiass-windows-x64.exe" --verbose
+    
+    echo -e "Building for windows-arm64..."
+    npx nexe maiass-standalone.cjs --target "windows-arm64-18.16.0" --output "$BUILD_DIR/nexe/maiass-windows-arm64.exe" --verbose
+    npx nexe maiass.cjs --target "windows-arm64-18.16.0" --output "$BUILD_DIR/nexe/maiass-windows-arm64.exe" --verbose
     
     echo -e "${GREEN}✅ Nexe build complete${NC}"
 }
@@ -96,7 +95,10 @@ build_with_bun() {
     mkdir -p "$BUILD_DIR/bun"
     
     # Convert to Bun-compatible format if needed
-    if [ -f "maiass.mjs" ]; then
+    if [ -f "maiass-standalone.cjs" ]; then
+        echo -e "Using standalone version for Bun..."
+        INPUT_FILE="maiass-standalone.cjs"
+    elif [ -f "maiass.mjs" ]; then
         echo -e "Using ESM version for Bun..."
         INPUT_FILE="maiass.mjs"
     elif [ -f "maiass.cjs" ]; then
@@ -107,26 +109,21 @@ build_with_bun() {
         exit 1
     fi
     
-    # Build for each platform
-    declare -A bun_targets=(
-        ["macos-x64"]="bun-darwin-x64"
-        ["macos-arm64"]="bun-darwin-aarch64"
-        ["linux-x64"]="bun-linux-x64"
-        ["linux-arm64"]="bun-linux-aarch64"
-        ["windows-x64"]="bun-windows-x64"
-    )
+    # Build for each platform individually (macOS compatible)
+    echo -e "Building for macos-x64..."
+    bun build "$INPUT_FILE" --compile --target="bun-darwin-x64" --outfile="$BUILD_DIR/bun/maiass-macos-x64"
     
-    for platform in "${!bun_targets[@]}"; do
-        target="${bun_targets[$platform]}"
-        output="$BUILD_DIR/bun/maiass-$platform"
-        
-        if [[ "$platform" == *"windows"* ]]; then
-            output="$output.exe"
-        fi
-        
-        echo -e "Building for $platform with target $target..."
-        bun build "$INPUT_FILE" --compile --target="$target" --outfile="$output"
-    done
+    echo -e "Building for macos-arm64..."
+    bun build "$INPUT_FILE" --compile --target="bun-darwin-aarch64" --outfile="$BUILD_DIR/bun/maiass-macos-arm64"
+    
+    echo -e "Building for linux-x64..."
+    bun build "$INPUT_FILE" --compile --target="bun-linux-x64" --outfile="$BUILD_DIR/bun/maiass-linux-x64"
+    
+    echo -e "Building for linux-arm64..."
+    bun build "$INPUT_FILE" --compile --target="bun-linux-aarch64" --outfile="$BUILD_DIR/bun/maiass-linux-arm64"
+    
+    echo -e "Building for windows-x64..."
+    bun build "$INPUT_FILE" --compile --target="bun-windows-x64" --outfile="$BUILD_DIR/bun/maiass-windows-x64.exe"
     
     echo -e "${GREEN}✅ Bun build complete${NC}"
 }
