@@ -225,8 +225,8 @@ case "${1:-all}" in
         ;;
     "all")
         build_with_pkg
-        build_with_nexe
         build_with_bun
+        # build_with_nexe  # Disabled: Nexe often fails with newer Node versions
         build_source_distribution
         show_build_sizes
         test_builds

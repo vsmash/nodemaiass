@@ -77,13 +77,27 @@ rm -rf release-automated
 mkdir -p release-automated
 cd release-automated
 
-# Copy binaries
-cp ../build/maiass-macos-x64 maiass-macos-x64
-cp ../build/maiass-macos-arm64 maiass-macos-arm64
-cp ../build/maiass-linux-x64 maiass-linux-x64
-cp ../build/maiass-linux-arm64 maiass-linux-arm64
-cp ../build/maiass-win-x64.exe maiass-windows-x64.exe
-cp ../build/maiass-win-arm64.exe maiass-windows-arm64.exe
+# Copy binaries from the new build system (uses best available method)
+if [ -d "../dist/bun" ]; then
+    # Prefer Bun builds (faster, smaller)
+    cp ../dist/bun/maiass-macos-x64 maiass-macos-x64
+    cp ../dist/bun/maiass-macos-arm64 maiass-macos-arm64
+    cp ../dist/bun/maiass-linux-x64 maiass-linux-x64
+    cp ../dist/bun/maiass-linux-arm64 maiass-linux-arm64
+    cp ../dist/bun/maiass-windows-x64.exe maiass-windows-x64.exe
+    print_success "Using Bun-built binaries"
+elif [ -d "../dist/pkg" ]; then
+    # Fallback to PKG builds
+    cp ../dist/pkg/maiass-macos-x64 maiass-macos-x64
+    cp ../dist/pkg/maiass-macos-arm64 maiass-macos-arm64
+    cp ../dist/pkg/maiass-linux-x64 maiass-linux-x64
+    cp ../dist/pkg/maiass-linux-arm64 maiass-linux-arm64
+    cp ../dist/pkg/maiass-windows-x64.exe maiass-windows-x64.exe
+    print_success "Using PKG-built binaries"
+else
+    print_error "No built binaries found in dist/ directory"
+    exit 1
+fi
 
 chmod +x maiass-*
 
