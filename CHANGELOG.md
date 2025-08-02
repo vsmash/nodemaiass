@@ -1,4 +1,4 @@
-## 5.3.1
+## 5.3.2
 2 August 2025
 
 - Updated maiass.sh and nodemaiass.sh scripts
