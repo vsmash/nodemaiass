@@ -61,6 +61,23 @@ fi
 print_status "Building all platform binaries..."
 npm run build:all
 
+# Step 1.5: Prepare binaries for signing
+print_status "Preparing binaries for code signing..."
+rm -rf build
+mkdir -p build
+
+# Copy binaries to build directory for signing (prefer Bun, fallback to PKG)
+if [ -d "dist/bun" ]; then
+    cp dist/bun/maiass-* build/ 2>/dev/null || true
+    print_success "Copied Bun binaries to build directory"
+elif [ -d "dist/pkg" ]; then
+    cp dist/pkg/maiass-* build/ 2>/dev/null || true
+    print_success "Copied PKG binaries to build directory"
+else
+    print_error "No binaries found in dist/ directory"
+    exit 1
+fi
+
 # Step 2: Code sign binaries
 print_status "Code signing binaries..."
 if [[ "$OSTYPE" == "darwin"* ]]; then
@@ -77,15 +94,24 @@ rm -rf release-automated
 mkdir -p release-automated
 cd release-automated
 
-# Copy binaries from the new build system (uses best available method)
-if [ -d "../dist/bun" ]; then
-    # Prefer Bun builds (faster, smaller)
+# Copy signed binaries from the build directory (where code signing puts them)
+if [ -d "../build" ] && [ -f "../build/maiass-macos-x64" ]; then
+    # Use signed binaries from build directory
+    cp ../build/maiass-macos-x64 maiass-macos-x64
+    cp ../build/maiass-macos-arm64 maiass-macos-arm64
+    cp ../build/maiass-linux-x64 maiass-linux-x64
+    cp ../build/maiass-linux-arm64 maiass-linux-arm64
+    cp ../build/maiass-win-x64.exe maiass-windows-x64.exe
+    cp ../build/maiass-win-arm64.exe maiass-windows-arm64.exe
+    print_success "Using signed binaries from build directory"
+elif [ -d "../dist/bun" ]; then
+    # Fallback to unsigned Bun builds
     cp ../dist/bun/maiass-macos-x64 maiass-macos-x64
     cp ../dist/bun/maiass-macos-arm64 maiass-macos-arm64
     cp ../dist/bun/maiass-linux-x64 maiass-linux-x64
     cp ../dist/bun/maiass-linux-arm64 maiass-linux-arm64
     cp ../dist/bun/maiass-windows-x64.exe maiass-windows-x64.exe
-    print_success "Using Bun-built binaries"
+    print_success "Using unsigned Bun-built binaries"
 elif [ -d "../dist/pkg" ]; then
     # Fallback to PKG builds
     cp ../dist/pkg/maiass-macos-x64 maiass-macos-x64
