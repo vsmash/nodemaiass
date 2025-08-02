@@ -1,5 +1,16 @@
-## 5.3.3
+## 5.3.4
 2 August 2025
+
+- (vsmsh) Upgrade to release process and checksum generation
+	- feat: added new checksums for various platforms in checksums.txt
+	- fix(scripts): revised create-homebrew-formula.sh to prefer x64 over intel
+	- fix(scripts): amended copy command in create-release.sh from "maiass-macos-intel" to "maiass-macos-x64"
+	- feat(scripts): incorporated code signature verification in create-release.sh for macOS binaries
+- (vsmsh) Bumped version to 5.3.3
+- (vsmsh) Updated binary hashing in Homebrew formula creation
+	- feat: updated script to download and hash binaries from actual GitHub release
+	- fix: improved error handling if binary download fails
+	- refactor: clarity improvements to status and error messages
 
 - (vsmsh) Updated binary hashing in Homebrew formula creation
 	- feat: updated script to download and hash binaries from actual GitHub release
