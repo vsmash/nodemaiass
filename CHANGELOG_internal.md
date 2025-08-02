@@ -1,5 +1,10 @@
-## 5.3.2
+## 5.3.3
 2 August 2025
+
+- (vsmsh) Updated binary hashing in Homebrew formula creation
+	- feat: updated script to download and hash binaries from actual GitHub release
+	- fix: improved error handling if binary download fails
+	- refactor: clarity improvements to status and error messages
 
 - (vsmsh) MAI-8 Updated maiass.sh and nodemaiass.sh scripts
 	- fix: updated node command to use .cjs modules in maiass.sh and nodemaiass.sh scripts
