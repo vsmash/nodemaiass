@@ -23,11 +23,13 @@
   ],
   "scripts": {
     "start": "node maiass.mjs",
-    "build": "node build.js",
-    "build:all": "node build.js",
-    "build:macos": "pkg . --targets node18-macos-x64,node18-macos-arm64",
-    "build:linux": "pkg . --targets node18-linux-x64,node18-linux-arm64",
-    "build:windows": "pkg . --targets node18-win-x64,node18-win-arm64",
+    "build": "./scripts/build-bundled.sh",
+    "build:all": "./scripts/advanced-build.sh all",
+    "build:pkg": "./scripts/advanced-build.sh pkg",
+    "build:bun": "./scripts/advanced-build.sh bun",
+    "build:nexe": "./scripts/advanced-build.sh nexe",
+    "build:source": "./scripts/advanced-build.sh source",
+    "build:legacy": "node build.js",
     "test": "node test/test-runner.js"
   },
   "dependencies": {
@@ -36,6 +38,7 @@
     "yargs": "^17.7.2"
   },
   "devDependencies": {
+    "nexe": "^5.0.0-beta.4",
     "pkg": "^5.8.1"
   },
   "pkg": {
@@ -57,6 +60,20 @@
       "node18-win-x64",
       "node18-win-arm64"
     ],
-    "outputPath": "build"
+    "outputPath": "dist",
+    "compress": "Brotli"
+  },
+  "nexe": {
+    "input": "maiass.cjs",
+    "output": "maiass",
+    "targets": [
+      "mac-x64-18.16.0",
+      "mac-arm64-18.16.0", 
+      "linux-x64-18.16.0",
+      "linux-arm64-18.16.0",
+      "windows-x64-18.16.0",
+      "windows-arm64-18.16.0"
+    ],
+    "verbose": true
   }
 }
