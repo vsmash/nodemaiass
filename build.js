@@ -49,6 +49,31 @@ function buildForTarget(target) {
       encoding: 'utf8'
     });
     console.log(colors.Green(`✓ Successfully built for ${platformNames[target]} -> ${outputName}`));
+    
+    // Code sign macOS binaries
+    if (target.includes('macos') && process.platform === 'darwin') {
+      try {
+        console.log(colors.BBlue(`  🔐 Code signing ${outputName}...`));
+        execSync(`./scripts/codesign.sh "${outputPath}"`, { stdio: 'pipe' });
+        console.log(colors.Green(`  ✓ Code signed ${outputName}`));
+      } catch (error) {
+        console.log(colors.Yellow(`  ⚠️ Code signing failed for ${outputName} (continuing without signing)`));
+        console.log(colors.Gray(`    ${error.message.split('\n')[0]}`));
+      }
+    }
+    
+    // Code sign Windows binaries
+    if (target.includes('win')) {
+      try {
+        console.log(colors.BBlue(`  🔐 Code signing ${outputName}...`));
+        execSync(`./scripts/codesign-windows.sh "${outputPath}"`, { stdio: 'pipe' });
+        console.log(colors.Green(`  ✓ Code signed ${outputName}`));
+      } catch (error) {
+        console.log(colors.Yellow(`  ⚠️ Windows code signing failed for ${outputName} (continuing without signing)`));
+        console.log(colors.Gray(`    ${error.message.split('\n')[0]}`));
+      }
+    }
+    
     return true;
   } catch (error) {
     console.log(colors.Red(`✗ Failed to build for ${platformNames[target]}: ${error.message}`));
