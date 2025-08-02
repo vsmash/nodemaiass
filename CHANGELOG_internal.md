@@ -1,5 +1,33 @@
-## 5.3.5
+## 5.3.6
 2 August 2025
+
+- (vsmsh) Updated release process and scripts
+	- feat: added code signing for macOS binaries in release.yml
+	- refactor: modified release asset creation to include signature-preserving archives
+	- refactor: updated instructions and details in release descriptors
+	- feat: added quick-release.sh for building, signing, and uploading
+	- feat: added release-and-deploy.sh for complete automated release process, including Homebrew update.
+- (vsmsh) Bumped version to 5.3.5
+- (vsmsh) Improved code signing and binary hashing
+	- feat(scripts): added advanced options to code signing in codesign.sh
+	- feat(scripts): added Gatekeeper assessment to code signing in codesign.sh
+	- refactor(scripts): changed binary hashing to archive hashing in create-homebrew-formula.sh
+	- refactor(scripts): changed binary links to archive links in create-homebrew-formula.sh
+	- feat(scripts): added binary archiving in create-release.sh
+	- feat(scripts): added Gatekeeper assessment in create-release.sh
+	- refactor(scripts): added archive hashing in create-release.sh
+	- docs(scripts): updated next steps instructions in create-release.sh
+- (vsmsh) Bumped version to 5.3.4
+- (vsmsh) Upgrade to release process and checksum generation
+	- feat: added new checksums for various platforms in checksums.txt
+	- fix(scripts): revised create-homebrew-formula.sh to prefer x64 over intel
+	- fix(scripts): amended copy command in create-release.sh from "maiass-macos-intel" to "maiass-macos-x64"
+	- feat(scripts): incorporated code signature verification in create-release.sh for macOS binaries
+- (vsmsh) Bumped version to 5.3.3
+- (vsmsh) Updated binary hashing in Homebrew formula creation
+	- feat: updated script to download and hash binaries from actual GitHub release
+	- fix: improved error handling if binary download fails
+	- refactor: clarity improvements to status and error messages
 
 - (vsmsh) Improved code signing and binary hashing
 	- feat(scripts): added advanced options to code signing in codesign.sh
