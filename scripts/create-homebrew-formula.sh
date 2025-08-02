@@ -42,12 +42,19 @@ LINUX_SHA=""
 
 # Download and hash Intel binary
 print_status "Downloading and hashing Intel binary from GitHub..."
-if curl -L -o "temp-intel" "https://github.com/$REPO/releases/download/$VERSION/maiass-macos-intel" 2>/dev/null; then
+if curl -L -o "temp-intel" "https://github.com/$REPO/releases/download/$VERSION/maiass-macos-x64" 2>/dev/null; then
     INTEL_SHA=$(shasum -a 256 "temp-intel" | cut -d' ' -f1)
-    echo "✅ Intel SHA256: ${INTEL_SHA:0:8}..."
+    echo "✅ Intel (x64) SHA256: ${INTEL_SHA:0:8}..."
     rm "temp-intel"
 else
-    print_error "Failed to download Intel binary from GitHub release"
+    print_warning "x64 binary not found in GitHub release, trying intel variant..."
+    if curl -L -o "temp-intel" "https://github.com/$REPO/releases/download/$VERSION/maiass-macos-intel" 2>/dev/null; then
+        INTEL_SHA=$(shasum -a 256 "temp-intel" | cut -d' ' -f1)
+        echo "✅ Intel SHA256: ${INTEL_SHA:0:8}..."
+        rm "temp-intel"
+    else
+        print_error "Failed to download Intel binary from GitHub release"
+    fi
 fi
 
 # Download and hash ARM64 binary
@@ -93,7 +100,7 @@ class Maiass < Formula
   license "GPL-3.0-only"
   on_macos do
     if Hardware::CPU.intel?
-      url "https://github.com/$REPO/releases/download/#{version}/maiass-macos-intel"
+      url "https://github.com/$REPO/releases/download/#{version}/maiass-macos-x64"
       sha256 "$INTEL_SHA"
     else
       url "https://github.com/$REPO/releases/download/#{version}/maiass-macos-arm64"
