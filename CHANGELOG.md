@@ -1,5 +1,15 @@
-## 5.2.8
+## 5.2.9
 2 August 2025
+
+- Updated .gitignore and removed unused Formula file
+	- feat: added 'Formula/maiass.rb' to .gitignore
+	- fix: deleted unused 'Formula/maiass.rb' file
+- Update Maiass formula and related scripts
+	- feat: updated Maiass version in brew formula to 5.2.7
+	- fix: remodeled URL structure in Maiass formula and creation script
+	- feat: added new symlink names for main MAIASS tool
+	- fix: streamlined 'create-homebrew-formula.sh' layout
+	- fix: updated URL patterns in 'create-release.sh' removing v from version tag
 
 - Update Maiass formula and related scripts
 	- feat: updated Maiass version in brew formula to 5.2.7
