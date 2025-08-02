@@ -44,8 +44,18 @@ if ! command -v gh >/dev/null 2>&1; then
 fi
 
 # Authenticate with GitHub CLI
-print_status "Authenticating with GitHub..."
-echo "$GITHUB_TOKEN" | gh auth login --with-token
+print_status "Checking GitHub authentication..."
+if ! gh auth status >/dev/null 2>&1; then
+    if [[ -n "$GITHUB_TOKEN" ]]; then
+        echo "$GITHUB_TOKEN" | gh auth login --with-token
+    else
+        print_error "Not authenticated with GitHub CLI"
+        echo "Run: gh auth login"
+        exit 1
+    fi
+else
+    print_success "Already authenticated with GitHub CLI"
+fi
 
 # Step 1: Build all binaries
 print_status "Building all platform binaries..."
