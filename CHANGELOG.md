@@ -1,5 +1,24 @@
-## 5.3.8
+## 5.3.9
 2 August 2025
+
+- Improve build scripts for reliability and flexibility
+	- refactor(advanced-build.sh): disabled nexe builds due to incompatibilities
+	- refactor(release-and-deploy.sh): updated to use Bun-built binaries when available
+	- fallback(release-and-deploy.sh): added PKG-built binaries as a secondary option
+	- feat(release-and-deploy.sh): implemented error handling for missing binaries
+- Refactored build scripts for standalone file usage
+	- refactor: updated package.json to use  for , , and  input
+	- refactor: removed unused > pkg@5.8.1
+	- > Error! Entry file/directory is expected
+	- Pass --help to see usage information scripts and assets configuration in package.json
+	- refactor: altered  to require  for PKG and Nexe builds
+	- refactor: removed platform loop in  and built for each specific platform with updated standalone references
+	- refactor: adjusted Bun build process in  to handle standalone file and renamed platform outputs
+- Update dependencies and configurations
+	- chore: upgraded package version from 0.7.1 to 5.3.6
+	- chore: switched maiass bin from .mjs to .cjs
+	- chore: added nexe as a devDependency
+	- chore: added several new devDependencies including webpack and ajv packages
 
 - Refactored build scripts for standalone file usage
 	- refactor: updated package.json to use  for , , and  input
