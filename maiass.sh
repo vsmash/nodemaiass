@@ -5,4 +5,4 @@
 DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # Run the maiass command
-node "$DIR/maiass.mjs" "$@"
+node "$DIR/maiass.cjs" "$@"

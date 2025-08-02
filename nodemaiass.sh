@@ -6,4 +6,4 @@ while [ -h "$SOURCE" ]; do
   [[ $SOURCE != /* ]] && SOURCE="$DIR/$SOURCE"
 done
 DIR="$(cd -P "$(dirname "$SOURCE")" && pwd)"
-node "$DIR/maiass.mjs" "$@"
+node "$DIR/maiass.cjs" "$@"
