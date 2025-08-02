@@ -1,5 +1,10 @@
-## 5.3.9
+## 5.3.10
 2 August 2025
+
+- Update release process and checksums
+- chore: updated checksums for all platform binaries
+	- feat: added preparation step for binary code signing
+	- refactor: modified script to prioritize signed binaries for release
 
 - Improve build scripts for reliability and flexibility
 	- refactor(advanced-build.sh): disabled nexe builds due to incompatibilities

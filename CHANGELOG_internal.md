@@ -1,5 +1,7 @@
-## 5.3.9
+## 5.3.10
 2 August 2025
+
+- (vsmsh) Update release process and checksums
 
 - (vsmsh) Improve build scripts for reliability and flexibility
 	- refactor(advanced-build.sh): disabled nexe builds due to incompatibilities
