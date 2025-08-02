@@ -1,5 +1,11 @@
-## 5.3.6
+## 5.3.7
 2 August 2025
+
+- (vsmsh) Update dependencies and configurations
+	- chore: upgraded package version from 0.7.1 to 5.3.6
+	- chore: switched maiass bin from .mjs to .cjs
+	- chore: added nexe as a devDependency
+	- chore: added several new devDependencies including webpack and ajv packages
 
 - (vsmsh) Updated release process and scripts
 	- feat: added code signing for macOS binaries in release.yml
