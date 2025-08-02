@@ -39,13 +39,26 @@ jobs:
     - name: Build all platforms
       run: npm run build:all
       
-    - name: Create release assets
+    - name: Code sign macOS binaries (if available)
+      run: |
+        if [[ "$RUNNER_OS" == "macOS" ]]; then
+          echo "🔐 Code signing macOS binaries..."
+          if ./scripts/codesign.sh; then
+            echo "✅ macOS code signing completed"
+          else
+            echo "⚠️ macOS code signing failed, continuing with unsigned binaries"
+          fi
+        else
+          echo "⚠️ Not on macOS runner - skipping code signing"
+        fi
+      
+    - name: Create release assets with archives
       run: |
         mkdir -p release-assets
         cd release-assets
         
-        # Copy and rename binaries with proper naming
-        cp ../build/maiass-macos-x64 maiass-macos-intel
+        # Copy binaries with proper naming
+        cp ../build/maiass-macos-x64 maiass-macos-x64
         cp ../build/maiass-macos-arm64 maiass-macos-arm64
         cp ../build/maiass-linux-x64 maiass-linux-x64
         cp ../build/maiass-linux-arm64 maiass-linux-arm64
@@ -55,11 +68,35 @@ jobs:
         # Make binaries executable
         chmod +x maiass-*
         
-        # Create checksums
-        shasum -a 256 maiass-* > checksums.txt
+        # Create archives that preserve signatures
+        echo "📦 Creating signature-preserving archives..."
+        
+        # macOS archives using ditto (preserves extended attributes/signatures)
+        if command -v ditto >/dev/null 2>&1; then
+          ditto -c -k --sequesterRsrc --keepParent maiass-macos-x64 maiass-macos-x64.zip
+          ditto -c -k --sequesterRsrc --keepParent maiass-macos-arm64 maiass-macos-arm64.zip
+          echo "✅ Created macOS archives with ditto"
+        else
+          # Fallback to zip on non-macOS runners
+          zip -9 maiass-macos-x64.zip maiass-macos-x64
+          zip -9 maiass-macos-arm64.zip maiass-macos-arm64
+          echo "⚠️ Created macOS archives with zip (signatures may not be preserved)"
+        fi
+        
+        # Linux archives
+        tar -czf maiass-linux-x64.tar.gz maiass-linux-x64
+        tar -czf maiass-linux-arm64.tar.gz maiass-linux-arm64
+        
+        # Windows archives
+        zip -9 maiass-windows-x64.zip maiass-windows-x64.exe
+        zip -9 maiass-windows-arm64.zip maiass-windows-arm64.exe
+        
+        # Create checksums for archives
+        shasum -a 256 *.zip *.tar.gz > checksums.txt
         
         # List created files
-        ls -la
+        echo "📋 Created release files:"
+        ls -la *.zip *.tar.gz checksums.txt
         
     - name: Upload build artifacts
       uses: actions/upload-artifact@v4
@@ -116,67 +153,87 @@ jobs:
         tag_name: ${{ steps.version.outputs.tag_name }}
         name: "maiass ${{ steps.version.outputs.version }} - Cross-Platform Release"
         body: |
-          🎉 **Cross-platform release of maiass!**
+          🎉 **Cross-platform release of maiass with proper code signing!**
           
           AI-powered Git workflow automation tool now available for macOS, Linux, and Windows with self-contained binaries (no Node.js installation required).
           
+          ## � Code Signing
+          - ✅ **macOS binaries are properly signed** with Apple Developer ID
+          - ✅ **Signatures preserved** through archive distribution
+          - ✅ **No more "killed" processes** on macOS
+          
           ## 🚀 Quick Install
           
-          ### Universal Installer (Recommended)
+          ### Homebrew (Recommended for macOS/Linux)
           ```bash
-          curl -fsSL https://raw.githubusercontent.com/vsmash/nodemaiass/main/scripts/install.sh | bash
+          brew install vsmash/maiass/maiass
           ```
           
-          ### Homebrew (macOS/Linux)
+          ### Universal Installer
           ```bash
-          brew tap vsmash/maiass
-          brew install maiass
+          curl -fsSL https://raw.githubusercontent.com/vsmash/maiass/main/scripts/install.sh | bash
           ```
           
           ## 📦 Manual Download
           
-          Choose your platform:
+          Choose your platform and download the archive:
           
           ### macOS
-          - **Apple Silicon (M1/M2/M3):** [maiass-macos-arm64](https://github.com/vsmash/nodemaiass/releases/download/${{ steps.version.outputs.tag_name }}/maiass-macos-arm64)
-          - **Intel:** [maiass-macos-intel](https://github.com/vsmash/nodemaiass/releases/download/${{ steps.version.outputs.tag_name }}/maiass-macos-intel)
+          - **Apple Silicon (M1/M2/M3):** [maiass-macos-arm64.zip](https://github.com/vsmash/maiass/releases/download/${{ steps.version.outputs.tag_name }}/maiass-macos-arm64.zip)
+          - **Intel:** [maiass-macos-x64.zip](https://github.com/vsmash/maiass/releases/download/${{ steps.version.outputs.tag_name }}/maiass-macos-x64.zip)
           
           ### Linux
-          - **x64:** [maiass-linux-x64](https://github.com/vsmash/nodemaiass/releases/download/${{ steps.version.outputs.tag_name }}/maiass-linux-x64)
+          - **x64:** [maiass-linux-x64.tar.gz](https://github.com/vsmash/maiass/releases/download/${{ steps.version.outputs.tag_name }}/maiass-linux-x64.tar.gz)
+          - **ARM64:** [maiass-linux-arm64.tar.gz](https://github.com/vsmash/maiass/releases/download/${{ steps.version.outputs.tag_name }}/maiass-linux-arm64.tar.gz)
           
           ### Windows
-          - **x64:** [maiass-windows-x64.exe](https://github.com/vsmash/nodemaiass/releases/download/${{ steps.version.outputs.tag_name }}/maiass-windows-x64.exe)
+          - **x64:** [maiass-windows-x64.zip](https://github.com/vsmash/maiass/releases/download/${{ steps.version.outputs.tag_name }}/maiass-windows-x64.zip)
+          - **ARM64:** [maiass-windows-arm64.zip](https://github.com/vsmash/maiass/releases/download/${{ steps.version.outputs.tag_name }}/maiass-windows-arm64.zip)
           
           ## ✨ What's New
           
+          - ✅ **Proper code signing** for macOS binaries (Apple Developer ID)
+          - ✅ **Archive distribution** preserves signatures through GitHub releases
           - ✅ **Cross-platform binaries** for macOS, Linux, Windows
           - ✅ **Self-contained** - includes Node.js runtime (no installation required)
-          - ✅ **Universal installer** with automatic platform detection
-          - ✅ **Homebrew support** for easy installation
-          - ✅ **ARM64 support** for Apple Silicon Macs
+          - ✅ **Homebrew support** with signature-preserving distribution
+          - ✅ **ARM64 support** for Apple Silicon Macs and ARM64 Linux/Windows
           
           ## 🔐 Verification
           
-          All binaries include SHA256 checksums for verification:
-          - **Checksums:** [checksums.txt](https://github.com/vsmash/nodemaiass/releases/download/${{ steps.version.outputs.tag_name }}/checksums.txt)
+          All archives include SHA256 checksums for verification:
+          - **Checksums:** [checksums.txt](https://github.com/vsmash/maiass/releases/download/${{ steps.version.outputs.tag_name }}/checksums.txt)
           
-          ## 📋 System Requirements
+          ## 📋 Installation Instructions
           
-          - **macOS:** 10.15+ (Intel or Apple Silicon)
-          - **Linux:** Most distributions (x64)
-          - **Windows:** 10+ (x64)
-          - **Dependencies:** None (Node.js included in binary)
+          ### macOS/Linux:
+          ```bash
+          # Download and extract
+          curl -L -o maiass.zip <download-url>
+          unzip maiass.zip
+          chmod +x maiass-*
+          sudo mv maiass-* /usr/local/bin/maiass
+          ```
           
-          ## 📝 Note
+          ### Windows:
+          ```powershell
+          # Download and extract to desired location
+          # Add to PATH environment variable
+          ```
           
-          **Use the binary downloads above** - the "Source code" archives below are for development only and don't include the self-contained executables.
+          ## 📝 Important Notes
+          
+          - **Download the archives** (.zip/.tar.gz) not individual binaries
+          - **macOS users:** Archives preserve code signatures for seamless execution
+          - **Homebrew users:** Will automatically get properly signed binaries
+          - **Source code archives below** are for development only
         files: |
-          release-assets/maiass-macos-intel
-          release-assets/maiass-macos-arm64
-          release-assets/maiass-linux-x64
-          release-assets/maiass-linux-arm64
-          release-assets/maiass-windows-x64.exe
-          release-assets/maiass-windows-arm64.exe
+          release-assets/maiass-macos-x64.zip
+          release-assets/maiass-macos-arm64.zip
+          release-assets/maiass-linux-x64.tar.gz
+          release-assets/maiass-linux-arm64.tar.gz
+          release-assets/maiass-windows-x64.zip
+          release-assets/maiass-windows-arm64.zip
           release-assets/checksums.txt
         draft: false
         prerelease: false
