@@ -1,3 +1,23 @@
+## 5.3.0
+2 August 2025
+
+- (vsmsh) Updated code signing for macOS and Windows binaries
+	- feat: added certificate files to .gitignore
+	- feat: added code signing for .exe files in build.js
+	- docs: created new detailed documents on code signing for both platforms
+	- feat: added new scripts for code signing and signature verification for individual binaries
+- (vsmsh) Bumped version to 5.2.9
+- (vsmsh) Updated .gitignore and removed unused Formula file
+	- feat: added 'Formula/maiass.rb' to .gitignore
+	- fix: deleted unused 'Formula/maiass.rb' file
+- (vsmsh) Bumped version to 5.2.8
+- (vsmsh) Update Maiass formula and related scripts
+	- feat: updated Maiass version in brew formula to 5.2.7
+	- fix: remodeled URL structure in Maiass formula and creation script
+	- feat: added new symlink names for main MAIASS tool
+	- fix: streamlined 'create-homebrew-formula.sh' layout
+	- fix: updated URL patterns in 'create-release.sh' removing v from version tag
+
 ## 5.2.9
 2 August 2025
 
