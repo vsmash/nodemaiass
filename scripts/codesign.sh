@@ -113,13 +113,20 @@ sign_binary() {
     # Remove existing signatures
     codesign --remove-signature "$binary_path" 2>/dev/null || true
     
-    # Sign the binary
-    if codesign --sign "$DEVELOPER_ID" --force --verbose "$binary_path"; then
+    # Sign the binary with runtime hardening and deep signing
+    if codesign --deep --options runtime --timestamp --sign "$DEVELOPER_ID" --force --verbose "$binary_path"; then
         print_success "Signed: $binary_name"
         
-        # Verify the signature
-        if codesign --verify --verbose "$binary_path" 2>/dev/null; then
+        # Verify the signature with strict checks
+        if codesign --verify --deep --strict --verbose=2 "$binary_path" 2>/dev/null; then
             print_success "Verified: $binary_name"
+            
+            # Test with spctl (Gatekeeper assessment)
+            if spctl --assess --type exec --verbose=4 "$binary_path" 2>/dev/null; then
+                print_success "Gatekeeper approved: $binary_name"
+            else
+                print_warning "Gatekeeper assessment failed: $binary_name (may need notarization)"
+            fi
         else
             print_warning "Signature verification failed: $binary_name"
         fi
