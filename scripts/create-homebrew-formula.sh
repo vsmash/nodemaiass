@@ -40,41 +40,55 @@ INTEL_SHA=""
 ARM64_SHA=""
 LINUX_SHA=""
 
-# Download and hash Intel binary
-print_status "Downloading and hashing Intel binary from GitHub..."
-if curl -L -o "temp-intel" "https://github.com/$REPO/releases/download/$VERSION/maiass-macos-x64" 2>/dev/null; then
-    INTEL_SHA=$(shasum -a 256 "temp-intel" | cut -d' ' -f1)
+# Download and hash Intel binary archive
+print_status "Downloading and hashing Intel binary archive from GitHub..."
+if curl -L -o "temp-intel.zip" "https://github.com/$REPO/releases/download/$VERSION/maiass-macos-x64.zip" 2>/dev/null; then
+    INTEL_SHA=$(shasum -a 256 "temp-intel.zip" | cut -d' ' -f1)
     echo "✅ Intel (x64) SHA256: ${INTEL_SHA:0:8}..."
-    rm "temp-intel"
+    rm "temp-intel.zip"
 else
-    print_warning "x64 binary not found in GitHub release, trying intel variant..."
-    if curl -L -o "temp-intel" "https://github.com/$REPO/releases/download/$VERSION/maiass-macos-intel" 2>/dev/null; then
+    print_warning "x64 archive not found in GitHub release, trying raw binary..."
+    if curl -L -o "temp-intel" "https://github.com/$REPO/releases/download/$VERSION/maiass-macos-x64" 2>/dev/null; then
         INTEL_SHA=$(shasum -a 256 "temp-intel" | cut -d' ' -f1)
-        echo "✅ Intel SHA256: ${INTEL_SHA:0:8}..."
+        echo "✅ Intel (raw) SHA256: ${INTEL_SHA:0:8}..."
         rm "temp-intel"
     else
         print_error "Failed to download Intel binary from GitHub release"
     fi
 fi
 
-# Download and hash ARM64 binary
-print_status "Downloading and hashing ARM64 binary from GitHub..."
-if curl -L -o "temp-arm64" "https://github.com/$REPO/releases/download/$VERSION/maiass-macos-arm64" 2>/dev/null; then
-    ARM64_SHA=$(shasum -a 256 "temp-arm64" | cut -d' ' -f1)
+# Download and hash ARM64 binary archive
+print_status "Downloading and hashing ARM64 binary archive from GitHub..."
+if curl -L -o "temp-arm64.zip" "https://github.com/$REPO/releases/download/$VERSION/maiass-macos-arm64.zip" 2>/dev/null; then
+    ARM64_SHA=$(shasum -a 256 "temp-arm64.zip" | cut -d' ' -f1)
     echo "✅ ARM64 SHA256: ${ARM64_SHA:0:8}..."
-    rm "temp-arm64"
+    rm "temp-arm64.zip"
 else
-    print_error "Failed to download ARM64 binary from GitHub release"
+    print_warning "ARM64 archive not found, trying raw binary..."
+    if curl -L -o "temp-arm64" "https://github.com/$REPO/releases/download/$VERSION/maiass-macos-arm64" 2>/dev/null; then
+        ARM64_SHA=$(shasum -a 256 "temp-arm64" | cut -d' ' -f1)
+        echo "✅ ARM64 (raw) SHA256: ${ARM64_SHA:0:8}..."
+        rm "temp-arm64"
+    else
+        print_error "Failed to download ARM64 binary from GitHub release"
+    fi
 fi
 
 # Download and hash Linux binary
 print_status "Downloading and hashing Linux binary from GitHub..."
-if curl -L -o "temp-linux" "https://github.com/$REPO/releases/download/$VERSION/maiass-linux-x64" 2>/dev/null; then
-    LINUX_SHA=$(shasum -a 256 "temp-linux" | cut -d' ' -f1)
+if curl -L -o "temp-linux.tar.gz" "https://github.com/$REPO/releases/download/$VERSION/maiass-linux-x64.tar.gz" 2>/dev/null; then
+    LINUX_SHA=$(shasum -a 256 "temp-linux.tar.gz" | cut -d' ' -f1)
     echo "✅ Linux SHA256: ${LINUX_SHA:0:8}..."
-    rm "temp-linux"
+    rm "temp-linux.tar.gz"
 else
-    print_error "Failed to download Linux binary from GitHub release"
+    print_warning "Linux archive not found, trying raw binary..."
+    if curl -L -o "temp-linux" "https://github.com/$REPO/releases/download/$VERSION/maiass-linux-x64" 2>/dev/null; then
+        LINUX_SHA=$(shasum -a 256 "temp-linux" | cut -d' ' -f1)
+        echo "✅ Linux (raw) SHA256: ${LINUX_SHA:0:8}..."
+        rm "temp-linux"
+    else
+        print_error "Failed to download Linux binary from GitHub release"
+    fi
 fi
 
 if [ -z "$INTEL_SHA" ] || [ -z "$ARM64_SHA" ] || [ -z "$LINUX_SHA" ]; then
@@ -100,24 +114,30 @@ class Maiass < Formula
   license "GPL-3.0-only"
   on_macos do
     if Hardware::CPU.intel?
-      url "https://github.com/$REPO/releases/download/#{version}/maiass-macos-x64"
+      url "https://github.com/$REPO/releases/download/#{version}/maiass-macos-x64.zip"
       sha256 "$INTEL_SHA"
     else
-      url "https://github.com/$REPO/releases/download/#{version}/maiass-macos-arm64"
+      url "https://github.com/$REPO/releases/download/#{version}/maiass-macos-arm64.zip"
       sha256 "$ARM64_SHA"
     end
   end
 
   on_linux do
-    url "https://github.com/$REPO/releases/download/#{version}/maiass-linux-x64"
+    url "https://github.com/$REPO/releases/download/#{version}/maiass-linux-x64.tar.gz"
     sha256 "$LINUX_SHA"
   end
 
   def install
-    bin.install Dir["maiass-*"].first => "maiass"
+    # Extract the binary from the archive and install it
+    if OS.mac?
+      bin.install Dir["maiass-macos-*"].first => "maiass"
+    elsif OS.linux?
+      bin.install Dir["maiass-linux-*"].first => "maiass"
+    end
+    
+    # Create convenience symlinks
     bin.install_symlink "maiass" => "myass"
     bin.install_symlink "maiass" => "miass"
-
   end
 
   test do

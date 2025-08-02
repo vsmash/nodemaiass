@@ -92,32 +92,69 @@ cp ../build/maiass-win-arm64.exe maiass-windows-arm64.exe
 
 echo "✅ Copied all release binaries"
 
-# Verify code signatures on macOS binaries
+# Verify code signatures on macOS binaries and create archives
 if [[ "$OSTYPE" == "darwin"* ]]; then
     echo "🔍 Verifying code signatures on macOS binaries..."
     for binary in maiass-macos-*; do
-        if codesign -dv "$binary" 2>/dev/null; then
+        if codesign --verify --deep --strict --verbose=2 "$binary" 2>/dev/null; then
             echo "✅ $binary is properly signed"
+            
+            # Test with Gatekeeper
+            if spctl --assess --type exec --verbose=4 "$binary" 2>/dev/null; then
+                echo "✅ $binary passes Gatekeeper assessment"
+            else
+                echo "⚠️ $binary fails Gatekeeper (may need notarization for distribution)"
+            fi
+            
+            # Create archive that preserves extended attributes
+            echo "📦 Creating archive for $binary..."
+            ditto -c -k --sequesterRsrc --keepParent "$binary" "${binary}.zip"
+            echo "✅ Created ${binary}.zip"
         else
             echo "❌ $binary is NOT signed - this will cause issues!"
             exit 1
         fi
     done
+else
+    echo "⚠️ Not on macOS - skipping signature verification"
 fi
 
-# Make binaries executable and create checksums
+# Create archives for Linux and Windows binaries too
+echo "📦 Creating archives for all binaries..."
+for binary in maiass-linux-* maiass-windows-*; do
+    if [[ -f "$binary" ]]; then
+        if [[ "$binary" == *.exe ]]; then
+            # Windows binary - use zip
+            zip -9 "${binary%.exe}.zip" "$binary"
+            echo "✅ Created ${binary%.exe}.zip"
+        else
+            # Linux binary - use tar.gz
+            tar -czf "${binary}.tar.gz" "$binary"
+            echo "✅ Created ${binary}.tar.gz"
+        fi
+    fi
+done
+
+# Make binaries executable and create checksums for both binaries and archives
 chmod +x maiass-*
 
-# Create checksums
+# Create checksums for all files (binaries and archives)
 echo "🔒 Creating checksums..."
-shasum -a 256 maiass-* > checksums.txt
+shasum -a 256 maiass-* *.zip *.tar.gz > checksums.txt 2>/dev/null || shasum -a 256 maiass-* > checksums.txt
 
 echo "✅ Release assets prepared in ./release/"
+echo ""
+echo "📋 Upload to GitHub Release:"
+echo "For macOS: Upload the .zip files (preserve signatures)"
+echo "For Linux: Upload the .tar.gz files" 
+echo "For Windows: Upload the .zip files"
+echo "Also upload: checksums.txt"
 echo ""
 echo "📋 Next steps:"
 echo "1. Create a GitHub release: https://github.com/$REPO/releases/new"
 echo "2. Tag: v$VERSION"
-echo "3. Upload files from ./release/ directory"
+echo "3. Upload ARCHIVE files (.zip, .tar.gz) from ./release/ directory"
+echo "4. DO NOT upload raw binaries - use archives to preserve signatures"
 echo "4. Include installation instructions in release notes"
 
 echo ""
