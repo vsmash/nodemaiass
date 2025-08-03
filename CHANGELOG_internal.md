@@ -1,5 +1,31 @@
-## 5.3.17
+## 5.3.18
 3 August 2025
+
+- (vsmsh) Update domain in documentation and scripts
+	- docs: changed release URL from 'maiass.dev' to 'maiass.net' in development.md
+	- chore: updated R2_BASE_URL in create-homebrew-formula.sh, deploy-to-r2.sh, and release-and-deploy.sh scripts to 'maiass.net'
+	- refactor: replaced all occurrences of 'maiass.dev' with 'maiass.net' in respective script files
+- (vsmsh) Bumped version to 5.3.17
+- (vsmsh) more permissions fix
+- (vsmsh) Bumped version to 5.3.16
+- (vsmsh) fixed permissions issue
+- (vsmsh) Bumped version to 5.3.15
+- (vsmsh) Handle Windows binary copy conditional in release script
+	- feat: added conditional checks before copying maiass-windows-x64.exe
+	- refactor: removed redundant zip creation for maiass-windows-arm64.exe
+	- chore: updated archive and checksum script segment for Windows executables
+- (vsmsh) Bumped version to 5.3.14
+- (vsmsh) Remove 'v' prefix from version URLs and messages
+	- refactor: standardized version URLs by removing 'v' prefix
+	- fix: adjusted GitHub release commands to not include 'v' prefix
+	- chore: ensured correct versioning in R2 and GitHub communication
+	- fix: corrected file permissions for copied binaries
+	- chore: added copying of .exe files to build directory
+- (vsmsh) Bumped version to 5.3.13
+- (vsmsh) Add MAIASS script documentation and environment variable setup
+	- docs: created README in scripts directory detailing all MAIASS scripts
+	- chore: added GITHUB_TOKEN entry to .dev.vars.example
+	- feat(release): incorporated .dev.vars loading in release-and-deploy.sh to auto-source env variables
 
 - (vsmsh) more permissions fix
 - (vsmsh) Bumped version to 5.3.16
