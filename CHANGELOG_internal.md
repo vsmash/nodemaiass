@@ -1,5 +1,10 @@
-## 5.3.12
+## 5.3.13
 3 August 2025
+
+- (vsmsh) Add MAIASS script documentation and environment variable setup
+	- docs: created README in scripts directory detailing all MAIASS scripts
+	- chore: added GITHUB_TOKEN entry to .dev.vars.example
+	- feat(release): incorporated .dev.vars loading in release-and-deploy.sh to auto-source env variables
 
 - (vsmsh) Introduce R2 deployment and improve .gitignore
 	- feat: created  for example environment variables
