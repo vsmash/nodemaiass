@@ -2,3 +2,4 @@
 # Copy to .dev.vars and fill in your actual values
 
 CLOUDFLARE_ACCOUNT_ID=your_cloudflare_account_id_here
+GITHUB_TOKEN=your_github_token_here
