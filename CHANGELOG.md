@@ -1,3 +1,20 @@
+## 5.3.12
+3 August 2025
+
+- Introduce R2 deployment and improve .gitignore
+	- feat: created  for example environment variables
+	- feat: added new Homebrew formula file
+	- feat: implemented  for standalone Node.js execution
+	- feat: added  for deploying release binaries to Cloudflare R2
+	- fix: removed obsolete checksum files from  and
+	- fix: updated  to use R2 URLs, preserving signatures
+	- docs: updated development documentation with build and release workflows
+	- chore: updated  to
+- Update release process and checksums
+- chore: updated checksums for all platform binaries
+	- feat: added preparation step for binary code signing
+	- refactor: modified script to prioritize signed binaries for release
+
 ## 5.3.10
 2 August 2025
 
