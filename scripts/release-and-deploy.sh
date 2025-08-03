@@ -266,16 +266,16 @@ class Maiass < Formula
   license "GPL-3.0-only"
   on_macos do
     if Hardware::CPU.intel?
-      url "https://releases.maiass.dev/#{version}/maiass-macos-x64.zip"
+      url "https://releases.maiass.net/#{version}/maiass-macos-x64.zip"
       sha256 "$INTEL_SHA"
     else
-      url "https://releases.maiass.dev/#{version}/maiass-macos-arm64.zip"
+      url "https://releases.maiass.net/#{version}/maiass-macos-arm64.zip"
       sha256 "$ARM64_SHA"
     end
   end
 
   on_linux do
-    url "https://releases.maiass.dev/#{version}/maiass-linux-x64.tar.gz"
+    url "https://releases.maiass.net/#{version}/maiass-linux-x64.tar.gz"
     sha256 "$LINUX_SHA"
   end
 
@@ -329,6 +329,6 @@ echo "🍺 Users can now install with:"
 echo "   brew upgrade maiass"
 echo ""
 echo "📦 Direct downloads (preserves signatures):"
-echo "   https://releases.maiass.dev/latest.json"
+echo "   https://releases.maiass.net/latest.json"
 echo ""
 echo "🔗 GitHub Release: https://github.com/$REPO/releases/tag/$VERSION"

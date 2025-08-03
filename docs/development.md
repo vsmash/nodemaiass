@@ -61,7 +61,7 @@ maiass/
 3. **R2 Deployment**: `./scripts/deploy-to-r2.sh`
    - Uploads signed archives to Cloudflare R2
    - Preserves code signatures (GitHub releases strip them)
-   - Creates versioned URLs: `https://releases.maiass.dev/v5.3.10/`
+   - Creates versioned URLs: `https://releases.maiass.net/v5.3.10/`
 
 ### Why Multiple Directories?
 
