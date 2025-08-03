@@ -21,7 +21,7 @@ echo "======================="
 
 # Configuration
 VERSION=$(node -p "require('./package.json').version")
-R2_BASE_URL="https://releases.maiass.dev"
+R2_BASE_URL="https://releases.maiass.net"
 RELEASE_DIR="release-automated"
 
 print_status "Deploying MAIASS v$VERSION to R2..."

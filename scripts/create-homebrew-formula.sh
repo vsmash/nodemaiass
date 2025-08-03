@@ -36,7 +36,7 @@ mkdir -p "$FORMULA_DIR"
 print_status "Calculating SHA256 hashes from R2 release binaries (preserves signatures)..."
 
 # Use R2 URLs instead of GitHub to preserve code signatures
-R2_BASE_URL="https://releases.maiass.dev/$VERSION"
+R2_BASE_URL="https://releases.maiass.net/$VERSION"
 
 # Download and calculate SHA256 from R2 release files
 INTEL_SHA=""
@@ -120,16 +120,16 @@ class Maiass < Formula
   license "GPL-3.0-only"
   on_macos do
     if Hardware::CPU.intel?
-      url "https://releases.maiass.dev/#{version}/maiass-macos-x64.zip"
+      url "https://releases.maiass.net/#{version}/maiass-macos-x64.zip"
       sha256 "$INTEL_SHA"
     else
-      url "https://releases.maiass.dev/#{version}/maiass-macos-arm64.zip"
+      url "https://releases.maiass.net/#{version}/maiass-macos-arm64.zip"
       sha256 "$ARM64_SHA"
     end
   end
 
   on_linux do
-    url "https://releases.maiass.dev/#{version}/maiass-linux-x64.tar.gz"
+    url "https://releases.maiass.net/#{version}/maiass-linux-x64.tar.gz"
     sha256 "$LINUX_SHA"
   end
 
