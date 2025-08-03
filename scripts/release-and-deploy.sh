@@ -68,6 +68,13 @@ fi
 print_status "Building all platform binaries..."
 npm run build:all
 
+# Fix permissions on built binaries immediately after build
+print_status "Fixing permissions on built binaries..."
+chmod +x dist/bun/maiass-* 2>/dev/null || true
+chmod +x dist/bun/*.exe 2>/dev/null || true
+chmod +x dist/pkg/maiass-* 2>/dev/null || true
+chmod +x dist/pkg/*.exe 2>/dev/null || true
+
 # Step 1.5: Prepare binaries for signing
 print_status "Preparing binaries for code signing..."
 rm -rf build
