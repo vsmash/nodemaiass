@@ -75,15 +75,23 @@ mkdir -p build
 
 # Copy binaries to build directory for signing (prefer Bun, fallback to PKG)
 if [ -d "dist/bun" ]; then
+    # Copy all binaries including .exe files
     cp dist/bun/maiass-* build/ 2>/dev/null || true
+    cp dist/bun/*.exe build/ 2>/dev/null || true
     print_success "Copied Bun binaries to build directory"
 elif [ -d "dist/pkg" ]; then
+    # Copy all binaries including .exe files  
     cp dist/pkg/maiass-* build/ 2>/dev/null || true
+    cp dist/pkg/*.exe build/ 2>/dev/null || true
     print_success "Copied PKG binaries to build directory"
 else
     print_error "No binaries found in dist/ directory"
     exit 1
 fi
+
+# Fix permissions on copied files
+chmod +x build/maiass-* 2>/dev/null || true
+chmod +x build/*.exe 2>/dev/null || true
 
 # Step 2: Code sign binaries
 print_status "Code signing binaries..."
@@ -171,16 +179,16 @@ ls -la *.zip *.tar.gz checksums.txt
 cd ..
 
 # Step 4: Create or update GitHub release
-print_status "Creating GitHub release v$VERSION..."
+print_status "Creating GitHub release $VERSION..."
 
 # Delete existing release if it exists
-if gh release view "v$VERSION" >/dev/null 2>&1; then
-    print_warning "Release v$VERSION already exists, deleting..."
-    gh release delete "v$VERSION" --yes
+if gh release view "$VERSION" >/dev/null 2>&1; then
+    print_warning "Release $VERSION already exists, deleting..."
+    gh release delete "$VERSION" --yes
 fi
 
 # Create new release
-gh release create "v$VERSION" \
+gh release create "$VERSION" \
     --title "MAIASS v$VERSION - Code Signed Release" \
     --notes "🔐 **Properly Code Signed Release**
 
@@ -209,7 +217,7 @@ All archives include SHA256 checksums in checksums.txt
     release-automated/maiass-windows-arm64.zip \
     release-automated/checksums.txt
 
-print_success "GitHub release v$VERSION created successfully!"
+print_success "GitHub release $VERSION created successfully!"
 
 # Step 5: Deploy to R2 for signature preservation
 print_status "Deploying to Cloudflare R2..."
@@ -247,16 +255,16 @@ class Maiass < Formula
   license "GPL-3.0-only"
   on_macos do
     if Hardware::CPU.intel?
-      url "https://releases.maiass.dev/v#{version}/maiass-macos-x64.zip"
+      url "https://releases.maiass.dev/#{version}/maiass-macos-x64.zip"
       sha256 "$INTEL_SHA"
     else
-      url "https://releases.maiass.dev/v#{version}/maiass-macos-arm64.zip"
+      url "https://releases.maiass.dev/#{version}/maiass-macos-arm64.zip"
       sha256 "$ARM64_SHA"
     end
   end
 
   on_linux do
-    url "https://releases.maiass.dev/v#{version}/maiass-linux-x64.tar.gz"
+    url "https://releases.maiass.dev/#{version}/maiass-linux-x64.tar.gz"
     sha256 "$LINUX_SHA"
   end
 
@@ -301,7 +309,7 @@ print_success "🎉 Complete release automation finished!"
 echo ""
 echo "✅ Built and code-signed binaries"
 echo "✅ Created signature-preserving archives" 
-echo "✅ Uploaded to GitHub release v$VERSION"
+echo "✅ Uploaded to GitHub release $VERSION"
 echo "✅ Deployed to R2 with preserved signatures"
 echo "✅ Updated Homebrew formula with correct checksums"
 echo "✅ Pushed Homebrew formula to repository"
@@ -312,4 +320,4 @@ echo ""
 echo "📦 Direct downloads (preserves signatures):"
 echo "   https://releases.maiass.dev/latest.json"
 echo ""
-echo "🔗 GitHub Release: https://github.com/$REPO/releases/tag/v$VERSION"
+echo "🔗 GitHub Release: https://github.com/$REPO/releases/tag/$VERSION"
