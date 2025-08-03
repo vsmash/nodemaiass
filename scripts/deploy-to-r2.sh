@@ -45,8 +45,8 @@ cd "$RELEASE_DIR"
 # Upload all release files to R2 with version prefix
 print_status "Uploading signed archives to R2..."
 
-# Create version directory structure in R2: /v5.3.9/
-VERSION_PREFIX="v$VERSION"
+# Create version directory structure in R2: /5.3.13/
+VERSION_PREFIX="$VERSION"
 
 # Upload each file with proper content types
 upload_file() {
