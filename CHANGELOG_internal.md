@@ -1,5 +1,17 @@
-## 5.3.13
+## 5.3.14
 3 August 2025
+
+- (vsmsh) Remove 'v' prefix from version URLs and messages
+	- refactor: standardized version URLs by removing 'v' prefix
+	- fix: adjusted GitHub release commands to not include 'v' prefix
+	- chore: ensured correct versioning in R2 and GitHub communication
+	- fix: corrected file permissions for copied binaries
+	- chore: added copying of .exe files to build directory
+- (vsmsh) Bumped version to 5.3.13
+- (vsmsh) Add MAIASS script documentation and environment variable setup
+	- docs: created README in scripts directory detailing all MAIASS scripts
+	- chore: added GITHUB_TOKEN entry to .dev.vars.example
+	- feat(release): incorporated .dev.vars loading in release-and-deploy.sh to auto-source env variables
 
 - (vsmsh) Add MAIASS script documentation and environment variable setup
 	- docs: created README in scripts directory detailing all MAIASS scripts
