@@ -116,8 +116,10 @@ if [ -d "../build" ] && [ -f "../build/maiass-macos-x64" ]; then
     cp ../build/maiass-macos-arm64 maiass-macos-arm64
     cp ../build/maiass-linux-x64 maiass-linux-x64
     cp ../build/maiass-linux-arm64 maiass-linux-arm64
-    cp ../build/maiass-win-x64.exe maiass-windows-x64.exe
-    cp ../build/maiass-win-arm64.exe maiass-windows-arm64.exe
+    # Copy Windows binaries from dist/bun (they're not code signed yet)
+    if [ -f "../dist/bun/maiass-windows-x64.exe" ]; then
+        cp ../dist/bun/maiass-windows-x64.exe maiass-windows-x64.exe
+    fi
     print_success "Using signed binaries from build directory"
 elif [ -d "../dist/bun" ]; then
     # Fallback to unsigned Bun builds
@@ -125,7 +127,9 @@ elif [ -d "../dist/bun" ]; then
     cp ../dist/bun/maiass-macos-arm64 maiass-macos-arm64
     cp ../dist/bun/maiass-linux-x64 maiass-linux-x64
     cp ../dist/bun/maiass-linux-arm64 maiass-linux-arm64
-    cp ../dist/bun/maiass-windows-x64.exe maiass-windows-x64.exe
+    if [ -f "../dist/bun/maiass-windows-x64.exe" ]; then
+        cp ../dist/bun/maiass-windows-x64.exe maiass-windows-x64.exe
+    fi
     print_success "Using unsigned Bun-built binaries"
 elif [ -d "../dist/pkg" ]; then
     # Fallback to PKG builds
@@ -167,8 +171,9 @@ tar -czf maiass-linux-x64.tar.gz maiass-linux-x64
 tar -czf maiass-linux-arm64.tar.gz maiass-linux-arm64
 
 # Windows archives  
-zip -9 maiass-windows-x64.zip maiass-windows-x64.exe
-zip -9 maiass-windows-arm64.zip maiass-windows-arm64.exe
+if [ -f "maiass-windows-x64.exe" ]; then
+    zip -9 maiass-windows-x64.zip maiass-windows-x64.exe
+fi
 
 # Create checksums
 shasum -a 256 *.zip *.tar.gz > checksums.txt
@@ -214,7 +219,6 @@ All archives include SHA256 checksums in checksums.txt
     release-automated/maiass-linux-x64.tar.gz \
     release-automated/maiass-linux-arm64.tar.gz \
     release-automated/maiass-windows-x64.zip \
-    release-automated/maiass-windows-arm64.zip \
     release-automated/checksums.txt
 
 print_success "GitHub release $VERSION created successfully!"
