@@ -3,6 +3,13 @@
 
 set -e
 
+# Load environment variables
+if [[ -f ".dev.vars" ]]; then
+    set -a
+    source .dev.vars
+    set +a
+fi
+
 # Colors
 RED='\033[0;31m'
 GREEN='\033[0;32m'
