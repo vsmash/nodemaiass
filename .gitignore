@@ -4,15 +4,27 @@
 .env.maiass
 .env.maiass.*
 
+# Wrangler local files
+.wrangler/
+
 # Sensitive configuration
 *.backup.*
 
-# Build artifacts and binaries
+# Build artifacts and releases (can be regenerated)
 build/
+dist/
 release/
-*.exe
-maiass-*
-maiass-
+release-automated/
+release-fixed/
+__MACOSX/
+
+# Cloudflare local development
+.wrangler/
+.dev.vars
+
+# Environment files
+.env*
+!.env.example
 
 # Node.js
 node_modules/
