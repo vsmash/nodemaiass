@@ -1,5 +1,22 @@
-## 5.3.16
+## 5.3.17
 3 August 2025
+
+- more permissions fix
+- fixed permissions issue
+- Handle Windows binary copy conditional in release script
+	- feat: added conditional checks before copying maiass-windows-x64.exe
+	- refactor: removed redundant zip creation for maiass-windows-arm64.exe
+	- chore: updated archive and checksum script segment for Windows executables
+- Remove 'v' prefix from version URLs and messages
+	- refactor: standardized version URLs by removing 'v' prefix
+	- fix: adjusted GitHub release commands to not include 'v' prefix
+	- chore: ensured correct versioning in R2 and GitHub communication
+	- fix: corrected file permissions for copied binaries
+	- chore: added copying of .exe files to build directory
+- Add MAIASS script documentation and environment variable setup
+	- docs: created README in scripts directory detailing all MAIASS scripts
+	- chore: added GITHUB_TOKEN entry to .dev.vars.example
+	- feat(release): incorporated .dev.vars loading in release-and-deploy.sh to auto-source env variables
 
 - fixed permissions issue
 - Handle Windows binary copy conditional in release script
