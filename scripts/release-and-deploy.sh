@@ -204,7 +204,16 @@ All archives include SHA256 checksums in checksums.txt
 
 print_success "GitHub release v$VERSION created successfully!"
 
-# Step 5: Update Homebrew formula
+# Step 5: Deploy to R2 for signature preservation
+print_status "Deploying to Cloudflare R2..."
+if [[ -f "scripts/deploy-to-r2.sh" ]]; then
+    ./scripts/deploy-to-r2.sh
+    print_success "R2 deployment completed!"
+else
+    print_warning "R2 deployment script not found"
+fi
+
+# Step 6: Update Homebrew formula
 print_status "Updating Homebrew formula..."
 
 # Calculate SHA256s from the archives we just created
@@ -231,16 +240,16 @@ class Maiass < Formula
   license "GPL-3.0-only"
   on_macos do
     if Hardware::CPU.intel?
-      url "https://github.com/$REPO/releases/download/#{version}/maiass-macos-x64.zip"
+      url "https://releases.maiass.dev/v#{version}/maiass-macos-x64.zip"
       sha256 "$INTEL_SHA"
     else
-      url "https://github.com/$REPO/releases/download/#{version}/maiass-macos-arm64.zip"
+      url "https://releases.maiass.dev/v#{version}/maiass-macos-arm64.zip"
       sha256 "$ARM64_SHA"
     end
   end
 
   on_linux do
-    url "https://github.com/$REPO/releases/download/#{version}/maiass-linux-x64.tar.gz"
+    url "https://releases.maiass.dev/v#{version}/maiass-linux-x64.tar.gz"
     sha256 "$LINUX_SHA"
   end
 
@@ -279,17 +288,21 @@ else
     print_warning "Homebrew formula not found at $FORMULA_FILE"
 fi
 
-# Step 6: Final summary
+# Step 7: Final summary
 echo ""
 print_success "🎉 Complete release automation finished!"
 echo ""
 echo "✅ Built and code-signed binaries"
 echo "✅ Created signature-preserving archives" 
 echo "✅ Uploaded to GitHub release v$VERSION"
+echo "✅ Deployed to R2 with preserved signatures"
 echo "✅ Updated Homebrew formula with correct checksums"
 echo "✅ Pushed Homebrew formula to repository"
 echo ""
 echo "🍺 Users can now install with:"
 echo "   brew upgrade maiass"
+echo ""
+echo "📦 Direct downloads (preserves signatures):"
+echo "   https://releases.maiass.dev/latest.json"
 echo ""
 echo "🔗 GitHub Release: https://github.com/$REPO/releases/tag/v$VERSION"
