@@ -1,3 +1,8 @@
+## 5.3.19
+11 August 2025
+
+- (vsmsh) DEVOPS-4 package installation
+
 ## 5.3.18
 3 August 2025
 
