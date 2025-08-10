@@ -1,5 +1,9 @@
-## 5.3.20
+## 5.3.21
 11 August 2025
+
+- removed single quotes from set upstream origin
+- added setup
+- package installation
 
 - added setup
 - package installation
