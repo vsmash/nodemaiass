@@ -1,11 +1,12 @@
 {
-  "name": "maiass",
+  "name": "maiass-dev",
   "type": "module",
   "version": "5.3.18",
   "description": "MAIASS - Modular AI-Augmented Semantic Scribe - Intelligent Git workflow automation",
   "main": "maiass.mjs",
   "bin": {
-    "maiass": "./maiass.mjs"
+    "maiass": "./maiass.mjs",
+    "maiass-setup": "./setup-env.js"
   },
   "author": "Velvary Pty Ltd",
   "license": "GPL-3.0-only",
