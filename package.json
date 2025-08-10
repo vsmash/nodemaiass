@@ -3,9 +3,9 @@
   "type": "module",
   "version": "5.3.18",
   "description": "MAIASS - Modular AI-Augmented Semantic Scribe - Intelligent Git workflow automation",
-  "main": "maiass-standalone.cjs",
+  "main": "maiass.mjs",
   "bin": {
-    "maiass": "./maiass-standalone.cjs"
+    "maiass": "./maiass.mjs"
   },
   "author": "Velvary Pty Ltd",
   "license": "GPL-3.0-only",
@@ -40,32 +40,5 @@
   "devDependencies": {
     "nexe": "^5.0.0-beta.4",
     "pkg": "^5.8.1"
-  },
-  "pkg": {
-    "scripts": [],
-    "assets": [],
-    "targets": [
-      "node18-macos-x64",
-      "node18-macos-arm64",
-      "node18-linux-x64",
-      "node18-linux-arm64",
-      "node18-win-x64",
-      "node18-win-arm64"
-    ],
-    "outputPath": "dist",
-    "compress": "Brotli"
-  },
-  "nexe": {
-    "input": "maiass-standalone.cjs",
-    "output": "maiass",
-    "targets": [
-      "mac-x64-18.16.0",
-      "mac-arm64-18.16.0",
-      "linux-x64-18.16.0",
-      "linux-arm64-18.16.0",
-      "windows-x64-18.16.0",
-      "windows-arm64-18.16.0"
-    ],
-    "verbose": true
   }
 }

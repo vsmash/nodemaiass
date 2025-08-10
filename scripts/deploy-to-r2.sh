@@ -2,7 +2,7 @@
 # Deploy MAIASS release binaries to Cloudflare R2
 # This preserves code signatures by serving directly from R2
 
-set -e
+# Note: Don't use set -e here so we can continue uploading other files if one fails
 
 # Colors
 RED='\033[0;31m'
@@ -40,7 +40,10 @@ if ! command -v wrangler &> /dev/null; then
     exit 1
 fi
 
-cd "$RELEASE_DIR"
+cd "$RELEASE_DIR" || {
+    print_error "Failed to enter release directory: $RELEASE_DIR"
+    exit 1
+}
 
 # Upload all release files to R2 with version prefix
 print_status "Uploading signed archives to R2..."
@@ -67,26 +70,44 @@ upload_file() {
     local r2_path="$VERSION_PREFIX/$file"
     
     print_status "Uploading $file..."
-    wrangler r2 object put "maiass-releases/$r2_path" \
+    
+    # Try to upload, but continue if it fails
+    if wrangler r2 object put "maiass-releases/$r2_path" \
         --file "$file" \
         --content-type "$content_type" \
         --cache-control "public, max-age=31536000" \
-        --remote
-    
-    if [[ $? -eq 0 ]]; then
+        --remote 2>/dev/null; then
         print_success "✓ $file → $R2_BASE_URL/$r2_path"
+        return 0
     else
-        print_error "✗ Failed to upload $file"
+        print_error "✗ Failed to upload $file (will continue with other files)"
         return 1
     fi
 }
 
 # Upload all archives and checksums
+UPLOAD_SUCCESS=0
+UPLOAD_FAILED=0
+FAILED_FILES=()
+
 for file in *.zip *.tar.gz checksums.txt; do
     if [[ -f "$file" ]]; then
-        upload_file "$file"
+        if upload_file "$file"; then
+            ((UPLOAD_SUCCESS++))
+        else
+            ((UPLOAD_FAILED++))
+            FAILED_FILES+=("$file")
+        fi
     fi
 done
+
+# Report upload results
+if [[ $UPLOAD_FAILED -gt 0 ]]; then
+    print_warning "Upload completed with $UPLOAD_FAILED failures out of $((UPLOAD_SUCCESS + UPLOAD_FAILED)) files"
+    print_warning "Failed files: ${FAILED_FILES[*]}"
+else
+    print_success "All $UPLOAD_SUCCESS files uploaded successfully!"
+fi
 
 # Create a latest.json manifest for automated downloads
 print_status "Creating download manifest..."
@@ -119,13 +140,16 @@ EOF
 upload_file "latest.json"
 
 # Also upload to root level for easy access
-wrangler r2 object put "maiass-releases/latest.json" \
+print_status "Uploading latest.json to root level..."
+if wrangler r2 object put "maiass-releases/latest.json" \
     --file "latest.json" \
     --content-type "application/json" \
     --cache-control "public, max-age=300" \
-    --remote
-
-print_success "✓ latest.json → $R2_BASE_URL/latest.json"
+    --remote 2>/dev/null; then
+    print_success "✓ latest.json → $R2_BASE_URL/latest.json"
+else
+    print_error "✗ Failed to upload latest.json to root level"
+fi
 
 cd ..
 
