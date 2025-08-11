@@ -1,6 +1,6 @@
-## 5.7.0
+## 5.7.1
 11 August 2025
 
-- Add split functionality for current content
-	- refactor: split current content into lines for slicing
+- Delete wrangler.jsonc file
+	- refactor: remove wrangler.jsonc file
 
