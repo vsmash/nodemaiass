@@ -1,9 +1,0 @@
-#!/bin/bash
-# Development version of maiass command for testing
-# This script runs the local development version of maiass
-
-# Get the directory where this script is located
-DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-
-# Run the local development version
-node "$DIR/maiass.mjs" "$@"
