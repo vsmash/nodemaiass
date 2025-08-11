@@ -3,7 +3,7 @@
  */
 
 export const TEST_CONFIG = {
-  // Test environment settings
+  // Test environment settings needing updates
   timeout: 30000,
   verbose: process.env.MAIASS_TEST_VERBOSE === 'true',
   keepTempFiles: process.env.MAIASS_TEST_KEEP_FILES === 'true',
