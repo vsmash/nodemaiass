@@ -247,7 +247,7 @@ MAIASS_AUTO_TAG_RELEASES=true             # Automatically tag releases (required
 # Changelog Configuration
 MAIASS_CHANGELOG_PATH=CHANGELOG.md        # Main changelog file path
 MAIASS_CHANGELOG_NAME=CHANGELOG.md        # Main changelog file name
-MAIASS_CHANGELOG_INTERNAL_NAME=CHANGELOG_internal.md  # Internal changelog file name
+MAIASS_CHANGELOG_INTERNAL_NAME.CHANGELOG_internal.md  # Internal changelog file name
 ```
 
 ## 🔄 Workflow Phases
@@ -278,7 +278,7 @@ MAIASS orchestrates a 4-phase workflow:
 - Creates git tags for releases
 - **Generates dual changelogs**:
   - `CHANGELOG.md`: Clean, user-facing format with JIRA tickets stripped
-  - `CHANGELOG_internal.md`: Developer format with commit hashes, authors, and JIRA tickets
+  - `.CHANGELOG_internal.md`: Developer format with commit hashes, authors, and JIRA tickets
 - **Smart commit range detection**: Only includes commits since the last release tag
 - **Version replacement logic**: Replaces same-day patch versions instead of duplicating entries
 
