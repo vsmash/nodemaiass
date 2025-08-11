@@ -21,7 +21,6 @@ This directory contains all build, release, and deployment scripts for MAIASS. H
 - `.dev.vars` file with `GITHUB_TOKEN` and `CLOUDFLARE_ACCOUNT_ID`
 - macOS (for code signing)
 - Wrangler CLI authenticated
-
 ---
 
 ## 🔧 Development Scripts
@@ -49,7 +48,6 @@ This directory contains all build, release, and deployment scripts for MAIASS. H
 - Preserves code signatures (unlike GitHub downloads)
 
 **Prerequisites:** Must run after `release-and-deploy.sh` creates archives
-
 ---
 
 ## 🔐 Code Signing Scripts
@@ -79,7 +77,6 @@ This directory contains all build, release, and deployment scripts for MAIASS. H
 ```
 - Signs a single binary file
 - Used for testing signatures
-
 ---
 
 ## 🍺 Homebrew Scripts
@@ -94,7 +91,6 @@ This directory contains all build, release, and deployment scripts for MAIASS. H
 - Copies formula to `../homebrew-maiass/`
 
 **Note:** Usually called automatically by `release-and-deploy.sh`
-
 ---
 
 ## 📦 Legacy Scripts (Don't Use Directly)
@@ -111,7 +107,6 @@ This directory contains all build, release, and deployment scripts for MAIASS. H
 ### `build-bundled.sh`
 ❌ **OBSOLETE** - Use `advanced-build.sh` instead
 - Old single-method build script
-
 ---
 
 ## 🛠️ Utility Scripts
@@ -139,7 +134,6 @@ This directory contains all build, release, and deployment scripts for MAIASS. H
 ```
 - Installs MAIASS to `/usr/local/bin/`
 - Used for local development setup
-
 ---
 
 ## 📋 Workflow Summary
@@ -155,19 +149,15 @@ This directory contains all build, release, and deployment scripts for MAIASS. H
 ### For Homebrew Updates:
 1. Usually automatic via `release-and-deploy.sh`
 2. Manual: `./scripts/create-homebrew-formula.sh`
-
 ---
 
 ## 🔧 Configuration Files
-
 - `.dev.vars` - GitHub token and Cloudflare account ID
 - `wrangler.jsonc` - Cloudflare R2 bucket configuration
 - `../homebrew-maiass/` - Homebrew tap repository
-
 ---
 
 ## ❗ Important Notes
-
 - **Always use `release-and-deploy.sh`** for production releases
 - **R2 URLs preserve code signatures** (GitHub downloads strip them)
 - **Homebrew formula uses R2 URLs** to ensure signed binaries

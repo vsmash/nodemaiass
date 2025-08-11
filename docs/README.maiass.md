@@ -27,7 +27,6 @@ nma
 ```
 
 ## Features
-
 - 🌍 **Cross-platform binaries**: Self-contained executables for macOS, Linux, Windows (ARM & x64)
 - 🔌 **WordPress integration**: Automatic version management for themes and plugins
 - 🚀 **Intelligent workflows**: AI-powered commit messages and automated version bumping
@@ -63,7 +62,6 @@ nma --help            # Show help information
 ```
 
 ## Documentation
-
 - [Installation Guide](./installation-guide.md) - Binary and npm installation methods
 - [Configuration & Environment Variables](./configuration.md) - Complete setup guide
 - [Workflow Guide](./workflow.md) - WordPress integration and usage examples

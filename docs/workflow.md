@@ -108,7 +108,6 @@ develop
 # AI analyzes your changes and suggests:
 🤖 AI Suggestion:
 "USER-123: Implement secure login validation
-
 - Add password strength requirements
 - Implement rate limiting for failed attempts
 - Add comprehensive test coverage"
@@ -448,7 +447,6 @@ MAIASS_THEME_PATH=wp-content/themes/my-theme/functions.php
 
 # Generates contextual messages:
 "USER-123: Add user authentication system
-
 - Implement JWT token validation
 - Add password hashing with bcrypt
 - Create user session management
@@ -577,7 +575,6 @@ nma patch --tag --force --auto-stage
 alias commit="nma --commits-only --auto-stage"
 alias release="nma minor --tag"
 ```
-
 ---
 
 **💡 Pro Tip**: Start with `nma --dry-run` to understand what the workflow will do before making any changes!

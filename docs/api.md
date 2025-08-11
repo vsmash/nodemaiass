@@ -334,7 +334,6 @@ All modules use consistent error handling patterns:
 ```
 
 ### Common Error Codes
-
 - `NOT_GIT_REPOSITORY`: Current directory is not a Git repository
 - `NO_VERSION_FILES`: No version files detected in project
 - `MERGE_CONFLICT`: Git merge conflict encountered
@@ -390,7 +389,6 @@ const gitInfo = getGitInfoSync(); // Does not exist
 ### Memory Management
 
 Large repositories are handled efficiently:
-
 - Git operations use streaming where possible
 - File operations are batched
 - Memory usage is monitored in debug mode
@@ -398,11 +396,9 @@ Large repositories are handled efficiently:
 ### Caching
 
 Configuration and Git information is cached appropriately:
-
 - Config values cached per session
 - Git branch info cached until changed
 - Version file detection cached per run
-
 ---
 
 **💡 Pro Tip**: Use TypeScript definitions for better IDE support and type safety when integrating MAIASS into your projects.

@@ -64,7 +64,6 @@ maiass/
    - Creates versioned URLs: `https://releases.maiass.net/v5.3.10/`
 
 ### Why Multiple Directories?
-
 - **`dist/`**: Raw build outputs, unsigned, multiple formats
 - **`build/`**: Staging for code signing (macOS Developer ID)
 - **`release-automated/`**: Final signed archives ready for distribution
