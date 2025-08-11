@@ -155,8 +155,6 @@ EOF
 
 print_success "Homebrew formula created: $FORMULA_FILE"
 cp "$FORMULA_FILE" "../homebrew-maiass/$FORMULA_FILE"
-
-
 # Create tap repository instructions
 cat > "HOMEBREW_TAP_SETUP.md" << EOF
 # Setting Up Homebrew Tap
