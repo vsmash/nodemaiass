@@ -165,13 +165,13 @@ maiass env --json       # Show environment as JSON
 1. **Enable AI features** (optional):
    ```bash
    # Set OpenAI API key globally
-   nma config --global openai_token=your_api_key_here
+   maiass config --global openai_token=your_api_key_here
    ```
 
 2. **Project-specific settings** (if needed):
    ```bash
    # Override branch names for projects using 'main'
-   nma config --project masterbranch=main
+   maiass config --project masterbranch=main
    ```
 
 ### Configuration Files
@@ -247,7 +247,7 @@ Thursday, 24 July 2025- d7ddba9 VEL-405 Update Maiass Pipeline functionality (De
 # On feature branch: feature/USER-123-new-login
 
 # 1. Complete workflow with minor version bump
-nma minor --tag
+maiass minor --tag
 
 # This will:
 # - Detect you're on a feature branch
@@ -260,19 +260,19 @@ nma minor --tag
 ### Quick Commit Without Version Management
 ```bash
 # Just commit changes without version bumping
-nma --commits-only --auto-stage
+maiass --commits-only --auto-stage
 
 # With AI commit message
-nma commit
+maiass commit
 ```
 
 ### Safe Testing
 ```bash
 # Preview what would happen without making changes
-nma --dry-run patch
+maiass --dry-run patch
 
 # Check current version status
-nma version --current
+maiass version --current
 ```
 
 ## 🔧 Advanced Usage
@@ -280,24 +280,24 @@ nma version --current
 ### Custom Version Files
 ```bash
 # Configure custom version file
-nma config --project version_primary_file=VERSION.txt
-nma config --project version_primary_type=text
+maiass config --project version_primary_file=VERSION.txt
+maiass config --project version_primary_type=text
 ```
 
 ### Multiple Version Files
 ```bash
 # Update multiple files with same version
-nma config --project version_secondary_files="src/version.js,docs/VERSION"
+maiass config --project version_secondary_files="src/version.js,docs/VERSION"
 ```
 
 ### AI Customization
 ```bash
 # Different AI modes
-nma config --global openai_mode=autosuggest  # Auto-suggest without asking
-nma config --global openai_mode=off          # Disable AI
+maiass config --global openai_mode=autosuggest  # Auto-suggest without asking
+maiass config --global openai_mode=off          # Disable AI
 
 # Custom commit message style
-nma config --global openai_commit_message_style=conventional
+maiass config --global openai_commit_message_style=conventional
 ```
 
 ## 🐛 Troubleshooting
@@ -316,7 +316,7 @@ git status
 ls package.json composer.json VERSION
 
 # Or configure custom version file
-nma config --project version_primary_file=your-version-file
+maiass config --project version_primary_file=your-version-file
 ```
 
 **"Failed to switch to develop branch"**
@@ -329,7 +329,7 @@ git checkout -b develop
 ```bash
 # Enable verbose debugging
 export MAIASS_DEBUG=true
-nma --dry-run
+maiass --dry-run
 ```
 
 ## 📚 Documentation- [Configuration Guide](docs/configuration.md)- [Workflow Guide](docs/workflow.md)- [API Reference](docs/api.md)- [Contributing](docs/contributing.md)
