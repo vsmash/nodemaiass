@@ -1,5 +1,7 @@
-## 5.3.21
+## 5.3.22
 11 August 2025
+
+- (vsmsh) DEVOPS-4 more changes
 
 - (vsmsh) DEVOPS-4 removed single quotes from set upstream origin
 - (vsmsh) Bumped version to 5.3.20
