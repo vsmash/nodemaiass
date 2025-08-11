@@ -227,7 +227,6 @@ codesign -dv maiass-macos-arm64
 - CI/CD integration for signing
 - Notarization for macOS (when Developer ID ready)
 - Enhanced certificate validation in scripts
-
 ---
 
 *Last updated: $(date)*  

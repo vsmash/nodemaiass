@@ -136,7 +136,6 @@ git push
 ```
 
 ## Security Notes
-
 - **Never commit certificates** to git
 - **Use environment variables** for Developer ID
 - **Test signed binaries** before release

@@ -5,7 +5,6 @@ MAIASS uses a flexible configuration system based on `.env.maiass` files and env
 ## 🏗️ Configuration System Overview
 
 MAIASS uses `.env.maiass` files for configuration with a clear hierarchy:
-
 - **Project**: `./.env.maiass` (highest priority)
 - **Global**: `~/.env.maiass` (user-wide settings)
 - **Environment**: System environment variables (lowest priority)
@@ -311,7 +310,6 @@ nma config --project verbosity=verbose
 nma config --project debug=false
 nma config --project autopush_commits=true
 ```
-
 ---
 
 **💡 Pro Tip**: Use `nma config --list` to see all available configuration variables and their descriptions.

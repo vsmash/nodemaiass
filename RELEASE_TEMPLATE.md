@@ -52,7 +52,6 @@ Invoke-WebRequest -Uri "https://github.com/vsmash/maiass/releases/download/v0.7.
 ```
 
 ## ✨ What's New
-
 - ✅ **Cross-platform binaries** for macOS, Linux, Windows
 - ✅ **Self-contained** - includes Node.js runtime (no installation required)
 - ✅ **Universal installer** with automatic platform detection
@@ -65,7 +64,6 @@ All binaries include SHA256 checksums for verification:
 - **Checksums:** [checksums.txt](https://github.com/vsmash/maiass/releases/download/v0.7.1/checksums.txt)
 
 ## 📋 System Requirements
-
 - **macOS:** 10.15+ (Intel or Apple Silicon)
 - **Linux:** Most distributions (x64)
 - **Raspberry Pi / Linux ARM64**
@@ -73,7 +71,6 @@ All binaries include SHA256 checksums for verification:
 - **Dependencies:** None (Node.js included in binary)
 
 ## 🆘 Support
-
 - **Documentation:** https://github.com/vsmash/maiass
 - **Issues:** https://github.com/vsmash/maiass/issues
 - **Discussions:** https://github.com/vsmash/maiass/discussions
@@ -81,7 +78,6 @@ All binaries include SHA256 checksums for verification:
 ## 📝 Note
 
 **Use the binary downloads above** - the "Source code" archives below are for development only and don't include the self-contained executables.
-
 ---
 
 **Full Changelog:** https://github.com/vsmash/maiass/compare/v0.6.0...v0.7.1

@@ -208,7 +208,6 @@ npm update -g maiass
 ```
 
 ## ❓ Support
-
 - **Documentation**: https://github.com/vsmash/nodemaiass
 - **Issues**: https://github.com/vsmash/nodemaiass/issues
 - **Discussions**: https://github.com/vsmash/nodemaiass/discussions
