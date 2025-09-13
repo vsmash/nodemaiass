@@ -1,8 +1,8 @@
 # Environment and configuration files
 .env
 .env.*
-.env.maiass
-.env.maiass.*
+!.env.maiass
+.env.maiass.local
 
 # Wrangler local files
 .wrangler/
