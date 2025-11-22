@@ -46,7 +46,7 @@ async function setupEnvironment() {
   
   // Collect sensitive variables
   console.log('\n📝 Setting up sensitive variables (stored securely):');
-  const openaiKey = await prompt('OpenAI API Key (optional): ');
+  const maiassKey = await prompt('MAIASS API Key (optional): ');
   
   // Collect general config
   console.log('\n⚙️  Setting up general configuration:');
@@ -54,10 +54,10 @@ async function setupEnvironment() {
   const developBranch = await prompt('Development branch name (default: develop): ') || 'develop';
   
   // Write secure env file
-  if (openaiKey.trim()) {
+  if (maiassKey.trim()) {
     const secureContent = `# Sensitive environment variables for MAIASS
 # This file is stored in a secure OS-specific location
-OPENAI_API_KEY=${openaiKey.trim()}
+MAIASS_API_KEY=${maiassKey.trim()}
 `;
     fs.writeFileSync(secureEnvPath, secureContent, { mode: 0o600 }); // Secure permissions
     console.log(`✅ Secure variables saved to: ${secureEnvPath}`);

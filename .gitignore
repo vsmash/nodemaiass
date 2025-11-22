@@ -43,3 +43,7 @@ Thumbs.db
 Formula/maiass.rb
 # Code signing certificates
 certs/
+
+# MAIASS log file
+maiass.log
+.env.maiass.bak

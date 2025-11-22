@@ -9,7 +9,7 @@ export const TEST_CONFIG = {
   keepTempFiles: process.env.MAIASS_TEST_KEEP_FILES === 'true',
   
   // Mock settings for testing
-  mockOpenAI: true,
+  mockAI: true,
   mockGitRemote: false,
   
   // Test data

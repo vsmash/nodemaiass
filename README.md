@@ -47,14 +47,14 @@ maiass --dry-run
 
 ```bash
 # Enable AI features
-maiass config set openai_token "your_api_key"
-maiass config set openai_mode "ask"
+maiass config set maiass_token "your_api_key"
+maiass config set ai_mode "ask"
 
 # MAIASS will now suggest intelligent commit messages
 maiass
 ```
 
-## ✨ Key Features- **🤖 AI-Powered Commit Messages**: OpenAI integration for intelligent commit suggestions- **📋 Dual Changelog System**: User-facing and developer-facing changelogs- **🔄 Complete Git Workflow**: Branch validation, commits, merges, and versioning- **🏷️ Smart Version Management**: Multiple version file support with semantic versioning- **🌍 Cross-Platform**: Self-contained binaries for macOS, Linux, and Windows- **⚙️ Zero Configuration**: Works out of the box with sensible defaults- **🎯 JIRA Integration**: Automatic ticket detection from branch names
+## ✨ Key Features- **🤖 AI-Powered Commit Messages**: AI integration for intelligent commit suggestions- **📋 Dual Changelog System**: User-facing and developer-facing changelogs- **🔄 Complete Git Workflow**: Branch validation, commits, merges, and versioning- **🏷️ Smart Version Management**: Multiple version file support with semantic versioning- **🌍 Cross-Platform**: Self-contained binaries for macOS, Linux, and Windows- **⚙️ Zero Configuration**: Works out of the box with sensible defaults- **🎯 JIRA Integration**: Automatic ticket detection from branch names
 
 ## � Documentation
 
@@ -99,11 +99,11 @@ MAIASS orchestrates a 4-phase intelligent workflow:
 
 ```bash
 # Enable AI features (global)
-maiass config set --global openai_token "your_api_key"
-maiass config set --global openai_mode "ask"
+maiass config set --global maiass_token "your_api_key"
+maiass config set --global ai_mode "ask"
 
 # Project-specific branch override
-maiass config set masterbranch "main"
+maiass config set mainbranch "main"
 
 # View current configuration
 maiass config list
@@ -164,14 +164,14 @@ maiass env --json       # Show environment as JSON
 
 1. **Enable AI features** (optional):
    ```bash
-   # Set OpenAI API key globally
-   maiass config --global openai_token=your_api_key_here
+   # Set Maiass API key globally
+   maiass config --global maiass_token=your_api_key_here
    ```
 
 2. **Project-specific settings** (if needed):
    ```bash
    # Override branch names for projects using 'main'
-   maiass config --project masterbranch=main
+   maiass config --project mainbranch=main
    ```
 
 ### Configuration Files
@@ -187,7 +187,7 @@ MAIASS_AI_MODE=ask                    # ask, autosuggest, off
 MAIASS_AI_MODEL=gpt-4                 # AI model to use
 
 # Branch Configuration (only set if different from defaults)
-MAIASS_MASTERBRANCH=main                  # Default: master
+MAIASS_MAINBRANCH=main                  # Default: main
 MAIASS_DEVELOPBRANCH=develop              # Default: develop
 MAIASS_STAGINGBRANCH=staging              # Default: staging
 
@@ -206,7 +206,7 @@ MAIASS_CHANGELOG_INTERNAL_NAME.CHANGELOG_internal.md  # Internal changelog file 
 
 MAIASS orchestrates a 4-phase workflow:
 
-### 1. **Branch Detection & Validation**- Detects current branch and validates against workflow requirements- Auto-switches from master/staging to develop branch- Prompts for confirmation on release/master branches- Handles missing develop branch gracefully
+### 1. **Branch Detection & Validation**- Detects current branch and validates against workflow requirements- Auto-switches from main/staging to develop branch- Prompts for confirmation on release/main branches- Handles missing develop branch gracefully
 
 ### 2. **Commit Workflow**- Detects staged and unstaged changes- Offers AI-powered commit message suggestions- Supports multi-line commit messages- Prepends JIRA ticket numbers from branch names
 
@@ -293,11 +293,11 @@ maiass config --project version_secondary_files="src/version.js,docs/VERSION"
 ### AI Customization
 ```bash
 # Different AI modes
-maiass config --global openai_mode=autosuggest  # Auto-suggest without asking
-maiass config --global openai_mode=off          # Disable AI
+maiass config --global ai_mode=autosuggest  # Auto-suggest without asking
+maiass config --global ai_mode=off          # Disable AI
 
 # Custom commit message style
-maiass config --global openai_commit_message_style=conventional
+maiass config --global ai_commit_message_style=conventional
 ```
 
 ## 🐛 Troubleshooting

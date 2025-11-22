@@ -38,6 +38,7 @@ import { commitThis } from './lib/commit.js';
 import { handleConfigCommand } from './lib/config-command.js';
 import { handleVersionCommand } from './lib/version-command.js';
 import { handleMaiassCommand } from './lib/maiass-command.js';
+import { handleAccountInfoCommand } from './lib/account-info.js';
 import { SYMBOLS } from './lib/symbols.js';
 
 // Simple CLI setup for pkg compatibility
@@ -82,6 +83,7 @@ if (args.includes('--help') || args.includes('-h') || command === 'help') {
   console.log('  git-info           Display git repository information');
   console.log('  config             Manage configuration');
   console.log('  version            Manage version information');
+  console.log('  account-info       Show your account status (masked token)');
   console.log('\nOptions:');
   console.log('  --commits-only, -c Generate AI commits without version management');
   console.log('  --auto-stage, -a   Automatically stage all changes');
@@ -104,7 +106,8 @@ switch (command) {
     break;
     
   case 'git-info':
-    displayGitInfo();
+    const gitInfo = getGitInfo();
+    displayGitInfo(gitInfo);
     break;
     
   case 'config':
@@ -113,6 +116,12 @@ switch (command) {
     
   case 'version':
     handleVersionCommand(process.argv.slice(3));
+    break;
+    
+  case 'account-info':
+    handleAccountInfoCommand({
+      json: args.includes('--json')
+    });
     break;
     
   case 'maiass':

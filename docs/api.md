@@ -72,7 +72,7 @@ Classifies a branch according to Git flow conventions.
 - `branchName` (string): Branch name to classify
 - `options` (Object): Branch configuration
   - `developBranch` (string): Develop branch name
-  - `masterBranch` (string): Master branch name
+  - `mainBranch` (string): Main branch name
   - `stagingBranch` (string): Staging branch name
 
 **Returns:**
@@ -81,7 +81,7 @@ Classifies a branch according to Git flow conventions.
   - `isRelease` (boolean): Is release branch
   - `isHotfix` (boolean): Is hotfix branch
   - `isDevelop` (boolean): Is develop branch
-  - `isMaster` (boolean): Is master branch
+  - `isMain` (boolean): Is main branch
 
 ### `version-manager.js`
 
@@ -267,7 +267,7 @@ Object containing all configuration variable definitions:
   },
   'MAIASS_AI_TOKEN': {
     default: '',
-    description: 'OpenAI API key for AI features',
+    description: 'MAIASS API key for AI features',
     sensitive: true
   }
   // ... more variables
@@ -339,7 +339,7 @@ All modules use consistent error handling patterns:
 - `MERGE_CONFLICT`: Git merge conflict encountered
 - `INVALID_VERSION`: Invalid version format provided
 - `CONFIG_ERROR`: Configuration file error
-- `OPENAI_ERROR`: OpenAI API error
+- `AI_ERROR`: AI API error
 
 ## 🧪 Testing Utilities
 

@@ -90,7 +90,7 @@ MAIASS_DEBUG=true nma hello
 
 The debug output shows:
 - **File loading status** for each environment file
-- **API token validation** for `MAIASS_AI_TOKEN` and `OPENAI_API_KEY`
+- **API token validation** for `MAIASS_AI_TOKEN` and `MAIASS_API_KEY`
 - **Token status indicators**: ✓ (valid), ⚠ (warning), ✗ (invalid), - (not found)
 - **Masked token previews** (first 8 characters) for security
 - **Final token resolution** showing which tokens are active after all files are loaded
