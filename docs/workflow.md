@@ -287,8 +287,8 @@ hotfix/critical-fix → nma patch --tag
 
 ### Branch Configuration
 ```bash
-# For projects using 'main' instead of 'master'
-nma config --project masterbranch=main
+# For projects using 'main' instead of 'main'
+nma config --project mainbranch=main
 
 # Custom develop branch name
 nma config --project developbranch=dev
@@ -465,13 +465,13 @@ MAIASS_THEME_PATH=wp-content/themes/my-theme/functions.php
 ### AI Modes
 ```bash
 # Ask mode (default) - Prompts for approval
-nma config --global openai_mode=ask
+nma config --global ai_mode=ask
 
 # Auto-suggest - Uses AI without asking
-nma config --global openai_mode=autosuggest
+nma config --global ai_mode=autosuggest
 
 # Off - Disable AI completely
-nma config --global openai_mode=off
+nma config --global ai_mode=off
 ```
 
 ## 🚨 Error Handling & Recovery
@@ -551,11 +551,11 @@ nma minor
 ### Custom Commit Styles
 ```bash
 # Conventional commits
-nma config --global openai_commit_message_style=conventional
+nma config --global ai_commit_message_style=conventional
 # Result: "feat(auth): add user login validation"
 
 # Simple style
-nma config --global openai_commit_message_style=simple
+nma config --global ai_commit_message_style=simple
 # Result: "Add user login validation"
 ```
 

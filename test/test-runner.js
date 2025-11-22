@@ -90,7 +90,7 @@ class TestUtils {
     execSync('git commit -m "Initial commit"', { cwd: repoPath, stdio: 'pipe' });
     
     // Create develop branch if needed
-    if (branch !== 'main' && branch !== 'master') {
+    if (branch !== 'main' && branch !== 'main') {
       execSync(`git checkout -b ${branch}`, { cwd: repoPath, stdio: 'pipe' });
     }
     
@@ -325,10 +325,10 @@ gitInfoTests.test('should detect git repository', async () => {
   const result = await TestUtils.runMaiassCommand(['git'], { cwd: repoPath });
   
   TestUtils.assertContains(result.stdout, 'Current Branch', 'Should show current branch');
-  // Accept either main or master branch (git init creates master by default)
+  // Accept either main or main branch (git init creates main by default)
   TestUtils.assert(
-    result.stdout.includes('main') || result.stdout.includes('master'),
-    'Should be on main or master branch'
+    result.stdout.includes('main') || result.stdout.includes('main'),
+    'Should be on main or main branch'
   );
 });
 
@@ -523,7 +523,7 @@ pipelineTests.test('should handle dry-run mode', async () => {
   const repoPath = await TestUtils.createTestRepo('dry-run-test', {
     files: ['package.json'],
     version: '1.0.0',
-    branch: 'master' // Stay on master to avoid develop branch switching
+    branch: 'main' // Stay on main to avoid develop branch switching
   });
   
   // Verify git repository was created properly

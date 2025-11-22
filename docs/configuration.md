@@ -15,7 +15,7 @@ MAIASS uses `.env.maiass` files for configuration with a clear hierarchy:
 Project-specific overrides stored in your project root:
 ```bash
 # Project-specific branch names
-MAIASS_MASTERBRANCH=main
+MAIASS_MAINBRANCH=main
 MAIASS_DEVELOPBRANCH=develop
 
 # Project-specific version settings
@@ -50,11 +50,11 @@ nma config --global
 nma config --project
 
 # Set global configuration
-nma config --global openai_token=your_key_here
+nma config --global maiass_token=your_key_here
 nma config --global debug=true
 
 # Set project configuration
-nma config --project masterbranch=main
+nma config --project mainbranch=main
 nma config --project version_primary_file=VERSION.txt
 
 # Edit configuration files directly
@@ -73,15 +73,15 @@ You can also create/edit `.env.maiass` files directly:
 echo "MAIASS_AI_TOKEN=your_key" >> ~/.env.maiass
 
 # Create project config
-echo "MAIASS_MASTERBRANCH=main" >> .env.maiass
+echo "MAIASS_MAINBRANCH=main" >> .env.maiass
 ```
 
 ## 📋 Complete Variable Reference
 
 ### 🤖 AI Integration
 ```bash
-# OpenAI Configuration
-MAIASS_AI_TOKEN=your_api_key_here          # OpenAI API key (sensitive)
+# AI Configuration
+MAIASS_AI_TOKEN=your_api_key_here          # AI API key (sensitive)
 MAIASS_AI_MODE=ask                         # ask, autosuggest, off
 MAIASS_AI_MODEL=gpt-4                      # AI model to use
 MAIASS_AI_TEMPERATURE=0.7                  # AI creativity (0.0-2.0)
@@ -93,7 +93,7 @@ MAIASS_AI_COMMIT_MESSAGE_STYLE=bullet      # bullet, conventional, simple
 ### 🌿 Branch Configuration
 ```bash
 # Branch Names (only set if different from defaults)
-MAIASS_MASTERBRANCH=master                     # Default: master
+MAIASS_MAINBRANCH=main                     # Default: main
 MAIASS_DEVELOPBRANCH=develop                   # Default: develop
 MAIASS_STAGINGBRANCH=staging                   # Default: staging
 ```
@@ -163,7 +163,7 @@ Always store sensitive information securely:
 
 ```bash
 # ✅ Good: Store in global config
-nma config --global openai_token=your_key
+nma config --global maiass_token=your_key
 
 # ❌ Avoid: Hardcoding in scripts
 export MAIASS_AI_TOKEN=your_key
@@ -191,11 +191,11 @@ echo "*.backup.*" >> .gitignore
 ### Basic Setup
 ```bash
 # 1. Set up AI integration
-nma config --global openai_token=your_api_key_here
-nma config --global openai_mode=ask
+nma config --global maiass_token=your_api_key_here
+nma config --global ai_mode=ask
 
 # 2. Configure for projects using 'main' branch
-nma config --global masterbranch=main
+nma config --global mainbranch=main
 
 # 3. Enable debug mode for troubleshooting
 nma config --global debug=true
@@ -208,17 +208,15 @@ nma config --project version_primary_file=VERSION.txt
 nma config --project version_primary_type=text
 
 # For a project with different branch names
-nma config --project masterbranch=main
+nma config --project mainbranch=main
 nma config --project developbranch=dev
 ```
 
 ### Enterprise Setup
 ```bash
-# Custom OpenAI endpoint
-nma config --global openai_endpoint=https://your-proxy.com/v1/chat/completions
 
 # Disable AI for security
-nma config --global openai_mode=off
+nma config --global ai_mode=off
 
 # Enable commit signing
 nma config --global commit_sign=true
@@ -240,13 +238,13 @@ nma env
 
 ### Common Issues
 
-**"OpenAI API key not found"**
+**"MAIASS API key not found"**
 ```bash
 # Check if key is set
-nma config | grep openai_token
+nma config | grep maiass_token  
 
 # Set the key
-nma config --global openai_token=your_key_here
+nma config --global maiass_token=your_key_here
 ```
 
 **"Configuration not loading"**
@@ -264,7 +262,7 @@ cat ~/.env.maiass
 nma config | grep branch
 
 # Override for current project
-nma config --project masterbranch=main
+nma config --project mainbranch=main
 ```
 
 ### Debug Configuration Loading
@@ -328,7 +326,7 @@ DEFAULT_BRANCH=main
 ### Example secure.env (sensitive)
 ```bash
 # Sensitive variables - stored securely
-OPENAI_API_KEY=sk-...
+MAIASS_API_KEY=sk-...
 GITHUB_TOKEN=ghp_...
 ```
 
