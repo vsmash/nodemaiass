@@ -62,6 +62,19 @@ if (firstArg && versionBumpTypes.includes(firstArg)) {
   command = 'maiass';
 }
 
+// Handle --auto flag (must be before other processing)
+if (args.includes('--auto') || args.includes('-a')) {
+  // Override all auto-yes variables for non-interactive mode
+  process.env.MAIASS_AUTO_STAGE_UNSTAGED = 'true';
+  process.env.MAIASS_AUTO_PUSH_COMMITS = 'true';
+  process.env.MAIASS_AUTO_MERGE_TO_DEVELOP = 'true';
+  process.env.MAIASS_AUTO_APPROVE_AI_SUGGESTIONS = 'true';
+  
+  if (process.env.MAIASS_DEBUG === 'true') {
+    logger.debug('[DEBUG] Auto-mode enabled - all prompts will be skipped');
+  }
+}
+
 // Handle version flag
 if (args.includes('--version') || args.includes('-v')) {
   console.log(version);
@@ -85,8 +98,9 @@ if (args.includes('--help') || args.includes('-h') || command === 'help') {
   console.log('  version            Manage version information');
   console.log('  account-info       Show your account status (masked token)');
   console.log('\nOptions:');
+  console.log('  --auto             Enable all auto-yes functionality (non-interactive mode)');
   console.log('  --commits-only, -c Generate AI commits without version management');
-  console.log('  --auto-stage, -a   Automatically stage all changes');
+  console.log('  --auto-stage       Automatically stage all changes');
   console.log('  --help, -h         Show this help message');
   console.log('  --version, -v      Show version');
   console.log('  --dry-run          Run without making changes');
@@ -129,7 +143,8 @@ switch (command) {
     handleMaiassCommand({
       _: process.argv.slice(2).filter(arg => !arg.startsWith('--')),
       'commits-only': args.includes('--commits-only') || args.includes('-c'),
-      'auto-stage': args.includes('--auto-stage') || args.includes('-a'),
+      'auto-stage': args.includes('--auto-stage'),
+      'auto': args.includes('--auto'),
       'version-bump': versionBump,
       'dry-run': args.includes('--dry-run') || args.includes('-d'),
       force: args.includes('--force') || args.includes('-f'),
