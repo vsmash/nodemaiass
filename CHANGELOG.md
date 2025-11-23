@@ -1,6 +1,9 @@
-## 5.7.13
+## 5.7.14
 24 November 2025
 
+- Update .gitignore and maiass.mjs
+	  - chore: remove unused entries in .gitignore
+	  - feat: add handling for --auto flag in maiass.mjs
 - Update changelog.js to keep JIRA ticket in internal changelog
 	  - refactor: modify line to keep JIRA ticket information in subject
 - Add new function to update changelog path
