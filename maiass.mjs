@@ -29,8 +29,6 @@ const __dirname = path.dirname(new URL(import.meta.url).pathname.replace(/^\/(\w
 const packageJson = JSON.parse(fs.readFileSync(path.join(__dirname, 'package.json')));
 const version = packageJson.version;
 
-// display a horizontal line
-console.log(colors.BCyan('─'.repeat(50)));
 // Import env display utility
 import { displayEnvironmentVariables } from './lib/env-display.js';
 import { getGitInfo, displayGitInfo, validateBranchForOperations } from './lib/git-info.js';
