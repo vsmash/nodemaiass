@@ -1,13 +1,5 @@
-## 5.7.8
+## 5.7.9
 24 November 2025
-
-- Updated endpoints and enhanced logging for API interaction
-	- feat(lib): replaced 'anonymous-subscription' endpoint with '/v1/token' in account-info.js and commit.js
-	- feat(lib): added 'X-Client-Name' and 'X-Client-Version' headers to API requests
-	- fix(lib): replaced direct access of response data with compatibility checks for multiple field names
-	- refactor(lib): improved logging with more detailed API key, subscription ID, and credits info
-	- refactor(lib): updated machine-fingerprint.js comments to reflect algorithm change
-	- feat(commit): included 'X-Subscription-ID' in commit.js headers
 
 ## 5.7.7
 23 November 2025
