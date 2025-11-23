@@ -22,10 +22,6 @@ __MACOSX/
 .wrangler/
 .dev.vars
 
-# Environment files
-.env*
-!.env.example
-
 # Node.js
 node_modules/
 npm-debug.log*
@@ -47,3 +43,4 @@ certs/
 # MAIASS log file
 maiass.log
 .env.maiass.bak
+.env.maiass.local
