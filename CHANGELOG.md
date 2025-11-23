@@ -1,6 +1,11 @@
-## 5.7.15
+## 5.7.16
 24 November 2025
 
+- Add MAIASS version display and git branch info
+	  - feat: add displayHeader function for MAIASS version
+	  - feat: get own MAIASS version from package.json
+	  - feat: display MAIASS version in displayVersionInfo
+	  - feat: show current git branch in validateAndHandleBranching
 - Update verbosity and debug mode settings in .env file
 	  - fix: disable debug mode in MAIASS_VERBOSITY
 	  - fix: enable debug mode in MAIASS_DEBUG
