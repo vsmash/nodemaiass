@@ -1,6 +1,10 @@
-## 5.7.30
+## 5.7.31
 24 November 2025
 
+- Update internal changelog logic
+	  - refactor: remove unnecessary comments and unused code
+	  - refactor: simplify formatting of commit messages
+	  - refactor: restructure logic for handling existing changelog entries
 - Update internal changelog function to remove console log and process exit
 - Update internal changelog formatting
 	  - fix: correct date variable usage
