@@ -1,3 +1,11 @@
+## 5.8.9
+25 November 2025
+
+- Update getGitInfo function to handle new repository state
+	  - Add logic to retrieve status when no branch exists yet
+	  - Set branch as null in return object
+	  - Assign status properties to return object based on retrieved status
+
 ## 5.8.4
 24 November 2025
 
