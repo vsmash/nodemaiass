@@ -1,6 +1,9 @@
-## 5.7.26
+## 5.7.27
 24 November 2025
 
+- Add logging and exit functionality
+	  - refactor: log the dateWithWeekday
+	  - refactor: add process exit functionality
 - Update date format in internal changelog
 	  - refactor: use dateWithWeekday instead of date
 - Update internal changelog formatting
