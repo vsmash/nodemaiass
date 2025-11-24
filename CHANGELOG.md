@@ -1,6 +1,8 @@
-## 5.7.25
+## 5.7.26
 24 November 2025
 
+- Update date format in internal changelog
+	  - refactor: use dateWithWeekday instead of date
 - Update internal changelog formatting
 	  - refactor: use  instead of Mon Nov 24 13:16:21 AEDT 2025 for better readability
 - Updated internal changelog
