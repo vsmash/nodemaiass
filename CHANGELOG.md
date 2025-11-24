@@ -1,6 +1,9 @@
-## 5.7.22
+## 5.7.23
 24 November 2025
 
+- Updated internal changelog
+	- refactor: simplified date formatting in internal changelog
+	- refactor: improved content update logic in internal changelog
 - Update internal changelog content
 	  - refactor: simplify date formatting
 	  - refactor: improve content update logic in the changelog
