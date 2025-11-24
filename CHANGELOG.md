@@ -1,6 +1,10 @@
-## 5.8.1
+## 5.8.2
 24 November 2025
 
+- Add features to bootstrap module and fix log message
+	  - feat: Add functions for project type detection and version source identification in bootstrap module
+	  - feat: Implement configuration setup steps in bootstrap module
+	  - fix: Update log message for anonymous subscription request in account-info module
 - Update automated AI suggestion prompts
 	  - feat: add automatic approval for AI suggestions based on environment variables
 	  - feat: add automatic push option for commits based on environment variables
