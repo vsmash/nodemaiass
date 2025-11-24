@@ -1,6 +1,8 @@
-## 5.7.23
+## 5.7.25
 24 November 2025
 
+- Update internal changelog formatting
+	  - refactor: use  instead of Mon Nov 24 13:16:21 AEDT 2025 for better readability
 - Updated internal changelog
 	- refactor: simplified date formatting in internal changelog
 	- refactor: improved content update logic in internal changelog
