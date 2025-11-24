@@ -1,6 +1,9 @@
-## 5.7.28
+## 5.7.29
 24 November 2025
 
+- Update internal changelog formatting
+	  - fix: correct date variable usage
+	  - fix: remove unnecessary console.log and process.exit calls
 - Update internal changelog function
 	  - refactor: remove redundant console.log statements
 	  - style: fix indentation issue
