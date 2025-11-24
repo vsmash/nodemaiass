@@ -1,6 +1,13 @@
-## 5.7.16
+## 5.7.17
 24 November 2025
 
+- Update color handling and commit message flow
+	- feat: added bold orange in colors.js
+	- feat: implemented function to get color based on credit count in commit.js
+	- feat: created function to print gradient line in commit.js
+	- fix: optimized credit information extraction and display in commit.js
+	- feat: added anonymous subscription creation when no AI token found in commit.js
+	- feat: improved AI suggestion display with gradient lines in commit.js
 - Add MAIASS version display and git branch info
 	  - feat: add displayHeader function for MAIASS version
 	  - feat: get own MAIASS version from package.json
