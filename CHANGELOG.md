@@ -1,6 +1,8 @@
-## 5.7.20
+## 5.7.21
 24 November 2025
 
+- Update internal changelog entries with weekday in date
+	  - refactor: replace date with weekday in internal changelog entries
 - Update date format in changelog
 	  - refactor: modify date format in changelog to include capitalized weekday
 	  - refactor: update weekday to be capitalized in changelog
