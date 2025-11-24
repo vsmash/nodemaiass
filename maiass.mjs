@@ -107,55 +107,66 @@ if (args.includes('--help') || args.includes('-h') || command === 'help') {
   process.exit(0);
 }
 
-// Command routing
-switch (command) {
-  case 'hello':
-    console.log(colors.BCyan('Hello from MAIASS!'));
-    break;
-    
-  case 'env':
-    displayEnvironmentVariables();
-    break;
-    
-  case 'git-info':
-    const gitInfo = getGitInfo();
-    displayGitInfo(gitInfo);
-    break;
-    
-  case 'config':
-    handleConfigCommand(process.argv.slice(3));
-    break;
-    
-  case 'version':
-    handleVersionCommand(process.argv.slice(3));
-    break;
-    
-  case 'account-info':
-    handleAccountInfoCommand({
-      json: args.includes('--json')
-    });
-    break;
-    
-  case 'maiass':
-    // Handle the main MAIASS workflow
-    handleMaiassCommand({
-      _: process.argv.slice(2).filter(arg => !arg.startsWith('--')),
-      'commits-only': args.includes('--commits-only') || args.includes('-c'),
-      'auto-stage': args.includes('--auto-stage'),
-      'auto': args.includes('--auto'),
-      'version-bump': versionBump,
-      'dry-run': args.includes('--dry-run') || args.includes('-d'),
-      force: args.includes('--force') || args.includes('-f'),
-      silent: args.includes('--silent') || args.includes('-s'),
-      tag: getArgValue(args, '--tag') || getArgValue(args, '-t')
-    });
-    break;
-    
-  default:
-    console.error(`Unknown command: ${command}`);
-    console.log('Run `maiass --help` for available commands.');
-    process.exit(1);
-}
+// Command routing (wrapped in async IIFE to handle async commands)
+(async () => {
+  switch (command) {
+    case 'hello':
+      console.log(colors.BCyan('Hello from MAIASS!'));
+      break;
+      
+    case 'env':
+      displayEnvironmentVariables();
+      break;
+      
+    case 'git-info':
+      const gitInfo = getGitInfo();
+      displayGitInfo(gitInfo);
+      break;
+      
+    case 'config':
+      await handleConfigCommand(process.argv.slice(3));
+      break;
+      
+    case 'version':
+      await handleVersionCommand(process.argv.slice(3));
+      break;
+      
+    case 'account-info':
+      await handleAccountInfoCommand({
+        json: args.includes('--json')
+      });
+      break;
+      
+    case 'maiass':
+      // Handle the main MAIASS workflow
+      await handleMaiassCommand({
+        _: process.argv.slice(2).filter(arg => !arg.startsWith('--')),
+        'commits-only': args.includes('--commits-only') || args.includes('-c'),
+        'auto-stage': args.includes('--auto-stage'),
+        'auto': args.includes('--auto'),
+        'version-bump': versionBump,
+        'dry-run': args.includes('--dry-run') || args.includes('-d'),
+        force: args.includes('--force') || args.includes('-f'),
+        silent: args.includes('--silent') || args.includes('-s'),
+        tag: getArgValue(args, '--tag') || getArgValue(args, '-t')
+      });
+      break;
+      
+    default:
+      console.error(`Unknown command: ${command}`);
+      console.log('Run `maiass --help` for available commands.');
+      process.exit(1);
+  }
+  
+  // Exit cleanly after successful command execution
+  process.exit(0);
+})().catch(error => {
+  console.error(colors.Red(`${SYMBOLS.CROSS} Fatal error: ${error.message}`));
+  if (process.env.MAIASS_DEBUG === 'true') {
+    console.error(colors.Gray(error.stack));
+  }
+  process.exit(1);
+});
 
 // Helper function to get argument values
 function getArgValue(args, flag) {
