@@ -1,6 +1,8 @@
-## 5.8.9
+## 5.8.10
 25 November 2025
 
+- Add handling for new repositories without commits
+	  - feat: Skip merge workflow for new repositories with no branch yet
 - Update getGitInfo function to handle new repository state
 	  - Add logic to retrieve status when no branch exists yet
 	  - Set branch as null in return object
