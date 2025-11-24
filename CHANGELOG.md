@@ -1,6 +1,9 @@
-## 5.7.27
+## 5.7.28
 24 November 2025
 
+- Update internal changelog function
+	  - refactor: remove redundant console.log statements
+	  - style: fix indentation issue
 - Add logging and exit functionality
 	  - refactor: log the dateWithWeekday
 	  - refactor: add process exit functionality
