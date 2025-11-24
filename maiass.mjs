@@ -38,10 +38,16 @@ import { handleVersionCommand } from './lib/version-command.js';
 import { handleMaiassCommand } from './lib/maiass-command.js';
 import { handleAccountInfoCommand } from './lib/account-info.js';
 import { SYMBOLS } from './lib/symbols.js';
+import { bootstrapProject, needsBootstrap } from './lib/bootstrap.js';
 
 // Simple CLI setup for pkg compatibility
 const args = process.argv.slice(2);
 const firstArg = args[0];
+
+// Handle --setup/--bootstrap flag early
+if (args.includes('--setup') || args.includes('--bootstrap')) {
+  process.env.MAIASS_FORCE_BOOTSTRAP = 'true';
+}
 
 // Check if first argument is a version bump type
 const versionBumpTypes = ['major', 'minor', 'patch'];
@@ -99,6 +105,7 @@ if (args.includes('--help') || args.includes('-h') || command === 'help') {
   console.log('  --auto             Enable all auto-yes functionality (non-interactive mode)');
   console.log('  --commits-only, -c Generate AI commits without version management');
   console.log('  --auto-stage       Automatically stage all changes');
+  console.log('  --setup, --bootstrap Run interactive project setup');
   console.log('  --help, -h         Show this help message');
   console.log('  --version, -v      Show version');
   console.log('  --dry-run          Run without making changes');
@@ -109,6 +116,15 @@ if (args.includes('--help') || args.includes('-h') || command === 'help') {
 
 // Command routing (wrapped in async IIFE to handle async commands)
 (async () => {
+  // Run bootstrap if needed (first-time setup)
+  if (needsBootstrap()) {
+    const completed = await bootstrapProject();
+    if (completed) {
+      // Bootstrap completed, exit so user can run maiass again
+      process.exit(0);
+    }
+  }
+  
   switch (command) {
     case 'hello':
       console.log(colors.BCyan('Hello from MAIASS!'));
