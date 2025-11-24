@@ -1,3 +1,12 @@
+## 5.8.1
+24 November 2025
+
+- Update automated AI suggestion prompts
+	  - feat: add automatic approval for AI suggestions based on environment variables
+	  - feat: add automatic push option for commits based on environment variables
+	  - feat: add automatic staging of changes based on environment variables
+	  - feat: add automatic merging to develop branch based on environment variables
+
 ## 5.7.34
 24 November 2025
 
