@@ -48,7 +48,7 @@ maiass --dry-run
 ```bash
 # Enable AI features
 maiass config set maiass_token "your_api_key"
-maiass config set ai_mode "ask"
+maiass config set ai_mode "ask" (or "always" or "off")
 
 # MAIASS will now suggest intelligent commit messages
 maiass

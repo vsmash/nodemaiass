@@ -1,7 +1,7 @@
 # MAIASS - AI Context
 
 ## Project Purpose
-Node.js replica of MAIASS Bash script (`/Volumes/ashdev/ashdev/static/maiass-whole/maiass/maiass.sh`). Converting 109KB+ Bash workflow automation to modern Node.js CLI.
+Node.js replica of MAIASS Bash script (`maiass.sh`). Converting 109KB+ Bash workflow automation to modern Node.js CLI.
 
 ## AI Assistant Guidelines
 
