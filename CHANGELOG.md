@@ -1,6 +1,10 @@
-## 5.8.2
+## 5.8.3
 24 November 2025
 
+- Add client info utilities
+	  - feat: add client-info module for client name and version retrieval
+	  - feat: add getClientName function to get client name for API headers
+	  - feat: add getClientVersion function to get client version for API headers
 - Add features to bootstrap module and fix log message
 	  - feat: Add functions for project type detection and version source identification in bootstrap module
 	  - feat: Implement configuration setup steps in bootstrap module
