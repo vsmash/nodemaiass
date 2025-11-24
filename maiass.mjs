@@ -51,6 +51,7 @@ if (args.includes('--setup') || args.includes('--bootstrap')) {
 
 // Check if first argument is a version bump type
 const versionBumpTypes = ['major', 'minor', 'patch'];
+const validCommands = ['hello', 'env', 'git-info', 'config', 'version', 'account-info', 'maiass', 'help'];
 let command = 'maiass'; // Default to maiass workflow
 let versionBump = null;
 
@@ -59,10 +60,15 @@ if (firstArg && versionBumpTypes.includes(firstArg)) {
   versionBump = firstArg;
   command = 'maiass';
 } else if (firstArg && !firstArg.startsWith('-')) {
-  // First arg is a command
+  // First arg is a command - validate it
+  if (!validCommands.includes(firstArg)) {
+    console.error(colors.Red(`${SYMBOLS.CROSS} Error: Unknown command '${firstArg}'`));
+    console.log(`Run 'nma --help' for available commands.`);
+    process.exit(1);
+  }
   command = firstArg;
-} else {
-  // No command specified or starts with flag, default to maiass
+} else if (!firstArg) {
+  // No command specified, default to maiass
   command = 'maiass';
 }
 
@@ -85,6 +91,40 @@ if (args.includes('--version') || args.includes('-v')) {
   process.exit(0);
 }
 
+// Handle --account-info flag (before help to allow it to work)
+if (args.includes('--account-info')) {
+  command = 'account-info';
+}
+
+// Validate flags - check for unrecognized options
+const validFlags = [
+  '--help', '-h',
+  '--version', '-v',
+  '--account-info',
+  '--auto', '-a',
+  '--commits-only', '-c',
+  '--auto-stage',
+  '--setup', '--bootstrap',
+  '--dry-run', '-d',
+  '--force', '-f',
+  '--silent', '-s',
+  '--json',
+  '--tag', '-t'
+];
+
+// Check for unrecognized flags
+for (const arg of args) {
+  if (arg.startsWith('-')) {
+    // Check if it's a flag with value (e.g., --tag=value or --tag value)
+    const flagName = arg.split('=')[0];
+    if (!validFlags.includes(flagName) && !validFlags.includes(arg)) {
+      console.error(colors.Red(`${SYMBOLS.CROSS} Error: Unrecognized option '${arg}'`));
+      console.log(`Run 'nma --help' for available options.`);
+      process.exit(1);
+    }
+  }
+}
+
 // Handle help flag
 if (args.includes('--help') || args.includes('-h') || command === 'help') {
   console.log(`\nMAIASS v${version}`);
@@ -102,6 +142,7 @@ if (args.includes('--help') || args.includes('-h') || command === 'help') {
   console.log('  version            Manage version information');
   console.log('  account-info       Show your account status (masked token)');
   console.log('\nOptions:');
+  console.log('  --account-info     Show your account status (masked token)');
   console.log('  --auto             Enable all auto-yes functionality (non-interactive mode)');
   console.log('  --commits-only, -c Generate AI commits without version management');
   console.log('  --auto-stage       Automatically stage all changes');
