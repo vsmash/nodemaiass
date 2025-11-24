@@ -1,3 +1,14 @@
+## 5.9.0
+25 November 2025
+
+- Enhanced command and flag validation
+	  - feat: added dynamic command validation for first argument
+	  - feat: implemented flag validation for recognized options
+	  - fix: improved error handling for unrecognized commands and flags
+	  - docs: updated help output to include --account-info option
+- Update README with AI mode options
+	  - docs: add AI mode options to enable intelligent commit suggestions
+
 ## 5.8.10
 25 November 2025
 
