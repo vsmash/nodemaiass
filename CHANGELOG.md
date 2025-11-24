@@ -1,6 +1,9 @@
-## 5.7.21
+## 5.7.22
 24 November 2025
 
+- Update internal changelog content
+	  - refactor: simplify date formatting
+	  - refactor: improve content update logic in the changelog
 - Update internal changelog entries with weekday in date
 	  - refactor: replace date with weekday in internal changelog entries
 - Update date format in changelog
