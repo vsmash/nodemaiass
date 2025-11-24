@@ -1,6 +1,10 @@
-## 5.9.0
+## 5.9.1
 25 November 2025
 
+- Enhanced command line help output
+	  - feat: added detailed help messages for valid commands and flags
+	  - refactor: grouped flags by category for improved readability
+	  - fix: removed redundant help command message
 - Enhanced command and flag validation
 	  - feat: added dynamic command validation for first argument
 	  - feat: implemented flag validation for recognized options
