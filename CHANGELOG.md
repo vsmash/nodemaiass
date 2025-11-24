@@ -1,6 +1,7 @@
-## 5.7.29
+## 5.7.30
 24 November 2025
 
+- Update internal changelog function to remove console log and process exit
 - Update internal changelog formatting
 	  - fix: correct date variable usage
 	  - fix: remove unnecessary console.log and process.exit calls
