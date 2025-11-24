@@ -1,6 +1,9 @@
-## 5.8.3
+## 5.8.4
 24 November 2025
 
+- Add logger functionality to secure storage module
+	  - refactor: update logger import in secure-storage.js
+	  - docs: update debug log messages in secure-storage.js
 - Add client info utilities
 	  - feat: add client-info module for client name and version retrieval
 	  - feat: add getClientName function to get client name for API headers
