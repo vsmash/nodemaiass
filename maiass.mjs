@@ -63,7 +63,14 @@ if (firstArg && versionBumpTypes.includes(firstArg)) {
   // First arg is a command - validate it
   if (!validCommands.includes(firstArg)) {
     console.error(colors.Red(`${SYMBOLS.CROSS} Error: Unknown command '${firstArg}'`));
-    console.log(`Run 'nma --help' for available commands.`);
+    console.log('');
+    console.log('Valid commands:');
+    console.log('  ' + validCommands.join(', '));
+    console.log('');
+    console.log('Version bump types:');
+    console.log('  ' + versionBumpTypes.join(', '));
+    console.log('');
+    console.log(`Run 'nma --help' for more information.`);
     process.exit(1);
   }
   command = firstArg;
@@ -119,7 +126,21 @@ for (const arg of args) {
     const flagName = arg.split('=')[0];
     if (!validFlags.includes(flagName) && !validFlags.includes(arg)) {
       console.error(colors.Red(`${SYMBOLS.CROSS} Error: Unrecognized option '${arg}'`));
-      console.log(`Run 'nma --help' for available options.`);
+      console.log('');
+      console.log('Valid flags:');
+      // Group flags by category for better readability
+      const helpFlags = validFlags.filter(f => f.includes('help') || f.includes('version'));
+      const commandFlags = validFlags.filter(f => f.includes('account') || f.includes('setup') || f.includes('bootstrap'));
+      const workflowFlags = validFlags.filter(f => !helpFlags.includes(f) && !commandFlags.includes(f));
+      
+      console.log('  Help & Info:');
+      console.log('    ' + helpFlags.join(', '));
+      console.log('  Commands:');
+      console.log('    ' + commandFlags.join(', '));
+      console.log('  Workflow Options:');
+      console.log('    ' + workflowFlags.join(', '));
+      console.log('');
+      console.log(`Run 'nma --help' for detailed information.`);
       process.exit(1);
     }
   }
