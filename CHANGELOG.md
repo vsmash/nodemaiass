@@ -1,6 +1,10 @@
-## 5.7.17
+## 5.7.18
 24 November 2025
 
+- Update version files with new version and configurations
+	  - feat: add function to update secondary version files based on config
+	  - feat: implement logic to update secondary version files with new version and patterns
+	  - docs: add detailed comments and explanation for the updateSecondaryVersionFiles function
 - Update color handling and commit message flow
 	- feat: added bold orange in colors.js
 	- feat: implemented function to get color based on credit count in commit.js
