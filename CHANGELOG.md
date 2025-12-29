@@ -1,6 +1,8 @@
-## 5.9.2
+## 5.9.3
 30 December 2025
 
+- Added development log configurations
+	  - feat: introduce MAIASS_DEVLOG_CLIENT, MAIASS_DEVLOG_SUBCLIENT, and MAIASS_DEVLOG_PROJECT in environment variables
 - Add npm deployment script
 	  - feat: implement npm deployment script
 	  - chore: merge develop branch into main before deployment
