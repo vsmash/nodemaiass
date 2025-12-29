@@ -1,6 +1,10 @@
-## 5.9.3
+## 5.9.4
 30 December 2025
 
+- Added subClient parameter to logging functions
+	  - feat(devlog): included subClient in extractDevlogContext and logThis functions
+	  - fix(log): updated command execution to incorporate subClient parameter
+	  - fix(log): passed subClient to logCommit and logMerge functions
 - Added development log configurations
 	  - feat: introduce MAIASS_DEVLOG_CLIENT, MAIASS_DEVLOG_SUBCLIENT, and MAIASS_DEVLOG_PROJECT in environment variables
 - Add npm deployment script
