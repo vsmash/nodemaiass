@@ -1,3 +1,10 @@
+## 5.9.5
+4 January 2026
+
+- Update package name and version in package-lock.json
+	  - chore: renamed project from maiass-dev to maiass
+	  - chore: updated version from 5.3.22 to 5.9.4
+
 ## 5.9.4
 30 December 2025
 
