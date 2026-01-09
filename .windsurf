@@ -42,5 +42,5 @@ node setup-env.js  # Environment setup
 ```
 
 ### Related Locations
-- Original: `/Volumes/ashdev/ashdev/static/maiass-whole/maiass/maiass.sh`
-- Test repo: `/Volumes/ashdev/ashdev/static/dummy-repos-for-tests/wordpress-repo`
+- Original: `/Users/sysop/static/maiass-whole/maiass/maiass.sh`
+- Test repo: `/Users/sysop/static/dummy-repos-for-tests/wordpress-repo`
