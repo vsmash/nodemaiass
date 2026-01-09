@@ -1,3 +1,11 @@
+## 5.9.7
+10 January 2026
+
+- Implemented spinner for AI API calls
+	  - feat: added Spinner class to manage loading state during API requests
+	  - feat: integrated spinner start/stop functionality in API call handling
+	  - fix(api): implemented fetch with timeout using AbortController
+
 ## 5.9.6
 4 January 2026
 
