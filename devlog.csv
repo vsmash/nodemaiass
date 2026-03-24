@@ -1,0 +1,382 @@
+Date	Computer	Client	Project	Minutes	Ticket	Message
+Tue 22 Jul 05:27	enigma	VVelvary1		MAIASSS	VVelvary1	c	Initialized MAIASS project with basic structure; - feat: created primary script files (.nvmrc, maiass.js, nodemaiass.sh); - feat: added colors.js for CLI color definitions; - feat: set up package.json with basic information and dependencies; - docs: added README.md with initial project info; - feat: created CHANGELOG.md for future updates; - feat: added package-lock.json for dependency versions
+Tue 22 Jul 05:28	enigma	VVelvary1		MAIASSS	VVelvary1	c	Merged feature/VEL-400_initialbuild into develop
+Tue 22 Jul 05:29	enigma	VVelvary1		MAIASSS	VVelvary1	c	Merged develop into staging
+Tue 22 Jul 05:32	enigma	VVelvary1		MAIASSS	VVelvary1	c	VEL-400 Updated code for better module management and removed unnecessary imports; - refactor(lib): switched from module.exports to export default in colors.js; - refactor(maiass): removed unnecessary chalk import; - feat(package): added "type": "module" to package.json
+Tue 22 Jul 05:34	enigma	VVelvary1		MAIASSS	VVelvary1	c	Merged feature/VEL-400_initialbuild into develop
+Tue 22 Jul 05:34	enigma	VVelvary1		MAIASSS	VVelvary1	c	Merged develop into staging
+Tue 22 Jul 05:59	enigma	VVelvary1		MAIASSS	VVelvary1	c	VEL-400 Implemented cross-platform configuration loading and environment setup; - feat: added new configuration handling module; - feat: introduced environment variable loading from multiple sources; - feat: created helper script for environment setup; - feat: made application an ES module; - refactor: updated version fetching in main script from package.json
+Tue 22 Jul 05:59	enigma	VVelvary1		MAIASSS	VVelvary1	c	Merged feature/VEL-400_initialbuild into develop
+Tue 22 Jul 06:06	enigma	VVelvary1		MAIASSS	VVelvary1	c	VEL-400 Added initial version of MAIASS project with detailed documentation; - feat: added .windsurf with detailed project overview and development guidelines; - feat: added README.maiass.md with project summary and quick start guide; - feat: added commands.md with available and planned commands for MAIASS; - feat: added configuration.md with details on environment variable loading and setup; - feat: added development.md with code style guide, testing instructions, and contribution guidelines; - feat: added setup.md with installation, environment setup, and troubleshooting instructions
+Tue 22 Jul 06:07	enigma	VVelvary1		MAIASSS	VVelvary1	c	Merged feature/VEL-400_initialbuild into develop
+Tue 22 Jul 06:07	enigma	VVelvary1		MAIASSS	VVelvary1	c	Merged develop into staging
+Tue 22 Jul 06:17	enigma	VVelvary1		MAIASSS	VVelvary1	c	VEL-400 Updated documentation and added environment display utility; - docs: simplified and updated project documentation; - feat: exported getConfigPaths function in lib/config.js; - feat: added new file lib/env-display.js for environment display utility; - feat: integrated environment display utility in maiass.js
+Tue 22 Jul 06:18	enigma	VVelvary1		MAIASSS	VVelvary1	c	Merged feature/VEL-400_initialbuild into develop
+Tue 22 Jul 06:29	enigma	VVelvary1		MAIASSS	VVelvary1	c	VEL-400 Refactored environment variable display logic; - fix(lib): simplified display of MAIASS-specific variables; - fix(lib): removed additional relevant variables from MAIASS display; - fix(lib): adjusted displayAllEnvironmentVariables to show only MAIASS-prefixed vars
+Tue 22 Jul 06:56	enigma	VVelvary1		MAIASSS	VVelvary1	c	VEL-400 Enhanced environment variable display and added new color options; - feat: added new color options in colors.js; - feat: improved environment variable display in env-display.js; - feat: added new file maiass-variables.js for managing MAIASS environment variables
+Tue 22 Jul 06:56	enigma	VVelvary1		MAIASSS	VVelvary1	c	Merged feature/VEL-400_initialbuild into develop
+Tue 22 Jul 06:56	enigma	VVelvary1		MAIASSS	VVelvary1	c	Merged develop into staging
+Tue 22 Jul 07:06	enigma	VVelvary1		MAIASSS	VVelvary1	c	VEL-400 Improved visual presentation in terminal output; - feat: added symbols.js for Unicode/ASCII fallbacks; - refactor: integrated symbols into env-display.js for better readability; - refactor: rearranged colors.js for consistency
+Tue 22 Jul 07:07	enigma	VVelvary1		MAIASSS	VVelvary1	c	Merged feature/VEL-400_initialbuild into develop
+Tue 22 Jul 07:07	enigma	VVelvary1		MAIASSS	VVelvary1	c	Merged develop into staging
+Tue 22 Jul 07:51	enigma	VVelvary1		MAIASSS	VVelvary1	c	VEL-402 Added Git information extraction and display utility; - feat: added a Git information utility in lib/git-info.js; - feat: integrated Git information utility in maiass.js; - feat: added Git info display and validation commands in CLI
+Tue 22 Jul 07:51	enigma	VVelvary1		MAIASSS	VVelvary1	c	Merged feature/VEL-402_committhis into develop
+Tue 22 Jul 08:13	enigma	VVelvary1		MAIASSS	VVelvary1	c	Merged feature/VEL-402_committhis into develop
+Tue 22 Jul 08:52	enigma	VVelvary1		MAIASSS	VVelvary1	c	VEL-402 Added bash script for commit; - feat: added new committhis.sh bash script; - feat: implemented nma commit function in script
+Tue 22 Jul 08:52	enigma	VVelvary1		MAIASSS	VVelvary1	c	Merged feature/VEL-402_committhis into develop
+Sun 27 Jul 09:09	enigma	VVelvary		MAIASSS	VEL-405	c	VEL-405 Integrate devlog functionality and improve commit and merge logging;   - feat: added devlog functionality as a separate module;   - feat: implemented commit logging to devlog in 'commit.js' ;   - feat: introduced merge logging in 'maiass-pipeline.js' within 'handleMergeToDevelop' and 'handleVersionManagement';   - feat: created 'devlog.js' file with multiple utility functions for development logging
+Sun 27 Jul 09:09	enigma	VVelvary		MAIASSS	Ddevops	c	Merged feature/VEL-405_changelog_fixes into develop
+Sun 27 Jul 09:10	enigma	VVelvary		MAIASSS	Ddevops	c	Merged release/0.7.5 into develop
+Sun 27 Jul 09:12	enigma	VVelvary		MAIASSS	VEL-405	c	VEL-405 Added debug message for devlog.sh command execution;   - feat: add debug message condition in devlog.js to show the executed command if MAIASS_DEBUG is set to true
+Sun 27 Jul 09:15	enigma	VVelvary		MAIASSS	VEL-405	c	VEL-405 Modify devlog.js functionality;   - refactor: changed console output behavior within logThis function ;   - feat: added silent execution of command for cleaner log display
+Sun 27 Jul 09:15	enigma	VVelvary		MAIASSS	VEL-405	c	VEL-405 Improved output capture in devlog;   - fix: replaced trim method in execSync command output capture in devlog.js;   - feat: added functionality for logging full command result, including errors
+Sun 27 Jul 09:15	enigma	VVelvary		MAIASSS	Ddevops	c	Merged feature/VEL-405_changelog_fixes into develop
+Sun 27 Jul 09:15	enigma	VVelvary		MAIASSS	Ddevops	c	Merged release/0.7.6 into develop
+Sun 27 Jul 09:21	enigma	VVelvary		MAIASSS	VEL-405	c	VEL-405 Improve debug handling in devlog;   - feat: introduced condition for command execution during debug;   - refactor: reordered execSync command execution;   - fix(devlog): revised handling for both debug and non-debug scenarios
+Sun 27 Jul 09:23	enigma	VVelvary		MAIASSS	VEL-405	c	VEL-405 Refined debugging messages in devlog.js;   - feat: added logging of messages to devlog.sh;   - fix: corrected the error and debug message handling;   - refactor: streamlined debug message print conditions
+Sun 27 Jul 09:23	enigma	VVelvary		MAIASSS	Ddevops	c	Merged feature/VEL-405_changelog_fixes into develop
+Sun 27 Jul 09:23	enigma	VVelvary		MAIASSS	Ddevops	c	Merged release/0.7.7 into develop
+Sun 27 Jul 09:35	enigma	vsmash		nodemaiass	VEL-405	c	VEL-405 Refactor logging and merging operations; - refactor(devlog): switched execution from synchronous to asynchronous; - fix(commit): handleStagedCommit now passes along the entire gitInfo object; - refactor(devlog): replace default names with clearly outlined  attributes; - feat(devlog): extractDevlogContext to separate gitInfo context extraction logic; - feat(devlog): use extracted context in logCommit and logMerge functions; - refactor(maiass-pipeline): pass along originalGitInfo to logMerge function in handleMergeToDevelop method
+Sun 27 Jul 09:36	enigma	vsmash		nodemaiass	VEL-405	c	Merged feature/VEL-405_changelog_fixes into develop
+Sun 27 Jul 09:36	enigma	vsmash		nodemaiass	VEL-405	c	Merged release/0.7.8 into develop
+Sun 27 Jul 09:47	enigma	vsmash		nodemaiass	VEL-405	0	VEL-405 Updated devlog.js to handle different parameters;   - fix: corrected second parameter in devlog.sh command
+Sun 27 Jul 09:47	enigma	vsmash		nodemaiass	VEL-405	0	Merged feature/VEL-405_changelog_fixes into develop
+Sun 27 Jul 09:47	enigma	vsmash		nodemaiass	VEL-405	0	Merged release/0.7.10 into develop
+Sun 27 Jul 09:51	enigma	vsmash		nodemaiass	VEL-405	0	VEL-405 Refine devlog logs;   - refactor: remove extra log from devlog for cleaner output
+Sun 27 Jul 09:51	enigma	vsmash		nodemaiass	VEL-405	0	Merged feature/VEL-405_changelog_fixes into develop
+Sun 27 Jul 09:51	enigma	vsmash		nodemaiass	VEL-405	0	Merged release/0.7.11 into develop
+Sun 27 Jul 12:13	enigma	vsmash		nodemaiass	VEL-405	?	VEL-405 Changed command option in devlog.js;   - fix: updated the second parameter from "0" to "?" in devlog.js command execution
+Sun 27 Jul 12:13	enigma	vsmash		nodemaiass	VEL-405	?	Merged feature/VEL-405_changelog_fixes into develop
+Sun 27 Jul 12:13	enigma	vsmash		nodemaiass	VEL-405	?	Merged release/0.7.12 into develop
+Sun 27 Jul 13:45	enigma	vsmash		nodemaiass	MAI-7	?	MAI-7 Implemented cross-platform binary building and updated docs;   - feat(build): added cross-platform binary building script;   - feat(build): added compiled binaries for arm64 and x64;   - docs: added cross-platform build instructions and support info;   - refactor: replaced commonJS with ES modules for pkg compatibility;   - refactor: updated scripts to use the new entry point
+Sun 27 Jul 14:32	enigma	vsmash		maiass	MAI-7	?	MAI-7 Updated project files for latest release and improved DX ;   - docs: added installation-guide, node-compatibility, and shipping-node-options;   - feat: created a new home-brew setup markdown file;   - feat: added a new release template markdown file;   - feat: created a new development installation shell script;   - feat: added .gitignore entries for node_modules, cache files, OS generated files, build artifacts and binaries;   - docs: created a new home-brew formula for MAIASS;   - docs: added installation guide for manual and automatic installation methods. Also explained compatibility issues and potential solutions.
+Sun 27 Jul 14:51	enigma	vsmash		maiass	MAI-7	?	MAI-7 Implemented GitHub Actions for testing and release automation;   - feat: added GitHub Actions workflow for cross-platform build and release;   - feat: added GitHub Actions workflow for running tests across multiple Node.js versions;   - feat: implemented automated binary creation for multiple platforms;   - feat: created GitHub Release through Actions with included checksums for binary verification;   - feat: added workflows that trigger on pushes to main, develop, feature branches and pull request
+Sun 27 Jul 15:01	enigma	vsmash		maiass	MAI-7	?	MAI-7 Updated script and version;   - feat: added handling for new argument types in 'version' command;   - fix: corrected positional arguments array writing in 'version' command;   - chore: updated package version to "0.8.0"
+Sun 27 Jul 15:08	enigma	vsmash		maiass	MAI-7	?	MAI-7 Expanded CLI functionality for MAIASS workflow;   - feat: added version bump functionality ('major', 'minor', 'patch') for MAIASS workflow;   - feat: added several new flags for CLI including '--dry-run', '--commits-only', '--force', and '--silent';   - refactor(cli): made improvements to help text for better usability;   - fix(node-execution): updated node execution from cjs to mjs in nodemaiass.sh;   - refactor(code-tidy): cleaned up argument handling in NodeJS command switch case
+Sun 27 Jul 15:08	enigma	vsmash		maiass	MAI-7	?	Merged feature/MAI-7_node_packaging into develop
+Sun 27 Jul 15:08	enigma	vsmash		maiass	MAI-7	?	Merged release/0.9.0 into develop
+Sun 27 Jul 15:08	enigma	vsmash		maiass	MAI-7	?	Merged feature/MAI-7_node_packaging into develop
+Sun 27 Jul 15:08	enigma	vsmash		maiass	MAI-7	?	Merged release/0.9.1 into develop
+Sun 27 Jul 15:14	enigma	vsmash		maiass	MAI-7	?	MAI-7 Updated GitHub release workflow triggers;   - fix(workflow): change release trigger condition to main branch update or workflow dispatch event
+Sun 27 Jul 15:14	enigma	vsmash		maiass	MAI-7	?	Merged feature/MAI-7_node_packaging into develop
+Sun 27 Jul 15:14	enigma	vsmash		maiass	MAI-7	?	Merged release/0.9.2 into develop
+Sun 27 Jul 15:37	enigma	vsmash		maiass	MAI-7	?	MAI-7 Update create-release.sh script and enhance branching flows;   - feat: add current branch detection ;   - feat: add options for merging branches ;   - feat: improve branch-switching handling in script;   - fix: improve error handling for invalid user choice
+Sun 27 Jul 15:37	enigma	vsmash		maiass	MAI-7	?	Merged feature/MAI-7_node_packaging into develop
+Sun 27 Jul 15:37	enigma	vsmash		maiass	MAI-7	?	Merged release/0.9.3 into develop
+Sun 27 Jul 15:44	enigma	vsmash		maiass	MAI-7	?	MAI-7 Improved git release workflow;   - feat: added write permissions for creating releases;   - feat: extended checkout action for fetching all history and tags;   - feat: enhanced mechanism for getting latest git tag with default value set when no tags found
+Sun 27 Jul 15:44	enigma	vsmash		maiass	MAI-7	?	Merged feature/MAI-7_node_packaging into develop
+Sun 27 Jul 15:44	enigma	vsmash		maiass	MAI-7	?	Merged release/0.9.4 into develop
+Sun 27 Jul 15:52	enigma	vsmash		maiass	MAI-7	?	MAI-7 Updated test scripts to use .mjs node files;   - fix: change reference from maiass.js to maiass.mjs in debug-git-test.js;   - fix: modify path to maiass.mjs in test-runner.js
+Sun 27 Jul 15:52	enigma	vsmash		maiass	MAI-7	?	Merged feature/MAI-7_node_packaging into develop
+Sun 27 Jul 15:52	enigma	vsmash		maiass	MAI-7	?	Merged release/0.9.5 into develop
+Sun 27 Jul 16:02	enigma	vsmash		maiass	MAI-7	?	MAI-7 Updated files to utilize common JS execution;   - fix: replaced 'maiass.mjs' with 'maiass.cjs' in debug-git-test.js;   - fix: changed file path for 'maiass.mjs' to 'maiass.cjs' in test-runner.js
+Sun 27 Jul 16:02	enigma	vsmash		maiass	MAI-7	?	Merged feature/MAI-7_node_packaging into develop
+Sun 27 Jul 16:02	enigma	vsmash		maiass	MAI-7	?	Merged release/0.9.6 into develop
+Mon 28 Jul 06:11	enigma	vsmash		maiass	MAI-7	?	MAI-7 Enhanced Wordpress Integration and Debugging Information;   - feat: expanded WordPress plugin and theme management functionality;   - feat: added methods for updating version in WordPress theme style.css and PHP version constant;   - feat: implemented version constant generator based on file path for WordPress plugins and themes;   - feat: incorporated automatic generation of constants in WordPress update process;   - feat: Implemented dry run mode for WordPress updates previewing;   - feat: included expanded debugging information in configuration load and WordPress update functions;   - fix: corrected list format in create-release.sh script;   - docs: extensive descriptions and usage examples in workflow.md;   - docs: provided configuration metro information for WordPress plugin/theme management in configuration.md
+Mon 28 Jul 06:12	enigma	vsmash		maiass	MAI-7	?	Merged feature/MAI-7_node_packaging into develop
+Mon 28 Jul 06:12	enigma	vsmash		maiass	MAI-7	?	Merged release/0.9.7 into develop
+Mon 28 Jul 10:26	enigma	vsmash		maiass	MAI-7	?	MAI-7 Updated codebase and documentation for rebranding;   - refactor: changed name of the tool from MAIASS to MAIASS across the project ;   - docs: updated documentation for renaming to MAIASS;   - feat: added 'devmyass' script for executing local development version;   - feat: added logger.js for centralized logging with consistent branding;   - fix: updated git-info display to use centralized logger;   - chore: updated .gitignore to ignore MAIASS related files;   - refactor: improved environment variable and configuration display and edits to use centralized logger;   - delete: removed unused README.committhis.md document
+Mon 28 Jul 10:26	enigma	vsmash		maiass	MAI-7	?	Merged feature/MAI-7_node_packaging into develop
+Mon 28 Jul 10:26	enigma	vsmash		maiass	MAI-7	?	Merged release/1.0.1 into develop
+Mon 28 Jul 10:37	enigma	vsmash		maiass	MAI-7	?	MAI-7 Updated logging systems in maiass and removed unnecessary logs;   - refactor(maiass): replace console.log with the logger system for better output control;   - refactor(maiass): change user prompts to use the logger system instead of console.log;   - fix(maiass): correct comment typo on commit functionality script;   - fix(maiass): remove unnecessary log commenting on ES module import success;   - style(maiass): remove excess white spaces in commitThis function
+Mon 28 Jul 10:37	enigma	vsmash		maiass	MAI-7	?	Merged feature/MAI-7_node_packaging into develop
+Mon 28 Jul 10:37	enigma	vsmash		maiass	MAI-7	?	Merged release/1.0.2 into develop
+Mon 28 Jul 11:35	enigma	vsmash		maiass	no-ticket	?	Updated message in maiass-command.js;   - fix: corrected application name in thank you message
+Mon 28 Jul 11:35	enigma	vsmash		maiass	no-ticket	?	Merged release/1.0.3 into develop
+Mon 28 Jul 11:38	enigma	vsmash		maiass	no-ticket	?	Updated logger functionality;   - feat: added bold parameter to logger methods;   - fix: updated color selection based on boldness
+Mon 28 Jul 11:38	enigma	vsmash		maiass	no-ticket	?	Merged release/1.0.4 into develop
+Mon 28 Jul 12:31	enigma	vsmash		maiass	MAI-7	?	MAI-7 Added new color to colors.js;   - feat: added bold lime color function to colors.js
+Mon 28 Jul 12:31	enigma	vsmash		maiass	MAI-7	?	Merged feature/MAI-7_node_packaging into develop
+Mon 28 Jul 12:31	enigma	vsmash		maiass	MAI-7	?	Merged release/1.0.5 into develop
+Mon 28 Jul 12:33	enigma	vsmash		maiass	MAI-7	?	MAI-7 Improved logging in commit.js;   - fix: updated logging call for aiSuggestion
+Mon 28 Jul 12:35	enigma	vsmash		maiass	MAI-7	?	MAI-7 Updated logger functionality;   - feat: added aisuggestion method to logger.js
+Mon 28 Jul 12:35	enigma	vsmash		maiass	MAI-7	?	MAI-7 Updated style and behavior of logger;   - style(logger): changed text color to bright yellow;   - refactor(logger): removed MAIASS_PREFIX from aisuggestion log method
+Mon 28 Jul 12:36	enigma	vsmash		maiass	MAI-7	?	Merged feature/MAI-7_node_packaging into develop
+Mon 28 Jul 12:36	enigma	vsmash		maiass	MAI-7	?	Merged release/1.0.6 into develop
+Mon 28 Jul 12:45	enigma	vsmash		maiass	MAI-7	?	MAI-7 Updated logging in maiass.mjs;   - feat: imported logger from './lib/logger.js';   - refactor: replaced console.log with logger.header for displaying version;   - chore: added a blue colored horizontal line for better UI
+Mon 28 Jul 12:46	enigma	vsmash		maiass	MAI-7	?	MAI-7 Refactor log method in commit.js;   - refactor: changed log.info to log.aisuggestion in commit.js
+Mon 28 Jul 12:46	enigma	vsmash		maiass	MAI-7	?	Merged feature/MAI-7_node_packaging into develop
+Mon 28 Jul 12:46	enigma	vsmash		maiass	MAI-7	?	Merged release/1.0.7 into develop
+Mon 28 Jul 12:54	enigma	vsmash		maiass	MAI-7	?	MAI-7 Updated documentation and code to reflect changes in project name;   - docs: Updated README, documentation, and scripts to change name to "Semantic Scribe";   - refactor: Updated JavaScript files to change project name display to "Semantic Scribe";   - feat: Added new symbol 'maiassdot' in symbols.js;   - refactor: Removed logger.header line in maiass.mjs;   - fix: Updated project description in package.json
+Mon 28 Jul 12:56	enigma	vsmash		maiass	MAI-7	?	MAI-7 Updated logger and main packages;   - refactor: Changed log.info to log.aisuggestion in commit.js;   - feat: Imported logger from './lib/logger.js';   - refactor: Replaced console.log with logger.header in maiass.mjs file;   - style: Changed text color to bright yellow in logger;   - refactor: Removed MAIASS_PREFIX from aisuggestion log method;   - feat: Added aisuggestion method to logger.js;   - fix: Updated logging call for aiSuggestion;   - feat: Added bold lime color function to colors.js;   - refactor: Version and description update in package.json
+Mon 28 Jul 12:56	enigma	vsmash		maiass	MAI-7	?	Merged feature/MAI-7_node_packaging into develop
+Mon 28 Jul 12:56	enigma	vsmash		maiass	MAI-7	?	Merged release/1.0.8 into develop
+Mon 28 Jul 13:06	enigma	vsmash		maiass	MAI-7	?	MAI-7 Replace console logs with logger in maiass-pipeline and version-manager files;   - refactor(maiass-pipeline): replaced console.log with logger;   - refactor(version-manager): switched console.log to logger.info;   - style: changed symbol to GEAR for branch switch message in maiass-pipeline
+Mon 28 Jul 13:16	enigma	vsmash		maiass	MAI-7	?	MAI-7 Standardize logging syntax and improve logging statements;   - refactor: standardize logger method calls with two arguments syntax ;   - refactor: moved logging statements to appropriate points in functions;   - fix: updated incorrect logger to log calls;   - refactor: removed unnecessary info loggings
+Mon 28 Jul 13:16	enigma	vsmash		maiass	MAI-7	?	Merged feature/MAI-7_node_packaging into develop
+Mon 28 Jul 13:16	enigma	vsmash		maiass	MAI-7	?	Merged release/1.0.10 into develop
+Mon 28 Jul 13:20	enigma	vsmash		maiass	MAI-7	?	MAI-7 Updated logging in maiass-pipeline.js;   - refactor: replaced console.log with logger for better debuguity;   - refactor: replaced console.error with logger.error for better error tracking;   - refactor: replaced console.success with logger.success for improved success message tracking;   - refactor: refined logger messages;   - refactor: streamlined calls to use git commands through logger functionality
+Mon 28 Jul 13:20	enigma	vsmash		maiass	MAI-7	?	Merged feature/MAI-7_node_packaging into develop
+Mon 28 Jul 13:20	enigma	vsmash		maiass	MAI-7	?	Merged release/1.0.11 into develop
+Mon 28 Jul 13:22	enigma	vsmash		maiass	MAI-7	?	MAI-7 Updated logging in maiass-pipeline.js;   - feat: replaced console.log with a logger;   - feat: started logging current branch and version information;   - fix: replaced console.error with logger for error handling
+Mon 28 Jul 13:46	enigma	vsmash		maiass	MAI-7	?	MAI-7 Refactored logging framework for enhanced error management;   - feat(logger.js): added a debugging method to logger;   - feat(devlog.js, version-manager.js): replaced console.log with custom logger methods;   - fix(version-manager.js): managed exceptions for file reading/navigating errors
+Mon 28 Jul 13:46	enigma	vsmash		maiass	MAI-7	?	Merged feature/MAI-7_node_packaging into develop
+Mon 28 Jul 13:46	enigma	vsmash		maiass	MAI-7	?	Merged release/1.0.12 into develop
+Mon 28 Jul 13:50	enigma	vsmash		maiass	MAI-7	?	MAI-7 Updated logging functionality and error handling;   - refactor: replaced SYMBOLS.INFO with SYMBOLS.GEAR in logging messages;   - feat: incorporated error handling using logger instead of console.error;   - refactor: updated all console.log statements to use the logger module;   - feat: added more descriptive log messages for git operations
+Mon 28 Jul 13:50	enigma	vsmash		maiass	MAI-7	?	Merged feature/MAI-7_node_packaging into develop
+Mon 28 Jul 13:51	enigma	vsmash		maiass	MAI-7	?	Merged release/1.0.13 into develop
+Mon 28 Jul 13:51	enigma	vsmash		maiass	MAI-7	?	MAI-7 Updated logger symbol in pipeline;   - refactor: changed logger symbol from INFO to GEAR in maiass-pipeline.js
+Mon 28 Jul 13:51	enigma	vsmash		maiass	MAI-7	?	Merged feature/MAI-7_node_packaging into develop
+Mon 28 Jul 13:52	enigma	vsmash		maiass	MAI-7	?	Merged release/1.0.14 into develop
+Mon 28 Jul 13:58	enigma	vsmash		maiass	MAI-7	?	MAI-7 Improved logging output symbolism;   - feat: introduced distinct symbols for different logging operations;   - refactor: replaced standard logging symbols with detailed ones for merging, pulling and pushing actions
+Mon 28 Jul 14:01	enigma	vsmash		maiass	MAI-7	?	MAI-7 Implemented AI symbol and updated AI message identifier;   - feat(symbols): added new 'brain' symbol for AI ;   - refactor(commit): changed AI suggestion message symbol from 'INFO' to 'BRAIN'
+Mon 28 Jul 14:01	enigma	vsmash		maiass	MAI-7	?	Merged feature/MAI-7_node_packaging into develop
+Mon 28 Jul 14:01	enigma	vsmash		maiass	MAI-7	?	Merged release/1.0.15 into develop
+Mon 28 Jul 14:09	enigma	vsmash		maiass	MAI-7	?	MAI-7 Removed unused binary build files and tweaked logging in maiass-pipeline.js;   - chore: deleted maiass-arm64 build file;   - chore: deleted maiass-x64 build file;   - refactor: remove redundant logging line in validateAndHandleBranching;   - style: changed logger output color to blue for 'Phase 1: Branch Detection and Validation' message
+Mon 28 Jul 14:10	enigma	vsmash		maiass	MAI-7	?	Merged feature/MAI-7_node_packaging into develop
+Mon 28 Jul 14:10	enigma	vsmash		maiass	MAI-7	?	Merged release/1.0.16 into develop
+Tue 29 Jul 13:31	enigma	vsmash		maiass	MAI-7	?	MAI-7 Updated pertinently the logger, refined API interaction, and more ;   - feat: Revamped logger for better debugging ;   - feat: Altered handling of requests to API with enhanced timeouts, error handling, and logging;   - fix: Directed error feedback to match with the new Logger usage replacing previous console errors;   - chore: Removed compatibility with pkg from CommonJs;   - fix: Broadened error notifications for AI suggestion failures. Added stack if available and specific error handling for common network issues.
+Thu 31 Jul 00:18	enigma	vsmash		maiass	no-ticket	?	Improved debug mode and enhanced documentation;   - fix: updated context title in .windsurf;   - docs: added explanation for Debug Mode Token Validation in README;   - feat: introduced new token-validator.js for debugging API tokens;   - feat: integrated token-validator in main application (maiass.mjs)
+Thu 31 Jul 00:18	enigma	vsmash		maiass	no-ticket	?	Merged release/1.0.17 into develop
+Thu 31 Jul 01:09	enigma	vsmash		maiass	no-ticket	?	Refactored code related to user prompts and session usage;   - feat: introduced enhanced credit display;   - feat: added warning before every AI suggestion;   - fix: improved Ctrl+C handling in raw and readline interfaces;   - feat: added AI usage breakdown details;   - feat: added low credit warning
+Thu 31 Jul 01:09	enigma	vsmash		maiass	no-ticket	?	Merged release/1.0.18 into develop
+Thu 31 Jul 08:40	enigma	vsmash		maiass	no-ticket	?	Refined commit messaging and added new color functions;   - feat: added new color functions in colors.js;   - fix: improved token counting mechanism in commit.js;   - feat: added blueOnWhite logging property in logger.js;   - style: modified how log messages are presented in commit.js
+Thu 31 Jul 08:42	enigma	vsmash		maiass	no-ticket	?	Merged release/1.0.19 into develop
+Thu 31 Jul 08:42	enigma	vsmash		maiass	no-ticket	?	Merged release/1.0.20 into develop
+Thu 31 Jul 08:42	enigma	vsmash		maiass	no-ticket	?	Merged release/1.0.21 into develop
+Thu 31 Jul 08:45	enigma	vsmash		maiass	MAI-7	?	MAI-7 Improved MAIASS functionalities and user experience;   - feat: added new color functions  and  in colors.js ;   - refact: removed redundant logic and enhanced error messages related to AI API request in commit.js;   - feat: added credit usage breakdown with details in commit.js ;   - chore: updated project context title in .windsurf;   - docs: added 'Debug Mode Token Validation' section in README.maiass.md ;   - feat: created new file CREDIT_IMPROVEMENTS.md outlining credit display enhancements and other safety features
+Thu 31 Jul 08:46	enigma	vsmash		maiass	MAI-7	?	Merged feature/MAI-7_node_packaging into develop
+Thu 31 Jul 08:46	enigma	vsmash		maiass	MAI-7	?	Merged release/1.0.22 into develop
+Fri 01 Aug 15:36	enigma	vsmash		maiass	MAI-7	?	MAI-7 Enhanced AI key management and added machine fingerprinting;   - feat: Added functionality to auto-create anonymous subscriptions if no API key exists;   - feat: Added new module for generating a unique machine fingerprint for abuse prevention;   - refactor: Updated API requests to include the machine fingerprint;   - test: Created test file for credit display functionality
+Fri 01 Aug 15:36	enigma	vsmash		maiass	MAI-7	?	Merged feature/MAI-7_node_packaging into develop
+Fri 01 Aug 15:36	enigma	vsmash		maiass	MAI-7	?	Merged release/1.0.23 into develop
+Fri 01 Aug 15:44	enigma	vsmash		maiass	MAI-7	?	MAI-7 Updated install script;   - fix: corrected repository path in install.sh;   - feat: updated binary name in install.sh
+Fri 01 Aug 15:44	enigma	vsmash		maiass	MAI-7	?	Merged feature/MAI-7_node_packaging into develop
+Fri 01 Aug 15:44	enigma	vsmash		maiass	MAI-7	?	Merged release/1.0.24 into develop
+Fri 01 Aug 15:52	enigma	vsmash		maiass	MAI-7	?	MAI-7 Improved application naming and documentation;   - refactor: renamed maiass.mjs to maiass.mjs;   - docs: updated command references in cross-platform documentation;   - docs: updated command references in node compatibility documentation;   - build: modified references in package.json script section and pkg property;   - refactor: removed maiass.mjs file from the project
+Fri 01 Aug 15:53	enigma	vsmash		maiass	MAI-7	?	Merged feature/MAI-7_node_packaging into develop
+Fri 01 Aug 15:53	enigma	vsmash		maiass	MAI-7	?	Merged release/1.0.25 into develop
+Fri 01 Aug 16:10	enigma	vsmash		maiass	MAI-7	?	MAI-7 Refined logging and prompting capabilities, added new config options;   - feat(lib): introduced 'critical' and 'prompt' log levels;   - feat(lib): added shouldLog function based on verbosity in logger.js;   - refactor(lib): replaced certain log.info calls with log.critical in commit.js;   - refactor(lib): changed MAIASS_PREFIX icon in logger.js;   - feat(lib): added 'autoSwitch' variable to control version mgmt in maiass-pipeline.js;   - feat(lib): introduced new symbol 'maiassass' in symbols.js;   - feat: added new command line options '--commits-only, -c' and '--auto-stage, -a' in maiass.mjs;   -
+Fri 01 Aug 16:16	enigma	vsmash		maiass	MAI-7	?	MAI-7 Updated color configurations and trimming functions;   - feat(lib/colors.js): add BSoftPink and SoftPink color definitions;   - fix(lib/commit.js): trim whitespace from edited and AI suggested commit messages;   - refactor(lib/logger.js): changed MAIASS branding color to BSoftPink and modified log settings
+Fri 01 Aug 16:18	enigma	vsmash		maiass	MAI-7	?	MAI-7 Updated logging methods in maiass-pipeline.js;   - fix(code): replaced logger.White with logger.log.BWhite for currentBranch output
+Fri 01 Aug 16:21	enigma	vsmash		maiass	MAI-7	?	MAI-7 Updated logger functionality and streamlined pipeline code;   - feat: added BWhite logging method in logger.js;   - refactor: simplified logger usage in maiass-pipeline.js
+Fri 01 Aug 16:21	enigma	vsmash		maiass	MAI-7	?	Merged feature/MAI-7_node_packaging into develop
+Fri 01 Aug 16:21	enigma	vsmash		maiass	MAI-7	?	Merged release/1.0.26 into develop
+Fri 01 Aug 16:21	enigma	vsmash		maiass	MAI-7	?	MAI-7 Updated Maiass pipeline logic;   - feat: Added line to pause execution in handleMergeToDevelop function
+Fri 01 Aug 16:51	enigma	vsmash		maiass	MAI-7	?	MAI-7 Refactor input utility methods;   - refactor: moved getSingleCharInput and getMultiLineInput to input-utils.js;   - fix: autoformatted user prompts for increased visibility ;   - refactor: cleaned up manage input methods in commit.js;   - refactor: removed color formatting from prompt calling methods in maiass-pipeline.js
+Fri 01 Aug 17:02	enigma	vsmash		maiass	MAI-7	?	MAI-7 Improved commit and pipeline handling;   - feat: display git status in detailed format;   - feat: enhanced handling for unstaged/untracked changes;   - fix(lib): improved messaging and error handling for different commit states;   - feat: added conditionals to handle commit workflow cancellation and uncommitted changes in pipeline mode ;   - feat: included additional exit points in various commit/pipeline stages;   - feat: handle clean working directory state check after commit workflow
+Fri 01 Aug 17:05	enigma	vsmash		maiass	MAI-7	?	MAI-7 Refactored pipeline.js logic and improved debugging;   - feat: added condition to handle user-cancelled merges gracefully in runMaiassPipeline function;   - refactor: replaced console.debug with logger.debug for better logging in branchExists function
+Fri 01 Aug 17:06	enigma	vsmash		maiass	MAI-7	?	Merged feature/MAI-7_node_packaging into develop
+Fri 01 Aug 17:06	enigma	vsmash		maiass	MAI-7	?	Merged release/1.0.27 into develop
+Fri 01 Aug 17:14	enigma	vsmash		maiass	MAI-7	?	MAI-7 Refactor configuration handling;   - refactor: revised parameter order in  in  to include global option;   - feat: added  option in  in  to allow global key value setting;   - feat: updated  in  to use  method for determining the config path based on  option
+Fri 01 Aug 17:15	enigma	vsmash		maiass	MAI-7	?	Merged feature/MAI-7_node_packaging into develop
+Fri 01 Aug 17:15	enigma	vsmash		maiass	MAI-7	?	Merged release/1.0.28 into develop
+Fri 01 Aug 17:18	enigma	vsmash		maiass	MAI-7	?	MAI-7 Refactor log handling in version-manager;   - refactor: replaced console.log with logger.debug for .env.maiass content display
+Fri 01 Aug 17:24	enigma	vsmash		maiass	MAI-7	?	MAI-7 Enhancements to Logging and Error Management in the MAIASS system;   - feat: implemented a debug buffer system for logging sessions in logger.js;   - feat: added methods to initialize a debugging session, add entries to the buffer and retrieve it;   - feat: ability to write debug content to a temporary file;   - feat: ability to retrieve current debug session info in logger.js;   - refactor: enhanced error logging in logger.js to include debug buffer;   - feat: added logging side-effect to executeGitCommand() in maiass-pipeline.js for better output tracking;   - feat: improved error management in executeGitCommand() function;   - feat: debug information are now written to a file when there's an error
+Fri 01 Aug 17:30	enigma	vsmash		maiass	MAI-7	?	MAI-7 Updated default parameter in executeGitCommand function;   - refactor: changed silent's default value from false to 'pipe' in executeGitCommand
+Fri 01 Aug 17:30	enigma	vsmash		maiass	MAI-7	?	Merged feature/MAI-7_node_packaging into develop
+Fri 01 Aug 17:30	enigma	vsmash		maiass	MAI-7	?	Merged release/1.0.29 into develop
+Fri 01 Aug 17:36	enigma	vsmash		maiass	MAI-7	?	MAI-7 Improved git command handling and added debug verbosity;   - fix: changed default silent parameter value in executeGitCommand function;   - feat: added function to display git push command under debug verbosity;   - refactor: adjusted conditional check within handleStagedCommit function
+Fri 01 Aug 17:37	enigma	vsmash		maiass	MAI-7	?	MAI-7 Simplified debug check in handleStagedCommit function;   - fix(lib): remove unnecessary condition from debug check
+Fri 01 Aug 17:41	enigma	vsmash		maiass	MAI-7	?	MAI-7 Refactor commit handler;   - refactor(lib): removed verbosity check in handleStagedCommit function
+Fri 01 Aug 17:41	enigma	vsmash		maiass	MAI-7	?	Merged feature/MAI-7_node_packaging into develop
+Fri 01 Aug 17:41	enigma	vsmash		maiass	MAI-7	?	Merged release/1.0.30 into develop
+Fri 01 Aug 18:49	enigma	vsmash		maiass	MAI-7	?	MAI-7 Updated version tagging workflow;   - feat: added options for version bump and tagcreation in handleMergeToDevelop;   - feat: added functionality to decide tagging strategy;   - feat: Split release handling into simple bump and full release branch workflow;   - feat: Simple bump updates version and skips release branch and tagging;   - feat: Full release workflow includes release branch creation and tagging;   - feat: Updated return message with workflow used;   - fix: Made failure messages in git operations more consistent;   - chore: Removed redundant and commented out code sections.;   - style: Cleaned up logging and commenting for readability improvement
+Fri 01 Aug 18:50	enigma	vsmash		maiass	MAI-7	?	Merged feature/MAI-7_node_packaging into develop
+Fri 01 Aug 18:50	enigma	vsmash		maiass	MAI-7	?	Merged feature/MAI-7_node_packaging into develop
+Fri 01 Aug 18:50	enigma	vsmash		maiass	MAI-7	?	Merged release/1.0.32 into develop
+Fri 01 Aug 19:13	enigma	vsmash		maiass	MAI-7	?	MAI-7 Improved handling of commit logs;   - refactor: updated condition for executing changelog commits processing;   - feat: added proceed action when no commits are found;   - refactor: modified commit processing only to execute if commits exist;   - feat: added version bump fallback for change logs with no commits;   - refactor: unified fallback to version bump when no changelogs are found;   - feat: added tool's capability to create version bump entry for internal changelog
+Fri 01 Aug 19:13	enigma	vsmash		maiass	MAI-7	?	Merged feature/MAI-7_node_packaging into develop
+Fri 01 Aug 19:13	enigma	vsmash		maiass	MAI-7	?	Merged release/1.0.33 into develop
+Fri 01 Aug 19:13	enigma	vsmash		maiass	MAI-7	?	Merged feature/MAI-7_node_packaging into develop
+Fri 01 Aug 19:15	enigma	vsmash		maiass	MAI-7	?	Merged feature/MAI-7_node_packaging into develop
+Fri 01 Aug 19:15	enigma	vsmash		maiass	MAI-7	?	Merged release/1.1.0 into develop
+Fri 01 Aug 19:19	enigma	vsmash		maiass	MAI-7	?	MAI-7 Updated warning messages and handling for empty commits;   - fix: revised 'No relevant commits found for changelog' behavior to skip changelog update;   - fix: changed treatment for absent internal changelog commits from version bump entry to skipping update;   - style: moved formattedCommits definition closer to its usage in updateInternalChangelog function
+Fri 01 Aug 19:19	enigma	vsmash		maiass	MAI-7	?	Merged feature/MAI-7_node_packaging into develop
+Fri 01 Aug 19:24	enigma	vsmash		maiass	MAI-7	?	MAI-7 Improved Maiass pipeline logging and branch handling;   - refactor: replaced logger with log in Maiass pipeline;   - feat: added cache for finalBranch and originalBranch to avoid repeating git calls;   - feat: included logging for final branch after attempted switch;   - refactor: encapsulated debug file writing logic within try-catch block to prevent blocking of pipeline completion
+Fri 01 Aug 19:24	enigma	vsmash		maiass	MAI-7	?	Merged feature/MAI-7_node_packaging into develop
+Fri 01 Aug 19:28	enigma	vsmash		maiass	MAI-7	?	MAI-7 Refactored changelog update logic;   - feat: Added conditional logic for updating changelog regardless of relevant commits;   - refactor: Reconfigured message formatting of commit messages;   - fix: Adjusted logic for handling of internal changelogs
+Fri 01 Aug 19:28	enigma	vsmash		maiass	MAI-7	?	Merged feature/MAI-7_node_packaging into develop
+Fri 01 Aug 19:29	enigma	vsmash		maiass	MAI-7	?	MAI-7 Updated Changelog and Warning Messages;   - docs: revised Changelog for version 1.1.3;   - fix: updated warning messages and skip behavior for empty commits
+Fri 01 Aug 19:29	enigma	vsmash		maiass	MAI-7	?	Merged feature/MAI-7_node_packaging into develop
+Fri 01 Aug 19:33	enigma	vsmash		maiass	MAI-7	?	MAI-7 Refined changelog update process;   - fix: made log warnings more precise about changelog updates when no commits present;   - refactor: modified changelog generation process to add formatted commits selectively;   - refactor: mirrored these changes for updateInternalChangelog function as well
+Fri 01 Aug 19:33	enigma	vsmash		maiass	MAI-7	?	Merged feature/MAI-7_node_packaging into develop
+Fri 01 Aug 19:34	enigma	vsmash		maiass	MAI-7	?	MAI-7 Updated Changelog and Behavior Fixes;   - docs: updated CHANGELOG.md content ;   - fix: revised behavior for empty commits in changelog ;   - fix: adjusted treatment for absent internal changelog commits
+Fri 01 Aug 19:34	enigma	vsmash		maiass	MAI-7	?	Merged feature/MAI-7_node_packaging into develop
+Fri 01 Aug 19:41	enigma	vsmash		maiass	MAI-7	?	MAI-7 Updated maiass-pipeline.js to improve git commit handling;   - feat: modified method of acquiring latest git tag;   - feat: introduced fallback for no git tags to get all commits;   - feat: added filtering logic to exclude empty commit message lines;   - refactor: removed default 'Version bump' for lack of formatted commits;   - refactor: improved git logs command flexibility for main and internal changelogs;   - refactor: replaced hardcoded last tag with dynamically fetched git tag
+Fri 01 Aug 19:41	enigma	vsmash		maiass	MAI-7	?	Merged feature/MAI-7_node_packaging into develop
+Fri 01 Aug 19:42	enigma	vsmash		maiass	MAI-7	?	Merged feature/MAI-7_node_packaging into develop
+Fri 01 Aug 19:44	enigma	vsmash		maiass	MAI-7	?	MAI-7 Update Changelog file;   - fix: revised 'No relevant commits found for changelog' behavior;   - fix: updated treatment for absence of internal changelog commits from version bump entry;   - style: relocated formattedCommits definition in updateInternalChangelog function;   - remove: deleted 'Version bump' line
+Fri 01 Aug 19:51	enigma	vsmash		maiass	MAI-7	?	MAI-7 Improved command line user input handling and commit message suggestion;   - feat: added handling for invalid user inputs during commit message creation;   - refactor: improved visibility of user prompts and data handling during single character input collection;   - fix: resolve process exiting prematurely by maintaining original raw mode state during input collection
+Fri 01 Aug 19:51	enigma	vsmash		maiass	MAI-7	?	Merged feature/MAI-7_node_packaging into develop
+Fri 01 Aug 19:53	enigma	vsmash		maiass	MAI-7	?	Merged feature/MAI-7_node_packaging into develop
+Fri 01 Aug 19:54	enigma	vsmash		maiass	MAI-7	?	Merged feature/MAI-7_node_packaging into develop
+Fri 01 Aug 19:54	enigma	vsmash		maiass	MAI-7	?	Merged release/1.2.0 into develop
+Fri 01 Aug 19:56	enigma	vsmash		maiass	MAI-7	?	MAI-7 Update internal CHANGELOG file;   - refactor: renamed CHANGELOG_internal.md to CHANGELOG_internal_bak.md
+Fri 01 Aug 19:56	enigma	vsmash		maiass	MAI-7	?	Merged feature/MAI-7_node_packaging into develop
+Fri 01 Aug 19:58	enigma	vsmash		maiass	MAI-7	?	MAI-7 Stop creating new internal changelog if not existent;   - refactor: removed CHANGELOG_internal.md;   - refactor(maiass-pipeline): stopped creating new internal changelog if it doesn't exist
+Fri 01 Aug 19:58	enigma	vsmash		maiass	MAI-7	?	Merged feature/MAI-7_node_packaging into develop
+Fri 01 Aug 20:00	enigma	vsmash		maiass	MAI-7	?	MAI-7 Renamed internal changelog file;   - refactor: renamed CHANGELOG_internal_bak.md to CHANGELOG_internal.md
+Fri 01 Aug 20:01	enigma	vsmash		maiass	MAI-7	?	Merged feature/MAI-7_node_packaging into develop
+Fri 01 Aug 20:04	enigma	vsmash		maiass	no-ticket	?	Removed unneeded test files;   - feat: Deleted test-credit-display.js;   - feat: Deleted test-file.txt;   - feat: Removed test-install.sh;   - feat: Erased test.env
+Fri 01 Aug 20:04	enigma	vsmash		maiass	no-ticket	?	Merged main into develop
+Fri 01 Aug 20:18	enigma	vsmash		maiass	MAI-7	?	MAI-7 Updated package building and release script;   - feat: added .pkgignore to exclude development files from builds;   - feat(package.json): included relevant files to assets in package.json;   - fix(scripts): removed premature exit command from create-release.sh
+Fri 01 Aug 20:18	enigma	vsmash		maiass	MAI-7	?	Merged feature/MAI-7_node_packaging into develop
+Fri 01 Aug 20:18	enigma	vsmash		maiass	MAI-7	?	Merged release/1.2.5 into develop
+Fri 01 Aug 20:47	enigma	vsmash		maiass	MAI-7	?	MAI-7 Added .DS_Store to .pkgignore;   - feat: ignore .DS_Store files in packaging
+Fri 01 Aug 20:47	enigma	vsmash		maiass	MAI-7	?	Merged feature/MAI-7_node_packaging into develop
+Fri 01 Aug 20:47	enigma	vsmash		maiass	MAI-7	?	Merged release/1.2.6 into develop
+Fri 01 Aug 20:52	enigma	vsmash		maiass	MAI-7	?	MAI-7 Updated script files; - fix(build.js): corrected project name in build script; - feat(.pkgignore): added scripts/ path to package ignore list
+Fri 01 Aug 20:52	enigma	vsmash		maiass	MAI-7	?	Merged feature/MAI-7_node_packaging into develop
+Fri 01 Aug 20:52	enigma	vsmash		maiass	MAI-7	?	Merged release/1.2.7 into develop
+Fri 01 Aug 20:57	enigma	vsmash		maiass	MAI-7	?	MAI-7 Refactoring build process and release script;   - feat(build.js): mapped targets to output filenames;   - feat(build.js): improved build directory check and cleanup;   - fix(package.json): removed unused scripts in pkg section;   - feat(scripts/create-release.sh): refactored release binaries copy process;   - fix(scripts/create-release.sh): updated chmod and shasum commands to match new filenames;   - cleanup(scripts/create-release.sh): removed unnecessary comments and conditions
+Fri 01 Aug 20:57	enigma	vsmash		maiass	MAI-7	?	Merged feature/MAI-7_node_packaging into develop
+Fri 01 Aug 20:57	enigma	vsmash		maiass	MAI-7	?	Merged release/1.2.8 into develop
+Fri 01 Aug 21:07	enigma	vsmash		maiass	MAI-7	?	MAI-7 Refactoring script and file names;   - refactor: updated output file names in build.js;   - refactor: modify repo path in create-release.sh;   - refactor: adjusted names when copying binaries in create-release.sh;   - refactor: changed executable file names in create-release.sh
+Fri 01 Aug 21:07	enigma	vsmash		maiass	MAI-7	?	Merged feature/MAI-7_node_packaging into develop
+Fri 01 Aug 21:07	enigma	vsmash		maiass	MAI-7	?	Merged release/1.2.9 into develop
+Fri 01 Aug 21:14	enigma	vsmash		maiass	MAI-7	?	MAI-7 Updated release script for additional platforms;   - feat: Added support for MacOS ARM64 in release script;   - feat: Added support for Linux ARM64 in release script;   - feat: Added support for Windows ARM64 in release script
+Fri 01 Aug 21:14	enigma	vsmash		maiass	MAI-7	?	Merged feature/MAI-7_node_packaging into develop
+Fri 01 Aug 21:14	enigma	vsmash		maiass	MAI-7	?	Merged release/1.2.10 into develop
+Fri 01 Aug 21:35	enigma	vsmash		maiass	MAI-7	?	MAI-7 Updated GitHub actions and documentation for cross-platform release;   - feat: updated filenames from "maiass" to "maiass" in copying & renaming step;   - feat: added executable permissions for "maiass" binaries;   - feat: updated shasum command from "maiass" to "maiass";   - fix: revised tag name message format in echo command logic;   - fix: changed value of name from "MAIASS" to "maiass" in release action;   - docs: updated references from "maiass" to "maiass" in description and download links;   - feat: added references to maiass-linux-arm64 and maiass-windows-arm64.exe in release files
+Fri 01 Aug 21:35	enigma	vsmash		maiass	MAI-7	?	Merged feature/MAI-7_node_packaging into develop
+Fri 01 Aug 21:35	enigma	vsmash		maiass	MAI-7	?	Merged release/1.2.11 into develop
+Fri 01 Aug 21:43	enigma	vsmash		maiass	MAI-7	?	MAI-7 Updated script and test files to reflect name change of main script;   - refactor: Updated name of CLI script from "maiassnode" to "maiass";   - refactor: Revised file directories in scripts and tests to reflect new script name;   - docs: Updated documentation for script usage and module interactions based on new name
+Sat 02 Aug 05:51	enigma	vsmash		maiass	MAI-7	?	MAI-7 Set release ignore rules, enhance release and pkgignore files;   - feat: created .gitattributes to manage release ignoring rules;   - docs(release.yml): added note for using binary downloads not source code archives;   - feat(.pkgignore): added more rules to pkgignore;   - docs(RELEASE_TEMPLATE.md): updated version numbers, added Linux ARM64 support and repeated note about binary downloads
+Sat 02 Aug 05:51	enigma	vsmash		maiass	MAI-7	?	Merged feature/MAI-7_node_packaging into develop
+Sat 02 Aug 05:51	enigma	vsmash		maiass	MAI-7	?	Merged release/1.2.12 into develop
+Sat 02 Aug 06:41	enigma	vsmash		maiass	MAI-7	?	MAI-7 Project Maintenance and Improvement;   - feat: Added GPL-3.0-only license;   - fix: Adjusted package version according to recent changes;   - feat: Added new Modular AI-Augmented Semantic Scribe feature to the project;   - doc: Overhauled README with updated descriptions and examples;   - fix: Updated brew configuration to correctly tap into maiass instead of nodemaiass;   - refactor: Deleted old maiassnode.rb file;   - feat: Modified Homebrew setup script to accommodate updates;   - doc: Ignored additional files (HOMEBREW_TAP_SETUP.md, script creations) on .pkgignore;   - doc: Copied updated maiass.rb Homebrew formula to homebrew
+Sat 02 Aug 06:41	enigma	vsmash		maiass	MAI-7	?	Merged feature/MAI-7_node_packaging into develop
+Sat 02 Aug 06:41	enigma	vsmash		maiass	MAI-7	?	Merged release/5.2.5 into develop
+Sat 02 Aug 08:06	enigma	vsmash		maiass	MAI-7	?	MAI-7 Updated feature name and implemented version update checker;   - refactor: Changed feature name from 'AI-Assisted Semantic Savant' to 'AI-Augmented Semantic Scribe';   - fix: Adjusted associated references in documentation and code for the new feature name;   - feat: Added functionality to check for version updates from the GitHub releases;   - fix: Updated brew configuration to correctly define augmented semantic scribe;   - feat: Updated package.json with new version and adjusted description.
+Sat 02 Aug 08:06	enigma	vsmash		maiass	MAI-7	?	Merged feature/MAI-7_node_packaging into develop
+Sat 02 Aug 08:06	enigma	vsmash		maiass	MAI-7	?	Merged release/5.2.6 into develop
+Sat 02 Aug 09:42	enigma	vsmash		maiass	MAI-7	?	MAI-7 Update MAIASS homebrew formula and script;   - fix: update maiass sha256 checksum in homebrew formula;   - refactor: remove superfluous 'v' from download URLs in homebrew formula and shells script
+Sat 02 Aug 09:42	enigma	vsmash		maiass	MAI-7	?	Merged feature/MAI-7_node_packaging into develop
+Sat 02 Aug 09:42	enigma	vsmash		maiass	MAI-7	?	Merged release/5.2.7 into develop
+Sat 02 Aug 09:54	enigma	vsmash		maiass	no-ticket	?	Update Maiass formula and related scripts;   - feat: updated Maiass version in brew formula to 5.2.7;   - fix: remodeled URL structure in Maiass formula and creation script;   - feat: added new symlink names for main MAIASS tool;   - fix: streamlined 'create-homebrew-formula.sh' layout;   - fix: updated URL patterns in 'create-release.sh' removing v from version tag
+Sat 02 Aug 09:54	enigma	vsmash		maiass	no-ticket	?	Merged main into develop
+Sat 02 Aug 09:54	enigma	vsmash		maiass	no-ticket	?	Merged release/5.2.8 into develop
+Sat 02 Aug 10:46	enigma	vsmash		maiass	no-ticket	?	Updated .gitignore and removed unused Formula file;   - feat: added 'Formula/maiass.rb' to .gitignore ;   - fix: deleted unused 'Formula/maiass.rb' file
+Sat 02 Aug 10:46	enigma	vsmash		maiass	no-ticket	?	Merged main into develop
+Sat 02 Aug 10:46	enigma	vsmash		maiass	no-ticket	?	Merged release/5.2.9 into develop
+Sat 02 Aug 11:35	enigma	vsmash		maiass	no-ticket	?	Updated code signing for macOS and Windows binaries;   - feat: added certificate files to .gitignore;   - feat: added code signing for .exe files in build.js;   - docs: created new detailed documents on code signing for both platforms;   - feat: added new scripts for code signing and signature verification for individual binaries
+Sat 02 Aug 11:35	enigma	vsmash		maiass	no-ticket	?	Merged main into develop
+Sat 02 Aug 11:36	enigma	vsmash		maiass	no-ticket	?	Merged release/5.3.0 into develop
+Sat 02 Aug 11:53	enigma	vsmash		maiass	no-ticket	?	Updated script for Homebrew formula creation and added binary file for testing;   - refactor(scripts): change process for retrieving SHA256 hashes in Homebrew script;   - feat: added new test binary file
+Sat 02 Aug 12:00	enigma	vsmash		maiass	MAI-8	?	MAI-8 Updated maiass.sh and nodemaiass.sh scripts;   - fix: updated node command to use .cjs modules in maiass.sh and nodemaiass.sh scripts
+Sat 02 Aug 12:01	enigma	vsmash		maiass	MAI-8	?	Merged deploy/MAI-8_node_issues into develop
+Sat 02 Aug 12:01	enigma	vsmash		maiass	MAI-8	?	Merged release/5.3.1 into develop
+Sat 02 Aug 12:04	enigma	vsmash		maiass	MAI-8	?	Merged deploy/MAI-8_node_issues into develop
+Sat 02 Aug 12:05	enigma	vsmash		maiass	MAI-8	?	Merged release/5.3.2 into develop
+Sat 02 Aug 12:13	enigma	vsmash		maiass	no-ticket	?	Updated binary hashing in Homebrew formula creation;   - feat: updated script to download and hash binaries from actual GitHub release;   - fix: improved error handling if binary download fails;   - refactor: clarity improvements to status and error messages
+Sat 02 Aug 12:13	enigma	vsmash		maiass	no-ticket	?	Merged main into develop
+Sat 02 Aug 12:13	enigma	vsmash		maiass	no-ticket	?	Merged release/5.3.3 into develop
+Sat 02 Aug 12:27	enigma	vsmash		maiass	no-ticket	?	Upgrade to release process and checksum generation;   - feat: added new checksums for various platforms in checksums.txt;   - fix(scripts): revised create-homebrew-formula.sh to prefer x64 over intel;   - fix(scripts): amended copy command in create-release.sh from "maiass-macos-intel" to "maiass-macos-x64";   - feat(scripts): incorporated code signature verification in create-release.sh for macOS binaries
+Sat 02 Aug 12:27	enigma	vsmash		maiass	no-ticket	?	Merged main into develop
+Sat 02 Aug 12:27	enigma	vsmash		maiass	no-ticket	?	Merged release/5.3.4 into develop
+Sat 02 Aug 13:10	enigma	vsmash		maiass	no-ticket	?	Improved code signing and binary hashing;   - feat(scripts): added advanced options to code signing in codesign.sh;   - feat(scripts): added Gatekeeper assessment to code signing in codesign.sh;   - refactor(scripts): changed binary hashing to archive hashing in create-homebrew-formula.sh;   - refactor(scripts): changed binary links to archive links in create-homebrew-formula.sh;   - feat(scripts): added binary archiving in create-release.sh;   - feat(scripts): added Gatekeeper assessment in create-release.sh;   - refactor(scripts): added archive hashing in create-release.sh;   - docs(scripts): updated next steps instructions in create-release.sh
+Sat 02 Aug 13:10	enigma	vsmash		maiass	no-ticket	?	Merged main into develop
+Sat 02 Aug 13:10	enigma	vsmash		maiass	no-ticket	?	Merged release/5.3.5 into develop
+Sat 02 Aug 13:20	enigma	vsmash		maiass	no-ticket	?	Updated release process and scripts;   - feat: added code signing for macOS binaries in release.yml;   - refactor: modified release asset creation to include signature-preserving archives;   - refactor: updated instructions and details in release descriptors;   - feat: added quick-release.sh for building, signing, and uploading;   - feat: added release-and-deploy.sh for complete automated release process, including Homebrew update.
+Sat 02 Aug 13:20	enigma	vsmash		maiass	no-ticket	?	Merged main into develop
+Sat 02 Aug 13:20	enigma	vsmash		maiass	no-ticket	?	Merged release/5.3.6 into develop
+Sat 02 Aug 14:58	enigma	vsmash		maiass	no-ticket	?	Update dependencies and configurations  ;   - chore: upgraded package version from 0.7.1 to 5.3.6;   - chore: switched maiass bin from .mjs to .cjs;   - chore: added nexe as a devDependency;   - chore: added several new devDependencies including webpack and ajv packages
+Sat 02 Aug 14:59	enigma	vsmash		maiass	no-ticket	?	Merged main into develop
+Sat 02 Aug 14:59	enigma	vsmash		maiass	no-ticket	?	Merged release/5.3.7 into develop
+Sat 02 Aug 15:10	enigma	vsmash		maiass	no-ticket	?	Refactored build scripts for standalone file usage;   - refactor: updated package.json to use  for , , and  input;   - refactor: removed unused > pkg@5.8.1
+> Error! Entry file/directory is expected
+  Pass --help to see usage information scripts and assets configuration in package.json;   - refactor: altered  to require  for PKG and Nexe builds;   - refactor: removed platform loop in  and built for each specific platform with updated standalone references;   - refactor: adjusted Bun build process in  to handle standalone file and renamed platform outputs
+Sat 02 Aug 15:10	enigma	vsmash		maiass	no-ticket	?	Merged main into develop
+Sat 02 Aug 15:10	enigma	vsmash		maiass	no-ticket	?	Merged release/5.3.8 into develop
+Sat 02 Aug 15:15	enigma	vsmash		maiass	no-ticket	?	Improve build scripts for reliability and flexibility;   - refactor(advanced-build.sh): disabled nexe builds due to incompatibilities;   - refactor(release-and-deploy.sh): updated to use Bun-built binaries when available;   - fallback(release-and-deploy.sh): added PKG-built binaries as a secondary option;   - feat(release-and-deploy.sh): implemented error handling for missing binaries
+Sat 02 Aug 15:16	enigma	vsmash		maiass	no-ticket	?	Merged main into develop
+Sat 02 Aug 15:16	enigma	vsmash		maiass	no-ticket	?	Merged release/5.3.9 into develop
+Sat 02 Aug 15:54	enigma	vsmash		maiass	no-ticket	?	Update release process and checksums; ;   - chore: updated checksums for all platform binaries;   - feat: added preparation step for binary code signing;   - refactor: modified script to prioritize signed binaries for release
+Sat 02 Aug 15:54	enigma	vsmash		maiass	no-ticket	?	Merged main into develop
+Sat 02 Aug 15:55	enigma	vsmash		maiass	no-ticket	?	Merged release/5.3.10 into develop
+Sun 03 Aug 11:04	enigma	vsmash		maiass	no-ticket	?	Introduce R2 deployment and improve .gitignore;   - feat: created  for example environment variables;   - feat: added new Homebrew formula file ;   - feat: implemented  for standalone Node.js execution;   - feat: added  for deploying release binaries to Cloudflare R2;   - fix: removed obsolete checksum files from  and ;   - fix: updated  to use R2 URLs, preserving signatures;   - docs: updated development documentation with build and release workflows;   - chore: updated  to
+Sun 03 Aug 11:05	enigma	vsmash		maiass	no-ticket	?	Merged main into develop
+Sun 03 Aug 11:05	enigma	vsmash		maiass	no-ticket	?	Merged release/5.3.12 into develop
+Sun 03 Aug 11:10	enigma	vsmash		maiass	no-ticket	?	Add MAIASS script documentation and environment variable setup;   - docs: created README in scripts directory detailing all MAIASS scripts;   - chore: added GITHUB_TOKEN entry to .dev.vars.example;   - feat(release): incorporated .dev.vars loading in release-and-deploy.sh to auto-source env variables
+Sun 03 Aug 11:11	enigma	vsmash		maiass	no-ticket	?	Merged main into develop
+Sun 03 Aug 11:11	enigma	vsmash		maiass	no-ticket	?	Merged release/5.3.13 into develop
+Sun 03 Aug 11:26	enigma	vsmash		maiass	no-ticket	?	Remove 'v' prefix from version URLs and messages;   - refactor: standardized version URLs by removing 'v' prefix;   - fix: adjusted GitHub release commands to not include 'v' prefix;   - chore: ensured correct versioning in R2 and GitHub communication;   - fix: corrected file permissions for copied binaries;   - chore: added copying of .exe files to build directory
+Sun 03 Aug 11:27	enigma	vsmash		maiass	no-ticket	?	Merged main into develop
+Sun 03 Aug 11:27	enigma	vsmash		maiass	no-ticket	?	Merged release/5.3.14 into develop
+Sun 03 Aug 11:31	enigma	vsmash		maiass	no-ticket	?	Handle Windows binary copy conditional in release script;   - feat: added conditional checks before copying maiass-windows-x64.exe;   - refactor: removed redundant zip creation for maiass-windows-arm64.exe;   - chore: updated archive and checksum script segment for Windows executables
+Sun 03 Aug 11:31	enigma	vsmash		maiass	no-ticket	?	Merged main into develop
+Sun 03 Aug 11:31	enigma	vsmash		maiass	no-ticket	?	Merged release/5.3.15 into develop
+Sun 03 Aug 11:33	enigma	vsmash		maiass	no-ticket	?	fixed permissions issue
+Sun 03 Aug 11:33	enigma	vsmash		maiass	no-ticket	?	Merged main into develop
+Sun 03 Aug 11:33	enigma	vsmash		maiass	no-ticket	?	Merged release/5.3.16 into develop
+Sun 03 Aug 11:35	enigma	vsmash		maiass	no-ticket	?	more permissions fix
+Sun 03 Aug 11:35	enigma	vsmash		maiass	no-ticket	?	Merged main into develop
+Sun 03 Aug 11:35	enigma	vsmash		maiass	no-ticket	?	Merged release/5.3.17 into develop
+Sun 03 Aug 12:06	enigma	vsmash		maiass	no-ticket	?	Merged main into develop
+Sun 03 Aug 12:06	enigma	vsmash		maiass	no-ticket	?	Merged release/5.3.18 into develop
+Mon 11 Aug 08:52	enigma	vsmash		nodemaiass	DEVOPS-4	?	DEVOPS-4 package installation
+Mon 11 Aug 08:52	enigma	vsmash		nodemaiass	DEVOPS-4	?	Merged feature/DEVOPS-4_nodepackage into develop
+Mon 11 Aug 08:52	enigma	vsmash		nodemaiass	DEVOPS-4	?	Merged release/5.3.19 into develop
+Mon 11 Aug 09:25	enigma	vsmash		nodemaiass	DEVOPS-4	?	DEVOPS-4 added setup
+Mon 11 Aug 09:25	enigma	vsmash		nodemaiass	DEVOPS-4	?	Merged feature/DEVOPS-4_nodepackage into develop
+Mon 11 Aug 09:44	enigma	vsmash		nodemaiass	DEVOPS-4	?	DEVOPS-4 removed single quotes from set upstream origin
+Mon 11 Aug 09:44	enigma	vsmash		nodemaiass	DEVOPS-4	?	Merged feature/DEVOPS-4_nodepackage into develop
+Mon 11 Aug 09:45	enigma	vsmash		nodemaiass	DEVOPS-4	?	Merged release/5.3.21 into develop
+Mon 11 Aug 10:00	enigma	vsmash		nodemaiass	DEVOPS-4	?	DEVOPS-4 more changes
+Mon 11 Aug 10:00	enigma	vsmash		nodemaiass	DEVOPS-4	?	Merged feature/DEVOPS-4_nodepackage into develop
+Sun 14 Sep 08:20	enigma	vsmash		nodemaiass	MAI-8	?	MAI-8 added stuff
+Sun 14 Sep 08:20	enigma	vsmash		nodemaiass	MAI-8	?	Merged osx/MAI-8_how_broken_is_it into develop
+Sun 23 Nov 08:51	ashwubbery.local	nodemaiass		MAI	MAI-8	?	MAI-8 Updated MAIASS project with key changes; 	- fix(docs): updated file paths in .windsurf; 	- feat: added maiass.log and .env.maiass.bak to .gitignore; 	- refactor: replaced "openai" with "maiass" in README.md and other documents; 	- refactor: changed "masterbranch" references to "mainbranch" throughout the project; 	- fix(docs): updated API token validation information in README.maiass.md; 	- fix(docs): updated branch classification method description in api.md; 	- fix: updated MAIASS_AI_TOKEN description in configuration variable definitions
+Sun 23 Nov 08:52	ashwubbery.local	nodemaiass		MAI	MAI-8	?	Merged osx/MAI-8_how_broken_is_it into develop
+Mon 24 Nov 08:28	ashwubbery.local	nodemaiass		MAI	MAI-8	?	MAI-8 Updated endpoints and enhanced logging for API interaction; 	- feat(lib): replaced 'anonymous-subscription' endpoint with '/v1/token' in account-info.js and commit.js; 	- feat(lib): added 'X-Client-Name' and 'X-Client-Version' headers to API requests; 	- fix(lib): replaced direct access of response data with compatibility checks for multiple field names; 	- refactor(lib): improved logging with more detailed API key, subscription ID, and credits info; 	- refactor(lib): updated machine-fingerprint.js comments to reflect algorithm change; 	- feat(commit): included 'X-Subscription-ID' in commit.js headers
+Mon 24 Nov 08:29	ashwubbery.local	nodemaiass		MAI	MAI-8	?	Merged osx/MAI-8_how_broken_is_it into develop
+Mon 24 Nov 08:29	ashwubbery.local	nodemaiass		MAI	MAI-8	?	Merged develop into staging
+Mon 24 Nov 08:29	ashwubbery.local	vsmash		nodemaiass	MAI-8	?	Merged osx/MAI-8_how_broken_is_it into develop
+Mon 24 Nov 08:36	ashwubbery.local	vsmash		nodemaiass	MAI-8	?	MAI-8 Add logCommit function for debugging;   - feat: import logCommit function for debugging
+Mon 24 Nov 08:36	ashwubbery.local	vsmash		nodemaiass	MAI-8	?	Merged osx/MAI-8_how_broken_is_it into develop
+Mon 24 Nov 08:43	ashwubbery.local	vsmash		nodemaiass	MAI-8	?	MAI-8 fix to change logs
+Mon 24 Nov 08:44	ashwubbery.local	vsmash		nodemaiass	MAI-8	?	Merged osx/MAI-8_how_broken_is_it into develop
+Mon 24 Nov 08:57	ashwubbery.local	vsmash		nodemaiass	MAI-8	?	MAI-8 Add new function to update changelog path;   - feat: import updateChangelogNew function;   - feat: add logic to handle changelog path;   - feat: call updateChangelogNew with changelog path and new version
+Mon 24 Nov 08:58	ashwubbery.local	vsmash		nodemaiass	MAI-8	?	Merged osx/MAI-8_how_broken_is_it into develop
+Mon 24 Nov 09:05	ashwubbery.local	vsmash		nodemaiass	MAI-8	?	MAI-8 Update changelog.js to keep JIRA ticket in internal changelog;   - refactor: modify line to keep JIRA ticket information in subject
+Mon 24 Nov 09:06	ashwubbery.local	vsmash		nodemaiass	MAI-8	?	Merged osx/MAI-8_how_broken_is_it into develop
+Mon 24 Nov 09:20	ashwubbery.local	vsmash		nodemaiass	MAI-8	?	MAI-8 Update .gitignore and maiass.mjs;   - chore: remove unused entries in .gitignore;   - feat: add handling for --auto flag in maiass.mjs
+Mon 24 Nov 09:20	ashwubbery.local	vsmash		nodemaiass	MAI-8	?	Merged osx/MAI-8_how_broken_is_it into develop
+Mon 24 Nov 09:21	ashwubbery.local	vsmash		nodemaiass	MAI-8	?	MAI-8 Update verbosity and debug mode settings in .env file;   - fix: disable debug mode in MAIASS_VERBOSITY;   - fix: enable debug mode in MAIASS_DEBUG
+Mon 24 Nov 09:22	ashwubbery.local	vsmash		nodemaiass	MAI-8	?	Merged osx/MAI-8_how_broken_is_it into develop
+Mon 24 Nov 10:23	ashwubbery.local	vsmash		nodemaiass	MAI-8	?	MAI-8 Add MAIASS version display and git branch info;   - feat: add displayHeader function for MAIASS version;   - feat: get own MAIASS version from package.json;   - feat: display MAIASS version in displayVersionInfo;   - feat: show current git branch in validateAndHandleBranching
+Mon 24 Nov 10:24	ashwubbery.local	vsmash		nodemaiass	MAI-8	?	Merged osx/MAI-8_how_broken_is_it into develop
+Mon 24 Nov 11:17	ashwubbery.local	nodemaiass		MAI	MAI-8	?	MAI-8 Update color handling and commit message flow; 	- feat: added bold orange in colors.js; 	- feat: implemented function to get color based on credit count in commit.js; 	- feat: created function to print gradient line in commit.js; 	- fix: optimized credit information extraction and display in commit.js; 	- feat: added anonymous subscription creation when no AI token found in commit.js; 	- feat: improved AI suggestion display with gradient lines in commit.js
+Mon 24 Nov 11:18	ashwubbery.local	nodemaiass		MAI	MAI-8	?	Merged osx/MAI-8_how_broken_is_it into develop
+Mon 24 Nov 12:12	ashwubbery.local	vsmash		nodemaiass	MAI-8	?	MAI-8 Update version files with new version and configurations;   - feat: add function to update secondary version files based on config;   - feat: implement logic to update secondary version files with new version and patterns;   - docs: add detailed comments and explanation for the updateSecondaryVersionFiles function
+Mon 24 Nov 12:12	ashwubbery.local	vsmash		nodemaiass	MAI-8	?	Merged osx/MAI-8_how_broken_is_it into develop
+Mon 24 Nov 12:12	ashwubbery.local	vsmash		nodemaiass	MAI-8	?	Merged release/5.7.18 into develop
+Mon 24 Nov 12:52	ashwubbery.local	vsmash		nodemaiass	no-ticket	?	Update internal changelog with weekday format and normalize date strings;   - feat: create/update internal changelog with weekday format;   - refactor: normalize date strings for comparison
+Mon 24 Nov 12:53	ashwubbery.local	vsmash		nodemaiass	no-ticket	?	Update date format in changelog;   - refactor: modify date format in changelog to include capitalized weekday;   - refactor: update weekday to be capitalized in changelog
+Mon 24 Nov 12:55	ashwubbery.local	vsmash		nodemaiass	no-ticket	?	Update internal changelog entries with weekday in date;   - refactor: replace date with weekday in internal changelog entries
+Mon 24 Nov 12:59	ashwubbery.local	vsmash		nodemaiass	no-ticket	?	Update internal changelog content;   - refactor: simplify date formatting;   - refactor: improve content update logic in the changelog
+Mon 24 Nov 13:06	ashwubbery.local	nodemaiass		MAIASSS	Devops	?	Updated internal changelog; 	- refactor: simplified date formatting in internal changelog; 	- refactor: improved content update logic in internal changelog
+Mon 24 Nov 13:16	ashwubbery.local	vsmash		nodemaiass	no-ticket	?	Update internal changelog formatting;   - refactor: use  instead of Mon Nov 24 13:16:21 AEDT 2025 for better readability
+Mon 24 Nov 13:20	ashwubbery.local	vsmash		nodemaiass	no-ticket	?	Update date format in internal changelog;   - refactor: use dateWithWeekday instead of date
+Mon 24 Nov 13:21	ashwubbery.local	vsmash		nodemaiass	no-ticket	?	Add logging and exit functionality;   - refactor: log the dateWithWeekday;   - refactor: add process exit functionality
+Mon 24 Nov 13:22	ashwubbery.local	vsmash		nodemaiass	no-ticket	?	Update internal changelog function;   - refactor: remove redundant console.log statements;   - style: fix indentation issue
+Mon 24 Nov 13:26	ashwubbery.local	vsmash		nodemaiass	no-ticket	?	Update internal changelog formatting;   - fix: correct date variable usage;   - fix: remove unnecessary console.log and process.exit calls
+Mon 24 Nov 13:29	ashwubbery.local	vsmash		nodemaiass	no-ticket	?	Update internal changelog function to remove console log and process exit
+Mon 24 Nov 13:33	ashwubbery.local	vsmash		nodemaiass	no-ticket	?	Update internal changelog logic;   - refactor: remove unnecessary comments and unused code;   - refactor: simplify formatting of commit messages;   - refactor: restructure logic for handling existing changelog entries
+Mon 24 Nov 14:08	ashwubbery.local	vsmash		nodemaiass	no-ticket	?	Update package.json with new version and additional files;   - chore: update package.json version to 5.7.33;   - chore: add new files to package.json "files" section
+Mon 24 Nov 14:09	ashwubbery.local	vsmash		nodemaiass	no-ticket	?	Merged release/5.8.0 into develop
+Mon 24 Nov 15:18	ashwubbery.local	vsmash		nodemaiass	no-ticket	?	Update automated AI suggestion prompts;   - feat: add automatic approval for AI suggestions based on environment variables;   - feat: add automatic push option for commits based on environment variables;   - feat: add automatic staging of changes based on environment variables;   - feat: add automatic merging to develop branch based on environment variables
+Mon 24 Nov 16:07	ashwubbery.local	vsmash		nodemaiass	no-ticket	?	Add features to bootstrap module and fix log message;   - feat: Add functions for project type detection and version source identification in bootstrap module;   - feat: Implement configuration setup steps in bootstrap module;   - fix: Update log message for anonymous subscription request in account-info module
+Mon 24 Nov 16:23	ashwubbery.local	vsmash		nodemaiass	no-ticket	?	Add client info utilities;   - feat: add client-info module for client name and version retrieval;   - feat: add getClientName function to get client name for API headers;   - feat: add getClientVersion function to get client version for API headers
+Mon 24 Nov 16:30	ashwubbery.local	vsmash		nodemaiass	no-ticket	?	Add logger functionality to secure storage module;   - refactor: update logger import in secure-storage.js;   - docs: update debug log messages in secure-storage.js
+Mon 24 Nov 16:54	ashwubbery.local	vsmash		nodemaiass	VEL-406	?	Merged feature/VEL-406_newshit into develop
+Mon 24 Nov 17:18	ashwubbery.local	vsmash		nodemaiass	VEL-406	?	Merged feature/VEL-406_newshit into develop
+Mon 24 Nov 17:19	ashwubbery.local	vsmash		nodemaiass	VEL-406	?	Merged feature/VEL-406_newshit into develop
+Tue 25 Nov 04:34	ashwubbery.local	vsmash		nodemaiass	VEL-406	?	VEL-406 Update getGitInfo function to handle new repository state;   - Add logic to retrieve status when no branch exists yet;   - Set branch as null in return object;   - Assign status properties to return object based on retrieved status
+Tue 25 Nov 04:34	ashwubbery.local	vsmash		nodemaiass	VEL-406	?	Merged feature/VEL-406_newshit into develop
+Tue 25 Nov 04:40	ashwubbery.local	vsmash		nodemaiass	VEL-406	?	VEL-406 Add handling for new repositories without commits;   - feat: Skip merge workflow for new repositories with no branch yet
+Tue 25 Nov 04:40	ashwubbery.local	vsmash		nodemaiass	VEL-406	?	Merged feature/VEL-406_newshit into develop
+Tue 25 Nov 08:38	ashwubbery.local	vsmash		nodemaiass	VEL-406	?	VEL-406 Update README with AI mode options;   - docs: add AI mode options to enable intelligent commit suggestions
+Tue 25 Nov 10:22	ashwubbery.local	vsmash		nodemaiass	VEL-406	?	VEL-406 Enhanced command and flag validation;   - feat: added dynamic command validation for first argument;   - feat: implemented flag validation for recognized options;   - fix: improved error handling for unrecognized commands and flags;   - docs: updated help output to include --account-info option
+Tue 25 Nov 10:23	ashwubbery.local	vsmash		nodemaiass	VEL-406	?	Merged feature/VEL-406_newshit into develop
+Tue 25 Nov 10:23	ashwubbery.local	vsmash		nodemaiass	VEL-406	?	Merged release/5.9.0 into develop
+Tue 25 Nov 10:30	ashwubbery.local	vsmash		nodemaiass	no-ticket	?	Enhanced command line help output;   - feat: added detailed help messages for valid commands and flags;   - refactor: grouped flags by category for improved readability;   - fix: removed redundant help command message
+Tue 30 Dec 09:23	ashwubbery.local	vsmash	vsmash	nodemaiass	VEL-406	?	VEL-406 Add npm deployment script  ;   - feat: implement npm deployment script  ;   - chore: merge develop branch into main before deployment  ;   - fix(script): ensure npm user is logged in before publishing
+Tue 30 Dec 09:23	ashwubbery.local	vsmash	vsmash	nodemaiass	VEL-406	?	Merged feature/VEL-406_newshit into develop
+Tue 30 Dec 09:26	ashwubbery.local	Velvary	Velvary	nodemaiass	VEL-406	?	VEL-406 Added development log configurations;   - feat: introduce MAIASS_DEVLOG_CLIENT, MAIASS_DEVLOG_SUBCLIENT, and MAIASS_DEVLOG_PROJECT in environment variables
+Tue 30 Dec 09:26	ashwubbery.local	Velvary	Velvary	nodemaiass	VEL-406	?	Merged feature/VEL-406_newshit into develop
+Tue 30 Dec 09:31	ashwubbery.local	Velvary	MAIASS	nodemaiass	VEL-406	?	VEL-406 Added subClient parameter to logging functions;   - feat(devlog): included subClient in extractDevlogContext and logThis functions;   - fix(log): updated command execution to incorporate subClient parameter;   - fix(log): passed subClient to logCommit and logMerge functions
+Tue 30 Dec 09:32	ashwubbery.local	Velvary	MAIASS	nodemaiass	VEL-406	?	Merged feature/VEL-406_newshit into develop
+Sat 10 Jan 09:34	ashwubbery.local	Velvary	MAIASS	nodemaiass	no-ticket	?	Implemented spinner for AI API calls;   - feat: added Spinner class to manage loading state during API requests;   - feat: integrated spinner start/stop functionality in API call handling;   - fix(api): implemented fetch with timeout using AbortController
+Sun 22 Mar 07:40	ashwubbery.local	Velvary	MAIASS	nodemaiass	no-ticket	?	Enhanced version detection and extraction logic  ;   - feat: added function to extract version from various file types  ;   - feat: prioritized custom primary version file from .env.maiass  ;   - fix: improved error handling for file reading and version extraction  ;   - refactor: updated version update logic for primary files with lineStart patterns  ;   - docs: expanded documentation for version extraction and detection functions
