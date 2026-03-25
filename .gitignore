@@ -44,3 +44,6 @@ certs/
 maiass.log
 .env.maiass.bak
 .env.maiass.local
+
+# Development logs
+devlog.csv

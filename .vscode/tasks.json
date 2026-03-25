@@ -1,0 +1,29 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Nodemaiass sh",
+            "type": "shell",
+            "command": "zsh -l",
+            "options": { "cwd": "${workspaceFolder}" },
+            "icon": {"color": "terminal.ansiMagenta" },
+            "isBackground": true,
+            "problemMatcher": {
+              "owner": "shell",
+              "fileLocation": "auto",
+              "background": {
+                "activeOnStart": true,
+                "beginsPattern": ".*",
+                "endsPattern": ".*"   // ends immediately, so spinner stops right away
+              }
+            }
+          },
+          {
+            "label": "Open Nodemaiass terminals",
+            "dependsOn": ["Nodemaiass sh"],
+            "dependsOrder": "parallel",
+            "runOptions": { "runOn": "folderOpen" }
+          }
+
+    ]
+}
