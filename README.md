@@ -3,7 +3,7 @@
 
 [![Node.js](https://img.shields.io/badge/Node.js-23+-green.svg)](https://nodejs.org/)
 [![License](https://img.shields.io/badge/License-GPL--3.0-blue.svg)](LICENSE)
-[![Version](https://img.shields.io/badge/Version-1.2.4-orange.svg)](package.json)---
+[![Version](https://img.shields.io/badge/Version-5.9.9-orange.svg)](package.json)---
 
 **MAIASS** is an intelligent Git workflow automation tool that streamlines version management, changelog generation, and deployment processes with AI-powered commit message suggestions. This Node.js implementation provides cross-platform compatibility and self-contained binary distribution.
 
