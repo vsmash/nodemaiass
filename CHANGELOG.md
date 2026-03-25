@@ -1,3 +1,16 @@
+## 5.9.10
+25 March 2026
+
+- Removed outdated devlog.csv file
+	  - chore: deleted obsolete devlog CSV file containing historical project logs and entries
+- chore: add devlog.csv to gitignore
+- fix: ensure anonymous subscription is created on first maiass run
+- - Add createAnonymousSubscriptionIfNeeded call to handleMaiassCommand
+	- Matches bashmaiass behavior of creating subscription immediately
+	- Ensures free credits are allocated on first use, not just when requesting AI
+	- Fixes: users install maiass but hit 0-credit wall because subscription was never triggered
+	- This should increase conversion rate from npm installs to active users
+
 ## 5.9.9
 22 March 2026
 
