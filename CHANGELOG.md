@@ -22,7 +22,7 @@
 	  - chore: deleted obsolete devlog CSV file containing historical project logs and entries
 - chore: add devlog.csv to gitignore
 - fix: ensure anonymous subscription is created on first maiass run
-- - Add createAnonymousSubscriptionIfNeeded call to handleMaiassCommand
+- Add createAnonymousSubscriptionIfNeeded call to handleMaiassCommand
 	- Matches bashmaiass behavior of creating subscription immediately
 	- Ensures free credits are allocated on first use, not just when requesting AI
 	- Fixes: users install maiass but hit 0-credit wall because subscription was never triggered
