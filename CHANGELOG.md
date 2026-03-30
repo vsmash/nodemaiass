@@ -1,6 +1,11 @@
-## 5.9.16
+## 5.9.17
 31 March 2026
 
+- Refactored changelog update logic
+	  - refactor: removed updateChangelog function due to redundancy
+	  - cleanup: optimized commit message processing for changelog
+	  - fix: handled cases for no new commits more gracefully
+	  - docs: clarified inline comments for improved code understanding
 - Add support for Windows PowerShell script execution in devlog
 	  - feat: implement retrieval of devlog.ps1 path for Windows
 	  - fix: adjust isDevlogAvailable function to check for PowerShell script
@@ -22,7 +27,7 @@
 	  - chore: deleted obsolete devlog CSV file containing historical project logs and entries
 - chore: add devlog.csv to gitignore
 - fix: ensure anonymous subscription is created on first maiass run
-- - Add createAnonymousSubscriptionIfNeeded call to handleMaiassCommand
+- Add createAnonymousSubscriptionIfNeeded call to handleMaiassCommand
 	- Matches bashmaiass behavior of creating subscription immediately
 	- Ensures free credits are allocated on first use, not just when requesting AI
 	- Fixes: users install maiass but hit 0-credit wall because subscription was never triggered
