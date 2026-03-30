@@ -1,3 +1,11 @@
+## 5.9.15
+30 March 2026
+
+- Enhance version management and file type inference
+	  - feat: added function to infer version file type based on filename
+	  - fix: normalized path separators for primary version file
+	  - refactor: improved logic for determining primary version type
+
 ## 5.9.10
 25 March 2026
 
