@@ -1,3 +1,12 @@
+## 5.9.16
+31 March 2026
+
+- Add support for Windows PowerShell script execution in devlog
+	  - feat: implement retrieval of devlog.ps1 path for Windows
+	  - fix: adjust isDevlogAvailable function to check for PowerShell script
+	  - refactor: update logger messages to generalize devlog references
+	  - chore: streamline command execution for cross-platform compatibility
+
 ## 5.9.15
 30 March 2026
 
