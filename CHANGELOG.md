@@ -1,3 +1,8 @@
+## 5.9.18
+1 April 2026
+
+- added powershell support
+
 ## 5.9.17
 31 March 2026
 
