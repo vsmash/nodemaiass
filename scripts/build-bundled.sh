@@ -49,6 +49,13 @@ EOF
     rm convert-to-cjs.js
 fi
 
+# Ensure Bun is available — install if missing (removes pkg from build path)
+if ! command -v bun &> /dev/null; then
+    echo -e "${YELLOW}🥖 Bun not found — installing...${NC}"
+    curl -fsSL https://bun.sh/install | bash
+    export PATH="$HOME/.bun/bin:$PATH"
+fi
+
 # Choose build method (prioritize Bun if available, fallback to PKG)
 BUILD_METHOD="pkg"
 
