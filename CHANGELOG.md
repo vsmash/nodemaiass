@@ -1,6 +1,8 @@
-## 5.9.22
+## 5.9.23
 5 April 2026
 
+- Updated local environment file instructions
+	  - docs: modify comments in .env.maiass.local template for clarity
 - Enhanced version bump handling and user feedback
 	  - feat: tracked explicit version bump requests
 	  - fix: resolved logging issue for missing version files
