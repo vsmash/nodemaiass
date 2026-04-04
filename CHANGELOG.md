@@ -1,3 +1,12 @@
+## 5.9.22
+5 April 2026
+
+- Enhanced version bump handling and user feedback
+	  - feat: tracked explicit version bump requests
+	  - fix: resolved logging issue for missing version files
+	  - docs: added first-run setup and gitignore updates
+	  - chore: improved command processing logic
+
 ## 5.9.21
 4 April 2026
 
