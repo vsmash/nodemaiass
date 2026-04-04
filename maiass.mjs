@@ -38,7 +38,7 @@ import { handleVersionCommand } from './lib/version-command.js';
 import { handleMaiassCommand } from './lib/maiass-command.js';
 import { handleAccountInfoCommand } from './lib/account-info.js';
 import { SYMBOLS } from './lib/symbols.js';
-import { bootstrapProject, needsBootstrap } from './lib/bootstrap.js';
+import { bootstrapProject } from './lib/bootstrap.js';
 
 // Simple CLI setup for pkg compatibility
 const args = process.argv.slice(2);
@@ -178,15 +178,48 @@ if (args.includes('--help') || args.includes('-h') || command === 'help') {
 
 // Command routing (wrapped in async IIFE to handle async commands)
 (async () => {
-  // Run bootstrap if needed (first-time setup)
-  if (needsBootstrap()) {
-    const completed = await bootstrapProject();
-    if (completed) {
-      // Bootstrap completed, exit so user can run maiass again
-      process.exit(0);
-    }
+  // --setup/--bootstrap: run the full interactive wizard and exit
+  if (process.env.MAIASS_FORCE_BOOTSTRAP === 'true') {
+    await bootstrapProject();
+    process.exit(0);
   }
-  
+
+  // First run (no .env.maiass and no .env.maiass.local): initialise and show welcome.
+  // We create .env.maiass.local as a marker so this only runs once per project.
+  if (!fs.existsSync('.env.maiass') && !fs.existsSync('.env.maiass.local')) {
+    // Create .env.maiass.local as a first-run marker (personal settings file)
+    fs.writeFileSync(
+      '.env.maiass.local',
+      `# .env.maiass.local — personal/local MAIASS settings (never committed)\n` +
+      `# Generated on first run: ${new Date().toISOString()}\n` +
+      `# Override any .env.maiass value here, e.g. MAIASS_AI_HOST=http://localhost:8787\n`,
+      'utf8'
+    );
+
+    // Add MAIASS entries to .gitignore if one already exists — avoids dirtying
+    // repos that don't have a .gitignore yet
+    if (fs.existsSync('.gitignore')) {
+      let gitignore = fs.readFileSync('.gitignore', 'utf8');
+      const needed = ['.env.maiass.local', 'maiass.log'].filter(p => !gitignore.includes(p));
+      if (needed.length > 0) {
+        if (!gitignore.endsWith('\n')) gitignore += '\n';
+        gitignore += `\n# MAIASS\n${needed.join('\n')}\n`;
+        fs.writeFileSync('.gitignore', gitignore, 'utf8');
+      }
+    }
+
+    // Show what defaults are active so the user knows what they're getting
+    const aiMode = process.env.MAIASS_AI_MODE || 'ask';
+    console.log('');
+    console.log(colors.BCyan('👋 Welcome to MAIASS!'));
+    console.log(colors.Gray('   Running with smart defaults:'));
+    console.log(colors.Gray(`   • AI commit messages: ${aiMode}`));
+    console.log(colors.Gray('   • Version management: off'));
+    console.log(colors.Gray('   • Changelogging: off'));
+    console.log(colors.Gray('   Run maiass --setup to configure for this project.'));
+    console.log('');
+  }
+
   switch (command) {
     case 'hello':
       console.log(colors.BCyan('Hello from MAIASS!'));
