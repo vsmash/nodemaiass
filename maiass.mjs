@@ -192,7 +192,7 @@ if (args.includes('--help') || args.includes('-h') || command === 'help') {
       '.env.maiass.local',
       `# .env.maiass.local — personal/local MAIASS settings (never committed)\n` +
       `# Generated on first run: ${new Date().toISOString()}\n` +
-      `# Override any .env.maiass value here, e.g. MAIASS_AI_HOST=http://localhost:8787\n`,
+      `# Use this file for personal overrides, e.g. MAIASS_AI_MODE=autosuggest\n`,
       'utf8'
     );
 
