@@ -1,347 +1,134 @@
-# 🫏 MAIASS (Node.js Edition)
-**Modular AI-Augmented Semantic Scribe** - Cross-platform Node.js implementation
+# `|))` MAIASS (Node.js)
+**Modular AI-Augmented Semantic Scribe** — intelligent Git workflow automation
 
-[![Node.js](https://img.shields.io/badge/Node.js-23+-green.svg)](https://nodejs.org/)
+[![npm](https://img.shields.io/npm/v/maiass.svg)](https://www.npmjs.com/package/maiass)
+[![Node.js](https://img.shields.io/badge/Node.js-18+-green.svg)](https://nodejs.org/)
 [![License](https://img.shields.io/badge/License-GPL--3.0-blue.svg)](LICENSE)
-[![Version](https://img.shields.io/badge/Version-5.9.9-orange.svg)](package.json)---
 
-**MAIASS** is an intelligent Git workflow automation tool that streamlines version management, changelog generation, and deployment processes with AI-powered commit message suggestions. This Node.js implementation provides cross-platform compatibility and self-contained binary distribution.
+---
 
-## 🚀 Quick Start
+MAIASS automates the repetitive parts of your Git workflow: staging, AI-powered commit messages, branch merging, version bumping, and changelog generation — all from a single command.
 
-### Installation
+> Looking for the shell/Homebrew version? See [bashmaiass](https://github.com/vsmash/bashmaiass).
 
-**Cross-Platform Binaries** (Recommended):
+---
+
+## Installation
+
 ```bash
-# Download and install for your platform
-curl -L https://github.com/vsmash/maiass/releases/latest/download/maiass-$(uname -s | tr '[:upper:]' '[:lower:]')-$(uname -m) -o maiass
-chmod +x maiass
-./maiass --version
+npm install -g maiass
 ```
 
-**From Source**:
-```bash
-git clone https://github.com/vsmash/nodemaiass.git
-cd nodemaiass && npm install && npm link
-```
+Requires Node.js 18+.
 
-### Basic Usage
+---
+
+## Quick Start
 
 ```bash
-# Complete workflow with patch version bump
+# First time in a project — run setup
+maiass --setup
+
+# Everyday use — commit, merge, bump patch version
 maiass
 
 # Specific version bumps
 maiass minor    # 1.2.3 → 1.3.0
 maiass major    # 1.2.3 → 2.0.0
-maiass 2.1.0    # Set specific version
 
-# Commit only (skip version management)
+# Commit only, skip version management
 maiass --commits-only
 
-# Preview changes without applying
-maiass --dry-run
-```
-
-### AI-Powered Commit Messages
-
-```bash
-# Enable AI features
-maiass config set maiass_token "your_api_key"
-maiass config set ai_mode "ask" (or "always" or "off")
-
-# MAIASS will now suggest intelligent commit messages
-maiass
-```
-
-## ✨ Key Features- **🤖 AI-Powered Commit Messages**: AI integration for intelligent commit suggestions- **📋 Dual Changelog System**: User-facing and developer-facing changelogs- **🔄 Complete Git Workflow**: Branch validation, commits, merges, and versioning- **🏷️ Smart Version Management**: Multiple version file support with semantic versioning- **🌍 Cross-Platform**: Self-contained binaries for macOS, Linux, and Windows- **⚙️ Zero Configuration**: Works out of the box with sensible defaults- **🎯 JIRA Integration**: Automatic ticket detection from branch names
-
-## � Documentation
-
-| Topic | Description |
-|-------|-------------|
-| **[Installation Guide](docs/installation-guide.md)** | Detailed installation instructions and binaries |
-| **[Configuration](docs/configuration.md)** | Environment variables and project setup |
-| **[Workflow Guide](docs/workflow.md)** | Complete workflow documentation |
-| **[Commands Reference](docs/commands.md)** | All available commands and options |
-| **[Cross-Platform Guide](docs/cross-platform.md)** | Platform-specific notes and compatibility |
-| **[Development](docs/development.md)** | Contributing and development setup |
-
-## 🔧 Supported Technologies
-
-### Version File Formats- **package.json** (Node.js/npm projects)- **composer.json** (PHP/Composer projects)- **VERSION** files (plain text)- **Git tags only** (for projects without version files)
-
-### Git Platforms- **GitHub** (public and private repositories)- **Bitbucket** (Cloud and Server)- **Any Git host** (core features work universally)
-
-### AI Models- **GPT-4o** (recommended for complex projects)- **GPT-4** (balanced performance and cost)- **GPT-3.5-turbo** (fast and economical)
-
-## 🌍 Platform Support
-
-| Platform | Binary Available | Self-Contained |
-|----------|------------------|----------------|
-| **macOS Intel** | ✅ `maiass-macos-intel` | ✅ Node.js included |
-| **macOS Apple Silicon** | ✅ `maiass-macos-arm64` | ✅ Node.js included |
-| **Linux x64** | ✅ `maiass-linux-x64` | ✅ Node.js included |
-| **Linux ARM64** | ✅ `maiass-linux-arm64` | ✅ Node.js included |
-| **Windows x64** | ✅ `maiass-windows-x64.exe` | ✅ Node.js included |
-| **Windows ARM64** | ✅ `maiass-windows-arm64.exe` | ✅ Node.js included |
-
-## 🔄 Workflow Overview
-
-MAIASS orchestrates a 4-phase intelligent workflow:
-
-1. **Branch Detection & Validation** - Validates current branch and workflow requirements
-2. **Commit Workflow** - AI-powered commit messages with JIRA integration
-3. **Merge Management** - Handles branch merging and conflict resolution
-4. **Version & Changelog** - Semantic versioning with dual changelog generation
-
-## ⚙️ Quick Configuration
-
-```bash
-# Enable AI features (global)
-maiass config set --global maiass_token "your_api_key"
-maiass config set --global ai_mode "ask"
-
-# Project-specific branch override
-maiass config set mainbranch "main"
-
-# View current configuration
-maiass config list
-```
-
-## 🎯 What Makes This Special?
-
-### Intelligent Automation- **Smart Version Detection**: Automatically finds and updates version files- **Context-Aware AI**: Analyzes code changes for meaningful commit messages- **Dual Changelog System**: Clean user-facing + detailed developer changelogs
-
-### Developer Experience- **Self-Contained Binaries**: No Node.js installation required- **Cross-Platform Compatibility**: Consistent behavior across all platforms- **Zero Configuration**: Works immediately with sensible defaults
-
-### Enterprise Ready- **Security First**: API keys never stored in repositories- **CI/CD Integration**: Perfect for automated deployment pipelines- **GPL-3.0 Licensed**: Free and open source software
-
-## 🔗 Related Projects- **[MAIASS (Bash)](https://github.com/vsmash/maiass)** - Original bash implementation- **[Homebrew Formula](https://github.com/vsmash/homebrew-maiass)** - Homebrew installation
-
-## 🤝 Contributing
-
-We welcome contributions! Whether it's:- 🐛 **Bug reports** and feature requests- 📖 **Documentation** improvements- 🔧 **Code contributions** and enhancements- 💡 **Ideas** for new features
-
-See our [Development Guide](docs/development.md) to get started.
-
-## 📄 License
-
-MAIASS is released under the [GNU General Public License v3.0](LICENSE). Free and open source software.
-
-## 🔗 Links- **[GitHub Repository](https://github.com/vsmash/nodemaiass)**- **[Issue Tracker](https://github.com/vsmash/nodemaiass/issues)**- **[Releases](https://github.com/vsmash/nodemaiass/releases)**- **[Original MAIASS](https://github.com/vsmash/maiass)**---
-
-**Ready to streamline your Git workflow?** Download MAIASS today and experience intelligent version management with AI-powered automation.
-
-```bash
-# Get the latest release
-curl -L https://github.com/vsmash/maiass/releases/latest/download/maiass-$(uname -s | tr '[:upper:]' '[:lower:]')-$(uname -m) -o maiass && chmod +x maiass
-```---
-
-**Made with ❤️ for developers who want better Git workflows**
-maiass version [major|minor|patch|version]
-
-# Configuration
-maiass config list
-maiass config get <key>
-maiass config set <key> <value>
-
-# Environment info
-maiass env
-
-# Git information
-maiass git-info
-maiass git              # Show git status and branch info
-
-# Environment variables
-maiass env              # Show current environment
-maiass env --json       # Show environment as JSON
-```
-
-## ⚙️ Configuration
-
-### Quick Setup
-
-1. **Enable AI features** (optional):
-   ```bash
-   # Set Maiass API key globally
-   maiass config --global maiass_token=your_api_key_here
-   ```
-
-2. **Project-specific settings** (if needed):
-   ```bash
-   # Override branch names for projects using 'main'
-   maiass config --project mainbranch=main
-   ```
-
-### Configuration Files
-
-MAIASS uses `.env.maiass` files for configuration:- **Global**: `~/.env.maiass` (user-wide settings)- **Project**: `./.env.maiass` (project-specific overrides)
-
-### Common Configuration Variables
-
-```bash
-# AI Integration
-MAIASS_AI_TOKEN=your_api_key_here
-MAIASS_AI_MODE=ask                    # ask, autosuggest, off
-MAIASS_AI_MODEL=gpt-4                 # AI model to use
-
-# Branch Configuration (only set if different from defaults)
-MAIASS_MAINBRANCH=main                  # Default: main
-MAIASS_DEVELOPBRANCH=develop              # Default: develop
-MAIASS_STAGINGBRANCH=staging              # Default: staging
-
-# Workflow Settings
-MAIASS_DEBUG=true                         # Enable debug output
-MAIASS_VERBOSITY=normal                   # brief, normal, verbose
-MAIASS_AUTO_TAG_RELEASES=true             # Automatically tag releases (required for changelog)
-
-# Changelog Configuration
-MAIASS_CHANGELOG_PATH=CHANGELOG.md        # Main changelog file path
-MAIASS_CHANGELOG_NAME=CHANGELOG.md        # Main changelog file name
-MAIASS_CHANGELOG_INTERNAL_NAME.CHANGELOG_internal.md  # Internal changelog file name
-```
-
-## 🔄 Workflow Phases
-
-MAIASS orchestrates a 4-phase workflow:
-
-### 1. **Branch Detection & Validation**- Detects current branch and validates against workflow requirements- Auto-switches from main/staging to develop branch- Prompts for confirmation on release/main branches- Handles missing develop branch gracefully
-
-### 2. **Commit Workflow**- Detects staged and unstaged changes- Offers AI-powered commit message suggestions- Supports multi-line commit messages- Prepends JIRA ticket numbers from branch names
-
-### 3. **Merge to Develop**- Merges feature branches to develop for version management- Pulls latest changes from remote- Handles merge conflicts with clear error messages
-
-### 4. **Version Management**- Detects version files (package.json, composer.json, etc.)- Bumps semantic versions (major.minor.patch)- Updates multiple version files simultaneously- Creates git tags for releases- **Generates dual changelogs**:
-  - `CHANGELOG.md`: Clean, user-facing format with JIRA tickets stripped
-  - `.CHANGELOG_internal.md`: Developer format with commit hashes, authors, and JIRA tickets- **Smart commit range detection**: Only includes commits since the last release tag- **Version replacement logic**: Replaces same-day patch versions instead of duplicating entries
-
-## 📝 Changelog System
-
-MAIASS automatically generates two types of changelogs during version management:
-
-### Main Changelog (`CHANGELOG.md`)
-**User-facing format** with clean, readable entries:
-```markdown
-## 0.5.6
-24 July 2025- Update Maiass Pipeline functionality
-	- feat: imported path package in maiass-pipeline
-	- docs: added comment about commit message formatting- Updated commit message filtering for maiass-pipeline
-	- feat: added code to clean up commit messages
-	- fix: removed empty lines and trailing newlines from each commit
-```
-
-### Internal Changelog (`CHANGELOG_internal.md`)
-**Developer-facing format** with commit hashes, authors, and JIRA tickets:
-```markdown
-## 0.5.6
-Thursday, 24 July 2025- d7ddba9 VEL-405 Update Maiass Pipeline functionality (Developer Name)- 5ea6d03 VEL-405 Updated commit message filtering for maiass-pipeline (Developer Name)
-```
-
-### Changelog Features- **Smart commit detection**: Only includes commits since the last release tag- **Automatic filtering**: Excludes merge commits, version bumps, and irrelevant entries- **JIRA integration**: Strips JIRA tickets from main changelog, preserves in internal- **Version replacement**: Same-day patch versions replace previous entries instead of duplicating- **Clean formatting**: No double bullets or unwanted blank lines
-
-## 🎨 Examples
-
-### Complete Feature Development Workflow
-```bash
-# On feature branch: feature/USER-123-new-login
-
-# 1. Complete workflow with minor version bump
-maiass minor --tag
-
-# This will:
-# - Detect you're on a feature branch
-# - Run commit workflow with AI suggestions
-# - Merge to develop branch
-# - Bump minor version (1.0.0 → 1.1.0)
-# - Create git tag v1.1.0
-```
-
-### Quick Commit Without Version Management
-```bash
-# Just commit changes without version bumping
-maiass --commits-only --auto-stage
-
-# With AI commit message
-maiass commit
-```
-
-### Safe Testing
-```bash
-# Preview what would happen without making changes
+# Preview without making changes
 maiass --dry-run patch
-
-# Check current version status
-maiass version --current
 ```
 
-## 🔧 Advanced Usage
+---
 
-### Custom Version Files
+## AI Commit Messages
+
+MAIASS uses its own proxy service for AI-powered commit message suggestions. On first run it creates an anonymous subscription automatically — no sign-up required.
+
+To use a named account (for credit top-ups):
+
 ```bash
-# Configure custom version file
-maiass config --project version_primary_file=VERSION.txt
-maiass config --project version_primary_type=text
+maiass config set MAIASS_AI_TOKEN your_api_key
 ```
 
-### Multiple Version Files
+AI mode is configured per-project in `.env.maiass`:
+
 ```bash
-# Update multiple files with same version
-maiass config --project version_secondary_files="src/version.js,docs/VERSION"
+MAIASS_AI_COMMITS=ask        # ask each time (default)
+MAIASS_AI_COMMITS=always     # always use AI
+MAIASS_AI_COMMITS=off        # disable AI
 ```
 
-### AI Customization
+---
+
+## Key Features
+
+- **AI commit messages** — analyses your diff and suggests a structured commit message
+- **Version management** — detects and bumps `package.json`, `composer.json`, `VERSION`, `.pbxproj` (Swift/Xcode), and more
+- **Changelog generation** — user-facing `CHANGELOG.md` and internal developer changelog
+- **Branch workflow** — feature → develop → staging → main with merge handling
+- **JIRA integration** — ticket numbers auto-detected from branch names
+- **First-run friendly** — works immediately with sensible defaults, no blocking setup
+
+---
+
+## Configuration
+
+MAIASS uses `.env.maiass` files for configuration:
+
+| File | Purpose |
+|------|---------|
+| `.env.maiass` | Project settings, committed to git |
+| `.env.maiass.local` | Personal overrides, gitignored |
+
+Run `maiass --setup` to configure a project interactively, or edit `.env.maiass` directly.
+
+Common variables:
+
 ```bash
-# Different AI modes
-maiass config --global ai_mode=autosuggest  # Auto-suggest without asking
-maiass config --global ai_mode=off          # Disable AI
-
-# Custom commit message style
-maiass config --global ai_commit_message_style=conventional
+MAIASS_AI_COMMITS=ask
+MAIASS_MODE=full                  # full or ai_only
+MAIASS_MAIN_BRANCH=main
+MAIASS_DEVELOP_BRANCH=develop
+MAIASS_VERSION_PRIMARY_FILE=package.json
+MAIASS_DEBUG=true                 # verbose output
 ```
 
-## 🐛 Troubleshooting
+---
 
-### Common Issues
+## Supported Version File Formats
 
-**"Not in a git repository"**
-```bash
-# Ensure you're in a git repository
-git status
-```
+| Format | Example |
+|--------|---------|
+| npm | `package.json` |
+| PHP/Composer | `composer.json` |
+| WordPress | `style.css`, `plugin.php` |
+| Plain text | `VERSION` |
+| Swift/Xcode | `*.xcodeproj/project.pbxproj` |
 
-**"No version files detected"**
-```bash
-# Check for supported version files
-ls package.json composer.json VERSION
+---
 
-# Or configure custom version file
-maiass config --project version_primary_file=your-version-file
-```
+## Documentation
 
-**"Failed to switch to develop branch"**
-```bash
-# Create develop branch if it doesn't exist
-git checkout -b develop
-```
+| Doc | Description |
+|-----|-------------|
+| [Configuration](docs/configuration.md) | All config variables and `.env.maiass` options |
+| [Commands](docs/commands.md) | Full command reference |
+| [Workflow](docs/workflow.md) | How the 4-phase pipeline works |
+| [Setup](docs/setup.md) | Platform-specific setup notes |
+| [API Reference](docs/api.md) | Internal module API |
+| [Development](docs/development.md) | Contributing and dev setup |
 
-### Debug Mode
-```bash
-# Enable verbose debugging
-export MAIASS_DEBUG=true
-maiass --dry-run
-```
+---
 
-## 📚 Documentation- [Configuration Guide](docs/configuration.md)- [Workflow Guide](docs/workflow.md)- [API Reference](docs/api.md)- [Contributing](docs/contributing.md)
+## Contributing
 
-## 🤝 Contributing
+Issues and PRs welcome. See [docs/development.md](docs/development.md) to get started.
 
-Contributions are welcome! Please read our [Contributing Guide](docs/contributing.md) for details.
+## License
 
-## 📄 License
-
-MIT License - see [LICENSE](LICENSE) file for details.
-
-## 🙏 Acknowledgments- Original MAIASS bash script by [vsmash](https://github.com/vsmash)- OpenAI for AI-powered commit messages- Node.js and npm ecosystem---
-
-**Made with ❤️ by the MAIASS team**
+[GNU General Public License v3.0](LICENSE)
