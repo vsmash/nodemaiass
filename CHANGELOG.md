@@ -1,3 +1,14 @@
+## 5.9.28
+09 April 2026
+
+- Updated README for MAIASS (Node.js)
+	- refactor: simplified project description and title
+	- update: enhanced quick start and installation instructions
+	- improve: clarified installation methods and added Node.js version requirements
+	- refine: detailed usage examples for MAIASS commands
+	- correct: fixed formatting inconsistencies and removed deprecated content
+	- enhance: added information about AI-powered commit messages and configuration options
+
 ## 5.9.27
 9 April 2026
 
