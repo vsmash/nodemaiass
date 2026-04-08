@@ -42,7 +42,8 @@ import { bootstrapProject } from './lib/bootstrap.js';
 
 // Simple CLI setup for pkg compatibility
 const args = process.argv.slice(2);
-const firstArg = args[0];
+// Skip flags (starting with -) to find the first meaningful argument
+const firstArg = args.find(a => !a.startsWith('-'));
 
 // Handle --setup/--bootstrap flag early
 if (args.includes('--setup') || args.includes('--bootstrap')) {
@@ -254,7 +255,7 @@ if (args.includes('--help') || args.includes('-h') || command === 'help') {
         _: process.argv.slice(2).filter(arg => !arg.startsWith('--')),
         'commits-only': args.includes('--commits-only') || args.includes('-c'),
         'auto-stage': args.includes('--auto-stage'),
-        'auto': args.includes('--auto'),
+        'auto': args.includes('--auto') || args.includes('-a'),
         'version-bump': versionBump,
         'dry-run': args.includes('--dry-run') || args.includes('-d'),
         force: args.includes('--force') || args.includes('-f'),
