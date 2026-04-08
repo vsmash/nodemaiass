@@ -1,6 +1,11 @@
-## 5.9.25
+## 5.9.26
 9 April 2026
 
+- Improve npm deployment script
+	  - feat: enhance script with pre-flight checks and status messages
+	  - fix: ensure the working directory is clean before deployment
+	  - fix: handle npm login if not authenticated
+	  - docs: update script comments for clarity
 - Update logging message in devlog.js
 	  - refactor(devlog): changed variable name from 'escapedMessage' to 'normalisedMessage' in debug log
 - Updated logging for security enhancements
