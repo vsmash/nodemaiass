@@ -5,69 +5,22 @@ Guide for contributing to and extending MAIASS.
 ## Project Structure
 
 ```
-maiass/
-├── maiass.js          # Main CLI entry point
-├── nodemaiass.sh          # Shell wrapper script
-├── setup-env.js           # Environment setup utility
-├── lib/
-│   ├── colors.js          # Color output utilities
-│   └── config.js          # Cross-platform configuration
-├── docs/
-│   ├── README.maiass.md   # Main documentation
-│   ├── configuration.md   # Config documentation
-│   ├── setup.md          # Setup instructions
-│   ├── commands.md       # Command reference
-│   └── development.md    # This file
-└── package.json          # Project metadata
+nodemaiass/
+├── maiass.mjs             # Main CLI entry point
+├── lib/                   # Core modules
+│   ├── maiass-pipeline.js # Main workflow orchestration
+│   ├── maiass-command.js  # CLI argument handling
+│   ├── commit.js          # AI commit message generation
+│   ├── version-manager.js # Version file detection and bumping
+│   ├── bootstrap.js       # --setup wizard
+│   ├── config-manager.js  # .env.maiass config loading
+│   ├── git-info.js        # Git helpers
+│   └── ...                # Other utilities
+├── docs/                  # Documentation
+├── scripts/
+│   └── npm_deploy.sh      # Promote branches and publish to npm
+└── package.json
 ```
-
-## Build/Release Structure
-
-MAIASS uses a multi-stage build and release process to create signed, distributable binaries:
-
-```
-maiass/
-├── dist/                    # Build outputs (from advanced-build.sh)
-│   ├── bun/                # Bun-compiled binaries (fast, modern)
-│   ├── pkg/                # PKG-compiled binaries (compatible) 
-│   └── source/             # Source distribution
-├── build/                   # Code signing staging (temporary)
-│   └── maiass-*            # Unsigned binaries copied from dist/ before signing
-├── release-automated/       # Final release (from release-and-deploy.sh)
-│   ├── maiass-*.zip        # Signed, archived binaries
-│   ├── maiass-*.tar.gz     # Ready for distribution
-│   ├── checksums.txt       # SHA256 verification
-│   └── latest.json         # Download manifest
-└── scripts/
-    ├── advanced-build.sh    # Multi-method build system
-    ├── release-and-deploy.sh # Complete release automation
-    └── deploy-to-r2.sh      # R2 deployment for signature preservation
-```
-
-### Build Workflow
-
-1. **Development Build**: `./scripts/advanced-build.sh`
-   - Creates unsigned binaries in `dist/bun/` and `dist/pkg/`
-   - Multiple bundling methods (Bun preferred, PKG fallback)
-   - Cross-platform compilation
-
-2. **Release Process**: `./scripts/release-and-deploy.sh`
-   - Copies binaries from `dist/` to `build/` for signing
-   - Code signs macOS binaries (preserving signatures)
-   - Creates signature-preserving archives in `release-automated/`
-   - Deploys to GitHub releases + Cloudflare R2
-   - Updates Homebrew formula
-
-3. **R2 Deployment**: `./scripts/deploy-to-r2.sh`
-   - Uploads signed archives to Cloudflare R2
-   - Preserves code signatures (GitHub releases strip them)
-   - Creates versioned URLs: `https://releases.maiass.net/v5.3.10/`
-
-### Why Multiple Directories?
-- **`dist/`**: Raw build outputs, unsigned, multiple formats
-- **`build/`**: Staging for code signing (macOS Developer ID)
-- **`release-automated/`**: Final signed archives ready for distribution
-- **R2**: Cloud storage that preserves binary signatures (GitHub strips them)
 
 ## Development Setup
 
@@ -223,12 +176,8 @@ function prompt(question) {
 
 ## Release Process
 
-1. **Update version** in `package.json`
-2. **Update CHANGELOG.md**
-3. **Test on all platforms**
-4. **Create release branch**
-5. **Tag release**
-6. **Merge to main**
+1. Use MAIASS itself to bump the version: `maiass patch` (or `minor`/`major`)
+2. Run `./scripts/npm_deploy.sh` to promote develop → staging → main and publish to npm
 
 ## Contributing
 
