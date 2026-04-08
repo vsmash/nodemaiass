@@ -1,16 +1,92 @@
 #!/bin/bash
-# get the current branch
-CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
+# npm_deploy.sh — promote develop → staging → main and publish to npm
+set -e  # exit immediately if any command fails
 
-git checkout main
+# ── Colours ──────────────────────────────────────────────────────────────────
+BOLD="\033[1m"
+RESET="\033[0m"
+CYAN="\033[1;36m"
+GREEN="\033[1;32m"
+YELLOW="\033[1;33m"
+RED="\033[1;31m"
+
+info()    { echo -e "${CYAN}▶  $*${RESET}"; }
+success() { echo -e "${GREEN}✔  $*${RESET}"; }
+warn()    { echo -e "${YELLOW}⚠  $*${RESET}"; }
+error()   { echo -e "${RED}✘  $*${RESET}" >&2; }
+step()    { echo -e "\n${BOLD}${CYAN}── $* ──${RESET}"; }
+
+# ── Trap: print a clear message if anything fails ────────────────────────────
+trap 'error "Deploy aborted at line $LINENO. Check the output above for details."' ERR
+
+# ── Pre-flight checks ─────────────────────────────────────────────────────────
+step "Pre-flight checks"
+
+CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
+info "Starting from branch: ${BOLD}$CURRENT_BRANCH${RESET}"
+
+# Abort if working directory is dirty
+if ! git diff --quiet || ! git diff --cached --quiet; then
+  error "Working directory is dirty. Commit or stash your changes before deploying."
+  exit 1
+fi
+success "Working directory is clean"
+
+# Show version being published
+VERSION=$(node -p "require('./package.json').version" 2>/dev/null || grep '"version"' package.json | head -1 | sed 's/.*: *"\(.*\)".*/\1/')
+info "Version to publish: ${BOLD}v${VERSION}${RESET}"
+
+# Confirm before proceeding
+echo ""
+warn "This will merge develop → staging → main and publish v${VERSION} to npm."
+read -rp "$(echo -e "${YELLOW}   Continue? [y/N] ${RESET}")" CONFIRM
+if [[ "$CONFIRM" != "y" && "$CONFIRM" != "Y" ]]; then
+  warn "Deploy cancelled."
+  exit 0
+fi
+
+# ── Promote to staging ────────────────────────────────────────────────────────
+step "Promoting to staging"
+
+info "Switching to staging..."
+git checkout staging
+git pull
+info "Merging develop into staging..."
 git merge develop
 git push
+success "staging is up to date"
 
-# check to see if npm user is logged in
-npm whoami
+# ── Promote to main ───────────────────────────────────────────────────────────
+step "Promoting to main"
 
-# if not logged in, login
-if [ $? -ne 0 ]; then
-    npm login
+info "Switching to main..."
+git checkout main
+info "Merging staging into main..."
+git merge staging
+git push
+success "main is up to date"
+
+# ── npm publish ───────────────────────────────────────────────────────────────
+step "Publishing to npm"
+
+if ! npm whoami --silent 2>/dev/null; then
+  warn "Not logged in to npm. Please log in:"
+  npm login
 fi
+
+info "Publishing v${VERSION}..."
 npm publish
+success "v${VERSION} published to npm"
+
+# ── Return to original branch ─────────────────────────────────────────────────
+step "Cleaning up"
+
+info "Returning to ${BOLD}$CURRENT_BRANCH${RESET}..."
+git checkout "$CURRENT_BRANCH"
+git merge main
+git push
+success "Branch ${BOLD}$CURRENT_BRANCH${RESET} is in sync with main"
+
+echo ""
+echo -e "${GREEN}${BOLD}🎉  Deploy complete — v${VERSION} is live on npm${RESET}"
+echo ""
