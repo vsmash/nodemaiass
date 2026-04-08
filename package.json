@@ -13,8 +13,6 @@
   "files": [
     "lib/",
     "maiass.mjs",
-    "maiass.cjs",
-    "maiass-standalone.cjs",
     "setup-env.js",
     "README.md",
     "LICENSE"

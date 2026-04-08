@@ -136,7 +136,7 @@ show_status() {
     echo "===================="
     
     # List of files that should exist
-    files=("maiass.cjs" "maiass.mjs" "maiass.sh" "package.json")
+    files=("maiass.mjs" "maiass.sh" "package.json")
     for file in "${files[@]}"; do
         if [ -f "$file" ]; then
             print_success "$file exists"

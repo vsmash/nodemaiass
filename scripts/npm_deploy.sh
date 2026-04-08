@@ -89,4 +89,6 @@ success "Branch ${BOLD}$CURRENT_BRANCH${RESET} is in sync with main"
 
 echo ""
 echo -e "${GREEN}${BOLD}🎉  Deploy complete — v${VERSION} is live on npm${RESET}"
+# make sure user knows what branch they're on
+echo -e "${YELLOW}   You are currently on branch: ${BOLD}$CURRENT_BRANCH${RESET}"
 echo ""
