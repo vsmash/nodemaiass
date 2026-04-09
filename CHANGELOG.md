@@ -1,6 +1,10 @@
-## 5.9.43
+## 5.9.44
 10 April 2026
 
+- Updated project description and homepage in package.json
+	  - feat: revised project description for clarity and detail
+	  - fix: updated homepage link to reflect new site address
+	  - refactor: modified keywords in package.json for better alignment with project features
 - Add MAIASS banner to README
 	  - feat: include MAIASS banner image in README.md
 - Update acknowledgments and support sections in README
