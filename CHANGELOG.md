@@ -1,6 +1,9 @@
-## 5.9.33
+## 5.9.34
 9 April 2026
 
+- Add release tagging to npm deployment script
+	  - feat: implement tagging of the release on main branch
+	  - docs: improve script comments for clarity
 - Update npm_deploy.sh to read version from develop branch
 	  - feat: read version from develop branch instead of the current branch
 	  - fix: improve error handling for version extraction
