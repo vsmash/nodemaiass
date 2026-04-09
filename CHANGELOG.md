@@ -1,6 +1,9 @@
-## 5.9.38
+## 5.9.39
 9 April 2026
 
+- Refined config value handling in readConfig function
+	  - feat: enhanced quote stripping for dotenv conventions
+	  - docs: updated comments for clarity on handling quotes
 - fix(config-manager): complete .env value escaping to satisfy CodeQL
 - Backslashes were not being escaped before double-quotes, producing
 	invalid .env output for values containing \. Escape order matters:
