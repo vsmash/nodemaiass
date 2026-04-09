@@ -1,6 +1,9 @@
-## 5.9.31
+## 5.9.33
 9 April 2026
 
+- Update npm_deploy.sh to read version from develop branch
+	  - feat: read version from develop branch instead of the current branch
+	  - fix: improve error handling for version extraction
 - Refactored command argument filtering
 	  - fix: corrected argument filtering to exclude single dash arguments
 - Refactored CLI argument handling and test utility improvements
