@@ -1,6 +1,11 @@
-## 5.9.37
+## 5.9.38
 9 April 2026
 
+- fix(config-manager): complete .env value escaping to satisfy CodeQL
+- Backslashes were not being escaped before double-quotes, producing
+	invalid .env output for values containing \. Escape order matters:
+	\\ must be processed before \" to avoid double-escaping.
+- Co-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>
 - Added GitHub release creation to npm deploy script
 	  - feat: implement GitHub release creation in deployment process
 	  - fix: update success message to include GitHub deployment
