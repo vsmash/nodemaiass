@@ -10,6 +10,14 @@
   },
   "author": "Velvary Pty Ltd",
   "license": "GPL-3.0-only",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vsmash/nodemaiass.git"
+  },
+  "homepage": "https://github.com/vsmash/nodemaiass#readme",
+  "bugs": {
+    "url": "https://github.com/vsmash/nodemaiass/issues"
+  },
   "files": [
     "lib/",
     "maiass.mjs",
