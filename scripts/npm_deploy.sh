@@ -32,9 +32,10 @@ if ! git diff --quiet || ! git diff --cached --quiet; then
 fi
 success "Working directory is clean"
 
-# Show version being published
-VERSION=$(node -p "require('./package.json').version" 2>/dev/null || grep '"version"' package.json | head -1 | sed 's/.*: *"\(.*\)".*/\1/')
-info "Version to publish: ${BOLD}v${VERSION}${RESET}"
+# Read version from develop (where the bump happened), not the current branch
+VERSION=$(git show develop:package.json | node -p "JSON.parse(require('fs').readFileSync('/dev/stdin','utf8')).version" 2>/dev/null \
+  || git show develop:package.json | grep '"version"' | head -1 | sed 's/.*: *"\(.*\)".*/\1/')
+info "Version to publish: ${BOLD}v${VERSION}${RESET} (from develop)"
 
 # Confirm before proceeding
 echo ""
