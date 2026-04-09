@@ -86,6 +86,27 @@ info "Publishing v${VERSION}..."
 npm publish
 success "v${VERSION} published to npm"
 
+# ── GitHub release ────────────────────────────────────────────────────────────
+step "Creating GitHub release"
+
+if command -v gh &>/dev/null; then
+  NPM_URL="https://www.npmjs.com/package/maiass/v/${VERSION}"
+  gh release create "v${VERSION}" \
+    --title "MAIASS v${VERSION}" \
+    --notes "## Install
+
+\`\`\`bash
+npm install -g maiass@${VERSION}
+\`\`\`
+
+[View on npm](${NPM_URL})" \
+    --latest
+  success "GitHub release v${VERSION} created"
+else
+  warn "gh CLI not found — skipping GitHub release creation"
+  info "Create it manually at: https://github.com/vsmash/nodemaiass/releases/new?tag=v${VERSION}"
+fi
+
 # ── Return to original branch ─────────────────────────────────────────────────
 step "Cleaning up"
 
@@ -96,7 +117,7 @@ git push
 success "Branch ${BOLD}$CURRENT_BRANCH${RESET} is in sync with main"
 
 echo ""
-echo -e "${GREEN}${BOLD}🎉  Deploy complete — v${VERSION} is live on npm${RESET}"
+echo -e "${GREEN}${BOLD}🎉  Deploy complete — v${VERSION} is live on npm and GitHub${RESET}"
 # make sure user knows what branch they're on
 echo -e "${YELLOW}   You are currently on branch: ${BOLD}$CURRENT_BRANCH${RESET}"
 echo ""
