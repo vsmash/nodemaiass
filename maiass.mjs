@@ -252,7 +252,7 @@ if (args.includes('--help') || args.includes('-h') || command === 'help') {
     case 'maiass':
       // Handle the main MAIASS workflow
       await handleMaiassCommand({
-        _: process.argv.slice(2).filter(arg => !arg.startsWith('--')),
+        _: process.argv.slice(2).filter(arg => !arg.startsWith('-')),
         'commits-only': args.includes('--commits-only') || args.includes('-c'),
         'auto-stage': args.includes('--auto-stage'),
         'auto': args.includes('--auto') || args.includes('-a'),
