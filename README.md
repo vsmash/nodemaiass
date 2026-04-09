@@ -1,3 +1,5 @@
+![MAIASS Banner](https://raw.githubusercontent.com/vsmash/maiass/main/assets/maiassbanner2.png)
+
 # `|))` MAIASS (Node.js)
 **Modular AI-Augmented Semantic Scribe** — intelligent Git workflow automation
 
@@ -129,6 +131,20 @@ MAIASS_DEBUG=true                 # verbose output
 
 Issues and PRs welcome. See [docs/development.md](docs/development.md) to get started.
 
+## 🙏 Acknowledgments
+
+- Git community for workflow inspiration
+- All contributors and testers
+
 ## License
 
 [GNU General Public License v3.0](LICENSE)
+
+---
+
+**Made with ❤️ for developers who want to automate versioning, changelogs, and commit messages.**
+
+## 💸 Support MAIASS
+
+[![GitHub Sponsors](https://img.shields.io/badge/Sponsor-GitHub-ea4aaa?logo=github)](https://github.com/sponsors/vsmash)
+[![Ko-fi](https://img.shields.io/badge/Buy%20Me%20a%20Coffee-Ko--fi-29abe0?logo=ko-fi)](https://ko-fi.com/myass)
