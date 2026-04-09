@@ -1,6 +1,8 @@
-## 5.9.29
+## 5.9.31
 9 April 2026
 
+- Refactored command argument filtering
+	  - fix: corrected argument filtering to exclude single dash arguments
 - Refactored CLI argument handling and test utility improvements
 	  - fix(cli): update argument parsing to skip flags for meaningful arguments
 	  - docs: clarify test runner description and function comments
