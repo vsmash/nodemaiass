@@ -33,8 +33,12 @@ jobs:
 
     - name: Run tests
       run: npm test
+      env:
+        MAIASS_AI_MODE: off
 
     - name: Test CLI entry point
       run: |
         node maiass.mjs --version
         node maiass.mjs --help
+      env:
+        MAIASS_AI_MODE: off

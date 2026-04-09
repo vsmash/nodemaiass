@@ -101,6 +101,7 @@ class TestUtils {
           ...process.env,
           MAIASS_DEBUG: 'false',
           MAIASS_AI_COMMITS: 'off',
+          MAIASS_AI_MODE: 'off',  // prevent anonymous subscription creation in test runs
           MAIASS_LOGGING: 'false'
         }
       });
