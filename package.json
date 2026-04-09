@@ -2,7 +2,7 @@
   "name": "maiass",
   "type": "module",
   "version": "5.9.43",
-  "description": "MAIASS - Modular AI-Augmented Semantic Scribe - Intelligent Git workflow automation",
+  "description": "AI commit message generator, semantic versioning, and changelog automation for Git. One command stages, commits with AI, bumps version, and merges branches. Free credits on install — no sign-up needed.",
   "main": "maiass.mjs",
   "bin": {
     "maiass": "./maiass.mjs",
@@ -14,7 +14,7 @@
     "type": "git",
     "url": "https://github.com/vsmash/nodemaiass.git"
   },
-  "homepage": "https://github.com/vsmash/nodemaiass#readme",
+  "homepage": "https://maiass.com",
   "bugs": {
     "url": "https://github.com/vsmash/nodemaiass/issues"
   },
@@ -29,13 +29,36 @@
     "node": ">=18.0.0"
   },
   "keywords": [
-    "git",
-    "automation",
-    "workflow",
+    "ai-commit",
+    "ai-commit-message",
+    "commit-message-generator",
+    "git-automation",
+    "git-workflow",
+    "changelog-generator",
+    "semantic-versioning",
+    "version-bump",
+    "conventional-commits",
     "ai",
+    "git",
     "commit",
-    "version",
-    "cli"
+    "changelog",
+    "semver",
+    "cli",
+    "automation",
+    "openai",
+    "developer-tools",
+    "version-management",
+    "workflow"
+  ],
+  "funding": [
+    {
+      "type": "github",
+      "url": "https://github.com/sponsors/vsmash"
+    },
+    {
+      "type": "ko_fi",
+      "url": "https://ko-fi.com/myass"
+    }
   ],
   "scripts": {
     "start": "node maiass.mjs",
