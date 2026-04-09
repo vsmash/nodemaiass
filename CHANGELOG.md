@@ -1,3 +1,10 @@
+## 5.9.42
+10 April 2026
+
+- Refactored config parsing logic in version-manager.js
+	  - refactor: improved parsing of pipe-separated config
+	  - fix: handled escaped pipes correctly in file configurations
+
 ## 5.9.40
 9 April 2026
 

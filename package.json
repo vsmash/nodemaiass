@@ -1,7 +1,7 @@
 {
   "name": "maiass",
   "type": "module",
-  "version": "5.9.41",
+  "version": "5.9.42",
   "description": "MAIASS - Modular AI-Augmented Semantic Scribe - Intelligent Git workflow automation",
   "main": "maiass.mjs",
   "bin": {
