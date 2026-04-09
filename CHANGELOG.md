@@ -1,6 +1,11 @@
-## 5.9.42
+## 5.9.43
 10 April 2026
 
+- Add MAIASS banner to README
+	  - feat: include MAIASS banner image in README.md
+- Update acknowledgments and support sections in README
+	  - docs: add acknowledgments for Git community, contributors, and testers
+	  - docs: update support section with GitHub Sponsors and Ko-fi links
 - Refactored config parsing logic in version-manager.js
 	  - refactor: improved parsing of pipe-separated config
 	  - fix: handled escaped pipes correctly in file configurations
