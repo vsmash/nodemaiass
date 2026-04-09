@@ -67,6 +67,13 @@ git merge staging
 git push
 success "main is up to date"
 
+# ── Tag the release on main ───────────────────────────────────────────────────
+step "Tagging release"
+
+git tag -a "v${VERSION}" -m "Release v${VERSION}"
+git push origin "v${VERSION}"
+success "Tagged v${VERSION} on main"
+
 # ── npm publish ───────────────────────────────────────────────────────────────
 step "Publishing to npm"
 
