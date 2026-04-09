@@ -1,6 +1,10 @@
-## 5.9.34
+## 5.9.35
 9 April 2026
 
+- Improved logging and documentation
+	  - fix(logger): enhanced session ID generation with random bytes
+	  - docs(config-manager): clarified comment on value quoting
+	  - fix(token-validator): added CodeQL comments for clearer logging practices
 - Add release tagging to npm deployment script
 	  - feat: implement tagging of the release on main branch
 	  - docs: improve script comments for clarity
