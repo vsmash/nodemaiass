@@ -1,3 +1,9 @@
+## 5.9.47
+11 April 2026
+
+- Updated strawfile with deployment testing note
+	  - feat: added note for deployment testing regarding ghost accounts
+
 ## 5.9.44
 10 April 2026
 
