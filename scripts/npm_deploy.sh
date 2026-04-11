@@ -17,7 +17,7 @@ error()   { echo -e "${RED}✘  $*${RESET}" >&2; }
 step()    { echo -e "\n${BOLD}${CYAN}── $* ──${RESET}"; }
 
 # ── Trap: print a clear message if anything fails ────────────────────────────
-trap 'error "Deploy aborted at line $LINENO. Check the output above for details."' ERR
+trap 'error "Deploy aborted at line $LINENO. Check the output above for details."; git checkout "$CURRENT_BRANCH" 2>/dev/null && warn "Returned to branch: $CURRENT_BRANCH"' ERR
 
 # ── Pre-flight checks ─────────────────────────────────────────────────────────
 step "Pre-flight checks"
