@@ -1,6 +1,7 @@
-## 5.9.48
+## 5.9.49
 11 April 2026
 
+- fix to deployment duplicate version branch return
 - Updated strawfile with additional test case
 	  - chore: added second test entry in strawfile.txt
 - Updated strawfile with deployment testing note
