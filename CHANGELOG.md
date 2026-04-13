@@ -1,3 +1,9 @@
+## 5.9.52
+13 April 2026
+
+- Updated homepage in package.json
+	  - fix(package): changed homepage from maiass.com to maiass.net
+
 ## 5.9.49
 11 April 2026
 
