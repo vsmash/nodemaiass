@@ -4,7 +4,7 @@
 **Modular AI-Augmented Semantic Scribe** — intelligent Git workflow automation
 
 [![npm](https://img.shields.io/npm/v/maiass.svg)](https://www.npmjs.com/package/maiass)
-[![Node.js](https://img.shields.io/badge/Node.js-18+-green.svg)](https://nodejs.org/)
+[![Node.js](https://img.shields.io/badge/Node.js-20+-green.svg)](https://nodejs.org/)
 [![License](https://img.shields.io/badge/License-GPL--3.0-blue.svg)](LICENSE)
 
 ---
@@ -21,7 +21,7 @@ MAIASS automates the repetitive parts of your Git workflow: staging, AI-powered 
 npm install -g maiass
 ```
 
-Requires Node.js 18+.
+Requires Node.js 20+.
 
 ---
 
@@ -60,9 +60,9 @@ maiass config set MAIASS_AI_TOKEN your_api_key
 AI mode is configured per-project in `.env.maiass`:
 
 ```bash
-MAIASS_AI_COMMITS=ask        # ask each time (default)
-MAIASS_AI_COMMITS=always     # always use AI
-MAIASS_AI_COMMITS=off        # disable AI
+MAIASS_AI_MODE=ask        # ask each time (default)
+MAIASS_AI_MODE=autosuggest  # always use AI
+MAIASS_AI_MODE=off          # disable AI
 ```
 
 ---
@@ -73,7 +73,7 @@ MAIASS_AI_COMMITS=off        # disable AI
 - **Version management** — detects and bumps `package.json`, `composer.json`, `VERSION`, `.pbxproj` (Swift/Xcode), and more
 - **Changelog generation** — user-facing `CHANGELOG.md` and internal developer changelog
 - **Branch workflow** — feature → develop → staging → main with merge handling
-- **JIRA integration** — ticket numbers auto-detected from branch names
+- **Ticket integration** — ticket numbers auto-detected from branch names (Jira `ABC-123`, GitHub/Trello `#123` or `123`)
 - **First-run friendly** — works immediately with sensible defaults, no blocking setup
 
 ---
@@ -92,10 +92,10 @@ Run `maiass --setup` to configure a project interactively, or edit `.env.maiass`
 Common variables:
 
 ```bash
-MAIASS_AI_COMMITS=ask
-MAIASS_MODE=full                  # full or ai_only
-MAIASS_MAIN_BRANCH=main
-MAIASS_DEVELOP_BRANCH=develop
+MAIASS_AI_MODE=ask
+MAIASS_MAINBRANCH=main
+MAIASS_DEVELOPBRANCH=develop
+MAIASS_STAGINGBRANCH=staging
 MAIASS_VERSION_PRIMARY_FILE=package.json
 MAIASS_DEBUG=true                 # verbose output
 ```

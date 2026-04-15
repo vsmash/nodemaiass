@@ -13,9 +13,12 @@ nodemaiass/
 │   ├── commit.js          # AI commit message generation
 │   ├── version-manager.js # Version file detection and bumping
 │   ├── bootstrap.js       # --setup wizard
-│   ├── config-manager.js  # .env.maiass config loading
-│   ├── git-info.js        # Git helpers
+│   ├── config.js          # .env.maiass config loading
+│   ├── git-info.js        # Git helpers, ticket extraction
 │   └── ...                # Other utilities
+├── test/
+│   ├── test-runner.js     # e2e tests (subprocess-based)
+│   └── unit/              # Vitest unit tests
 ├── docs/                  # Documentation
 ├── scripts/
 │   └── npm_deploy.sh      # Promote branches and publish to npm
@@ -25,7 +28,7 @@ nodemaiass/
 ## Development Setup
 
 ### Prerequisites
-- Node.js 23+
+- Node.js 20+
 - Git
 - Text editor with ES module support
 
@@ -109,28 +112,27 @@ const configPath = path.join(configDir, 'config.env');
 
 ## Testing
 
-### Manual Testing
-```bash
-# Test different environments
-nma hello
-DEBUG=true nma hello
+### Unit Tests (Vitest)
 
-# Test cross-platform config
-node setup-env.js
-```
-
-### Environment Testing
-Create test `.env` files:
+Unit tests live in `test/unit/` and cover individual library functions.
 
 ```bash
-# Test project-specific config
-echo "TEST_VAR=project" > .env
-nma hello
-
-# Test user config
-echo "TEST_VAR=user" > ~/.maiass.env
-nma hello
+npm run test:unit          # single run
+npm run test:unit:watch    # watch mode
+npm run test:coverage      # with coverage report
 ```
+
+### e2e Tests
+
+The e2e test runner spawns maiass as a subprocess and tests full CLI flows.
+
+```bash
+npm test
+```
+
+### CI
+
+GitHub Actions runs both unit and e2e tests on Node.js 20, 22, and 24 for every push and PR. A separate workflow automatically bumps the patch version when a PR is merged to `develop`.
 
 ## Porting from MAIASS.sh
 
@@ -176,8 +178,15 @@ function prompt(question) {
 
 ## Release Process
 
-1. Use MAIASS itself to bump the version: `maiass patch` (or `minor`/`major`)
-2. Run `./scripts/npm_deploy.sh` to promote develop → staging → main and publish to npm
+Version bumps on `develop` happen automatically via GitHub Actions when a PR is merged.
+
+To publish a release to npm:
+
+```bash
+./scripts/npm_deploy.sh
+```
+
+This promotes develop → staging → main, tags the release, and publishes to npm.
 
 ## Contributing
 

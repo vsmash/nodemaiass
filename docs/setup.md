@@ -5,7 +5,7 @@ MAIASS is designed to work seamlessly across Windows, macOS, and Linux with appr
 ## Installation
 
 ### Prerequisites
-- Node.js 18+ (recommended: 23+)
+- Node.js 20+
 - npm or yarn
 - Git
 
