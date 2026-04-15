@@ -1,6 +1,11 @@
-## 5.9.56
+## 5.9.57
 15 April 2026
 
+- Improve version-bump workflow: npm cache and noise reduction
+	Improve version-bump workflow: cache npm, suppress noise
+- - ci: add npm cache to setup-node step for faster installs
+	- ci: add --no-fund --no-audit flags to npm install to reduce output noise
+- Co-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>
 - test: version bump workflow
 	Updated Node.js version requirements and documentation
 	  - docs: updated Node.js requirement from 18+ to 20+
