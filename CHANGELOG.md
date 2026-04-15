@@ -1,3 +1,16 @@
+## 5.9.58
+16 April 2026
+
+- Pull latest develop before version bump to prevent stale base
+- - fix: pull origin/develop at the start of handleVersionManagement before
+	  reading version files — prevents bumping from a stale local version when
+	  remote has already been bumped (e.g. by a concurrent GH Actions run)
+	- fix: move develop-branch guard before getCurrentVersion() so we fail fast
+	  without doing unnecessary file I/O
+	- ci: add explicit git checkout develop step in version-bump.yml to ensure
+	  workflow lands on the real branch head, not the PR merge commit ref
+- Co-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>
+
 ## 5.9.57
 15 April 2026
 
