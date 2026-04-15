@@ -69,11 +69,18 @@
     "build:nexe": "./scripts/advanced-build.sh nexe",
     "build:source": "./scripts/advanced-build.sh source",
     "build:legacy": "node build.js",
-    "test": "node test/test-runner.js"
+    "test": "node test/test-runner.js",
+    "test:unit": "vitest run",
+    "test:unit:watch": "vitest",
+    "test:coverage": "vitest run --coverage"
   },
   "dependencies": {
     "chalk": "^5.4.1",
     "dotenv": "^16.4.5",
     "yargs": "^17.7.2"
+  },
+  "devDependencies": {
+    "@vitest/coverage-v8": "^4.1.4",
+    "vitest": "^4.1.4"
   }
 }
