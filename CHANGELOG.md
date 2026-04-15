@@ -1,3 +1,15 @@
+## 5.9.54
+16 April 2026
+
+- Refactored MAIASS command logic
+	  - chore: removed anonymous subscription creation logic
+	  - refactor: streamlined command handling in MAIASS pipeline
+- Enhanced branch name parsing and updated dependencies
+	  - feat: improved Jira ticket extraction from branch names
+	  - feat: added support for numeric ticket formats in branch names
+	  - chore(package): updated package version to 5.9.53 and added funding links
+	  - chore(package): included new development dependencies for coverage and testing
+
 ## 5.9.52
 13 April 2026
 
