@@ -1,0 +1,38 @@
+name: Version Bump on PR Merge
+
+on:
+  pull_request:
+    types: [closed]
+    branches:
+      - develop
+
+jobs:
+  bump-version:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GH_PAT }}
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install maiass
+        run: npm install -g maiass
+
+      - name: Configure git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Bump version
+        run: maiass -a patch
+        env:
+          MAIASS_AI_MODE: off
