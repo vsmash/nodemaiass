@@ -7,6 +7,19 @@ import { hideBin } from 'yargs/helpers';
 import { initLogger, logger } from './lib/logger.js';
 import { loadEnvironmentConfig, ensureConfigDirectories } from './lib/config.js';
 
+// If running from a subdirectory of a git repo, cd to the repo root first so
+// that .env.maiass is loaded from the right place and git operations are
+// consistent with the project root.
+import { execSync } from 'child_process';
+try {
+  const gitRoot = execSync('git rev-parse --show-toplevel', { encoding: 'utf8' }).trim();
+  if (gitRoot && gitRoot !== process.cwd()) {
+    process.chdir(gitRoot);
+  }
+} catch {
+  // Not in a git repo — leave cwd as-is, pipeline will handle it gracefully
+}
+
 // Load environment variables from multiple sources with cross-platform support
 ensureConfigDirectories();
 const envConfig = loadEnvironmentConfig();
