@@ -1,6 +1,10 @@
-## 5.10.4
+## 5.10.5
 17 April 2026
 
+- Add update check functionality with tests
+	  - feat: implement update check for npm package version
+	  - test: add unit tests for version comparison logic
+	  - fix(test): handle various response scenarios in tests
 - Updated command references from `nma` to `maiass`
 	  - docs: replaced all occurrences of `nma` with `maiass` in CLI command examples
 	  - docs: modified sections for configuration, manual setup, debugging, and workflow documentation
