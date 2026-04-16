@@ -12,7 +12,7 @@ import { loadEnvironmentConfig, ensureConfigDirectories } from './lib/config.js'
 // consistent with the project root.
 import { execSync } from 'child_process';
 try {
-  const gitRoot = execSync('git rev-parse --show-toplevel', { encoding: 'utf8' }).trim();
+  const gitRoot = execSync('git rev-parse --show-toplevel', { encoding: 'utf8', stdio: ['pipe', 'pipe', 'pipe'] }).trim();
   if (gitRoot && gitRoot !== process.cwd()) {
     process.chdir(gitRoot);
   }
@@ -52,6 +52,7 @@ import { handleMaiassCommand } from './lib/maiass-command.js';
 import { handleAccountInfoCommand } from './lib/account-info.js';
 import { SYMBOLS } from './lib/symbols.js';
 import { bootstrapProject } from './lib/bootstrap.js';
+import { createGithubAction, showGitlabExcerpt, showBitbucketExcerpt } from './lib/ci-templates.js';
 
 // Simple CLI setup for pkg compatibility
 const args = process.argv.slice(2);
@@ -130,7 +131,10 @@ const validFlags = [
   '--force', '-f',
   '--silent', '-s',
   '--json',
-  '--tag', '-t'
+  '--tag', '-t',
+  '--create-gh-action',
+  '--show-gl-excerpt',
+  '--show-bb-excerpt'
 ];
 
 // Check for unrecognized flags
@@ -187,8 +191,17 @@ if (args.includes('--help') || args.includes('-h') || command === 'help') {
   console.log('  --dry-run          Run without making changes');
   console.log('  --force            Skip confirmation prompts');
   console.log('  --silent           Suppress non-essential output');
+  console.log('\nCI Setup:');
+  console.log('  --create-gh-action Create .github/workflows/maiass-version-bump.yml');
+  console.log('  --show-gl-excerpt  Print GitLab CI excerpt to stdout (merge into .gitlab-ci.yml)');
+  console.log('  --show-bb-excerpt  Print Bitbucket Pipelines excerpt to stdout');
   process.exit(0);
 }
+
+// CI template commands — these run and exit immediately, no pipeline needed
+if (args.includes('--create-gh-action')) { createGithubAction(); process.exit(0); }
+if (args.includes('--show-gl-excerpt'))  { showGitlabExcerpt(); process.exit(0); }
+if (args.includes('--show-bb-excerpt'))  { showBitbucketExcerpt(); process.exit(0); }
 
 // Command routing (wrapped in async IIFE to handle async commands)
 (async () => {

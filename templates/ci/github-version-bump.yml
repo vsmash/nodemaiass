@@ -1,0 +1,66 @@
+# MAIASS — GitHub Actions: Auto Version Bump on PR Merge
+#
+# What this does:
+#   When a pull request is merged into your develop branch, this workflow
+#   automatically runs `maiass -a patch` to bump the patch version, commit
+#   the change, and push it back to develop.
+#
+# Setup:
+#   1. Copy this file to .github/workflows/maiass-version-bump.yml in your repo
+#   2. Create a fine-grained Personal Access Token (PAT) with:
+#        - Contents: Read & Write
+#        - Metadata: Read-only
+#        - Workflows: Read & Write
+#   3. Add the PAT as a repository secret named GH_PAT
+#   4. Set MAIASS_DEVELOPBRANCH in your .env.maiass if your branch isn't 'develop'
+#
+# Notes:
+#   - AI is disabled (MAIASS_AI_MODE: off) so no credits are used
+#   - The workflow reads MAIASS_DEVELOPBRANCH from your .env.maiass automatically
+#   - maiass pulls the latest develop before bumping to prevent stale version conflicts
+
+name: Version Bump on PR Merge
+
+on:
+  pull_request:
+    types: [closed]
+    branches:
+      - develop  # Change this to match your MAIASS_DEVELOPBRANCH if different
+
+jobs:
+  bump-version:
+    # Only run when the PR was actually merged (not just closed)
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write  # Required to push the version bump commit
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0          # Full history needed for changelog generation
+          token: ${{ secrets.GH_PAT }}  # PAT allows the bot to push back to the repo
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install maiass
+        run: npm install -g maiass --no-fund --no-audit
+
+      - name: Configure git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      # Explicitly check out the develop branch head (the pull_request closed
+      # event checks out a merge ref, not the branch itself)
+      - name: Checkout develop
+        run: git checkout develop
+
+      - name: Bump version
+        run: maiass -a patch
+        env:
+          MAIASS_AI_MODE: off  # Disable AI — no credits used in CI

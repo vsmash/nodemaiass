@@ -1,0 +1,43 @@
+# MAIASS — Bitbucket Pipelines: Auto Version Bump on Push to Develop
+#
+# What this does:
+#   Runs `maiass -a patch` whenever a commit lands on your develop branch
+#   (including merged pull requests). Bumps the patch version, commits, and pushes.
+#
+# ⚠️  Double-bump caveat:
+#   Unlike GitHub Actions, Bitbucket Pipelines cannot trigger exclusively on
+#   PR merge events — it fires on every push to the branch, including the
+#   version bump commit itself. The script below guards against this by checking
+#   the last commit message. If it looks like a MAIASS version bump, it exits early.
+#
+# Setup:
+#   1. Merge this excerpt into your bitbucket-pipelines.yml (or use as-is)
+#   2. In Bitbucket: Repository Settings → Pipelines → SSH Keys
+#      Add a key pair and grant write access, OR use an app password:
+#        - Create an app password with Repositories: Read & Write scope
+#        - Add it as a repository variable named BB_APP_PASSWORD (secured)
+#        - Add your Bitbucket username as BB_USERNAME
+#   3. Set MAIASS_DEVELOPBRANCH in your .env.maiass if your branch isn't 'develop'
+
+pipelines:
+  branches:
+    develop:  # Change to match your MAIASS_DEVELOPBRANCH if different
+      - step:
+          name: MAIASS Version Bump
+          image: node:20
+          script:
+            # Guard: skip if last commit was already a version bump
+            - |
+              LAST_MSG=$(git log -1 --pretty=format:'%s')
+              if echo "$LAST_MSG" | grep -qiE '^Bumped version'; then
+                echo "Version bump commit detected — skipping to avoid loop."
+                exit 0
+              fi
+            - npm install -g maiass --no-fund --no-audit
+            - git config user.name "Bitbucket Pipelines"
+            - git config user.email "pipelines@bitbucket.org"
+            # Authenticate push via app password
+            - git remote set-url origin "https://${BB_USERNAME}:${BB_APP_PASSWORD}@bitbucket.org/${BITBUCKET_REPO_FULL_NAME}.git"
+            - maiass -a patch
+          variables:
+            MAIASS_AI_MODE: "off"  # Disable AI — no credits used in CI
