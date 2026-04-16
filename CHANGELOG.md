@@ -1,3 +1,10 @@
+## 5.10.2
+16 April 2026
+
+- Improve handling of git repository context in maiass.mjs
+	  - feat: added logic to change working directory to git root if in a subdirectory
+	  - docs: included comments explaining new functionality
+
 ## 5.9.58
 16 April 2026
 
