@@ -41,28 +41,28 @@ MAIASS_VERBOSITY=normal
 ### Using the CLI
 ```bash
 # View all configuration
-nma config
+maiass config
 
 # View global configuration only
-nma config --global
+maiass config --global
 
 # View project configuration only
-nma config --project
+maiass config --project
 
 # Set global configuration
-nma config --global maiass_token=your_key_here
-nma config --global debug=true
+maiass config --global maiass_token=your_key_here
+maiass config --global debug=true
 
 # Set project configuration
-nma config --project mainbranch=main
-nma config --project version_primary_file=VERSION.txt
+maiass config --project mainbranch=main
+maiass config --project version_primary_file=VERSION.txt
 
 # Edit configuration files directly
-nma config --edit --global   # Opens ~/.env.maiass
-nma config --edit --project   # Opens ./.env.maiass
+maiass config --edit --global   # Opens ~/.env.maiass
+maiass config --edit --project   # Opens ./.env.maiass
 
 # List all available variables
-nma config --list
+maiass config --list
 ```
 
 ### Manual Configuration
@@ -163,7 +163,7 @@ Always store sensitive information securely:
 
 ```bash
 # ✅ Good: Store in global config
-nma config --global maiass_token=your_key
+maiass config --global maiass_token=your_key
 
 # ❌ Avoid: Hardcoding in scripts
 export MAIASS_AI_TOKEN=your_key
@@ -191,35 +191,35 @@ echo "*.backup.*" >> .gitignore
 ### Basic Setup
 ```bash
 # 1. Set up AI integration
-nma config --global maiass_token=your_api_key_here
-nma config --global ai_mode=ask
+maiass config --global maiass_token=your_api_key_here
+maiass config --global ai_mode=ask
 
 # 2. Configure for projects using 'main' branch
-nma config --global mainbranch=main
+maiass config --global mainbranch=main
 
 # 3. Enable debug mode for troubleshooting
-nma config --global debug=true
+maiass config --global debug=true
 ```
 
 ### Project-Specific Setup
 ```bash
 # For a project with custom version file
-nma config --project version_primary_file=VERSION.txt
-nma config --project version_primary_type=text
+maiass config --project version_primary_file=VERSION.txt
+maiass config --project version_primary_type=text
 
 # For a project with different branch names
-nma config --project mainbranch=main
-nma config --project developbranch=dev
+maiass config --project mainbranch=main
+maiass config --project developbranch=dev
 ```
 
 ### Enterprise Setup
 ```bash
 
 # Disable AI for security
-nma config --global ai_mode=off
+maiass config --global ai_mode=off
 
 # Enable commit signing
-nma config --global commit_sign=true
+maiass config --global commit_sign=true
 ```
 
 ## 🔍 Troubleshooting Configuration
@@ -227,13 +227,13 @@ nma config --global commit_sign=true
 ### View Current Configuration
 ```bash
 # See all variables and their sources
-nma config
+maiass config
 
 # Show sensitive values (be careful!)
-nma config --show-sensitive
+maiass config --show-sensitive
 
 # Check environment variables
-nma env
+maiass env
 ```
 
 ### Common Issues
@@ -241,10 +241,10 @@ nma env
 **"MAIASS API key not found"**
 ```bash
 # Check if key is set
-nma config | grep maiass_token  
+maiass config | grep maiass_token  
 
 # Set the key
-nma config --global maiass_token=your_key_here
+maiass config --global maiass_token=your_key_here
 ```
 
 **"Configuration not loading"**
@@ -259,17 +259,17 @@ cat ~/.env.maiass
 **"Wrong branch names"**
 ```bash
 # Check current branch configuration
-nma config | grep branch
+maiass config | grep branch
 
 # Override for current project
-nma config --project mainbranch=main
+maiass config --project mainbranch=main
 ```
 
 ### Debug Configuration Loading
 ```bash
 # Enable debug mode to see config loading
 export MAIASS_DEBUG=true
-nma config
+maiass config
 
 # This will show which files are loaded and in what order
 ```
@@ -280,37 +280,37 @@ nma config
 For projects that maintain version in multiple files:
 ```bash
 # Set primary version file
-nma config --project version_primary_file=package.json
-nma config --project version_primary_type=json
+maiass config --project version_primary_file=package.json
+maiass config --project version_primary_type=json
 
 # Set secondary files (comma-separated)
-nma config --project version_secondary_files="src/version.js,docs/VERSION"
-nma config --project version_secondary_types="text,text"
+maiass config --project version_secondary_files="src/version.js,docs/VERSION"
+maiass config --project version_secondary_types="text,text"
 ```
 
 ### Custom Version Patterns
 For non-standard version file formats:
 ```bash
 # Custom PHP version pattern
-nma config --project version_pattern_php="define\('VERSION', '([^']*)'\)"
+maiass config --project version_pattern_php="define\('VERSION', '([^']*)'\)"
 
 # Custom CSS version pattern  
-nma config --project version_pattern_css="Version: ([0-9.]+)"
+maiass config --project version_pattern_css="Version: ([0-9.]+)"
 ```
 
 ### Environment-Specific Configuration
 ```bash
 # Development environment
-nma config --project debug=true
-nma config --project verbosity=verbose
+maiass config --project debug=true
+maiass config --project verbosity=verbose
 
 # Production environment
-nma config --project debug=false
-nma config --project autopush_commits=true
+maiass config --project debug=false
+maiass config --project autopush_commits=true
 ```
 ---
 
-**💡 Pro Tip**: Use `nma config --list` to see all available configuration variables and their descriptions.
+**💡 Pro Tip**: Use `maiass config --list` to see all available configuration variables and their descriptions.
 
 ## Manual Configuration
 

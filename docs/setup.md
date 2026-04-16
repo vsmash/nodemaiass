@@ -52,12 +52,12 @@ For easy access, create a symlink:
 
 ### macOS/Linux
 ```bash
-ln -s /path/to/maiass/nodemaiass.sh ~/.local/bin/nma
+ln -s /path/to/maiass/nodemaiass.sh ~/.local/bin/maiass
 ```
 
 ### Windows (PowerShell as Admin)
 ```powershell
-New-Item -ItemType SymbolicLink -Path "C:\Windows\System32\nma.cmd" -Target "C:\path\to\maiass\nodemaiass.sh"
+New-Item -ItemType SymbolicLink -Path "C:\Windows\System32\maiass.cmd" -Target "C:\path\to\maiass\nodemaiass.sh"
 ```
 
 ## Verification
@@ -65,7 +65,7 @@ New-Item -ItemType SymbolicLink -Path "C:\Windows\System32\nma.cmd" -Target "C:\
 Test your installation:
 
 ```bash
-nma hello
+maiass hello
 ```
 
 You should see:

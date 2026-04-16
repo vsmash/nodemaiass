@@ -201,7 +201,7 @@ This promotes develop → staging → main, tags the release, and publishes to n
 
 ### Enable Debug Output
 ```bash
-DEBUG=true nma <command>
+DEBUG=true maiass <command>
 ```
 
 ### Check Environment Loading

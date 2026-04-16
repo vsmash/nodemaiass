@@ -16,7 +16,7 @@ MAIASS follows a structured 4-phase workflow that automates common Git operation
 ### Complete Workflow
 ```bash
 # Run the full MAIASS pipeline
-nma
+maiass
 
 # This will:
 # 1. Validate your current branch
@@ -29,7 +29,7 @@ nma
 ### Commits Only
 ```bash
 # Just handle commits, skip version management
-nma --commits-only
+maiass --commits-only
 
 # Perfect for:
 # - Feature development
@@ -40,12 +40,12 @@ nma --commits-only
 ### Version Management
 ```bash
 # Specific version bumps
-nma patch    # 1.0.0 → 1.0.1 (bug fixes)
-nma minor    # 1.0.0 → 1.1.0 (new features)
-nma major    # 1.0.0 → 2.0.0 (breaking changes)
+maiass patch    # 1.0.0 → 1.0.1 (bug fixes)
+maiass minor    # 1.0.0 → 1.1.0 (new features)
+maiass major    # 1.0.0 → 2.0.0 (breaking changes)
 
 # With git tagging
-nma minor --tag
+maiass minor --tag
 ```
 
 ## 📋 Phase-by-Phase Breakdown
@@ -187,7 +187,7 @@ Enter choice [1-5]:
 git status
 # → Modified: src/dashboard.js, tests/dashboard.test.js
 
-nma --commits-only
+maiass --commits-only
 
 # Result:
 # ✅ Commits changes with AI message
@@ -201,7 +201,7 @@ nma --commits-only
 git status
 # → Clean working directory
 
-nma minor --tag
+maiass minor --tag
 
 # Result:
 # ✅ Skips commit (no changes)
@@ -216,7 +216,7 @@ nma minor --tag
 git status
 # → Modified: src/security.js
 
-nma patch --tag
+maiass patch --tag
 
 # Result:
 # ✅ Commits security fix
@@ -228,7 +228,7 @@ nma patch --tag
 ### Scenario 4: Safe Testing
 ```bash
 # Preview what would happen
-nma --dry-run minor
+maiass --dry-run minor
 
 # Result:
 # ℹ️ Shows all planned actions
@@ -241,17 +241,17 @@ nma --dry-run minor
 ### Auto-Staging
 ```bash
 # Automatically stage all changes
-nma --auto-stage
+maiass --auto-stage
 
 # Equivalent to:
 git add .
-nma
+maiass
 ```
 
 ### Force Mode
 ```bash
 # Skip all confirmation prompts
-nma --force patch
+maiass --force patch
 
 # Perfect for:
 # - CI/CD pipelines
@@ -262,13 +262,13 @@ nma --force patch
 ### Custom Workflows
 ```bash
 # Combine options for specific needs
-nma minor --tag --force --dry-run
+maiass minor --tag --force --dry-run
 
 # Version management only
-nma version patch --tag
+maiass version patch --tag
 
 # Commit workflow only  
-nma commit --auto-stage
+maiass commit --auto-stage
 ```
 
 ## 🌿 Branch Strategy Best Practices
@@ -276,22 +276,22 @@ nma commit --auto-stage
 ### Git Flow Integration
 ```bash
 # Feature development
-feature/USER-123-feature → nma --commits-only
+feature/USER-123-feature → maiass --commits-only
 
 # Release preparation  
-develop → nma minor --tag
+develop → maiass minor --tag
 
 # Hotfixes
-hotfix/critical-fix → nma patch --tag
+hotfix/critical-fix → maiass patch --tag
 ```
 
 ### Branch Configuration
 ```bash
 # For projects using 'main' instead of 'main'
-nma config --project mainbranch=main
+maiass config --project mainbranch=main
 
 # Custom develop branch name
-nma config --project developbranch=dev
+maiass config --project developbranch=dev
 ```
 
 ## 🔧 Version Management Deep Dive
@@ -302,13 +302,13 @@ nma config --project developbranch=dev
 1.2.3
 
 # Patch: Bug fixes (1.2.3 → 1.2.4)
-nma patch
+maiass patch
 
 # Minor: New features (1.2.3 → 1.3.0)  
-nma minor
+maiass minor
 
 # Major: Breaking changes (1.2.3 → 2.0.0)
-nma major
+maiass major
 ```
 
 ### Multiple Version Files
@@ -324,7 +324,7 @@ src/version.php  → define('VERSION', '1.3.0');
 ### Git Tagging
 ```bash
 # Create annotated tags
-nma minor --tag
+maiass minor --tag
 
 # Result:
 git tag -a v1.3.0 -m "Release 1.3.0"
@@ -347,7 +347,7 @@ MAIASS_VERSION_CONSTANT=MY_AWESOME_PLUGIN_VERSION
 #### Workflow
 ```bash
 # Run version bump as usual
-nma minor
+maiass minor
 
 # MAIASS will automatically:
 # 1. Update package.json: "version": "1.3.0"
@@ -375,7 +375,7 @@ MAIASS_THEME_PATH=wp-content/themes/my-theme
 
 #### Workflow
 ```bash
-nma patch
+maiass patch
 
 # Updates functions.php with:
 define('MY_THEME_VERSION', '1.2.4');
@@ -412,7 +412,7 @@ functions.php        → define('MY_THEME_VERSION', '1.3.0');
 
 ```bash
 # Preview WordPress updates
-nma minor --dry-run
+maiass minor --dry-run
 
 # Output shows:
 # ℹ️ Would update WordPress plugin/theme versions (dry run)
@@ -465,13 +465,13 @@ MAIASS_THEME_PATH=wp-content/themes/my-theme/functions.php
 ### AI Modes
 ```bash
 # Ask mode (default) - Prompts for approval
-nma config --global ai_mode=ask
+maiass config --global ai_mode=ask
 
 # Auto-suggest - Uses AI without asking
-nma config --global ai_mode=autosuggest
+maiass config --global ai_mode=autosuggest
 
 # Off - Disable AI completely
-nma config --global ai_mode=off
+maiass config --global ai_mode=off
 ```
 
 ## 🚨 Error Handling & Recovery
@@ -487,7 +487,7 @@ nma config --global ai_mode=off
 git status
 # → Fix conflicts
 git add .
-nma --commits-only  # Continue workflow
+maiass --commits-only  # Continue workflow
 ```
 
 **Missing Develop Branch:**
@@ -504,14 +504,14 @@ nma --commits-only  # Continue workflow
 ℹ️ Skipping version management
 
 # Configure custom version file:
-nma config --project version_primary_file=VERSION.txt
+maiass config --project version_primary_file=VERSION.txt
 ```
 
 ### Recovery Commands
 ```bash
 # Check current state
-nma git
-nma version --current
+maiass git
+maiass version --current
 
 # Reset if needed
 git reset --hard HEAD~1  # Undo last commit
@@ -524,7 +524,7 @@ git checkout develop     # Switch branches manually
 ```bash
 # Enable detailed logging
 export MAIASS_DEBUG=true
-nma --dry-run
+maiass --dry-run
 
 # Shows:
 # - Configuration loading
@@ -536,8 +536,8 @@ nma --dry-run
 ### Verbose Output
 ```bash
 # More detailed information
-nma config --global verbosity=verbose
-nma minor
+maiass config --global verbosity=verbose
+maiass minor
 
 # Shows:
 # - Step-by-step progress
@@ -551,30 +551,30 @@ nma minor
 ### Custom Commit Styles
 ```bash
 # Conventional commits
-nma config --global ai_commit_message_style=conventional
+maiass config --global ai_commit_message_style=conventional
 # Result: "feat(auth): add user login validation"
 
 # Simple style
-nma config --global ai_commit_message_style=simple
+maiass config --global ai_commit_message_style=simple
 # Result: "Add user login validation"
 ```
 
 ### Custom Version Patterns
 ```bash
 # For custom version files
-nma config --project version_primary_file=src/version.py
-nma config --project version_pattern_text="__version__ = '([^']*)'"
+maiass config --project version_primary_file=src/version.py
+maiass config --project version_pattern_text="__version__ = '([^']*)'"
 ```
 
 ### Workflow Automation
 ```bash
 # CI/CD friendly
-nma patch --tag --force --auto-stage
+maiass patch --tag --force --auto-stage
 
 # Development workflow
-alias commit="nma --commits-only --auto-stage"
-alias release="nma minor --tag"
+alias commit="maiass --commits-only --auto-stage"
+alias release="maiass minor --tag"
 ```
 ---
 
-**💡 Pro Tip**: Start with `nma --dry-run` to understand what the workflow will do before making any changes!
+**💡 Pro Tip**: Start with `maiass --dry-run` to understand what the workflow will do before making any changes!

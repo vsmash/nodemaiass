@@ -8,7 +8,7 @@ MAIASS provides a set of commands for Git workflow automation and project manage
 Test command to verify installation and configuration.
 
 ```bash
-nma hello
+maiass hello
 ```
 
 **Output:**
@@ -21,26 +21,26 @@ nma hello
 The following commands are planned to replicate functionality from the original MAIASS script:
 
 ### Git Workflow
-- `nma init` - Initialize Git workflow in current directory
-- `nma branch <name>` - Create and switch to new feature branch
-- `nma merge` - Interactive merge workflow
-- `nma release [type]` - Create release (patch/minor/major)
+- `maiass init` - Initialize Git workflow in current directory
+- `maiass branch <name>` - Create and switch to new feature branch
+- `maiass merge` - Interactive merge workflow
+- `maiass release [type]` - Create release (patch/minor/major)
 
 ### Project Management
-- `nma version` - Display version information
-- `nma config` - Manage configuration
-- `nma status` - Show project and Git status
+- `maiass version` - Display version information
+- `maiass config` - Manage configuration
+- `maiass status` - Show project and Git status
 
 ### AI Integration
-- `nma commit` - AI-augmented commit message generation
-- `nma review` - AI code review suggestions
+- `maiass commit` - AI-augmented commit message generation
+- `maiass review` - AI code review suggestions
 
 ## Command Structure
 
 All commands follow this pattern:
 
 ```bash
-nma <command> [options] [arguments]
+maiass <command> [options] [arguments]
 ```
 
 ### Global Options
@@ -53,14 +53,14 @@ nma <command> [options] [arguments]
 
 ```bash
 # Basic usage
-nma hello
+maiass hello
 
 # Get help
-nma --help
-nma hello --help
+maiass --help
+maiass hello --help
 
 # Debug mode
-nma hello --debug
+maiass hello --debug
 ```
 
 ## Environment Integration
