@@ -24,6 +24,8 @@
     "maiass.mjs",
     "setup-env.js",
     "README.md",
+    "CONTRIBUTING.md",
+    "CODE_OF_CONDUCT.md",
     "LICENSE"
   ],
   "engines": {
