@@ -1,3 +1,10 @@
+## 5.10.6
+21 April 2026
+
+- Add contributing guidelines
+	  - feat: add CONTRIBUTING.md file
+	  - docs: update package.json to include CONTRIBUTING.md and CODE_OF_CONDUCT.md
+
 ## 5.10.5
 17 April 2026
 
