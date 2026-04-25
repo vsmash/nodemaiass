@@ -94,16 +94,32 @@ if (firstArg && versionBumpTypes.includes(firstArg)) {
   command = 'maiass';
 }
 
-// Handle --auto flag (must be before other processing)
-if (args.includes('--auto') || args.includes('-a')) {
-  // Override all auto-yes variables for non-interactive mode
+// Auto modes — order matters: check -am first because it's the longer flag
+// -am / --auto-merge: auto everything INCLUDING merge to develop + version bump.
+//                     Will open a PR in the browser if direct merge is blocked.
+// -a  / --auto:       auto everything UP TO commit. Pipeline stops after commit
+//                     phase; never opens a browser. Suitable for CI.
+const isAutoMerge = args.includes('--auto-merge') || args.includes('-am');
+const isAutoCommit = !isAutoMerge && (args.includes('--auto') || args.includes('-a'));
+
+if (isAutoMerge || isAutoCommit) {
+  // Common auto-yes vars for both modes — staging, pushing commits, AI approval
   process.env.MAIASS_AUTO_STAGE_UNSTAGED = 'true';
   process.env.MAIASS_AUTO_PUSH_COMMITS = 'true';
-  process.env.MAIASS_AUTO_MERGE_TO_DEVELOP = 'true';
   process.env.MAIASS_AUTO_APPROVE_AI_SUGGESTIONS = 'true';
-  
+}
+
+if (isAutoMerge) {
+  // -am: also auto-merge to develop and run the version bump
+  process.env.MAIASS_AUTO_MERGE_TO_DEVELOP = 'true';
   if (process.env.MAIASS_DEBUG === 'true') {
-    logger.debug('[DEBUG] Auto-mode enabled - all prompts will be skipped');
+    logger.debug('[DEBUG] Auto-merge mode enabled — merge + bump will run unattended');
+  }
+} else if (isAutoCommit) {
+  // -a: stop after commit phase; do not enter merge or version mgmt
+  process.env.MAIASS_AUTO_FINISH_AFTER_COMMIT = 'true';
+  if (process.env.MAIASS_DEBUG === 'true') {
+    logger.debug('[DEBUG] Auto-commit mode enabled — pipeline stops after commit phase');
   }
 }
 
@@ -124,6 +140,7 @@ const validFlags = [
   '--version', '-v',
   '--account-info',
   '--auto', '-a',
+  '--auto-merge', '-am',
   '--commits-only', '-c',
   '--auto-stage',
   '--setup', '--bootstrap',
@@ -182,7 +199,8 @@ if (args.includes('--help') || args.includes('-h') || command === 'help') {
   console.log('  account-info       Show your account status (masked token)');
   console.log('\nOptions:');
   console.log('  --account-info     Show your account status (masked token)');
-  console.log('  --auto             Enable all auto-yes functionality (non-interactive mode)');
+  console.log('  --auto, -a         Auto-yes for commit phase only — stops after commit (no merge, no bump)');
+  console.log('  --auto-merge, -am  Auto-yes including merge to develop and version bump (opens PR if blocked)');
   console.log('  --commits-only, -c Generate AI commits without version management');
   console.log('  --auto-stage       Automatically stage all changes');
   console.log('  --setup, --bootstrap Run interactive project setup');
