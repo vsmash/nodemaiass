@@ -1,6 +1,8 @@
-## 5.11.0
+## 5.11.1
 25 April 2026
 
+- Add logic to return user to original branch after release workflow
+	  - Add conditional logic to return the user to their original branch, excluding develop or release branches, after completing the release workflow.
 - Update Configuration and Automation Flags Handling
 	  - docs: Update configuration options in `configuration.md`
 	  - feat: Add automation flags for auto-staging, auto-pushing, auto-approving, and auto-merging
