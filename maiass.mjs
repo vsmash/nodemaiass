@@ -94,16 +94,33 @@ if (firstArg && versionBumpTypes.includes(firstArg)) {
   command = 'maiass';
 }
 
-// Handle --auto flag (must be before other processing)
-if (args.includes('--auto') || args.includes('-a')) {
-  // Override all auto-yes variables for non-interactive mode
+// Auto modes:
+// -a  / --auto:        full auto — stage, push, merge to develop, version bump
+//                      (kept identical to historical behaviour for CI compatibility)
+// -ac / --auto-commit: auto-yes for commit phase only — stops after commit
+//                      (no merge, no bump). Useful for CI runs that just want
+//                      the AI commit captured without touching develop.
+const isAutoCommit = args.includes('--auto-commit') || args.includes('-ac');
+const isAuto = !isAutoCommit && (args.includes('--auto') || args.includes('-a'));
+
+if (isAuto || isAutoCommit) {
+  // Shared auto-yes vars for both modes
   process.env.MAIASS_AUTO_STAGE_UNSTAGED = 'true';
   process.env.MAIASS_AUTO_PUSH_COMMITS = 'true';
-  process.env.MAIASS_AUTO_MERGE_TO_DEVELOP = 'true';
   process.env.MAIASS_AUTO_APPROVE_AI_SUGGESTIONS = 'true';
-  
+}
+
+if (isAuto) {
+  // -a: also auto-merge to develop (legacy behaviour)
+  process.env.MAIASS_AUTO_MERGE_TO_DEVELOP = 'true';
   if (process.env.MAIASS_DEBUG === 'true') {
-    logger.debug('[DEBUG] Auto-mode enabled - all prompts will be skipped');
+    logger.debug('[DEBUG] Auto mode enabled — full pipeline runs unattended');
+  }
+} else if (isAutoCommit) {
+  // -ac: stop after commit phase. Implemented by treating it as commits-only
+  process.env.MAIASS_AUTO_FINISH_AFTER_COMMIT = 'true';
+  if (process.env.MAIASS_DEBUG === 'true') {
+    logger.debug('[DEBUG] Auto-commit mode enabled — stops after commit phase');
   }
 }
 
@@ -124,6 +141,7 @@ const validFlags = [
   '--version', '-v',
   '--account-info',
   '--auto', '-a',
+  '--auto-commit', '-ac',
   '--commits-only', '-c',
   '--auto-stage',
   '--setup', '--bootstrap',
@@ -182,7 +200,8 @@ if (args.includes('--help') || args.includes('-h') || command === 'help') {
   console.log('  account-info       Show your account status (masked token)');
   console.log('\nOptions:');
   console.log('  --account-info     Show your account status (masked token)');
-  console.log('  --auto             Enable all auto-yes functionality (non-interactive mode)');
+  console.log('  --auto, -a         Full auto — stage, commit, push, merge to develop, bump version');
+  console.log('  --auto-commit, -ac Auto-yes for commit phase only — stops after commit (no merge, no bump)');
   console.log('  --commits-only, -c Generate AI commits without version management');
   console.log('  --auto-stage       Automatically stage all changes');
   console.log('  --setup, --bootstrap Run interactive project setup');
@@ -279,7 +298,8 @@ if (args.includes('--show-bb-excerpt'))  { showBitbucketExcerpt(); process.exit(
       // Handle the main MAIASS workflow
       await handleMaiassCommand({
         _: process.argv.slice(2).filter(arg => !arg.startsWith('-')),
-        'commits-only': args.includes('--commits-only') || args.includes('-c'),
+        // -ac is equivalent to -c (commits-only) plus auto-yes prompts
+        'commits-only': args.includes('--commits-only') || args.includes('-c') || args.includes('--auto-commit') || args.includes('-ac'),
         'auto-stage': args.includes('--auto-stage'),
         'auto': args.includes('--auto') || args.includes('-a'),
         'version-bump': versionBump,

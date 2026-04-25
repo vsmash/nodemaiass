@@ -49,6 +49,18 @@ maiass <command> [options] [arguments]
 - `--debug` - Enable debug output
 - `--config <path>` - Use specific config file
 
+### Workflow Options (main `maiass` command)
+- `--auto, -a` - Full auto: stage, commit, push, merge to develop, bump version. Suitable for CI.
+- `--auto-commit, -ac` - Auto-yes for commit phase only — stops after commit (no merge, no version bump)
+- `--commits-only, -c` - Generate AI commit without entering version management
+- `--auto-stage` - Auto-stage all changes (commit phase only)
+- `--dry-run, -d` - Preview without making changes
+- `--force, -f` - Skip confirmation prompts (still respects auto vars)
+- `--silent, -s` - Suppress non-essential output
+- `--tag, -t` - Force release tagging for the version bump
+
+See [configuration.md](./configuration.md#-automation-flags-vs-environment-variables) for how these flags relate to `MAIASS_AUTO_*` environment variables.
+
 ## Examples
 
 ```bash

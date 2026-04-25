@@ -137,10 +137,15 @@ MAIASS_VERBOSITY=normal                        # brief, normal, verbose
 MAIASS_LOGGING=false                           # Enable file logging
 MAIASS_BRAND=MAIASS                            # Brand name for display
 
-# Git Workflow
-MAIASS_AUTOPUSH_COMMITS=false                  # Auto-push after commit
-MAIASS_AUTO_STAGE_ALL=false                    # Auto-stage all changes
+# Git Workflow — auto-yes flags (also set by -a / -ac CLI flags)
+MAIASS_AUTO_STAGE_UNSTAGED=false               # Auto-stage unstaged changes during commit
+MAIASS_AUTO_PUSH_COMMITS=false                 # Auto-push commits to origin
+MAIASS_AUTO_APPROVE_AI_SUGGESTIONS=false       # Auto-approve AI commit suggestions
+MAIASS_AUTO_MERGE_TO_DEVELOP=false             # Auto-merge feature into develop
 MAIASS_COMMIT_SIGN=false                       # Sign commits with GPG
+
+# Pull Request Flow
+MAIASS_DEVELOP_PULLREQUESTS=off                # 'on' = open PR instead of direct merge to develop
 
 # Version Workflow
 MAIASS_VERSION_AUTO_TAG=false                  # Auto-create git tags
@@ -155,6 +160,39 @@ MAIASS_USE_UNICODE=auto                        # auto, true, false
 MAIASS_COLOR_OUTPUT=auto                       # auto, true, false
 MAIASS_SHOW_TIMESTAMPS=false                   # Show timestamps in output
 ```
+
+## 🤖 Automation Flags vs Environment Variables
+
+The `-a` and `-ac` CLI flags are convenience switches that set environment variables for the duration of one run. You can achieve the same effect by setting the variables in `.env.maiass` (project) or `~/.env.maiass` (global) for persistent automation.
+
+| CLI Flag | Behaviour | Sets these env vars to `true` |
+|---|---|---|
+| `-a` / `--auto` | Full auto: commit, push, merge, bump | `MAIASS_AUTO_STAGE_UNSTAGED`, `MAIASS_AUTO_PUSH_COMMITS`, `MAIASS_AUTO_APPROVE_AI_SUGGESTIONS`, `MAIASS_AUTO_MERGE_TO_DEVELOP` |
+| `-ac` / `--auto-commit` | Auto commit only — stops after commit phase | First three above (no `MAIASS_AUTO_MERGE_TO_DEVELOP`); also implies `--commits-only` |
+
+**Persisting in `.env.maiass`:**
+
+If you always want the same behaviour without typing the flag, set the env vars directly:
+
+```bash
+# Equivalent to running with -ac every time
+MAIASS_AUTO_STAGE_UNSTAGED=true
+MAIASS_AUTO_PUSH_COMMITS=true
+MAIASS_AUTO_APPROVE_AI_SUGGESTIONS=true
+```
+
+CLI flags **always** override the env vars — they set them to `true` for that run regardless of what's in your config files.
+
+### Pull Request Flow
+
+`MAIASS_DEVELOP_PULLREQUESTS` controls how merges into the develop branch happen:
+
+| Value | Behaviour |
+|---|---|
+| `off` (default) | Direct merge into develop. If a direct push is rejected (e.g. branch protection), maiass falls back to PR flow automatically (with prompt in interactive mode). |
+| `on` | Always push the source branch and open a PR-creation URL in the browser instead of direct merge. The pipeline ends after opening the PR — re-run maiass on develop after the PR lands to bump the version. |
+
+In `-a` mode with `MAIASS_DEVELOP_PULLREQUESTS=on`, the PR is opened automatically in the browser. In `-ac` mode the pipeline stops after commit, so the PR setting is not consulted.
 
 ## 🔒 Security Best Practices
 
