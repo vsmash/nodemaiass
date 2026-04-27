@@ -1,3 +1,10 @@
+## 5.12.3
+27 April 2026
+
+- Enhanced account information command with top-up link logging
+	  - feat: added top-up link logging for anonymous subscriptions
+	  - style: improved code formatting and spacing
+
 ## 5.11.1
 25 April 2026
 
