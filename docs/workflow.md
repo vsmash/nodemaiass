@@ -435,6 +435,88 @@ MAIASS_PLUGIN_PATH=wp-content/plugins/my-plugin/my-plugin.php
 MAIASS_THEME_PATH=wp-content/themes/my-theme/functions.php
 ```
 
+## 🔁 CI Auto-Version-Bump on PR Merge
+
+MAIASS can install a CI workflow that runs `maiass -a patch` automatically every time a pull request is merged into your develop branch — so version bumps never get forgotten.
+
+**One-time install per repository:**
+
+```bash
+# GitHub Actions
+maiass --create-gh-action
+
+# GitLab CI (prints to stdout — paste into your .gitlab-ci.yml)
+maiass --show-gl-excerpt
+
+# Bitbucket Pipelines (prints to stdout — paste into your bitbucket-pipelines.yml)
+maiass --show-bb-excerpt
+```
+
+**How it works:**
+
+1. You merge a PR into `develop` (or whatever you set `MAIASS_DEVELOPBRANCH` to).
+2. The workflow runs `npm install -g maiass` and then `maiass -a patch` on the merged commit.
+3. A new commit with the version bump and updated `CHANGELOG.md` is pushed back to the branch.
+4. `MAIASS_AI_MODE=off` is set inside the workflow — **no AI credits are consumed**.
+
+### GitHub Actions
+
+```bash
+maiass --create-gh-action
+```
+
+Writes `.github/workflows/maiass-version-bump.yml`. To finish setup:
+
+1. Create a fine-grained Personal Access Token at https://github.com/settings/personal-access-tokens with these scopes for the target repo:
+   - **Contents**: Read & Write
+   - **Metadata**: Read-only
+   - **Workflows**: Read & Write
+2. Add the PAT as a repository secret named `GH_PAT` (Settings → Secrets and variables → Actions).
+
+GitHub's trigger fires only on `pull_request.closed` with `merged == true`, so there's no risk of the bump commit re-triggering the workflow.
+
+### GitLab CI
+
+```bash
+maiass --show-gl-excerpt
+```
+
+Prints a job stage that runs on pushes to your develop branch. Merge it into your existing `.gitlab-ci.yml` (or use it as-is for a fresh project). To finish setup:
+
+1. Allow CI to push to your protected branch: **Settings → Repository → Protected branches**.
+2. Create a project access token (or personal access token) with write access.
+3. Add it as a masked, protected CI/CD variable named `GITLAB_TOKEN`.
+
+The excerpt includes a **double-bump guard**: it inspects the last commit's author and message, and exits early if it looks like a MAIASS bump commit. Required because GitLab can't trigger on PR-close specifically — it fires on every push to the branch, including its own bump commit.
+
+### Bitbucket Pipelines
+
+```bash
+maiass --show-bb-excerpt
+```
+
+Prints a pipeline step keyed on your develop branch. Merge it into your `bitbucket-pipelines.yml` (or use as-is). To finish setup:
+
+1. **Settings → Pipelines → SSH Keys** — add a key pair with write access, OR
+2. Use an app password: create one with **Repositories: Read & Write** scope, then add it as repository variables named `BB_USERNAME` and `BB_APP_PASSWORD` (secured).
+
+Like GitLab, Bitbucket can't gate on PR-merge specifically, so the same **double-bump guard** is included.
+
+### Develop branch name is baked in at install time
+
+The trigger filter in all three CI providers (`on.pull_request.branches:`, `only:`, `pipelines.branches:`) must be a YAML literal — there's no runtime escape hatch — so MAIASS substitutes your configured `MAIASS_DEVELOPBRANCH` into the rendered template at the moment you run `--create-gh-action` or `--show-*-excerpt`.
+
+- If `MAIASS_DEVELOPBRANCH=trunk` is set in `.env.maiass`, the installed workflow triggers on merges to `trunk`.
+- If unset, the workflow defaults to `develop` silently.
+
+If you rename your develop branch *after* installing the workflow, edit the trigger line in the installed file manually — re-running the install command will skip (it won't overwrite an existing workflow).
+
+### Notes
+
+- **Zero credit cost** — `MAIASS_AI_MODE: off` is set inside the workflow definition, so the version bump uses no AI tokens.
+- **No infinite loop** — GitHub's `merged == true` gate prevents re-triggering on the bump commit; GitLab and Bitbucket use the explicit double-bump guard.
+- **Combine with `--tag`** — change the workflow's `maiass -a patch` to `maiass -a patch --tag` if you also want a git tag created on every merge.
+
 ## 🤖 AI Integration Features
 
 ### Smart Commit Messages

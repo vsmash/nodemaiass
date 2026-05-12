@@ -98,6 +98,8 @@ MAIASS_DEVELOPBRANCH=develop                   # Default: develop
 MAIASS_STAGINGBRANCH=staging                   # Default: staging
 ```
 
+> `MAIASS_DEVELOPBRANCH` is also substituted into the CI workflow templates produced by `maiass --create-gh-action`, `--show-gl-excerpt`, and `--show-bb-excerpt` at the moment those commands run. See [CI Auto-Version-Bump on PR Merge](./workflow.md#-ci-auto-version-bump-on-pr-merge) for the install walkthrough.
+
 ### 📦 Version Management
 ```bash
 # Version Files
