@@ -74,6 +74,7 @@ MAIASS_AI_MODE=off          # disable AI
 - **Changelog generation** — user-facing `CHANGELOG.md` and internal developer changelog
 - **Branch workflow** — feature → develop → staging → main with merge handling
 - **Ticket integration** — ticket numbers auto-detected from branch names (Jira `ABC-123`, GitHub/Trello `#123` or `123`)
+- **CI auto-version-bump** — one flag installs a workflow (GitHub Actions, GitLab CI, or Bitbucket Pipelines) that bumps the version automatically on every merge to your develop branch, with zero AI credit cost. See [the workflow docs](docs/workflow.md#-ci-auto-version-bump-on-pr-merge).
 - **First-run friendly** — works immediately with sensible defaults, no blocking setup
 
 ---

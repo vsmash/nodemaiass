@@ -61,6 +61,16 @@ maiass <command> [options] [arguments]
 
 See [configuration.md](./configuration.md#-automation-flags-vs-environment-variables) for how these flags relate to `MAIASS_AUTO_*` environment variables.
 
+### CI Setup Commands
+
+One-time flags that install or print a CI workflow that auto-bumps your version on every merge to your develop branch. See [CI Auto-Version-Bump on PR Merge](./workflow.md#-ci-auto-version-bump-on-pr-merge) for the full setup walkthrough.
+
+- `--create-gh-action` — Create `.github/workflows/maiass-version-bump.yml` in the current repo. Requires a `GH_PAT` secret with Contents/Metadata/Workflows scopes.
+- `--show-gl-excerpt` — Print a GitLab CI excerpt to stdout for you to merge into `.gitlab-ci.yml`. Requires a `GITLAB_TOKEN` CI variable with write scope.
+- `--show-bb-excerpt` — Print a Bitbucket Pipelines excerpt to stdout for you to merge into `bitbucket-pipelines.yml`. Requires either an SSH key with write access, or `BB_USERNAME` + `BB_APP_PASSWORD` variables.
+
+All three flags substitute `MAIASS_DEVELOPBRANCH` (from `.env.maiass`) into the rendered workflow at the moment they run — so the trigger fires on your actual develop branch, not the literal string `develop`. Defaults to `develop` when unset.
+
 ## Examples
 
 ```bash

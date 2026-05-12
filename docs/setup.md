@@ -73,6 +73,18 @@ You should see:
 - No module warnings
 - Environment variables loaded from appropriate locations
 
+## Continuous Integration
+
+To auto-bump your project's version whenever a PR is merged to develop, MAIASS can install a ready-to-run CI workflow for GitHub Actions, GitLab CI, or Bitbucket Pipelines:
+
+```bash
+maiass --create-gh-action   # GitHub Actions
+maiass --show-gl-excerpt    # GitLab CI (prints excerpt)
+maiass --show-bb-excerpt    # Bitbucket Pipelines (prints excerpt)
+```
+
+The CI workflow disables AI (`MAIASS_AI_MODE=off`) so version bumps don't consume credits. See [CI Auto-Version-Bump on PR Merge](./workflow.md#-ci-auto-version-bump-on-pr-merge) for the auth setup per platform.
+
 ## Troubleshooting
 
 ### Module Type Warnings
