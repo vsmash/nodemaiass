@@ -11,17 +11,20 @@
 #   the last commit message. If it looks like a MAIASS version bump, it exits early.
 #
 # Setup:
-#   1. Merge this excerpt into your bitbucket-pipelines.yml (or use as-is)
-#   2. In Bitbucket: Repository Settings → Pipelines → SSH Keys
+#   1. Set MAIASS_DEVELOPBRANCH in your .env.maiass if your develop branch
+#      isn't called 'develop', then run `maiass --show-bb-excerpt` to print
+#      this template with your branch name baked in (defaults to 'develop'
+#      when unset).
+#   2. Merge the printed excerpt into your bitbucket-pipelines.yml (or use as-is)
+#   3. In Bitbucket: Repository Settings → Pipelines → SSH Keys
 #      Add a key pair and grant write access, OR use an app password:
 #        - Create an app password with Repositories: Read & Write scope
 #        - Add it as a repository variable named BB_APP_PASSWORD (secured)
 #        - Add your Bitbucket username as BB_USERNAME
-#   3. Set MAIASS_DEVELOPBRANCH in your .env.maiass if your branch isn't 'develop'
 
 pipelines:
   branches:
-    develop:  # Change to match your MAIASS_DEVELOPBRANCH if different
+    __MAIASS_DEVELOPBRANCH__:
       - step:
           name: MAIASS Version Bump
           image: node:20
