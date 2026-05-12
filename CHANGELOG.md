@@ -1,6 +1,9 @@
-## 5.12.5
+## 5.12.6
 12 May 2026
 
+- document CI auto-version-bump workflow (#10)
+- Document the --create-gh-action / --show-gl-excerpt / --show-bb-excerpt flags in docs/workflow.md, commands.md, setup.md, configuration.md, and the README.
+- https://velvary.atlassian.net/browse/MAI-14
 - substitute MAIASS_DEVELOPBRANCH in CI templates (#9)
 - Bake MAIASS_DEVELOPBRANCH into rendered CI templates at install/print time, with .trim() guard and silent fallback to 'develop'.
 - https://velvary.atlassian.net/browse/MAI-13
