@@ -1,3 +1,11 @@
+## 5.12.5
+12 May 2026
+
+- substitute MAIASS_DEVELOPBRANCH in CI templates (#9)
+- Bake MAIASS_DEVELOPBRANCH into rendered CI templates at install/print time, with .trim() guard and silent fallback to 'develop'.
+- https://velvary.atlassian.net/browse/MAI-13
+	Bumped version to 5.12.4
+
 ## 5.12.3
 27 April 2026
 
