@@ -2,7 +2,7 @@
   "name": "maiass",
   "type": "module",
   "version": "5.12.6",
-  "description": "AI commit message generator, semantic versioning, and changelog automation for Git. One command stages, commits with AI, bumps version, and merges branches. Free credits on install — no sign-up needed.",
+  "description": "AI commit messages, version bumps, and changelogs from one command. Stages, commits, merges, tags. Anonymous on first run — no email, no card.",
   "main": "maiass.mjs",
   "bin": {
     "maiass": "./maiass.mjs",

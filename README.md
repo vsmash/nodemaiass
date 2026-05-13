@@ -1,7 +1,8 @@
 ![MAIASS Banner](https://raw.githubusercontent.com/vsmash/maiass/main/assets/maiassbanner2.png)
 
-# `|))` MAIASS (Node.js)
-**Modular AI-Augmented Semantic Scribe** — intelligent Git workflow automation
+# MAIASS
+
+**AI commit messages, version bumps, and changelogs from one command.**
 
 [![npm](https://img.shields.io/npm/v/maiass.svg)](https://www.npmjs.com/package/maiass)
 [![Node.js](https://img.shields.io/badge/Node.js-20+-green.svg)](https://nodejs.org/)
@@ -9,23 +10,31 @@
 
 ---
 
-MAIASS automates the repetitive parts of your Git workflow: staging, AI-powered commit messages, branch merging, version bumping, and changelog generation — all from a single command.
+Run `maiass` in any git repo and it stages your changes, writes the commit message, bumps the version, updates the changelog, and merges the branch. It's for developers who do this routine every day and want the keystrokes back. Anonymous on first run — no email, no card, no sign-up.
 
-> Looking for the shell/Homebrew version? See [bashmaiass](https://github.com/vsmash/bashmaiass).
+> Site: [maiass.net](https://maiass.net) · Bash/Homebrew source: [bashmaiass](https://github.com/vsmash/bashmaiass)
 
 ---
 
-## Installation
+## Install
+
+**npm — all platforms (primary):**
 
 ```bash
 npm install -g maiass
 ```
 
-Requires Node.js 20+.
+**Homebrew — macOS:**
+
+```bash
+brew tap vsmash/maiass && brew install maiass
+```
+
+Requires Node.js 20+ for the npm install. Linux script install and other options are in the [docs](docs/setup.md).
 
 ---
 
-## Quick Start
+## Quick start
 
 ```bash
 # First time in a project — run setup
@@ -47,34 +56,45 @@ maiass --dry-run patch
 
 ---
 
-## AI Commit Messages
+## CI auto-version-bump
 
-MAIASS uses its own proxy service for AI-powered commit message suggestions. On first run it creates an anonymous subscription automatically — no sign-up required.
-
-To use a named account (for credit top-ups):
+One flag installs a CI workflow that runs `maiass -a patch` every time a PR merges into your develop branch — so version bumps and changelog entries never get forgotten.
 
 ```bash
-maiass config set MAIASS_AI_TOKEN your_api_key
+# GitHub Actions — writes .github/workflows/maiass-version-bump.yml
+maiass --create-gh-action
+
+# GitLab CI — prints a job stage to paste into .gitlab-ci.yml
+maiass --show-gl-excerpt
+
+# Bitbucket Pipelines — prints a step to paste into bitbucket-pipelines.yml
+maiass --show-bb-excerpt
 ```
 
-AI mode is configured per-project in `.env.maiass`:
-
-```bash
-MAIASS_AI_MODE=ask        # ask each time (default)
-MAIASS_AI_MODE=autosuggest  # always use AI
-MAIASS_AI_MODE=off          # disable AI
-```
+The installed workflow sets `MAIASS_AI_MODE=off`, so the bump runs at zero AI credit cost. Your configured `MAIASS_DEVELOPBRANCH` is baked into the trigger filter at install time. Full setup (PAT scopes for GitHub, double-bump guard for GitLab/Bitbucket) in [the workflow docs](docs/workflow.md#-ci-auto-version-bump-on-pr-merge).
 
 ---
 
-## Key Features
+## Anonymous by default
+
+First run creates a subscription tied to a machine fingerprint — no email, no account, no card. When you need credits, top up at [maiass.net](https://maiass.net) or run `maiass --setup` to add an API key for a named account.
+
+API keys live in OS-level secure storage (Keychain on macOS, Secret Service on Linux, encrypted local store on Windows), never in your repo. Commit diffs are sent to the proxy to generate the message and aren't stored — token counts, model, timestamp, and source IP are kept for billing and abuse prevention.
+
+AI mode per project in `.env.maiass`: `ask` / `autosuggest` / `off`.
+
+Run `maiass account-info` to see your subscription ID, credit balance, and top-up link.
+
+---
+
+## Key features
 
 - **AI commit messages** — analyses your diff and suggests a structured commit message
+- **CI auto-version-bump** — one flag installs a GitHub Actions, GitLab CI, or Bitbucket Pipelines workflow that bumps the version on every merge to your develop branch, at zero AI credit cost
 - **Version management** — detects and bumps `package.json`, `composer.json`, `VERSION`, `.pbxproj` (Swift/Xcode), and more
 - **Changelog generation** — user-facing `CHANGELOG.md` and internal developer changelog
 - **Branch workflow** — feature → develop → staging → main with merge handling
 - **Ticket integration** — ticket numbers auto-detected from branch names (Jira `ABC-123`, GitHub/Trello `#123` or `123`)
-- **CI auto-version-bump** — one flag installs a workflow (GitHub Actions, GitLab CI, or Bitbucket Pipelines) that bumps the version automatically on every merge to your develop branch, with zero AI credit cost. See [the workflow docs](docs/workflow.md#-ci-auto-version-bump-on-pr-merge).
 - **First-run friendly** — works immediately with sensible defaults, no blocking setup
 
 ---
@@ -132,7 +152,7 @@ MAIASS_DEBUG=true                 # verbose output
 
 Issues and PRs welcome. See [docs/development.md](docs/development.md) to get started.
 
-## 🙏 Acknowledgments
+## Acknowledgments
 
 - Git community for workflow inspiration
 - All contributors and testers
@@ -141,11 +161,11 @@ Issues and PRs welcome. See [docs/development.md](docs/development.md) to get st
 
 [GNU General Public License v3.0](LICENSE)
 
----
-
-**Made with ❤️ for developers who want to automate versioning, changelogs, and commit messages.**
-
-## 💸 Support MAIASS
+## Support MAIASS
 
 [![GitHub Sponsors](https://img.shields.io/badge/Sponsor-GitHub-ea4aaa?logo=github)](https://github.com/sponsors/vsmash)
 [![Ko-fi](https://img.shields.io/badge/Buy%20Me%20a%20Coffee-Ko--fi-29abe0?logo=ko-fi)](https://ko-fi.com/myass)
+
+---
+
+<sub>MAIASS is a backronym for *Modular AI-Assisted Semantic Scribe*. It's also pronounced however you like.</sub>
