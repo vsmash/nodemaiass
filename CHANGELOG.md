@@ -1,6 +1,9 @@
-## 5.12.10
+## 5.12.11
 13 May 2026
 
+- fix subcommand-flag validation contract (#13)
+- Generalises MAI-39's narrow config-only fix with per-subcommand FLAGS allow-list. Each handler exports its own FLAGS; validator unions them with always-valid globals. Closes MAI-39's config-typo MINOR with Levenshtein suggestion (no new deps). Re-enables version --current.
+- https://velvary.atlassian.net/browse/MAI-43
 - fix broken config subcommand wiring (#12)
 - Handler now accepts argv array (matching dispatcher) using same dual-shape pattern as handleVersionCommand. Validator skip added so config-specific flags aren't pre-rejected. Added config --help routing.
 - https://velvary.atlassian.net/browse/MAI-39
