@@ -104,26 +104,11 @@ if (firstArg && versionBumpTypes.includes(firstArg)) {
 const isAutoCommit = args.includes('--auto-commit') || args.includes('-ac');
 const isAuto = !isAutoCommit && (args.includes('--auto') || args.includes('-a'));
 
-if (isAuto || isAutoCommit) {
-  // Shared auto-yes vars for both modes
-  process.env.MAIASS_AUTO_STAGE_UNSTAGED = 'true';
-  process.env.MAIASS_AUTO_PUSH_COMMITS = 'true';
-  process.env.MAIASS_AUTO_APPROVE_AI_SUGGESTIONS = 'true';
-}
-
-if (isAuto) {
-  // -a: also auto-merge to develop (legacy behaviour)
-  process.env.MAIASS_AUTO_MERGE_TO_DEVELOP = 'true';
-  if (process.env.MAIASS_DEBUG === 'true') {
-    logger.debug('[DEBUG] Auto mode enabled — full pipeline runs unattended');
-  }
-} else if (isAutoCommit) {
-  // -ac: stop after commit phase. Implemented by treating it as commits-only
-  process.env.MAIASS_AUTO_FINISH_AFTER_COMMIT = 'true';
-  if (process.env.MAIASS_DEBUG === 'true') {
-    logger.debug('[DEBUG] Auto-commit mode enabled — stops after commit phase');
-  }
-}
+// Auto-mode env vars are applied AFTER flag validation below — see
+// "Apply auto-mode env vars" block. Detected here only because the booleans
+// are referenced in later debug logging; applying them here would leak into
+// process.env for commands that reject --auto via the validator (e.g.
+// `account-info --auto`).
 
 // Handle version flag
 if (args.includes('--version') || args.includes('-v')) {
@@ -173,6 +158,30 @@ if (!flagValidation.valid) {
   console.log('');
   console.log(`Run 'nma --help' or 'nma ${command} --help' for more information.`);
   process.exit(1);
+}
+
+// Apply auto-mode env vars now that validation has passed. Setting these
+// before validation would leak MAIASS_AUTO_* into process.env for commands
+// that reject --auto (e.g. `account-info --auto`) — see MAI-43 code review.
+if (isAuto || isAutoCommit) {
+  // Shared auto-yes vars for both modes
+  process.env.MAIASS_AUTO_STAGE_UNSTAGED = 'true';
+  process.env.MAIASS_AUTO_PUSH_COMMITS = 'true';
+  process.env.MAIASS_AUTO_APPROVE_AI_SUGGESTIONS = 'true';
+}
+
+if (isAuto) {
+  // -a: also auto-merge to develop (legacy behaviour)
+  process.env.MAIASS_AUTO_MERGE_TO_DEVELOP = 'true';
+  if (process.env.MAIASS_DEBUG === 'true') {
+    logger.debug('[DEBUG] Auto mode enabled — full pipeline runs unattended');
+  }
+} else if (isAutoCommit) {
+  // -ac: stop after commit phase. Implemented by treating it as commits-only
+  process.env.MAIASS_AUTO_FINISH_AFTER_COMMIT = 'true';
+  if (process.env.MAIASS_DEBUG === 'true') {
+    logger.debug('[DEBUG] Auto-commit mode enabled — stops after commit phase');
+  }
 }
 
 // Subcommand-specific help: route `maiass config --help` to the config
