@@ -155,8 +155,13 @@ const validFlags = [
   '--show-bb-excerpt'
 ];
 
+// Subcommand-specific flags are validated by the subcommand handler, not here.
+// (e.g. `config --global`, `config --list-vars` would otherwise be rejected
+// by the global validator before reaching handleConfigCommand.)
+const skipGlobalFlagValidation = command === 'config';
+
 // Check for unrecognized flags
-for (const arg of args) {
+for (const arg of skipGlobalFlagValidation ? [] : args) {
   if (arg.startsWith('-')) {
     // Check if it's a flag with value (e.g., --tag=value or --tag value)
     const flagName = arg.split('=')[0];
@@ -180,6 +185,14 @@ for (const arg of args) {
       process.exit(1);
     }
   }
+}
+
+// Subcommand-specific help: route `maiass config --help` to the config
+// handler so it can print its own flag reference rather than the global one.
+// (The handler returns immediately after printing help.)
+if (command === 'config' && (args.includes('--help') || args.includes('-h'))) {
+  await handleConfigCommand(process.argv.slice(3));
+  process.exit(0);
 }
 
 // Handle help flag
