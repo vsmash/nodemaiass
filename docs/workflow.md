@@ -593,7 +593,7 @@ maiass config --project version_primary_file=VERSION.txt
 ```bash
 # Check current state
 maiass git
-maiass version --current
+maiass version
 
 # Reset if needed
 git reset --hard HEAD~1  # Undo last commit
