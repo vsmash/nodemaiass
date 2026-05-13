@@ -125,7 +125,7 @@ if (args.includes('--account-info')) {
 //
 // Each subcommand handler exports a FLAGS array of its own legitimate flags.
 // We validate the argv against the union of (always-valid + subcommand FLAGS)
-// so that e.g. `version --current` and `config --global` work without
+// so that e.g. `version --tag` and `config --global` work without
 // blanket-skipping validation (which would let typos like `--globl` through).
 const SUBCOMMAND_FLAGS = {
   hello: [],
@@ -226,7 +226,7 @@ if (args.includes('--help') || args.includes('-h') || command === 'help') {
   console.log('  --show-bb-excerpt  Print Bitbucket Pipelines excerpt to stdout');
   console.log('\nSubcommand flags:');
   console.log('  Each subcommand has its own flags. Examples:');
-  console.log('    maiass version --current               Show current version only');
+  console.log('    maiass version                         Show current project version');
   console.log('    maiass config --global key=value       Write to global config');
   console.log('    maiass config --list-vars              List all supported variables');
   console.log('    maiass account-info --json             Account info as JSON');
