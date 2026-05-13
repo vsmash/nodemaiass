@@ -43,16 +43,17 @@ const packageJson = JSON.parse(fs.readFileSync(path.join(__dirname, 'package.jso
 const version = packageJson.version;
 
 // Import env display utility
-import { displayEnvironmentVariables } from './lib/env-display.js';
-import { getGitInfo, displayGitInfo, validateBranchForOperations } from './lib/git-info.js';
+import { displayEnvironmentVariables, FLAGS as ENV_FLAGS } from './lib/env-display.js';
+import { getGitInfo, displayGitInfo, validateBranchForOperations, FLAGS as GIT_INFO_FLAGS } from './lib/git-info.js';
 import { commitThis } from './lib/commit.js';
-import { handleConfigCommand } from './lib/config-command.js';
-import { handleVersionCommand } from './lib/version-command.js';
-import { handleMaiassCommand } from './lib/maiass-command.js';
-import { handleAccountInfoCommand } from './lib/account-info.js';
+import { handleConfigCommand, FLAGS as CONFIG_FLAGS } from './lib/config-command.js';
+import { handleVersionCommand, FLAGS as VERSION_FLAGS } from './lib/version-command.js';
+import { handleMaiassCommand, FLAGS as MAIASS_FLAGS } from './lib/maiass-command.js';
+import { handleAccountInfoCommand, FLAGS as ACCOUNT_INFO_FLAGS } from './lib/account-info.js';
 import { SYMBOLS } from './lib/symbols.js';
 import { bootstrapProject } from './lib/bootstrap.js';
 import { createGithubAction, showGitlabExcerpt, showBitbucketExcerpt } from './lib/ci-templates.js';
+import { validateFlags } from './lib/flag-validator.js';
 
 // Simple CLI setup for pkg compatibility
 const args = process.argv.slice(2);
@@ -103,6 +104,65 @@ if (firstArg && versionBumpTypes.includes(firstArg)) {
 const isAutoCommit = args.includes('--auto-commit') || args.includes('-ac');
 const isAuto = !isAutoCommit && (args.includes('--auto') || args.includes('-a'));
 
+// Auto-mode env vars are applied AFTER flag validation below — see
+// "Apply auto-mode env vars" block. Detected here only because the booleans
+// are referenced in later debug logging; applying them here would leak into
+// process.env for commands that reject --auto via the validator (e.g.
+// `account-info --auto`).
+
+// Handle version flag
+if (args.includes('--version') || args.includes('-v')) {
+  console.log(version);
+  process.exit(0);
+}
+
+// Handle --account-info flag (before help to allow it to work)
+if (args.includes('--account-info')) {
+  command = 'account-info';
+}
+
+// Validate flags against the active subcommand's allow-list (MAI-43).
+//
+// Each subcommand handler exports a FLAGS array of its own legitimate flags.
+// We validate the argv against the union of (always-valid + subcommand FLAGS)
+// so that e.g. `version --current` and `config --global` work without
+// blanket-skipping validation (which would let typos like `--globl` through).
+const SUBCOMMAND_FLAGS = {
+  hello: [],
+  env: ENV_FLAGS,
+  'git-info': GIT_INFO_FLAGS,
+  config: CONFIG_FLAGS,
+  version: VERSION_FLAGS,
+  'account-info': ACCOUNT_INFO_FLAGS,
+  maiass: MAIASS_FLAGS,
+  help: [],
+};
+
+const activeSubcommandFlags = SUBCOMMAND_FLAGS[command] ?? [];
+const flagValidation = validateFlags(args, activeSubcommandFlags);
+
+if (!flagValidation.valid) {
+  console.error(colors.Red(`${SYMBOLS.CROSS} Error: Unrecognized option '${flagValidation.flag}' for command '${command}'`));
+  if (flagValidation.suggestion) {
+    console.log('');
+    console.log(colors.BYellow(`Did you mean '${flagValidation.suggestion}'?`));
+  }
+  console.log('');
+  console.log(`Valid flags for '${command}':`);
+  const sortedFlags = [...flagValidation.validFlags].sort();
+  // Group long-form and short-form together for readable output.
+  const longFlags = sortedFlags.filter(f => f.startsWith('--'));
+  const shortFlags = sortedFlags.filter(f => !f.startsWith('--'));
+  if (longFlags.length) console.log('  ' + longFlags.join(', '));
+  if (shortFlags.length) console.log('  ' + shortFlags.join(', '));
+  console.log('');
+  console.log(`Run 'nma --help' or 'nma ${command} --help' for more information.`);
+  process.exit(1);
+}
+
+// Apply auto-mode env vars now that validation has passed. Setting these
+// before validation would leak MAIASS_AUTO_* into process.env for commands
+// that reject --auto (e.g. `account-info --auto`) — see MAI-43 code review.
 if (isAuto || isAutoCommit) {
   // Shared auto-yes vars for both modes
   process.env.MAIASS_AUTO_STAGE_UNSTAGED = 'true';
@@ -121,69 +181,6 @@ if (isAuto) {
   process.env.MAIASS_AUTO_FINISH_AFTER_COMMIT = 'true';
   if (process.env.MAIASS_DEBUG === 'true') {
     logger.debug('[DEBUG] Auto-commit mode enabled — stops after commit phase');
-  }
-}
-
-// Handle version flag
-if (args.includes('--version') || args.includes('-v')) {
-  console.log(version);
-  process.exit(0);
-}
-
-// Handle --account-info flag (before help to allow it to work)
-if (args.includes('--account-info')) {
-  command = 'account-info';
-}
-
-// Validate flags - check for unrecognized options
-const validFlags = [
-  '--help', '-h',
-  '--version', '-v',
-  '--account-info',
-  '--auto', '-a',
-  '--auto-commit', '-ac',
-  '--commits-only', '-c',
-  '--auto-stage',
-  '--setup', '--bootstrap',
-  '--dry-run', '-d',
-  '--force', '-f',
-  '--silent', '-s',
-  '--json',
-  '--tag', '-t',
-  '--create-gh-action',
-  '--show-gl-excerpt',
-  '--show-bb-excerpt'
-];
-
-// Subcommand-specific flags are validated by the subcommand handler, not here.
-// (e.g. `config --global`, `config --list-vars` would otherwise be rejected
-// by the global validator before reaching handleConfigCommand.)
-const skipGlobalFlagValidation = command === 'config';
-
-// Check for unrecognized flags
-for (const arg of skipGlobalFlagValidation ? [] : args) {
-  if (arg.startsWith('-')) {
-    // Check if it's a flag with value (e.g., --tag=value or --tag value)
-    const flagName = arg.split('=')[0];
-    if (!validFlags.includes(flagName) && !validFlags.includes(arg)) {
-      console.error(colors.Red(`${SYMBOLS.CROSS} Error: Unrecognized option '${arg}'`));
-      console.log('');
-      console.log('Valid flags:');
-      // Group flags by category for better readability
-      const helpFlags = validFlags.filter(f => f.includes('help') || f.includes('version'));
-      const commandFlags = validFlags.filter(f => f.includes('account') || f.includes('setup') || f.includes('bootstrap'));
-      const workflowFlags = validFlags.filter(f => !helpFlags.includes(f) && !commandFlags.includes(f));
-      
-      console.log('  Help & Info:');
-      console.log('    ' + helpFlags.join(', '));
-      console.log('  Commands:');
-      console.log('    ' + commandFlags.join(', '));
-      console.log('  Workflow Options:');
-      console.log('    ' + workflowFlags.join(', '));
-      console.log('');
-      console.log(`Run 'nma --help' for detailed information.`);
-      process.exit(1);
-    }
   }
 }
 
@@ -227,6 +224,13 @@ if (args.includes('--help') || args.includes('-h') || command === 'help') {
   console.log('  --create-gh-action Create .github/workflows/maiass-version-bump.yml');
   console.log('  --show-gl-excerpt  Print GitLab CI excerpt to stdout (merge into .gitlab-ci.yml)');
   console.log('  --show-bb-excerpt  Print Bitbucket Pipelines excerpt to stdout');
+  console.log('\nSubcommand flags:');
+  console.log('  Each subcommand has its own flags. Examples:');
+  console.log('    maiass version --current               Show current version only');
+  console.log('    maiass config --global key=value       Write to global config');
+  console.log('    maiass config --list-vars              List all supported variables');
+  console.log('    maiass account-info --json             Account info as JSON');
+  console.log('  Run `maiass config --help` for the config subcommand reference.');
   process.exit(0);
 }
 
