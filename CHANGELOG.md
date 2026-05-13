@@ -1,6 +1,9 @@
-## 5.12.12
+## 5.12.13
 13 May 2026
 
+- add lockfile sync step to auto-version-bump workflow (#15)
+- Workflow now runs npm install --no-audit --no-fund --ignore-scripts after the bump and commits any lockfile delta. The first run of this on Linux CI will produce the canonical lockfile and resolve the long-standing drift organically.
+- https://velvary.atlassian.net/browse/MAI-42
 - remove redundant --current flag from version subcommand (#14)
 - maiass version --current did the same thing as maiass version with no args. Removing the redundancy; MAI-43 validator now returns a helpful error for the old form.
 - https://velvary.atlassian.net/browse/MAI-46
