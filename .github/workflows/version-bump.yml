@@ -70,3 +70,23 @@ jobs:
         run: maiass -a patch
         env:
           MAIASS_AI_MODE: off  # Disable AI — no credits used in CI
+
+      # Keep package-lock.json in sync with the bumped package.json version.
+      # `maiass -a patch` rewrites package.json but doesn't run npm install,
+      # so without this step the lockfile lags by one version every release
+      # and accumulates drift. We use a full `npm install` (not
+      # --package-lock-only) so the resolution matches what `npm ci` will
+      # later expect — `--package-lock-only` can omit platform-specific
+      # optional transitive deps (e.g. @emnapi/*), which then break CI.
+      # See MAI-42.
+      - name: Sync package-lock.json
+        run: |
+          git pull --ff-only origin develop
+          npm install --no-audit --no-fund --ignore-scripts
+          if git diff --quiet package-lock.json; then
+            echo "package-lock.json already in sync; nothing to commit."
+          else
+            git add package-lock.json
+            git commit -m "Sync package-lock.json with bumped version"
+            git push origin develop
+          fi
