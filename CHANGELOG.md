@@ -1,3 +1,10 @@
+## 5.12.7
+13 May 2026
+
+- rewrite README + package.json description for npm marketing surface (#11)
+- Mirrors the maiass.net positioning locked in MAI-19/24/29 onto the npm page; surfaces MAI-13's CI auto-version-bump above the fold. Fixes backronym drift (Augmented → Assisted) in README footnote + maiass.mjs:2 header. Removes broken `config set` invocation; replaces unconditional 'free credits' promise with truthful first-run framing.
+- https://velvary.atlassian.net/browse/MAI-36
+
 ## 5.12.6
 12 May 2026
 
