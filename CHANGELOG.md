@@ -1,6 +1,9 @@
-## 5.12.11
+## 5.12.12
 13 May 2026
 
+- remove redundant --current flag from version subcommand (#14)
+- maiass version --current did the same thing as maiass version with no args. Removing the redundancy; MAI-43 validator now returns a helpful error for the old form.
+- https://velvary.atlassian.net/browse/MAI-46
 - fix subcommand-flag validation contract (#13)
 - Generalises MAI-39's narrow config-only fix with per-subcommand FLAGS allow-list. Each handler exports its own FLAGS; validator unions them with always-valid globals. Closes MAI-39's config-typo MINOR with Levenshtein suggestion (no new deps). Re-enables version --current.
 - https://velvary.atlassian.net/browse/MAI-43
