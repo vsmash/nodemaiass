@@ -50,6 +50,7 @@ import { handleConfigCommand, FLAGS as CONFIG_FLAGS } from './lib/config-command
 import { handleVersionCommand, FLAGS as VERSION_FLAGS } from './lib/version-command.js';
 import { handleMaiassCommand, FLAGS as MAIASS_FLAGS } from './lib/maiass-command.js';
 import { handleAccountInfoCommand, FLAGS as ACCOUNT_INFO_FLAGS } from './lib/account-info.js';
+import { handleCleanupCommand, FLAGS as CLEANUP_FLAGS } from './lib/changelog-cleanup.js';
 import { SYMBOLS } from './lib/symbols.js';
 import { bootstrapProject } from './lib/bootstrap.js';
 import { createGithubAction, showGitlabExcerpt, showBitbucketExcerpt } from './lib/ci-templates.js';
@@ -67,7 +68,7 @@ if (args.includes('--setup') || args.includes('--bootstrap')) {
 
 // Check if first argument is a version bump type
 const versionBumpTypes = ['major', 'minor', 'patch'];
-const validCommands = ['hello', 'env', 'git-info', 'config', 'version', 'account-info', 'maiass', 'help'];
+const validCommands = ['hello', 'env', 'git-info', 'config', 'version', 'account-info', 'cleanup-changelogs', 'maiass', 'help'];
 let command = 'maiass'; // Default to maiass workflow
 let versionBump = null;
 
@@ -121,6 +122,11 @@ if (args.includes('--account-info')) {
   command = 'account-info';
 }
 
+// Handle --cleanup-changelogs flag (mirrors --account-info — top-level utility)
+if (args.includes('--cleanup-changelogs')) {
+  command = 'cleanup-changelogs';
+}
+
 // Validate flags against the active subcommand's allow-list (MAI-43).
 //
 // Each subcommand handler exports a FLAGS array of its own legitimate flags.
@@ -134,6 +140,7 @@ const SUBCOMMAND_FLAGS = {
   config: CONFIG_FLAGS,
   version: VERSION_FLAGS,
   'account-info': ACCOUNT_INFO_FLAGS,
+  'cleanup-changelogs': CLEANUP_FLAGS,
   maiass: MAIASS_FLAGS,
   help: [],
 };
@@ -210,6 +217,7 @@ if (args.includes('--help') || args.includes('-h') || command === 'help') {
   console.log('  account-info       Show your account status (masked token)');
   console.log('\nOptions:');
   console.log('  --account-info     Show your account status (masked token)');
+  console.log('  --cleanup-changelogs  AI-clean CHANGELOG.md + .CHANGELOG_internal.md (backfills from git; writes .bak)');
   console.log('  --auto, -a         Full auto — stage, commit, push, merge to develop, bump version');
   console.log('  --auto-commit, -ac Auto-yes for commit phase only — stops after commit (no merge, no bump)');
   console.log('  --commits-only, -c Generate AI commits without version management');
@@ -310,7 +318,11 @@ if (args.includes('--show-bb-excerpt'))  { showBitbucketExcerpt(); process.exit(
         json: args.includes('--json')
       });
       break;
-      
+
+    case 'cleanup-changelogs':
+      await handleCleanupCommand();
+      break;
+
     case 'maiass':
       // Handle the main MAIASS workflow
       await handleMaiassCommand({

@@ -47,3 +47,7 @@ maiass.log
 
 # Development logs
 devlog.csv
+
+# MAIASS changelog cleanup backups
+CHANGELOG.md.bak
+.CHANGELOG_internal.md.bak

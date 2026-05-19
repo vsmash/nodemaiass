@@ -1,470 +1,548 @@
 ## 5.12.13
 13 May 2026
 
-- add lockfile sync step to auto-version-bump workflow (#15)
-- Workflow now runs npm install --no-audit --no-fund --ignore-scripts after the bump and commits any lockfile delta. The first run of this on Linux CI will produce the canonical lockfile and resolve the long-standing drift organically.
-- https://velvary.atlassian.net/browse/MAI-42
-- remove redundant --current flag from version subcommand (#14)
-- maiass version --current did the same thing as maiass version with no args. Removing the redundancy; MAI-43 validator now returns a helpful error for the old form.
-- https://velvary.atlassian.net/browse/MAI-46
-- fix subcommand-flag validation contract (#13)
-- Generalises MAI-39's narrow config-only fix with per-subcommand FLAGS allow-list. Each handler exports its own FLAGS; validator unions them with always-valid globals. Closes MAI-39's config-typo MINOR with Levenshtein suggestion (no new deps). Re-enables version --current.
-- https://velvary.atlassian.net/browse/MAI-43
-- fix broken config subcommand wiring (#12)
-- Handler now accepts argv array (matching dispatcher) using same dual-shape pattern as handleVersionCommand. Validator skip added so config-specific flags aren't pre-rejected. Added config --help routing.
-- https://velvary.atlassian.net/browse/MAI-39
-	Bumped version to 5.12.9
-- rewrite README + package.json description for npm marketing surface (#11)
-- Mirrors the maiass.net positioning locked in MAI-19/24/29 onto the npm page; surfaces MAI-13's CI auto-version-bump above the fold. Fixes backronym drift (Augmented → Assisted) in README footnote + maiass.mjs:2 header. Removes broken `config set` invocation; replaces unconditional 'free credits' promise with truthful first-run framing.
-- https://velvary.atlassian.net/browse/MAI-36
+- Added a lockfile sync step to the auto-version-bump workflow. The workflow now runs npm install --no-audit --no-fund --ignore-scripts after the bump and commits any lockfile delta, resolving long-standing drift.
+- Removed redundant --current flag from the version subcommand; it previously functioned the same as the version command with no args.
+- Fixed the subcommand-flag validation contract. Generalized validation with a per-subcommand FLAGS allow-list, re-enabling version --current functionality.
+- Fixed the broken config subcommand wiring. The handler now accepts argv array and has routing for config --help.
 
 ## 5.12.6
 12 May 2026
 
-- document CI auto-version-bump workflow (#10)
-- Document the --create-gh-action / --show-gl-excerpt / --show-bb-excerpt flags in docs/workflow.md, commands.md, setup.md, configuration.md, and the README.
-- https://velvary.atlassian.net/browse/MAI-14
-- substitute MAIASS_DEVELOPBRANCH in CI templates (#9)
-- Bake MAIASS_DEVELOPBRANCH into rendered CI templates at install/print time, with .trim() guard and silent fallback to 'develop'.
-- https://velvary.atlassian.net/browse/MAI-13
-	Bumped version to 5.12.4
+- Documented the CI auto-version-bump workflow, including the --create-gh-action, --show-gl-excerpt, and --show-bb-excerpt flags in multiple documentation files.
+- Substituted MAIASS_DEVELOPBRANCH in CI templates, baking it into rendered templates with a silent fallback to 'develop'.
 
 ## 5.12.3
 27 April 2026
 
-- Enhanced account information command with top-up link logging
-	  - feat: added top-up link logging for anonymous subscriptions
-	  - style: improved code formatting and spacing
+- Enhanced the account information command with top-up link logging for anonymous subscriptions, improving code formatting and spacing.
 
-## 5.11.1
+## 5.11.2
 25 April 2026
 
-- Add logic to return user to original branch after release workflow
-	  - Add conditional logic to return the user to their original branch, excluding develop or release branches, after completing the release workflow.
-- Update Configuration and Automation Flags Handling
-	  - docs: Update configuration options in `configuration.md`
-	  - feat: Add automation flags for auto-staging, auto-pushing, auto-approving, and auto-merging
-	  - fix: Remove deprecated `MAIASS_AUTOPUSH_COMMITS` variable in `maiass-variables.js`
-- Update auto modes and flags in maiass.mjs
-	  - refactor: reorganize auto modes and flags for clarity
-	  - docs: update command options in help message to reflect changes
-- Update pull request handling in config files
-	  - Update 'Pull Requests' configuration in config-command.js and config-manager.js to include 'MAIASS_DEVELOP_PULLREQUESTS' instead of 'MAIASS_STAGING_PULLREQUESTS' and 'MAIASS_MAIN_PULLREQUESTS'
-	  - Add logic in maiass-pipeline.js to open a pull request if 'MAIASS_DEVELOP_PULLREQUESTS' is set to 'on' instead of direct merge
+- Added logic to return user to original branch after release workflow, excluding develop or release branches.
+- Updated configuration options and introduced automation flags for auto-staging, auto-pushing, auto-approving, and auto-merging.
+- Removed deprecated autopush commits variable.
+- Reorganized auto modes and flags in maiass.mjs for clarity and updated command options in help message.
+- Updated pull request handling to include new configuration for pull requests and added logic to open a pull request if set to 'on'.
 
 ## 5.10.6
 21 April 2026
 
-- Add contributing guidelines
-	  - feat: add CONTRIBUTING.md file
-	  - docs: update package.json to include CONTRIBUTING.md and CODE_OF_CONDUCT.md
+- Added contributing guidelines, including a CONTRIBUTING.md file and updates to package.json to include this file and a CODE_OF_CONDUCT.md.
 
 ## 5.10.5
 17 April 2026
 
-- Add update check functionality with tests
-	  - feat: implement update check for npm package version
-	  - test: add unit tests for version comparison logic
-	  - fix(test): handle various response scenarios in tests
-- Updated command references from `nma` to `maiass`
-	  - docs: replaced all occurrences of `nma` with `maiass` in CLI command examples
-	  - docs: modified sections for configuration, manual setup, debugging, and workflow documentation
-- Updated CI templates and enhanced argument handling
-	  - feat: added commands for creating GitHub Action and displaying CI excerpts
-	  - feat: included CI templates for GitHub Actions, Bitbucket, and GitLab CI
-	  - fix: improved argument parsing and help output for new flags
-	  - chore: included new templates directory in package files
+- Added update check functionality with unit tests and handled various response scenarios in tests.
+- Updated command references from `nma` to `maiass` in CLI command examples and modified related documentation.
+- Updated CI templates and enhanced argument handling with new commands for creating GitHub Action and displaying CI excerpts, along with improved argument parsing and help output.
 
 ## 5.10.2
 16 April 2026
 
-- Improve handling of git repository context in maiass.mjs
-	  - feat: added logic to change working directory to git root if in a subdirectory
-	  - docs: included comments explaining new functionality
+- Improved handling of git repository context in maiass.mjs by adding logic to change working directory to the git root if in a subdirectory.
 
 ## 5.9.58
 16 April 2026
 
-- Pull latest develop before version bump to prevent stale base
-- - fix: pull origin/develop at the start of handleVersionManagement before
-	  reading version files — prevents bumping from a stale local version when
-	  remote has already been bumped (e.g. by a concurrent GH Actions run)
-	- fix: move develop-branch guard before getCurrentVersion() so we fail fast
-	  without doing unnecessary file I/O
-	- ci: add explicit git checkout develop step in version-bump.yml to ensure
-	  workflow lands on the real branch head, not the PR merge commit ref
-- Co-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>
+- Pulled latest develop before version bump to prevent stale base.
+	- Fixed pulling origin/develop at the start of handleVersionManagement before reading version files to prevent bumping from a stale local version when remote has already been bumped.
+	- Moved develop-branch guard before getCurrentVersion() to fail fast without unnecessary file I/O.
+	- Added explicit git checkout develop step in version-bump.yml to ensure workflow lands on the real branch head, not the PR merge commit ref.
+- Added GitHub Actions workflow for version bump on PR merge.
+	- Implemented version bump workflow triggered by merged pull requests.
+	- Configured steps for checking out code and setting up Node.js environment.
+	- Installed 'maiass' for version incrementing.
+	- Configured git settings for automated commits.
+- Refactored MAIASS command logic.
+	- Removed anonymous subscription creation logic.
+	- Streamlined command handling in MAIASS pipeline.
+- Enhanced branch name parsing and updated dependencies.
+	- Improved Jira ticket extraction from branch names.
+	- Added support for numeric ticket formats in branch names.
+	- Updated package version to 5.9.53 and added funding links.
+	- Included new development dependencies for coverage and testing.
 
 ## 5.9.57
 15 April 2026
 
-- Improve version-bump workflow: npm cache and noise reduction
-	Improve version-bump workflow: cache npm, suppress noise
-- - ci: add npm cache to setup-node step for faster installs
-	- ci: add --no-fund --no-audit flags to npm install to reduce output noise
-- Co-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>
-- test: version bump workflow
-	Updated Node.js version requirements and documentation
-	  - docs: updated Node.js requirement from 18+ to 20+
-	  - docs: corrected MAIASS_AI_COMMITS to MAIASS_AI_MODE in usage examples
-	  - docs: modified ticket integration description for clarity
-	  - docs: added e2e testing section and specifications
-	  - docs: streamlined release process instructions
-	  - package.json: changed Node.js engine requirement from 18+ to 20+
-- Updated package-lock.json for dependency upgrades
-	  - chore: bumped version from 5.9.53 to 5.9.55
-	  - chore: updated vitest from ^3.2.4 to ^4.1.4
-	  - chore: removed unused esbuild nodes from dependencies
-- Updated strawfile with workflow testing
-	  - refactored: changed testing description for GitHub workflows
-	  - removed: eliminated obsolete test entries
-
-## 5.9.55
-16 April 2026
-
-- Add GitHub Actions workflow for version bump on PR merge
-	  - feat: implement version bump workflow triggered by merged pull requests
-	  - ci: configure steps for checking out code and setting up Node.js environment
-	  - build: install 'maiass' for version incrementing
-	  - chore: configure git settings for automated commits
-- Refactored MAIASS command logic
-	  - chore: removed anonymous subscription creation logic
-	  - refactor: streamlined command handling in MAIASS pipeline
-- Enhanced branch name parsing and updated dependencies
-	  - feat: improved Jira ticket extraction from branch names
-	  - feat: added support for numeric ticket formats in branch names
-	  - chore(package): updated package version to 5.9.53 and added funding links
-	  - chore(package): included new development dependencies for coverage and testing
+- Improved version-bump workflow: cached npm and suppressed noise.
+	- Added npm cache to setup-node step for faster installs.
+	- Added --no-fund and --no-audit flags to npm install to reduce output noise.
+- Updated Node.js version requirements and documentation.
+	- Updated Node.js requirement from 18+ to 20+.
+	- Corrected MAIASS_AI_COMMITS to MAIASS_AI_MODE in usage examples.
+	- Modified ticket integration description for clarity.
+	- Added e2e testing section and specifications.
+	- Streamlined release process instructions.
+	- Changed Node.js engine requirement from 18+ to 20+.
+- Updated package-lock.json for dependency upgrades.
+	- Bumped version from 5.9.53 to 5.9.55.
+	- Updated vitest from ^3.2.4 to ^4.1.4.
+	- Removed unused esbuild nodes from dependencies.
+- Updated strawfile with workflow testing.
+	- Changed testing description for GitHub workflows.
+	- Eliminated obsolete test entries.
 
 ## 5.9.52
 13 April 2026
 
-- Updated homepage in package.json
-	  - fix(package): changed homepage from maiass.com to maiass.net
+- Updated homepage in package.json.
+	- Changed homepage from maiass.com to maiass.net.
 
 ## 5.9.49
 11 April 2026
 
-- fix to deployment duplicate version branch return
-- Updated strawfile with additional test case
-	  - chore: added second test entry in strawfile.txt
-- Updated strawfile with deployment testing note
-	  - feat: added note for deployment testing regarding ghost accounts
+- Fixed deployment duplicate version branch return.
+- Updated strawfile with additional test case.
+	- Added second test entry in strawfile.txt.
+- Updated strawfile with deployment testing note.
+	- Added note for deployment testing regarding ghost accounts.
 
 ## 5.9.44
 10 April 2026
 
-- Updated project description and homepage in package.json
-	  - feat: revised project description for clarity and detail
-	  - fix: updated homepage link to reflect new site address
-	  - refactor: modified keywords in package.json for better alignment with project features
-- Add MAIASS banner to README
-	  - feat: include MAIASS banner image in README.md
-- Update acknowledgments and support sections in README
-	  - docs: add acknowledgments for Git community, contributors, and testers
-	  - docs: update support section with GitHub Sponsors and Ko-fi links
-- Refactored config parsing logic in version-manager.js
-	  - refactor: improved parsing of pipe-separated config
-	  - fix: handled escaped pipes correctly in file configurations
-
-## 5.9.40
-9 April 2026
-
-- Updated package.json with repository information
-	  - feat: added repository URL, homepage, and bugs sections to package.json
-	  - docs: updated documentation for package.json changes
-- Refined config value handling in readConfig function
-	  - feat: enhanced quote stripping for dotenv conventions
-	  - docs: updated comments for clarity on handling quotes
-- fix(config-manager): complete .env value escaping to satisfy CodeQL
-- Backslashes were not being escaped before double-quotes, producing
-	invalid .env output for values containing \. Escape order matters:
-	\\ must be processed before \" to avoid double-escaping.
-- Co-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>
-- Added GitHub release creation to npm deploy script
-	  - feat: implement GitHub release creation in deployment process
-	  - fix: update success message to include GitHub deployment
-	  - docs: modify release notes format in script
-- Enhanced subscription logic for CI environments
-	  - feat: implemented check to skip anonymous subscription creation in CI environments
-	  - docs: updated comments to clarify behavior in bashmaiass and CI contexts
-	  - test: added environment variable to prevent anonymous subscription in test runs
-- Improved logging and documentation
-	  - fix(logger): enhanced session ID generation with random bytes
-	  - docs(config-manager): clarified comment on value quoting
-	  - fix(token-validator): added CodeQL comments for clearer logging practices
-- Add release tagging to npm deployment script
-	  - feat: implement tagging of the release on main branch
-	  - docs: improve script comments for clarity
-- Update npm_deploy.sh to read version from develop branch
-	  - feat: read version from develop branch instead of the current branch
-	  - fix: improve error handling for version extraction
-- Refactored command argument filtering
-	  - fix: corrected argument filtering to exclude single dash arguments
-- Refactored CLI argument handling and test utility improvements
-	  - fix(cli): update argument parsing to skip flags for meaningful arguments
-	  - docs: clarify test runner description and function comments
-	  - refactor(test): simplify repository creation and cleanup logic in tests
-	  - fix(test): ensure correct handling of error messages in command execution
-
-## 5.9.28
-09 April 2026
-
-- Updated README for MAIASS (Node.js)
-	- refactor: simplified project description and title
-	- update: enhanced quick start and installation instructions
-	- improve: clarified installation methods and added Node.js version requirements
-	- refine: detailed usage examples for MAIASS commands
-	- correct: fixed formatting inconsistencies and removed deprecated content
-	- enhance: added information about AI-powered commit messages and configuration options
-
-## 5.9.27
-9 April 2026
-
-- Updated GitHub Actions workflow and removed unused files
-	  - chore(ci): streamline Node.js test workflow with additional node version
-	  - refactor(ci): replace CLI test script with simpler entry point check
-	  - delete: remove outdated CREDIT_IMPROVEMENTS.md and HOMEBREW_TAP_SETUP.md files
-- Improve npm deployment script
-	  - feat: enhance script with pre-flight checks and status messages
-	  - fix: ensure the working directory is clean before deployment
-	  - fix: handle npm login if not authenticated
-	  - docs: update script comments for clarity
-- Update logging message in devlog.js
-	  - refactor(devlog): changed variable name from 'escapedMessage' to 'normalisedMessage' in debug log
-- Updated logging for security enhancements
-	  - feat(logging): masked sensitive information in logs
-	  - fix(logging): replaced exposed API key and token values with secure messages
-	  - refactor(logging): improved debug output to confirm presence without revealing sensitive data
-- docs: update version badge to 5.9.9
-- Enhance project type detection for Swift/Xcode
-	  - feat: implement detection for Swift projects using .pbxproj
-	  - feat: modify version source detection to prioritize .pbxproj for Swift
-	  - feat: update project type selection to include Swift
-	  - docs: improve comments and logging for Swift-specific handling
-	  - refactor: clean up code structure and variable naming in detection functions
-
-## 5.9.23
-5 April 2026
-
-- Updated local environment file instructions
-	  - docs: modify comments in .env.maiass.local template for clarity
-- Enhanced version bump handling and user feedback
-	  - feat: tracked explicit version bump requests
-	  - fix: resolved logging issue for missing version files
-	  - docs: added first-run setup and gitignore updates
-	  - chore: improved command processing logic
-
-## 5.9.21
-4 April 2026
-
-- Updated package dependencies
-	  - chore: removed unused devDependencies (nexe, pkg)
-	  - chore: cleaned up package.json structure
-- Add Bun installation check to build script
-	  - feat: ensure Bun is available by installing if missing
-	  - refactor: prioritize Bun for building method over PKG
-- Updated logging functionality for verbosity control
-	  - feat(logger): implemented dynamic verbosity level management
-	  - feat(logger): added methods for debug and trace mode detection
-	  - feat(logger): introduced redaction for sensitive data in log output
-	  - feat(logger): ensured debug and trace messages write to log file
-	  - fix(logger): corrected verbosity checks to include 'trace' level
-
-## 5.9.18
-1 April 2026
-
-- added powershell support
-
-## 5.9.17
-31 March 2026
-
-- Refactored changelog update logic
-	  - refactor: removed updateChangelog function due to redundancy
-	  - cleanup: optimized commit message processing for changelog
-	  - fix: handled cases for no new commits more gracefully
-	  - docs: clarified inline comments for improved code understanding
-- Add support for Windows PowerShell script execution in devlog
-	  - feat: implement retrieval of devlog.ps1 path for Windows
-	  - fix: adjust isDevlogAvailable function to check for PowerShell script
-	  - refactor: update logger messages to generalize devlog references
-	  - chore: streamline command execution for cross-platform compatibility
-
-## 5.9.15
-30 March 2026
-
-- Enhance version management and file type inference
-	  - feat: added function to infer version file type based on filename
-	  - fix: normalized path separators for primary version file
-	  - refactor: improved logic for determining primary version type
-
-## 5.9.10
-25 March 2026
-
-- Removed outdated devlog.csv file
-	  - chore: deleted obsolete devlog CSV file containing historical project logs and entries
-- chore: add devlog.csv to gitignore
-- fix: ensure anonymous subscription is created on first maiass run
-- Add createAnonymousSubscriptionIfNeeded call to handleMaiassCommand
-	- Matches bashmaiass behavior of creating subscription immediately
-	- Ensures free credits are allocated on first use, not just when requesting AI
-	- Fixes: users install maiass but hit 0-credit wall because subscription was never triggered
-	- This should increase conversion rate from npm installs to active users
-
-## 5.9.9
-22 March 2026
-
-- Enhanced version detection and extraction logic
-	  - feat: added function to extract version from various file types
-	  - feat: prioritized custom primary version file from .env.maiass
-	  - fix: improved error handling for file reading and version extraction
-	  - refactor: updated version update logic for primary files with lineStart patterns
-	  - docs: expanded documentation for version extraction and detection functions
-
-## 5.9.7
-10 January 2026
-
-- Implemented spinner for AI API calls
-	  - feat: added Spinner class to manage loading state during API requests
-	  - feat: integrated spinner start/stop functionality in API call handling
-	  - fix(api): implemented fetch with timeout using AbortController
-
-## 5.9.6
-4 January 2026
-
-- Implemented secure storage for Windows
-	  - feat: added encryption and decryption functions for Windows file storage
-	  - feat: implemented secure variable storage and retrieval for Windows
-	  - fix: handled storage initialization and data retrieval errors
-	  - docs: updated comments and code documentation for clarity
-- Update package name and version in package-lock.json
-	  - chore: renamed project from maiass-dev to maiass
-	  - chore: updated version from 5.3.22 to 5.9.4
-
-## 5.9.4
-30 December 2025
-
-- Added subClient parameter to logging functions
-	  - feat(devlog): included subClient in extractDevlogContext and logThis functions
-	  - fix(log): updated command execution to incorporate subClient parameter
-	  - fix(log): passed subClient to logCommit and logMerge functions
-- Added development log configurations
-	  - feat: introduce MAIASS_DEVLOG_CLIENT, MAIASS_DEVLOG_SUBCLIENT, and MAIASS_DEVLOG_PROJECT in environment variables
-- Add npm deployment script
-	  - feat: implement npm deployment script
-	  - chore: merge develop branch into main before deployment
-	  - fix(script): ensure npm user is logged in before publishing
-
-## 5.9.1
-25 November 2025
-
-- Enhanced command line help output
-	  - feat: added detailed help messages for valid commands and flags
-	  - refactor: grouped flags by category for improved readability
-	  - fix: removed redundant help command message
-- Enhanced command and flag validation
-	  - feat: added dynamic command validation for first argument
-	  - feat: implemented flag validation for recognized options
-	  - fix: improved error handling for unrecognized commands and flags
-	  - docs: updated help output to include --account-info option
-- Update README with AI mode options
-	  - docs: add AI mode options to enable intelligent commit suggestions
+- Updated project description and homepage in package.json.
+	- Revised project description for clarity and detail.
+	- Updated homepage link to reflect new site address.
+	- Modified keywords in package.json for better alignment with project features.
 
 ## 5.8.10
 25 November 2025
 
-- Add handling for new repositories without commits
-	  - feat: Skip merge workflow for new repositories with no branch yet
-- Update getGitInfo function to handle new repository state
-	  - Add logic to retrieve status when no branch exists yet
-	  - Set branch as null in return object
-	  - Assign status properties to return object based on retrieved status
+- Added handling for new repositories without commits.
+	- Skipped merge workflow for new repositories with no branch yet.
+- Updated getGitInfo function to handle new repository state.
+	- Retrieved status when no branch exists yet.
+	- Set branch as null in return object.
+	- Assigned status properties to return object based on retrieved status.
 
 ## 5.8.4
 24 November 2025
 
-- Add logger functionality to secure storage module
-	  - refactor: update logger import in secure-storage.js
-	  - docs: update debug log messages in secure-storage.js
-- Add client info utilities
-	  - feat: add client-info module for client name and version retrieval
-	  - feat: add getClientName function to get client name for API headers
-	  - feat: add getClientVersion function to get client version for API headers
-- Add features to bootstrap module and fix log message
-	  - feat: Add functions for project type detection and version source identification in bootstrap module
-	  - feat: Implement configuration setup steps in bootstrap module
-	  - fix: Update log message for anonymous subscription request in account-info module
-- Update automated AI suggestion prompts
-	  - feat: add automatic approval for AI suggestions based on environment variables
-	  - feat: add automatic push option for commits based on environment variables
-	  - feat: add automatic staging of changes based on environment variables
-	  - feat: add automatic merging to develop branch based on environment variables
+- Added logger functionality to the secure storage module.
+	- Updated logger import in secure-storage.js.
+	- Updated debug log messages in secure-storage.js.
+- Added client info utilities.
+	- Introduced client-info module for client name and version retrieval.
+	- Added getClientName function for client name in API headers.
+	- Added getClientVersion function for client version in API headers.
+- Enhanced features in the bootstrap module and fixed log message.
+	- Added functions for project type detection and version source identification.
+	- Implemented configuration setup steps.
+	- Updated log message for anonymous subscription request in account-info module.
+- Updated automated AI suggestion prompts.
+	- Added automatic approval for AI suggestions based on environment variables.
+	- Added automatic push options for commits based on environment variables.
+	- Added automatic staging of changes based on environment variables.
+	- Added automatic merging to the develop branch based on environment variables.
 
 ## 5.7.34
 24 November 2025
 
-- Update package.json with new version and additional files
-	  - chore: update package.json version to 5.7.33
-	  - chore: add new files to package.json "files" section
-- Update internal changelog logic
-	  - refactor: remove unnecessary comments and unused code
-	  - refactor: simplify formatting of commit messages
-	  - refactor: restructure logic for handling existing changelog entries
-- Update internal changelog function to remove console log and process exit
-- Update internal changelog formatting
-	  - fix: correct date variable usage
-	  - fix: remove unnecessary console.log and process.exit calls
-- Update internal changelog function
-	  - refactor: remove redundant console.log statements
-	  - style: fix indentation issue
-- Add logging and exit functionality
-	  - refactor: log the dateWithWeekday
-	  - refactor: add process exit functionality
-- Update date format in internal changelog
-	  - refactor: use dateWithWeekday instead of date
-- Update internal changelog formatting
-	  - refactor: use  instead of Mon Nov 24 13:16:21 AEDT 2025 for better readability
-- Updated internal changelog
-	- refactor: simplified date formatting in internal changelog
-	- refactor: improved content update logic in internal changelog
-- Update internal changelog content
-	  - refactor: simplify date formatting
-	  - refactor: improve content update logic in the changelog
-- Update internal changelog entries with weekday in date
-	  - refactor: replace date with weekday in internal changelog entries
-- Update date format in changelog
-	  - refactor: modify date format in changelog to include capitalized weekday
-	  - refactor: update weekday to be capitalized in changelog
-- Update internal changelog with weekday format and normalize date strings
-	  - feat: create/update internal changelog with weekday format
-	  - refactor: normalize date strings for comparison
-- Update version files with new version and configurations
-	  - feat: add function to update secondary version files based on config
-	  - feat: implement logic to update secondary version files with new version and patterns
-	  - docs: add detailed comments and explanation for the updateSecondaryVersionFiles function
-- Update color handling and commit message flow
-	- feat: added bold orange in colors.js
-	- feat: implemented function to get color based on credit count in commit.js
-	- feat: created function to print gradient line in commit.js
-	- fix: optimized credit information extraction and display in commit.js
-	- feat: added anonymous subscription creation when no AI token found in commit.js
-	- feat: improved AI suggestion display with gradient lines in commit.js
-- Add MAIASS version display and git branch info
-	  - feat: add displayHeader function for MAIASS version
-	  - feat: get own MAIASS version from package.json
-	  - feat: display MAIASS version in displayVersionInfo
-	  - feat: show current git branch in validateAndHandleBranching
-- Update verbosity and debug mode settings in .env file
-	  - fix: disable debug mode in MAIASS_VERBOSITY
-	  - fix: enable debug mode in MAIASS_DEBUG
-- Update .gitignore and maiass.mjs
-	  - chore: remove unused entries in .gitignore
-	  - feat: add handling for --auto flag in maiass.mjs
-- Update changelog.js to keep JIRA ticket in internal changelog
-	  - refactor: modify line to keep JIRA ticket information in subject
-- Add new function to update changelog path
-	  - feat: import updateChangelogNew function
-	  - feat: add logic to handle changelog path
-	  - feat: call updateChangelogNew with changelog path and new version
+- Updated internal changelog logic, improving formatting and restructuring.
+- Enhanced internal changelog with weekday format and improved date usage.
+- Implemented logging and exit functionality for internal changelog updates.
+- Updated version files and configurations for better management.
+- Improved color handling and commit message flow.
+- Displayed MAIASS version and current git branch information.
+
 ## 5.7.6
 14 September 2025
+
+- Added new features and optimizations to changelog processing.
+
+## 5.6.0
+11 August 2025
+
+- Updated Maiass Pipeline functionality.
+
+## 5.5.0
+11 August 2025
+
+- Updated changelog entries with latest version and commit messages.
+- Improved logic to find and update changelog entries.
+
+## 5.4.0
+11 August 2025
+
+- Updated test configuration with more descriptive comments for environment settings.
+
+## 5.3.31
+11 August 2025
+
+- Updated version check to npm registry.
+- Retrieved latest version and URL from npm registry data.
+- Handled case when no latest version is found in npm registry.
+- Updated git diff command to exclude changelog files.
+- Enhanced debug logging for AI commit suggestions.
+- Outputted diff and parameters in debug mode.
+- Outputted AI suggestion in debug mode.
+- Modified commit message handling for cross-platform compatibility.
+- Prepended JIRA ticket to commit message if present and not already.
+- Updated variable reference to use the final commit message instead of the original commit message.
+- Updated internal changelog file name to '.CHANGELOG_internal.md'.
+- Updated package-lock.json version to '5.3.22'.
+- Changed release URL from 'maiass.dev' to 'maiass.net' in development.md.
+- Added conditional checks before copying maiass-windows-x64.exe.
+- Removed redundant zip creation for maiass-windows-arm64.exe.
+- Standardized version URLs by removing 'v' prefix.
+- Adjusted GitHub release commands to not include 'v' prefix.
+- Added conditional logic to prevent devlog.sh availability on Windows.
+
+## 5.3.18
+3 August 2025
+
+- Changed release URL from 'maiass.dev' to 'maiass.net' in development.md.
+- Updated R2_BASE_URL in scripts to 'maiass.net'.
+- Replaced occurrences of 'maiass.dev' with 'maiass.net' in respective script files.
+- Added conditional checks before copying maiass-windows-x64.exe.
+- Removed redundant zip creation for maiass-windows-arm64.exe.
+- Removed 'v' prefix from version URLs and messages.
+- Adjusted GitHub release commands to not include 'v' prefix.
+- Corrected file permissions for copied binaries. 
+- Created README in scripts directory detailing all MAIASS scripts.
+- Added new scripts for code signing and signature verification for individual binaries.
+- Updated development documentation with build and release workflows.
+
+## 5.2.9
+02 August 2025
+
+- Updated .gitignore to include unused Formula file.
+- Deleted unused 'Formula/maiass.rb' file.
+- Updated Maiass version in homebrew formula to 5.2.7.
+- Remodeled URL structure in Maiass formula and creation script.
+- Added new symlink names for the main MAIASS tool.
+- Streamlined 'create-homebrew-formula.sh' layout.
+- Updated URL patterns in 'create-release.sh' to remove 'v' from version tag.
+- Updated maiass sha256 checksum in homebrew formula.
+- Removed superfluous 'v' from download URLs in homebrew formula and shell scripts.
+- Changed feature name from 'AI-Assisted Semantic Savant' to 'AI-Augmented Semantic Scribe'.
+- Adjusted associated references in documentation and code for the new feature name.
+- Added functionality to check for version updates from the GitHub releases.
+- Updated brew configuration to correctly define augmented semantic scribe.
+- Updated package.json with new version and adjusted description.
+- Added GPL-3.0-only license.
+- Adjusted package version according to recent changes.
+- Added new Modular AI-Assisted Semantic Savant feature to the project.
+- Overhauled README with updated descriptions and examples.
+- Updated brew configuration to correctly tap into maiass instead of nodemaiass.
+- Deleted old maiassnode.rb file.
+- Modified Homebrew setup script to accommodate updates.
+- Ignored additional files (HOMEBREW_TAP_SETUP.md, script creations) in .pkgignore.
+- Copied updated maiass.rb Homebrew formula to homebrew.
+
+## 1.2.12
+02 August 2025
+
+- Set release ignore rules and enhanced release and pkgignore files.
+- Updated script and test files to reflect the name change of the main script to "maiass". 
+
+## 1.2.11
+01 August 2025
+
+- Updated GitHub actions and documentation for cross-platform release, including executable permissions for "maiass" binaries and updated filenames from "maiassnode" to "maiass".
+- Added support for MacOS ARM64, Linux ARM64, and Windows ARM64 in the release script.
+- Refactored script and file names, including adjustments in output file names and executable file names in the release process.
+- Refactored build process and release script, improving build directory checks, cleanup, and file handling.
+- Updated script files and added scripts/ path to the package ignore list.
+- Added .DS_Store to .pkgignore to ignore these files in packaging.
+- Updated package building and release script to exclude development files from builds.
+- Removed unneeded test files.
+- Renamed internal changelog file.
+- Stopped creating a new internal changelog if one does not exist.
+- Updated internal CHANGELOG file.
+
+## 1.1.9
+01 August 2025
+
+- Improved command line user input handling and commit message suggestion.
+	Handled invalid user inputs during commit message creation.
+	Resolved process exiting prematurely by maintaining original raw mode state during input collection.
+- Revised 'No relevant commits found for changelog' behavior to skip changelog update.
+- Updated treatment for absence of internal changelog commits from version bump entry.
+- Updated maiass-pipeline.js to improve git commit handling.
+	Modified method of acquiring latest git tag and introduced a fallback for no git tags to get all commits.
+	Added filtering logic to exclude empty commit message lines.
+- Updated Changelog and fixed behavior for empty commits.
+	Revised behavior for empty commits in changelog.
+- Refined changelog update process.
+	Made log warnings more precise about changelog updates when no commits present.
+- Updated Changelog and warning messages.
+	Revised Changelog for version 1.1.3.
+	Updated warning messages and skip behavior for empty commits.
+- Refactored changelog update logic.
+	Added conditional logic for updating changelog regardless of relevant commits.
+- Improved Maiass pipeline logging and branch handling.
+	Added cache for finalBranch and originalBranch to avoid repeating git calls.
+- Updated warning messages and handling for empty commits.
+	Changed treatment for absent internal changelog commits from version bump entry to skipping update.
+
+## 1.0.34
+01 August 2025
+
+- Improved handling of commit logs.
+- Added capability for version bump fallback when no changelogs are found.
+- Updated version tagging workflow with options for version bump and tagging strategy.
+- Simplified release handling into bump and full release workflows.
+- Made failure messages in git operations more consistent.
+- Improved git command handling and added debug verbosity.
+- Enhanced logging and error management in the MAIASS system.
+- Refactored configuration handling.
+- Refactored pipeline logic and improved debugging.
+- Enhanced commit and pipeline handling.
+- Updated logger functionality and streamlined pipeline code.
+- Refined logging and prompting capabilities, added new config options.
+- Improved application naming and documentation.
+- Updated install script.
+- Enhanced AI key management and added machine fingerprinting.
+
+## 1.0.22
+31 July 2025
+
+- Updated logger, refined API interaction, and improved error handling.
+- Refined commit messaging and added new color functions.
+- Refactored code related to user prompts and session usage.
+- Improved debug mode and enhanced documentation.
+
+## 1.0.16
+28 July 2025
+
+- Removed unused binary build files and tweaked logging.
+- Implemented AI symbol and updated AI message identifier.
+- Updated logger symbol in pipeline.
+- Updated logging functionality and error handling.
+- Refactored logging framework for enhanced error management.
+- Updated logging in maiass-pipeline.js.
+- Standardized logging syntax and improved logging statements.
+- Updated documentation and code to reflect changes in project name.
+- Refactored log method in commit.js.
+- Updated style and behavior of logger.
+- Added new color to colors.js.
+- Updated logger functionality.
+- Corrected application name in thank you message.
+- Updated logging systems in maiassnode and removed unnecessary logs.
+- Updated codebase and documentation for rebranding.
+
+## 0.9.7
+28 July 2025
+
+- Enhanced WordPress integration with expanded plugin and theme management functionality.
+- Added methods for updating version in WordPress theme style.css and PHP version constant.
+- Implemented version constant generator based on file path for WordPress plugins and themes.
+- Incorporated automatic generation of constants in WordPress update process.
+- Implemented dry run mode for previewing WordPress updates.
+- Included expanded debugging information in configuration load and WordPress update functions.
+- Corrected list format in create-release.sh script.
+- Provided extensive descriptions and usage examples in workflow.md and configuration metro information for WordPress management in configuration.md.
+
+## 0.9.6
+27 July 2025
+
+- Updated files to utilize common JS execution.
+- Replaced 'maiassnode.mjs' with 'maiassnode.cjs' in debug-git-test.js.
+- Changed file path for 'maiassnode.mjs' to 'maiassnode.cjs' in test-runner.js.
+- Updated test scripts to use .mjs node files.
+- Changed reference from maiassnode.js to maiassnode.mjs in debug-git-test.js.
+- Modified path to maiassnode.mjs in test-runner.js.
+- Improved git release workflow with added write permissions for creating releases.
+- Extended checkout action for fetching all history and tags.
+- Enhanced mechanism for getting the latest git tag with a default value set when no tags are found.
+- Updated create-release.sh script and enhanced branching flows with current branch detection and options for merging branches.
+- Improved branch-switching handling in the script and error handling for invalid user choice.
+- Updated GitHub release workflow triggers, changing the release trigger condition to main branch updates or workflow dispatch events.
+- Expanded CLI functionality for MAIASSNODE workflow, adding version bump functionality ('major', 'minor', 'patch') and several new flags for CLI.
+- Improved help text for better usability.
+- Updated node execution from cjs to mjs in nodemaiass.sh.
+- Corrected positional arguments array writing in 'version' command.
+- Implemented GitHub Actions for testing and release automation, including workflows for cross-platform builds and multiple Node.js version tests.
+- Created a new home-brew setup markdown file and a new release template markdown file.
+- Added cross-platform binary building script with compiled binaries for arm64 and x64.
+
+## 0.7.12
+27 July 2025
+
+- Changed command option in devlog.js to use "?" instead of "0".
+- Refined devlog logs for cleaner output.
+- Updated devlog.js to handle different parameters for command execution.
+- Refactored devlog command parameters by removing unused 'type' parameter.
+- Refactored logging and merging operations in devlog:
+	- Switched execution from synchronous to asynchronous.
+	- Handled entire gitInfo object in handleStagedCommit.
+	- Replaced default names with clearly outlined attributes.
+	- Extracted context for logCommit and logMerge functions.
+	- Passed originalGitInfo to logMerge function in handleMergeToDevelop.
+- Refined debugging messages in devlog.js:
+	- Added logging of messages to devlog.sh.
+	- Corrected error and debug message handling.
+	- Streamlined debug message print conditions.
+- Improved debug handling in devlog:
+	- Introduced command execution condition during debug.
+	- Reordered execSync command execution.
+	- Revised handling for both debug and non-debug scenarios.
+- Improved output capture in devlog:
+	- Replaced trim method in execSync command output capture.
+	- Added functionality for logging full command result, including errors.
+- Modified devlog.js functionality:
+	- Changed console output behavior within logThis function.
+	- Added silent execution of command for cleaner log display.
+- Added debug message for devlog.sh command execution when MAIASS_DEBUG is true.
+- Integrated devlog functionality and improved commit and merge logging:
+	- Added devlog functionality as a separate module.
+	- Implemented commit logging in 'commit.js'.
+	- Introduced merge logging within 'handleMergeToDevelop' and 'handleVersionManagement'.
+	- Created 'devlog.js' file with utility functions for development logging.
+- Changed default AI endpoint in commit.js.
+- Removed MAIASS_AI_ENDPOINT from configuration documentation.
+- Updated MAIASS variable references to non-branded AI in maiass-variables.js.
+- Renamed occurrences of 'OPENAI' to 'AI' in variables and configuration files.
+- Updated README and documentation to reflect changes in configuration and variable names.
+- Updated test setup to use the renamed AI_MODE configuration variable.
+
+## 0.7.1
+25 July 2025
+
+- Added new emoji and ascii representations for symbols in symbols.js.
+
+## 0.6.28
+25 July 2025
+
+- Updated merging process in maiass-pipeline.
+	Added silent option to handleMergeToDevelop function and automated merge command reply when in silent mode.
+- Introduced silent mode for automated approval.
+	Added CLI option for automated prompts approval and integrated this mode into the command handler and pipeline modules.
+- Refactored changelog update function.
+	Updated regex to filter irrelevant commits in the updateChangelog function.
+- Improved changelog update filtering.
+	Enhanced readability by moving the check for irrelevant commits directly into the return statement and corrected the regular expression to better identify JIRA tickets.
+- Improved commit message filtering in changelog updates.
+	Updated commit filtering regex in the updateChangelog function.
+- Refactored maiass-pipeline.js filter conditions.
+	Simplified filtering conditions in the updateChangelog function.
+- Updated changelog and maiass-pipeline code.
+	Improved line filtering in maiass-pipeline.js, simplified commit filtering logic in updateChangelog function, added check for existing changelog, created a new one if non-existent, updated or prepended new entries based on version and date, resolved the issue of new entries overwriting the entire changelog, updated variable names for clarity, modified git log command format, replaced const with let for commit message formatting, and improved readability of commit formats in maiass-pipeline.js.
+- Updated line filters in maiass-pipeline.js.
+	Improved filtering by adding dashAuthor and withSha conditions, and updated return to use dashAuthor instead of shouldInclude for better accuracy.
+- Updated maiass-pipeline logic.
+	Simplified commit filtering logic in the updateChangelog function.
+- Improved commit message filtering.
+	Added more specific filtering for commit messages and corrected checking pattern for ignoring merge and bump messages.
+- Updated internal changelog creation logic.
+	Added check for existing changelog and created a new one if non-existent, updated or prepended new entries based on version and date, and resolved the issue of new entries overwriting the entire changelog.
+- Updated Git command execution in maiass-pipeline.
+	Modified format of git log command.
+- Updated Git log format in maiass-pipeline.
+	Updated git log formatting for better readability.
+- Updated maiass-pipeline.js.
+	Changed the format of internal log result in the updateChangelog function.
+- Improved formatting of commit messages and cleaned up changelog.
+	Replaced const with let for commit message formatting and improved readability of commit formats.
+- Implemented several revisions to changelog updates.
+	Added functionality for retrieving commit messages with author details and resolved issues with commit message processing for the main changelog.
+	Changed commit log output format in the updateChangelog function.
+- Consolidated commit modification functions in maiass-pipeline.js.
+	Merged two .map functions into one.
+	Renamed variables for better understanding and streamlined operations using the renamed variable.
+- Refactored author extraction in the main changelog update.
+	Modified git log command to include author in a unique format and added functionality to extract the author name from command output.
+- Refactored main functionality in maiass-pipeline.js.
+	Corrected commitMessages variable reference and added comments explaining commit message processing.
+- Refactored changelog update in maiass-pipeline.
+	Optimized commit message processing by removing author extraction and made commit filtering from irrelevant phrases case insensitive.
+- Refactored code in maiass-pipeline.js.
+	Simplified commitMessages variable assignment and removed duplicate operation by utilizing mainLogResult.
+- Updated git log command for changelog generation.
+	Changed mainLogResult to include author info and added author extraction from internalLogResult.
+- Updated CHANGELOG_internal.md.
+	Bumped version in CHANGELOG_internal.md and merged feature branch into develop.
+- Refactored commit logging in changelog update pipeline.
+	Modified git log command to retrieve complete commit info and improved relevancy filter for commits.
+	Added execution of git command to get raw internal log and improved formation of formatted internal commits.
+- Improved log output in maiass-pipeline.js.
+	Removed commit hash from internalLogResult output.
+
+## 0.6.0
+24 July 2025
+
+- Updated to version 0.5.8 with changelog improvements and error handling.
+	Changed git command for internal log in maiass-pipeline and enhanced error handling for internal changelog extraction.
+
+## 0.5.8
+24 July 2025
+
+- Improved internal changelog extraction.
+	Changed commit log command to include full commit message and author name.
+	Improved error handling for internal changelog commits.
+- Updated README and maiass-pipeline.js with changelog generation.
+	Added automated changelog generation to features and config instructions.
+	Elaborated on dual changelog system, including format and features.
+	Imported fs/promises module for filesystem operations.
+- Updated Maiass Pipeline functionality.
+	Imported path package in maiass-pipeline.
+	Added comment about commit message formatting for internal changelog.
+- Updated commit message filtering for maiass-pipeline.
+	Cleaned up commit messages by removing empty lines and trailing newlines.
+- Updated version tagging in Maiass pipeline.
+	Changed default to true for version tagging.
+- Refactored updateChangelog function.
+	Updated the changelog update function to use current version info.
+	Adjusted console message while skipping changelog update due to lack of current version.
+- Updated changelog and pipeline.js implementations.
+	Improved handling of commit message formatting for internal changelog and streamlined code.
+- Updated Changelog Creation and Error Handling Processes.
+	Added conditions to improve changelog updates and included helpful log messages during retrieval.
+
+## 0.5.0
+23 July 2025
+
+- Improved commit processing and auto-tagging.
+	Enhanced logic for processing commits and added support for updating an internal changelog.
+
+## 0.4.1
+23 July 2025
+
+- Enhanced logic to pull commit messages since the last tag in the changelog update.
+- Improved commit message formatting for changelog display.
+- Improved error handling during the changelog update process.
+- Updated code to filter out irrelevant commits and strip JIRA tickets.
+- Enhanced the README file and improved the configuration guide on environment variables. 
+- Added logic to pull commit messages since the last tag in the changelog update.
+- Implemented commit message formatting for proper changelog display.
+- Handled errors more gracefully during the changelog update process.
+
+## 0.3.2
+23 July 2025
+
+- Added an option for automatic version tagging based on environment configuration.
+- Improved version management by integrating auto-tagging or user prompt.
+- Implemented a check to return to the original branch after pipeline execution with log messages displaying the status of branch switching.
+- Enhanced Git error logging and added detailed output results for git operations.
+- Streamlined git command execution and improved error handling.
+- Integrated new features for checking remote existence, automatic changelog updates, and error handling in the version management process.
+- Restructured project documentation and updated the configuration management, including enhancements to the README file and API guide.
+- Modified environment file management and improved the configuration handling process.
+
+## 0.2.8
+22 July 2025
+
+- Added a bash script for commit functionality, including a commit function and logic to prepend JIRA ticket to commit messages when not already present.
+- Improved commit message handling by removing wrapping quotes, adjusting trimming behavior for git commands, and enhancing error handling during command execution.
+- Reconfigured environment variable load order and optimization for identification methods.
+- Updated tests and documentation.
+- Added a Git information extraction and display utility, integrating it into the CLI for user commands.
+- Enhanced visual presentation in terminal output with improved readability using symbols and consistent color arrangements.
+- Enhanced environment variable display with new color options and improved logic for MAIASS-specific variables.
+- Updated documentation and introduced an environment display utility within the project.
+- Launched the initial version of the MAIASSNODE project with comprehensive documentation including setup and contribution guidelines.
+- Implemented cross-platform configuration loading and environment setup for improved application management.
+- Updated code for better module management and removed unnecessary imports.
+
+## 0.1.1
+22 July 2025
+
+- Initialized MAIASSNODE project with a basic structure, including primary script files and CLI color definitions.
+- Set up package information and dependencies in package.json.
+- Added initial project information in README.md.
+- Created CHANGELOG.md for future updates.
+- Included package-lock.json for dependency versions.
