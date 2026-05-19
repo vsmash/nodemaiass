@@ -1,3 +1,22 @@
+## 5.12.14
+19 May 2026
+
+- Consolidated same-date sections post-AI.
+- Improved AI consolidation to handle non-adjacent patches.
+- Stopped relying on AI for consolidation; reorganized sections by normalized date and merged entries.
+- Updated existing cleaned files for consistent section merges.
+- Addressed a separate issue where an entry was dropped during AI processing.
+- Cleaned up changelog via the new cleanup command.
+- Included .gitignore in the cleanup commit to prevent blocking on modified files.
+- Added the `--cleanup-changelogs` command for improved changelog management.
+- Resolved issues with AI-written commit messages affecting changelog format.
+- Introduced a new module for changelog cleanup, enabling enhanced management of changelog files.
+- Implemented auto-picking of AI models based on input size for efficiency.
+- Added a branch-safety protocol to ensure proper checkout procedures during cleanup.
+- Enhanced inline bump resilience to prevent blocks in the changelog pipeline.
+- Credits from cleanup AI calls are now tracked in the existing environment variable.
+- Synced package-lock.json with the updated version.
+
 ## 5.12.13
 13 May 2026
 
