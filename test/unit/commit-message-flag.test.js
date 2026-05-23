@@ -276,43 +276,43 @@ describe('-m / --message verbatim commit (integration)', () => {
     expect(commitSubject(dir)).toBe('MAI-777 already there');
   });
 
-  // Case 7 — empty / whitespace-only message creates no commit.
+  // Case 7 — empty / whitespace-only message is a usage error.
   //
-  // The load-bearing guarantee is: NO commit is created and the documented
-  // "No commit message provided" error is surfaced (a handled outcome — the run
-  // does not hang and does not silently commit an empty message). Note: in
-  // commits-only mode (-c) the pipeline treats the aborted commit as a
-  // non-fatal end and exits 0, so we assert the no-commit + error-message
-  // facts rather than a non-zero exit code (which this mode does not produce).
-  it('does not commit when the message is empty', () => {
+  // An explicitly-supplied but empty -m/--message fails fast with a non-zero
+  // exit (parity with bash, which aborts here) BEFORE any staging/commit. No
+  // commit is created and the run does not hang.
+  it('exits non-zero and does not commit when the message is empty', () => {
     const dir = makeRepo({ branch: 'feature/MAI-777_demo' });
     stageChange(dir);
     const before = headSha(dir);
     const beforeCount = commitCount(dir);
-    const { signal, stdout } = runCli(dir, ['-c', '-m', ''], {
+    const { status, signal, stdout } = runCli(dir, ['-c', '-m', ''], {
       extraEnv: { MAIASS_AUTO_STAGE_UNSTAGED: 'true' },
     });
     // Did not hang (no kill-by-timeout).
     expect(signal).toBeNull();
+    // Usage error → non-zero exit (parity with bash).
+    expect(status).not.toBe(0);
     // HEAD unchanged — no new commit was created.
     expect(headSha(dir)).toBe(before);
     expect(commitCount(dir)).toBe(beforeCount);
-    // Documented, handled outcome.
-    expect(stdout).toContain('No commit message provided');
+    // Clear error surfaced.
+    expect(stdout).toContain('requires a non-empty value');
   });
 
-  it('does not commit when the message is whitespace-only', () => {
+  it('exits non-zero and does not commit when the message is whitespace-only', () => {
     const dir = makeRepo({ branch: 'feature/MAI-777_demo' });
     stageChange(dir);
     const before = headSha(dir);
     const beforeCount = commitCount(dir);
-    const { signal, stdout } = runCli(dir, ['-c', '-m', '   '], {
+    const { status, signal, stdout } = runCli(dir, ['-c', '-m', '   '], {
       extraEnv: { MAIASS_AUTO_STAGE_UNSTAGED: 'true' },
     });
     expect(signal).toBeNull();
+    expect(status).not.toBe(0);
     expect(headSha(dir)).toBe(before);
     expect(commitCount(dir)).toBe(beforeCount);
-    expect(stdout).toContain('No commit message provided');
+    expect(stdout).toContain('requires a non-empty value');
   });
 
   // Case 8 — `-ac -m` is fully unattended even with UNSTAGED changes and NO

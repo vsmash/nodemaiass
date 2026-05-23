@@ -184,6 +184,14 @@ if (!flagValidation.valid) {
   process.exit(1);
 }
 
+// An explicitly-supplied but empty/whitespace-only -m/--message is a usage
+// error — fail fast with a non-zero exit (parity with bash, which aborts here).
+// An absent flag (providedMessage === null) is unaffected.
+if (providedMessage !== null && providedMessage.trim() === '') {
+  console.error(colors.Red(`${SYMBOLS.CROSS} Error: --message/-m requires a non-empty value`));
+  process.exit(1);
+}
+
 // Apply auto-mode env vars now that validation has passed. Setting these
 // before validation would leak MAIASS_AUTO_* into process.env for commands
 // that reject --auto (e.g. `account-info --auto`) — see MAI-43 code review.
