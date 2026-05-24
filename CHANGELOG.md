@@ -1,3 +1,10 @@
+## 5.13.4
+24 May 2026
+
+- bump version-bump.yml node-version 20->24 (MAI-56 template parity) (#21)
+- Co-authored-by: Tyler Durton <tyler@wipeyour.com>
+	Sync package-lock.json with bumped version
+
 ## 5.13.2
 25 May 2026
 
