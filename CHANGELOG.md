@@ -1,3 +1,8 @@
+## 5.13.2
+25 May 2026
+
+- Synced package-lock.json to align with the updated version.
+
 ## 5.13.1
 24 May 2026
 
