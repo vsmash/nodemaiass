@@ -105,8 +105,7 @@ MAIASS_STAGINGBRANCH=staging                   # Default: staging
 # Version Files
 MAIASS_VERSION_PRIMARY_FILE=package.json       # Primary version file
 MAIASS_VERSION_PRIMARY_TYPE=json               # json, text, php, css
-MAIASS_VERSION_SECONDARY_FILES=                # Comma-separated additional files
-MAIASS_VERSION_SECONDARY_TYPES=                # Types for secondary files
+MAIASS_VERSION_SECONDARY_FILES=                # Pipe-separated file:type:pattern entries (see below)
 
 # Version Patterns (for custom files)
 MAIASS_VERSION_PATTERN_JSON="version"          # JSON key path
@@ -114,6 +113,43 @@ MAIASS_VERSION_PATTERN_TEXT=^(.*)$             # Regex pattern
 MAIASS_VERSION_PATTERN_PHP=Version.*'([^']*)'  # PHP constant pattern
 MAIASS_VERSION_PATTERN_CSS=Version:.*([0-9.]+) # CSS comment pattern
 ```
+
+#### Secondary Version Files
+
+`MAIASS_VERSION_SECONDARY_FILES` lets you keep extra files in sync with the primary version on every bump. It is a **pipe (`|`) separated** list of entries, where each entry is **colon (`:`) delimited** as `file:type:pattern`:
+
+```bash
+MAIASS_VERSION_SECONDARY_FILES=path/one:type:pattern|path/two:type:pattern
+```
+
+- `file` — path to the file to update.
+- `type` — one of `pattern`, `txt`, or `json` (defaults to `txt` if omitted). See below.
+- `pattern` — interpreted according to `type`. Everything after the second colon is the pattern, so a pattern may itself contain colons. To include a literal pipe in a pattern, escape it as `\|`.
+
+> **Note:** `MAIASS_VERSION_SECONDARY_TYPES` is **not implemented** — the code never reads it. The type is the second colon field of each `MAIASS_VERSION_SECONDARY_FILES` entry, not a separate variable. (The variable's built-in description still says "comma-separated"; that description is stale — the real format is pipe/colon as documented here.)
+
+**Supported `type` values:**
+
+- `pattern` — `pattern` is literal text containing a `{version}` placeholder. The literal text is regex-escaped and `{version}` is matched as a semver number (`[0-9]+\.[0-9]+\.[0-9]+`). When a matching block is found, the version inside it is **replaced in place** with the new version. It does **not** prepend a new entry — if the pattern is not already present in the file, nothing is written.
+- `txt` — finds each line that `startsWith(pattern)` and replaces the first semver number (`\d+\.\d+\.\d+`) on that line with the new version.
+- `json` — `pattern` is a dot-separated key path (e.g. `version` or `nested.version`) whose value is set to the new version.
+
+**Examples:**
+
+```bash
+# Update a PHP constant block and a build manifest's version key on every bump
+MAIASS_VERSION_SECONDARY_FILES=src/Plugin.php:pattern:VERSION = '{version}'|dist/build.json:json:version
+```
+
+**Multi-line patterns (`type:pattern` / `pattern` type only):**
+
+A pattern may span multiple lines using the `\n` escape — but **only inside a double-quoted value** in `.env.maiass`. The config loader uses dotenv, which expands `\n` → newline **only for double-quoted values**; unquoted or single-quoted values are taken literally (and an unquoted value would terminate at the first real newline). Use this for WordPress-style changelog headers:
+
+```bash
+MAIASS_VERSION_SECONDARY_FILES="readme.txt:pattern:== Changelog ==\n\n= {version} ="
+```
+
+Be aware that, like all `pattern`-type entries, this **rewrites the version in the existing matching block in place** — it does not prepend a new changelog entry for the new version.
 
 ### 🔌 WordPress Integration
 ```bash
