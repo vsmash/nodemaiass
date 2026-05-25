@@ -1,3 +1,33 @@
+## 5.13.4
+24 May 2026
+
+- bump version-bump.yml node-version 20->24 (MAI-56 template parity) (#21)
+- Co-authored-by: Tyler Durton <tyler@wipeyour.com>
+	Sync package-lock.json with bumped version
+
+## 5.13.2
+25 May 2026
+
+- Synced package-lock.json to align with the updated version.
+
+## 5.13.1
+24 May 2026
+
+- + MAI-59: fix secondary version-files docs and stale code comment (#19)
+- * MAI-57: fix secondary version-files docs (pipe/colon format, multi-line \n)
+	  - document real pipe-separated, colon-delimited file:type:pattern format with correct example
+	  - drop MAIASS_VERSION_SECONDARY_TYPES (never read by code); mark not implemented
+	  - list the three supported type values (pattern, txt, json) and what each does
+	  - add multi-line \n note (double-quoted, pattern type only) with caveat it rewrites in place
+- * MAI-57 MAI-59: fix stale comma-separated comment for MAIASS_VERSION_SECONDARY_FILES
+- ---------
+- Co-authored-by: Tyler Durton <tyler@wipeyour.com>
+	drop cache:'npm' and bump node 20→24 in generated bump workflow (#18)
+- - remove cache: 'npm' from generated setup-node step so workflow runs on projects without a Node lock file
+	  - bump generated node-version 20 to 24 (node 20 deprecated on GitHub runners)
+- Co-authored-by: Tyler Durton <tyler@wipeyour.com>
+	Merge branch 'release/5.13.0' into develop
+
 ## 5.13.0
 21 May 2026
 

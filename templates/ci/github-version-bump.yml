@@ -50,8 +50,11 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: '20'
-          cache: 'npm'
+          node-version: '24'
+          # No cache: this workflow only does `npm install -g maiass`, which
+          # needs no project-level npm cache. Setting cache: 'npm' makes
+          # setup-node fail on projects without a Node lock file (e.g.
+          # WordPress/PHP plugins): "Dependencies lock file is not found".
 
       - name: Install maiass
         run: npm install -g maiass --no-fund --no-audit
