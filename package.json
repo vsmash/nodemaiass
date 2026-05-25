@@ -1,7 +1,7 @@
 {
   "name": "maiass",
   "type": "module",
-  "version": "5.13.8",
+  "version": "5.13.5",
   "description": "AI commit messages, version bumps, and changelogs from one command. Stages, commits, merges, tags. Anonymous on first run — no email, no card.",
   "main": "maiass.mjs",
   "bin": {

@@ -1,11 +1,42 @@
-## 5.13.6
+## 5.13.5
 25 May 2026
 
-- # Conflicts:
-	#	.CHANGELOG_internal.md
-	#	CHANGELOG.md
-	#	package.json
-- Synced package-lock.json.
+- + MAI-52: add -m/--message flag and devlog .env.maiass.local template (#17)
+- * MAI-51 + MAI-52: add -m/--message flag and devlog .env.maiass.local template
+- add -m/--message flag for non-interactive commit messages. The value is
+	used verbatim (real newlines preserved, no escape interpretation, no blank-line
+	joining), bypasses the AI proxy + interactive prompts entirely (works with no
+	token/credit), preserves the Jira-ticket prepend (idempotent), is orthogonal to
+	mode, and is delivered via `git commit -F <tempfile>` so newlines survive shell
+	quoting. Forms: -m <v>, --message <v>, --message=<v>. Empty -> no commit.
+- add commented MAIASS_DEVLOG_CLIENT/SUBCLIENT/PROJECT template lines to the
+	generated .env.maiass.local at both generation points (first-run marker in
+	maiass.mjs and the --setup wizard in lib/bootstrap.js).
+- Co-Authored-By: Claude Opus 4.7 (1M context) <noreply@anthropic.com>
+- * MAI-51: tests for -m/--message flag; extract parser to lib/arg-utils.js
+- Add test/unit/commit-message-flag.test.js — 19 tests (8 unit on the parser +
+	hermetic spawn-based integration tests): multiline verbatim byte-exactness,
+	literal backslash-n not interpreted, single line, --message / --message= forms,
+	Jira prepend + idempotency, empty -> no commit, -ac -m unattended, no-token/no-AI.
+- Extract the pure extractMessageFlag parser from maiass.mjs into lib/arg-utils.js
+	so the argv-level cases can be unit-tested without booting the CLI; maiass.mjs
+	now imports it. No behavior change.
+- Co-Authored-By: Claude Opus 4.7 (1M context) <noreply@anthropic.com>
+- * MAI-51: exit non-zero on empty -m/--message (node↔bash parity)
+- An explicitly-supplied but empty/whitespace-only -m now fails fast with a
+	non-zero exit before any staging/commit, matching bash (which already aborts
+	on empty -m). Previously node printed "No commit message provided" but exited 0,
+	so a CI/agent passing an empty message saw a false success. Updated the two
+	empty-message tests to assert the non-zero exit.
+- Co-Authored-By: Claude Opus 4.7 (1M context) <noreply@anthropic.com>
+- * MAI-51: restore forceStaged destructuring in handleStagedCommit (fix develop-merge breakage)
+	  - reconcile dropped MAI-58 dryRun/forceStaged with MAI-51 providedMessage in handleStagedCommit and commitThis (lib/commit.js)
+	  - restore providedMessage plumbing through handleCommitWorkflow (lib/maiass-pipeline.js)
+	  - make staged-changes guard forceStaged-aware to match develop
+- ---------
+- Co-authored-by: Alana Durton <269018652+AlanaDurton@users.noreply.github.com>
+	Co-authored-by: Claude Opus 4.7 (1M context) <noreply@anthropic.com>
+	Sync package-lock.json with bumped version
 
 ## 5.13.4
 24 May 2026
