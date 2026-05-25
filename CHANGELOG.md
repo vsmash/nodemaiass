@@ -1,6 +1,7 @@
-## 5.13.5
+## 5.13.6
 25 May 2026
 
+- Synced package-lock.json with updated version.
 - + MAI-52: add -m/--message flag and devlog .env.maiass.local template (#17)
 - * MAI-51 + MAI-52: add -m/--message flag and devlog .env.maiass.local template
 - add -m/--message flag for non-interactive commit messages. The value is
