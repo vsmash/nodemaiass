@@ -1,6 +1,10 @@
-## 5.13.5
+## 5.13.6
 25 May 2026
 
+- # Conflicts:
+	#	.CHANGELOG_internal.md
+	#	CHANGELOG.md
+	#	package.json
 - Synced package-lock.json.
 
 ## 5.13.4
