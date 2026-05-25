@@ -55,11 +55,25 @@ import { SYMBOLS } from './lib/symbols.js';
 import { bootstrapProject } from './lib/bootstrap.js';
 import { createGithubAction, showGitlabExcerpt, showBitbucketExcerpt } from './lib/ci-templates.js';
 import { validateFlags } from './lib/flag-validator.js';
+import { extractMessageFlag } from './lib/arg-utils.js';
 
 // Simple CLI setup for pkg compatibility
 const args = process.argv.slice(2);
-// Skip flags (starting with -) to find the first meaningful argument
-const firstArg = args.find(a => !a.startsWith('-'));
+
+// -m / --message <value>: a verbatim commit message supplied non-interactively
+// (MAI-XX node+bash parity). The flag CONSUMES the next token as its value, so
+// that value must NOT be treated as the command name / version-bump type during
+// command derivation below. Supported forms: `-m <value>`, `--message <value>`,
+// `--message=<value>`. Single value only (no git-style repeated -m).
+//
+// extractMessageFlag returns { message, valueIndices } where valueIndices marks
+// argv positions that belong to the flag (the flag token and, for the space-
+// separated form, its value) so command derivation can skip them.
+const { message: providedMessage, valueIndices: messageArgIndices } = extractMessageFlag(args);
+
+// Skip flags (starting with -) AND the -m/--message value token to find the
+// first meaningful positional argument (command / version-bump).
+const firstArg = args.find((a, i) => !a.startsWith('-') && !messageArgIndices.has(i));
 
 // Handle --setup/--bootstrap flag early
 if (args.includes('--setup') || args.includes('--bootstrap')) {
@@ -146,7 +160,10 @@ const SUBCOMMAND_FLAGS = {
 };
 
 const activeSubcommandFlags = SUBCOMMAND_FLAGS[command] ?? [];
-const flagValidation = validateFlags(args, activeSubcommandFlags);
+// Skip the -m/--message value token during validation — it may legitimately
+// begin with '-' (e.g. `-m "-- breaking change --"`) and must not be treated
+// as an unknown flag.
+const flagValidation = validateFlags(args, activeSubcommandFlags, messageArgIndices);
 
 if (!flagValidation.valid) {
   console.error(colors.Red(`${SYMBOLS.CROSS} Error: Unrecognized option '${flagValidation.flag}' for command '${command}'`));
@@ -164,6 +181,14 @@ if (!flagValidation.valid) {
   if (shortFlags.length) console.log('  ' + shortFlags.join(', '));
   console.log('');
   console.log(`Run 'nma --help' or 'nma ${command} --help' for more information.`);
+  process.exit(1);
+}
+
+// An explicitly-supplied but empty/whitespace-only -m/--message is a usage
+// error — fail fast with a non-zero exit (parity with bash, which aborts here).
+// An absent flag (providedMessage === null) is unaffected.
+if (providedMessage !== null && providedMessage.trim() === '') {
+  console.error(colors.Red(`${SYMBOLS.CROSS} Error: --message/-m requires a non-empty value`));
   process.exit(1);
 }
 
@@ -221,6 +246,8 @@ if (args.includes('--help') || args.includes('-h') || command === 'help') {
   console.log('  --auto, -a         Full auto — stage, commit, push, merge to develop, bump version');
   console.log('  --auto-commit, -ac Auto-yes for commit phase only — stops after commit (no merge, no bump)');
   console.log('  --commits-only, -c Generate AI commits without version management');
+  console.log('  --message, -m <msg> Use this commit message verbatim (skips AI + the message prompt; no credit/token needed).');
+  console.log('                     Supplies the message only; for fully unattended use combine with -ac (or --auto-stage).');
   console.log('  --auto-stage       Automatically stage all changes');
   console.log('  --setup, --bootstrap Run interactive project setup');
   console.log('  --help, -h         Show this help message');
@@ -263,7 +290,12 @@ if (args.includes('--show-bb-excerpt'))  { showBitbucketExcerpt(); process.exit(
       '.env.maiass.local',
       `# .env.maiass.local — personal/local MAIASS settings (never committed)\n` +
       `# Generated on first run: ${new Date().toISOString()}\n` +
-      `# Use this file for personal overrides, e.g. MAIASS_AI_MODE=autosuggest\n`,
+      `# Use this file for personal overrides, e.g. MAIASS_AI_MODE=autosuggest\n` +
+      `\n` +
+      `# Example: devlog tagging (optional)\n` +
+      `#MAIASS_DEVLOG_CLIENT="yourclient"\n` +
+      `#MAIASS_DEVLOG_SUBCLIENT=""\n` +
+      `#MAIASS_DEVLOG_PROJECT="yourproject"\n`,
       'utf8'
     );
 
@@ -326,7 +358,9 @@ if (args.includes('--show-bb-excerpt'))  { showBitbucketExcerpt(); process.exit(
     case 'maiass':
       // Handle the main MAIASS workflow
       await handleMaiassCommand({
-        _: process.argv.slice(2).filter(arg => !arg.startsWith('-')),
+        // Positionals must exclude the -m/--message value token (it doesn't start
+        // with '-' but is NOT a command/bump-type positional).
+        _: process.argv.slice(2).filter((arg, i) => !arg.startsWith('-') && !messageArgIndices.has(i)),
         // -ac is equivalent to -c (commits-only) plus auto-yes prompts
         'commits-only': args.includes('--commits-only') || args.includes('-c') || args.includes('--auto-commit') || args.includes('-ac'),
         'auto-stage': args.includes('--auto-stage'),
@@ -335,7 +369,10 @@ if (args.includes('--show-bb-excerpt'))  { showBitbucketExcerpt(); process.exit(
         'dry-run': args.includes('--dry-run') || args.includes('-d'),
         force: args.includes('--force') || args.includes('-f'),
         silent: args.includes('--silent') || args.includes('-s'),
-        tag: getArgValue(args, '--tag') || getArgValue(args, '-t')
+        tag: getArgValue(args, '--tag') || getArgValue(args, '-t'),
+        // Verbatim commit message supplied via -m/--message (or null). Threaded
+        // through the pipeline to the commit phase; bypasses AI + interactive.
+        message: providedMessage
       });
       break;
       
@@ -363,3 +400,6 @@ function getArgValue(args, flag) {
   }
   return null;
 }
+
+// extractMessageFlag is imported from ./lib/arg-utils.js — extracted (MAI-51)
+// so it can be unit-tested without booting the CLI on import.
