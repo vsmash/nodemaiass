@@ -1,3 +1,15 @@
+## 5.14.2
+2 June 2026
+
+- Synced package-lock.json.
+- Implemented auto-picking of AI commit model based on diff size.
+	  - Added pickCommitModel() in lib/commit.js with override > legacy > auto-pick layering.
+	  - Introduced MAIASS_AI_COMMIT_MODEL environment variable for commit-only overrides, taking precedence over MAIASS_AI_MODEL.
+	  - Auto-picked commit models by post-truncation diff length: <30k for gpt-4o-mini, 30k-100k for gpt-4-turbo, >100k for gpt-4o.
+	  - Debug log displays tier and diff size when MAIASS_DEBUG is enabled.
+	  - Registered MAIASS_AI_COMMIT_MODEL in maiass-variables.js and added the AI category in config-manager/config-command.
+	  - Created commit-model-picker.test.js with 13 test cases covering overrides, legacy, and tier boundaries.
+
 ## 5.14.1
 1 June 2026
 
