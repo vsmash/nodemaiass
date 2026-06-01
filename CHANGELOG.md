@@ -1,3 +1,19 @@
+## 5.14.1
+1 June 2026
+
+- nodemaiass - auto-pick AI commit model by diff size
+- Three-layer model picker for commit message generation.
+- - MAIASS_AI_COMMIT_MODEL env var (NEW) — absolute override, wins over everything if set
+	- MAIASS_AI_MODEL (existing) — back-compat for legacy users with explicit choice
+	- Auto-pick: post-truncation diff size → gpt-4o-mini (<30K) / gpt-4-turbo (30K-100K) / gpt-4o (>100K)
+	- Debug log shows tier, char count, threshold range
+	- Registered in lib/maiass-variables.js + grouped under AI in config-manager.js + config-command.js
+	- 13 new unit tests in test/unit/commit-model-picker.test.js, 92/92 passing
+- Worker half (vsmash/maiass-proxy#5) landed first so client's model now passes through to 1min.ai. This PR makes the auto-pick take effect end-to-end.
+- Code-review verdict: ship. Three NITs deferred to follow-up (bootstrap template + non-string defence + comment hygiene).
+- Jira: https://velvary.atlassian.net/browse/MAI-48
+	Merge branch 'release/5.14.0' into develop
+
 ## 5.13.6
 25 May 2026
 
