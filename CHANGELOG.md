@@ -1,3 +1,14 @@
+## 5.15.0
+8 June 2026
+
+- Synced package-lock.json with the updated version.
+- Disabled auto-stage by default and renamed the auto-commit option to unattended-commit.
+		- Ensured that the auto-stage feature does not force stage changes.
+		- Restored the interactive alias for the commit option.
+		- Limited version commit to staging only version and changelog files, including secondary WordPress files.
+		- Implemented stash and restore for leftover changes during dirty-tree scenarios, preserving conflicts. 
+		- Updated user-facing output in node CLI and committhis.sh.
+
 ## 5.14.3
 8 June 2026
 
