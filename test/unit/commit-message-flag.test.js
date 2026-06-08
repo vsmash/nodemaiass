@@ -315,18 +315,23 @@ describe('-m / --message verbatim commit (integration)', () => {
     expect(stdout).toContain('requires a non-empty value');
   });
 
-  // Case 8 — `-ac -m` is fully unattended even with UNSTAGED changes and NO
-  // auto-stage env preset (-ac supplies the auto-yes itself). The timeout in
-  // runCli converts any hang into a test failure rather than a blocked suite.
-  it('runs fully unattended with -ac -m on a repo with unstaged changes (no auto-stage env)', () => {
+  // Case 8 — MAI-93: `-uc -m` is fully unattended and commits STAGED changes.
+  // It must NOT prompt and must NOT hang even with unstaged changes present.
+  // With a staged change + an unstaged change and no auto-stage env, it commits
+  // only the staged one. The timeout in runCli converts any hang into a failure.
+  it('runs fully unattended with -uc -m, committing only staged changes (no auto-stage env)', () => {
     const dir = makeRepo({ branch: 'feature/MAI-777_demo' });
-    unstagedChange(dir); // NOT git-added — -ac must stage it itself
+    stageChange(dir, 'staged.txt', 'staged\n');     // staged → should be committed
+    unstagedChange(dir, 'loose.txt', 'untracked\n'); // NOT staged → must be left alone
     // Deliberately do NOT set MAIASS_AUTO_STAGE_UNSTAGED.
-    const { status, signal } = runCli(dir, ['-ac', '-m', 'MAI-777 unattended'], { timeout: 30000 });
-    // A hang would surface as signal === 'SIGTERM' (execFileSync timeout kill).
+    const { status, signal } = runCli(dir, ['-uc', '-m', 'MAI-777 unattended'], { timeout: 30000 });
+    // A hang would surface as signal === 'SIGTERM' (timeout kill).
     expect(signal).toBeNull();
     expect(status).toBe(0);
     expect(commitSubject(dir)).toBe('MAI-777 unattended');
+    // The untracked file was NOT swept into the commit (still untracked).
+    const porcelain = execFileSync('git', ['status', '--porcelain'], { cwd: dir, encoding: 'utf8' });
+    expect(porcelain).toContain('?? loose.txt');
   });
 
   // Case 9 — no token / no AI / no network. All the runs above already delete

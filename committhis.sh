@@ -1,2 +1,2 @@
 #!/bin/bash
-nma commit --commits-only
+maiass --commits-only

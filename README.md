@@ -10,7 +10,9 @@
 
 ---
 
-Run `maiass` in any git repo and it stages your changes, writes the commit message, bumps the version, updates the changelog, and merges the branch. It's for developers who do this routine every day and want the keystrokes back. Anonymous on first run — no email, no card, no sign-up.
+Run `maiass` in any git repo and it commits your staged changes, writes the commit message, bumps the version, updates the changelog, and merges the branch. It's for developers who do this routine every day and want the keystrokes back. Anonymous on first run — no email, no card, no sign-up.
+
+By default MAIASS only ever commits changes you have already staged — it leaves unstaged and untracked files alone. To have it stage everything for you, either answer the interactive prompt, pass `--auto-stage` for a single run, or set `MAIASS_AUTO_STAGE_UNSTAGED=true` to make it the default.
 
 > Site: [maiass.net](https://maiass.net) · Bash/Homebrew source: [bashmaiass](https://github.com/vsmash/bashmaiass)
 
@@ -47,8 +49,11 @@ maiass
 maiass minor    # 1.2.3 → 1.3.0
 maiass major    # 1.2.3 → 2.0.0
 
-# Commit only, skip version management
-maiass --commits-only
+# Interactive commit-only, skip version management
+maiass --commits-only        # short: -c or -co
+
+# Unattended commit-only — commit STAGED changes, push, then stop (no merge, no bump)
+maiass --unattended-commit   # short: -uc (interactive sibling: -co / --commits-only)
 
 # Preview without making changes
 maiass --dry-run patch

@@ -101,7 +101,7 @@ if (firstArg && versionBumpTypes.includes(firstArg)) {
     console.log('Version bump types:');
     console.log('  ' + versionBumpTypes.join(', '));
     console.log('');
-    console.log(`Run 'nma --help' for more information.`);
+    console.log(`Run 'maiass --help' for more information.`);
     process.exit(1);
   }
   command = firstArg;
@@ -110,14 +110,30 @@ if (firstArg && versionBumpTypes.includes(firstArg)) {
   command = 'maiass';
 }
 
+// MAI-93: `-ac` / `--auto-commit` has been REMOVED (breaking change, no alias).
+// Reject it early — before any work — and point users at the replacement.
+// Skip any position that is the VALUE of -m/--message, so a legitimate commit
+// message like `maiass -uc -m "-ac"` is NOT treated as the removed flag.
+const usesRemovedAutoCommit = args.some(
+  (a, i) => (a === '--auto-commit' || a === '-ac') && !messageArgIndices.has(i)
+);
+if (usesRemovedAutoCommit) {
+  console.error('Please use -uc (--unattended-commit)');
+  process.exit(1);
+}
+
 // Auto modes:
-// -a  / --auto:        full auto — stage, push, merge to develop, version bump
-//                      (kept identical to historical behaviour for CI compatibility)
-// -ac / --auto-commit: auto-yes for commit phase only — stops after commit
-//                      (no merge, no bump). Useful for CI runs that just want
-//                      the AI commit captured without touching develop.
-const isAutoCommit = args.includes('--auto-commit') || args.includes('-ac');
-const isAuto = !isAutoCommit && (args.includes('--auto') || args.includes('-a'));
+// -a  / --auto:              full auto — push, merge to develop, version bump.
+//                            Does NOT force-stage unstaged/untracked changes any
+//                            more (MAI-93) — auto-staging is opt-in via
+//                            MAIASS_AUTO_STAGE_UNSTAGED=true.
+// -uc / --unattended-commit: auto-yes for commit phase only — commits STAGED
+//                            changes, pushes the current branch, then stops (no
+//                            merge, no bump). Unattended but does NOT force-stage
+//                            (MAI-93). Distinct from the INTERACTIVE commits-only
+//                            (-c / -co / --commits-only), which prompts.
+const isUnattendedCommit = args.includes('--unattended-commit') || args.includes('-uc');
+const isAuto = !isUnattendedCommit && (args.includes('--auto') || args.includes('-a'));
 
 // Auto-mode env vars are applied AFTER flag validation below — see
 // "Apply auto-mode env vars" block. Detected here only because the booleans
@@ -180,7 +196,7 @@ if (!flagValidation.valid) {
   if (longFlags.length) console.log('  ' + longFlags.join(', '));
   if (shortFlags.length) console.log('  ' + shortFlags.join(', '));
   console.log('');
-  console.log(`Run 'nma --help' or 'nma ${command} --help' for more information.`);
+  console.log(`Run 'maiass --help' or 'maiass ${command} --help' for more information.`);
   process.exit(1);
 }
 
@@ -195,9 +211,13 @@ if (providedMessage !== null && providedMessage.trim() === '') {
 // Apply auto-mode env vars now that validation has passed. Setting these
 // before validation would leak MAIASS_AUTO_* into process.env for commands
 // that reject --auto (e.g. `account-info --auto`) — see MAI-43 code review.
-if (isAuto || isAutoCommit) {
-  // Shared auto-yes vars for both modes
-  process.env.MAIASS_AUTO_STAGE_UNSTAGED = 'true';
+//
+// MAI-93: auto modes NO LONGER force MAIASS_AUTO_STAGE_UNSTAGED. Auto-staging
+// of unstaged/untracked changes is now opt-in — whatever the user/config set
+// (loaded into process.env at maiass.mjs:25) is preserved; default off. The
+// auto-yes vars below only cover push and AI-suggestion approval.
+if (isAuto || isUnattendedCommit) {
+  // Shared auto-yes vars for both modes (NOT auto-stage — see MAI-93 above)
   process.env.MAIASS_AUTO_PUSH_COMMITS = 'true';
   process.env.MAIASS_AUTO_APPROVE_AI_SUGGESTIONS = 'true';
 }
@@ -208,11 +228,11 @@ if (isAuto) {
   if (process.env.MAIASS_DEBUG === 'true') {
     logger.debug('[DEBUG] Auto mode enabled — full pipeline runs unattended');
   }
-} else if (isAutoCommit) {
-  // -ac: stop after commit phase. Implemented by treating it as commits-only
+} else if (isUnattendedCommit) {
+  // -uc: stop after commit phase. Implemented by treating it as commits-only
   process.env.MAIASS_AUTO_FINISH_AFTER_COMMIT = 'true';
   if (process.env.MAIASS_DEBUG === 'true') {
-    logger.debug('[DEBUG] Auto-commit mode enabled — stops after commit phase');
+    logger.debug('[DEBUG] Unattended-commit mode enabled — stops after commit phase');
   }
 }
 
@@ -243,12 +263,15 @@ if (args.includes('--help') || args.includes('-h') || command === 'help') {
   console.log('\nOptions:');
   console.log('  --account-info     Show your account status (masked token)');
   console.log('  --cleanup-changelogs  AI-clean CHANGELOG.md + .CHANGELOG_internal.md (backfills from git; writes .bak)');
-  console.log('  --auto, -a         Full auto — stage, commit, push, merge to develop, bump version');
-  console.log('  --auto-commit, -ac Auto-yes for commit phase only — stops after commit (no merge, no bump)');
-  console.log('  --commits-only, -c Generate AI commits without version management');
+  console.log('  --auto, -a         Full auto — commit staged, push, merge to develop, bump version');
+  console.log('                     (auto-staging of UNSTAGED changes is opt-in: MAIASS_AUTO_STAGE_UNSTAGED=true)');
+  console.log('  --commits-only, -c, -co  Interactive commit-only — generate AI commits without version management');
+  console.log('  --unattended-commit, -uc Unattended commit-only — commits STAGED changes, pushes current branch,');
+  console.log('                     then stops (no merge/bump; auto-staging of unstaged changes is opt-in)');
   console.log('  --message, -m <msg> Use this commit message verbatim (skips AI + the message prompt; no credit/token needed).');
-  console.log('                     Supplies the message only; for fully unattended use combine with -ac (or --auto-stage).');
-  console.log('  --auto-stage       Automatically stage all changes');
+  console.log('                     Supplies the message only; for fully unattended use combine with -uc (or --auto-stage).');
+  console.log('  --auto-stage       Stage all changes for this run (one-shot opt-in; otherwise unstaged');
+  console.log('                     changes are left alone unless MAIASS_AUTO_STAGE_UNSTAGED=true)');
   console.log('  --setup, --bootstrap Run interactive project setup');
   console.log('  --help, -h         Show this help message');
   console.log('  --version, -v      Show version');
@@ -361,8 +384,11 @@ if (args.includes('--show-bb-excerpt'))  { showBitbucketExcerpt(); process.exit(
         // Positionals must exclude the -m/--message value token (it doesn't start
         // with '-' but is NOT a command/bump-type positional).
         _: process.argv.slice(2).filter((arg, i) => !arg.startsWith('-') && !messageArgIndices.has(i)),
-        // -ac is equivalent to -c (commits-only) plus auto-yes prompts
-        'commits-only': args.includes('--commits-only') || args.includes('-c') || args.includes('--auto-commit') || args.includes('-ac'),
+        // commits-only is the INTERACTIVE commit-only mode: -c / -co / --commits-only.
+        // The UNATTENDED variant -uc / --unattended-commit also maps here, then adds
+        // the auto-yes / auto-finish env vars set above (MAI-93).
+        'commits-only': args.includes('--commits-only') || args.includes('-c') || args.includes('-co')
+          || args.includes('--unattended-commit') || args.includes('-uc'),
         'auto-stage': args.includes('--auto-stage'),
         'auto': args.includes('--auto') || args.includes('-a'),
         'version-bump': versionBump,
