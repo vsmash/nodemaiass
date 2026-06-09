@@ -1,3 +1,12 @@
+## 5.15.4
+9 June 2026
+
+- deploy preflight — require vsmash gh account + workflow scope (#24)
+- - npm_deploy.sh verifies gh user=vsmash + workflow scope in pre-flight
+	  - runs before merges/tag/npm publish so a release failure cannot strand the deploy
+- Co-authored-by: Tyler Durton <tyler@wipeyour.com>
+	Bumped version to 5.15.3
+
 ## 5.15.0
 8 June 2026
 
