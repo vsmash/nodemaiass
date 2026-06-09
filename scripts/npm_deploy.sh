@@ -16,6 +16,30 @@ warn()    { echo -e "${YELLOW}⚠  $*${RESET}"; }
 error()   { echo -e "${RED}✘  $*${RESET}" >&2; }
 step()    { echo -e "\n${BOLD}${CYAN}── $* ──${RESET}"; }
 
+# ── Ensure GitHub CLI is acting as vsmash + has the 'workflow' scope ──────────
+# MAIASS repos live under the vsmash account, and creating a GitHub release in a
+# repo that contains .github/workflows requires the token's 'workflow' scope.
+# Verified (and auto-switched) in pre-flight, BEFORE any irreversible step, so a
+# release failure can't strand us after `npm publish`.
+require_gh_vsmash() {
+  local want="vsmash" active scopes
+  command -v gh >/dev/null 2>&1 || { error "gh CLI not found — required to create the GitHub release."; exit 1; }
+  active=$(gh api user --jq .login 2>/dev/null || true)
+  if [[ "$active" != "$want" ]]; then
+    gh auth switch -u "$want" >/dev/null 2>&1 || true
+    active=$(gh api user --jq .login 2>/dev/null || true)
+  fi
+  if [[ "$active" != "$want" ]]; then
+    error "GitHub CLI must be authenticated as '$want' (currently: ${active:-none}). Fix: gh auth switch -u $want"
+    exit 1
+  fi
+  scopes=$(gh api -i user 2>/dev/null | grep -i '^x-oauth-scopes:' | cut -d: -f2- | tr -d ' \r')
+  case ",$scopes," in
+    *,workflow,*) : ;;
+    *) error "gh token for '$want' lacks the 'workflow' scope (needed to create GitHub releases). Fix: gh auth refresh -h github.com -s workflow"; exit 1 ;;
+  esac
+}
+
 # ── Trap: print a clear message if anything fails ────────────────────────────
 trap 'error "Deploy aborted at line $LINENO. Check the output above for details."; git checkout "$CURRENT_BRANCH" 2>/dev/null && warn "Returned to branch: $CURRENT_BRANCH"' ERR
 
@@ -31,6 +55,11 @@ if ! git diff --quiet || ! git diff --cached --quiet; then
   exit 1
 fi
 success "Working directory is clean"
+
+# GitHub release (final step) needs the vsmash account + 'workflow' scope.
+# Verify NOW, before merges/tag/publish, so we never publish then fail on release.
+require_gh_vsmash
+success "GitHub CLI authenticated as vsmash (workflow scope present)"
 
 # Read version from develop (where the bump happened), not the current branch
 VERSION=$(git show develop:package.json | node -p "JSON.parse(require('fs').readFileSync('/dev/stdin','utf8')).version" 2>/dev/null \
