@@ -1,6 +1,14 @@
-## 5.15.5
+## 5.15.6
 10 June 2026
 
+- Stopped CI version-bump runs from creating throwaway anonymous subscriptions
+	- Guarded `createAnonymousSubscriptionIfNeeded()` to return null without calling /v1/token when AI mode is off or running in CI with no existing token
+	- Added reusable `isAIModeOff()`, `isCI()`, and `ciHeaders()` helpers in client-info.js for robust parsing
+	- Sent `X-MAIASS-CI` header on token and proxy requests
+	- Quoted `MAIASS_AI_MODE: "off"` in the version-bump workflow and installed template
+	- Routed changelog-cleanup through shared parser
+	- Added vitest coverage for off/CI/local paths
+- Synced package-lock.json with updated version
 - deploy as owner (git-as mark) + force vsmash SSH key (#25)
 - - npm_deploy.sh: export GIT_SSH_COMMAND IdentitiesOnly=yes + git-as mark before git ops
 	  - fixes nondeterministic push denial as tylerdurton (1Password agent key order)
