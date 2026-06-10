@@ -1,3 +1,12 @@
+## 5.15.5
+10 June 2026
+
+- deploy as owner (git-as mark) + force vsmash SSH key (#25)
+- - npm_deploy.sh: export GIT_SSH_COMMAND IdentitiesOnly=yes + git-as mark before git ops
+	  - fixes nondeterministic push denial as tylerdurton (1Password agent key order)
+- Co-authored-by: Tyler Durton <tyler@wipeyour.com>
+	Sync package-lock.json with bumped version
+
 ## 5.15.4
 9 June 2026
 
