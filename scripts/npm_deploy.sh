@@ -2,6 +2,15 @@
 # npm_deploy.sh — promote develop → staging → main and publish to npm
 set -e  # exit immediately if any command fails
 
+# Deployments are owner (mark/vsmash) actions — not persona commits. Set the
+# owner identity + origin routing for this repo, and force the vsmash SSH key:
+# the 1Password agent otherwise offers a persona key (tyler) first and GitHub
+# nondeterministically denies the push. IdentitiesOnly=yes makes ssh use only the
+# host's configured IdentityFile (the vsmash key). Honour an existing
+# GIT_SSH_COMMAND (e.g. CI).
+export GIT_SSH_COMMAND="${GIT_SSH_COMMAND:-ssh -o IdentitiesOnly=yes}"
+command -v git-as >/dev/null 2>&1 && git-as mark >/dev/null 2>&1 || true
+
 # ── Colours ──────────────────────────────────────────────────────────────────
 BOLD="\033[1m"
 RESET="\033[0m"
