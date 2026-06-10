@@ -69,7 +69,12 @@ jobs:
       - name: Bump version
         run: maiass -a patch
         env:
-          MAIASS_AI_MODE: off  # Disable AI — no credits used in CI
+          # Quoted: unquoted `off` is a YAML boolean that GitHub stringifies to
+          # "false", and a repo's tracked .env.maiass (loaded with override) can
+          # still flip AI back on — both previously minted a throwaway anonymous
+          # subscription on every CI run. The CLI now also self-guards via CI
+          # detection (see MAI-98), but keep this explicit and correct.
+          MAIASS_AI_MODE: "off"  # Disable AI — no credits used in CI
 
       # Keep package-lock.json in sync with the bumped package.json version.
       # `maiass -a patch` rewrites package.json but doesn't run npm install,
