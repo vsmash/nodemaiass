@@ -65,4 +65,64 @@ describe('normalizeBulletMessage (MAI-108)', () => {
     const expected = 'Tidied logging\n  - chore: drop debug line';
     expect(normalizeBulletMessage(input)).toBe(expected);
   });
+
+  it('(e) returns "" for an empty string', () => {
+    expect(normalizeBulletMessage('')).toBe('');
+  });
+
+  it('(f) returns "" for whitespace-only input', () => {
+    expect(normalizeBulletMessage('   \n\t\n  ')).toBe('');
+  });
+
+  it('(g) tolerates CRLF line endings', () => {
+    const input = 'Fixed crash\r\n- fix: guard null config\r\n- fix: log path\r\n';
+    const expected = [
+      'Fixed crash',
+      '  - fix: guard null config',
+      '  - fix: log path',
+    ].join('\n');
+    expect(normalizeBulletMessage(input)).toBe(expected);
+  });
+
+  it('(h) leaves all-bullets/no-title output UNCHANGED (no fabricated subject)', () => {
+    const input = [
+      '- feat: add token refresh',
+      '- docs: update README',
+    ].join('\n');
+    // No summary line — the normalizer must not promote a bullet to a title.
+    expect(normalizeBulletMessage(input)).toBe(input);
+  });
+
+  it('(i) appends a wrapped continuation to the previous bullet, not a new one', () => {
+    const input = [
+      'Refactored auth flow',
+      '- feat: add token refresh handling that spans',
+      'multiple physical lines after a soft wrap',
+      '- docs: update README',
+    ].join('\n');
+    const expected = [
+      'Refactored auth flow',
+      '  - feat: add token refresh handling that spans multiple physical lines after a soft wrap',
+      '  - docs: update README',
+    ].join('\n');
+    expect(normalizeBulletMessage(input)).toBe(expected);
+  });
+
+  it('(j) appends a continuation that precedes any bullet to the title line', () => {
+    const input = [
+      'Refactored the authentication flow because',
+      'the legacy path was unmaintainable',
+      '- feat: add token refresh',
+    ].join('\n');
+    const expected = [
+      'Refactored the authentication flow because the legacy path was unmaintainable',
+      '  - feat: add token refresh',
+    ].join('\n');
+    expect(normalizeBulletMessage(input)).toBe(expected);
+  });
+
+  it('(k) leaves a single-line title that starts with a dash unchanged', () => {
+    const input = '- feat: add token refresh';
+    expect(normalizeBulletMessage(input)).toBe(input);
+  });
 });
