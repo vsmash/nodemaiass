@@ -17,6 +17,11 @@
 #   3. Add the PAT as a repository secret named GH_PAT
 #
 # Notes:
+#   - If the GH_PAT secret is missing, this workflow runs a preflight that, by
+#     default, fails with a clear message (the merge itself is unaffected — this
+#     runs after merge). To instead skip with a warning and keep the run green,
+#     set MAIASS_CI_FAIL_SILENTLY to "true" in the preflight step's env: block
+#     below.
 #   - AI is disabled (MAIASS_AI_MODE: off) so no credits are used.
 #   - The branch name below is substituted at install time from
 #     MAIASS_DEVELOPBRANCH. GitHub Actions requires `on.pull_request.branches`
@@ -43,12 +48,46 @@ jobs:
       contents: write  # Required to push the version bump commit
 
     steps:
+      # Preflight: this workflow runs AFTER the PR is merged, so a missing
+      # GH_PAT can't block the merge — but it would fail the checkout/push with
+      # a confusing auth error on every merge. Detect the empty secret up front
+      # and emit a clear, actionable message. Behaviour is controlled by the
+      # MAIASS_CI_FAIL_SILENTLY env var below:
+      #   false (default) — fail the run so the missing secret is noticed.
+      #   true            — skip with a warning; the run stays green.
+      - name: Check GH_PAT secret
+        id: preflight
+        env:
+          GH_PAT: ${{ secrets.GH_PAT }}
+          # Edit this to "true" to skip with a warning instead of failing when
+          # GH_PAT is missing.
+          MAIASS_CI_FAIL_SILENTLY: "false"
+        run: |
+          if [ -n "$GH_PAT" ]; then
+            exit 0
+          fi
+          MSG="GH_PAT secret is not set, so the version bump cannot be pushed back to the repo. Add a fine-grained PAT as a repo secret named GH_PAT (Settings → Secrets → Actions) with Contents: Read & Write, Metadata: Read-only, Workflows: Read & Write."
+          {
+            echo "### ⚠️ MAIASS version bump — GH_PAT missing"
+            echo ""
+            echo "$MSG"
+          } >> "$GITHUB_STEP_SUMMARY"
+          if [ "$MAIASS_CI_FAIL_SILENTLY" = "true" ]; then
+            echo "::warning title=MAIASS version bump skipped::$MSG"
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "::error title=MAIASS version bump failed::$MSG"
+            exit 1
+          fi
+
       - uses: actions/checkout@v4
+        if: steps.preflight.outputs.skip != 'true'
         with:
           fetch-depth: 0          # Full history needed for changelog generation
           token: ${{ secrets.GH_PAT }}  # PAT allows the bot to push back to the repo
 
       - uses: actions/setup-node@v4
+        if: steps.preflight.outputs.skip != 'true'
         with:
           node-version: '24'
           # No cache: this workflow only does `npm install -g maiass`, which
@@ -57,9 +96,11 @@ jobs:
           # WordPress/PHP plugins): "Dependencies lock file is not found".
 
       - name: Install maiass
+        if: steps.preflight.outputs.skip != 'true'
         run: npm install -g maiass --no-fund --no-audit
 
       - name: Configure git
+        if: steps.preflight.outputs.skip != 'true'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
@@ -67,9 +108,11 @@ jobs:
       # Explicitly check out the develop branch head (the pull_request closed
       # event checks out a merge ref, not the branch itself)
       - name: Checkout __MAIASS_DEVELOPBRANCH__
+        if: steps.preflight.outputs.skip != 'true'
         run: git checkout __MAIASS_DEVELOPBRANCH__
 
       - name: Bump version
+        if: steps.preflight.outputs.skip != 'true'
         run: maiass -a patch
         env:
           # Quoted: unquoted `off` is a YAML boolean that GitHub stringifies to
