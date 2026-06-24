@@ -17,6 +17,11 @@
 # Double-bump protection:
 #   The script checks the last commit author and skips if it was already made
 #   by the CI bot — preventing an infinite loop of version bumps.
+#
+# Missing-token behaviour:
+#   If GITLAB_TOKEN is not set, a preflight (by default) fails the job with a
+#   clear message. To instead skip with a warning and pass, set
+#   MAIASS_CI_FAIL_SILENTLY to "true" in the variables: block below.
 
 stages:
   - version
@@ -27,6 +32,20 @@ maiass-version-bump:
   only:
     - __MAIASS_DEVELOPBRANCH__
   script:
+    # Preflight: GITLAB_TOKEN is required to push the bump back. Behaviour when
+    # it's missing is controlled by MAIASS_CI_FAIL_SILENTLY in the variables:
+    # block below: false (default) fails the job; true skips with a warning.
+    - |
+      if [ -z "$GITLAB_TOKEN" ]; then
+        MSG="GITLAB_TOKEN CI/CD variable is not set — add it (masked, protected) with write access to enable automatic version bumping."
+        if [ "$MAIASS_CI_FAIL_SILENTLY" = "true" ]; then
+          echo "WARNING: $MSG Skipping version bump."
+          exit 0
+        else
+          echo "ERROR: $MSG"
+          exit 1
+        fi
+      fi
     # Skip if the last commit was already a version bump from this pipeline
     - |
       LAST_AUTHOR=$(git log -1 --pretty=format:'%an')
@@ -43,3 +62,5 @@ maiass-version-bump:
     - maiass -a patch
   variables:
     MAIASS_AI_MODE: "off"  # Disable AI — no credits used in CI
+    # Missing GITLAB_TOKEN: "false" fails the job, "true" skips with a warning.
+    MAIASS_CI_FAIL_SILENTLY: "false"

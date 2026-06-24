@@ -100,6 +100,8 @@ MAIASS_STAGINGBRANCH=staging                   # Default: staging
 
 > `MAIASS_DEVELOPBRANCH` is also substituted into the CI workflow templates produced by `maiass --create-gh-action`, `--show-gl-excerpt`, and `--show-bb-excerpt` at the moment those commands run. See [CI Auto-Version-Bump on PR Merge](./workflow.md#-ci-auto-version-bump-on-pr-merge) for the install walkthrough.
 
+> The generated workflow includes a `MAIASS_CI_FAIL_SILENTLY` env var (default `false`) that controls what happens when the push credential is missing: `false` fails the run with a clear message so it's noticed (the merge itself is unaffected — the workflow runs *after* merge); `true` skips with a warning and keeps the run green. It lives in the generated YAML — **not** in `.env.maiass` — so edit it there.
+
 ### 📦 Version Management
 ```bash
 # Version Files

@@ -21,6 +21,11 @@
 #        - Create an app password with Repositories: Read & Write scope
 #        - Add it as a repository variable named BB_APP_PASSWORD (secured)
 #        - Add your Bitbucket username as BB_USERNAME
+#
+# Missing-credential behaviour:
+#   If BB_USERNAME / BB_APP_PASSWORD are not set, a preflight (by default) fails
+#   the step with a clear message. To instead skip with a warning and pass, set
+#   MAIASS_CI_FAIL_SILENTLY to "true" on the first line of the script below.
 
 pipelines:
   branches:
@@ -29,6 +34,25 @@ pipelines:
           name: MAIASS Version Bump
           image: node:20
           script:
+            # Edit to "true" to skip with a warning instead of failing when the
+            # push credential is missing. (Bitbucket doesn't reliably export a
+            # step-level variables: block to the script, so it's set here.)
+            - export MAIASS_CI_FAIL_SILENTLY="false"
+            # Preflight: BB_USERNAME/BB_APP_PASSWORD are required to push the
+            # bump back. Behaviour when missing is controlled by
+            # MAIASS_CI_FAIL_SILENTLY above: false (default) fails the step;
+            # true skips with a warning.
+            - |
+              if [ -z "$BB_USERNAME" ] || [ -z "$BB_APP_PASSWORD" ]; then
+                MSG="BB_USERNAME / BB_APP_PASSWORD repository variables are not set — add them (app password with Repositories: Read & Write) to enable automatic version bumping."
+                if [ "$MAIASS_CI_FAIL_SILENTLY" = "true" ]; then
+                  echo "WARNING: $MSG Skipping version bump."
+                  exit 0
+                else
+                  echo "ERROR: $MSG"
+                  exit 1
+                fi
+              fi
             # Guard: skip if last commit was already a version bump
             - |
               LAST_MSG=$(git log -1 --pretty=format:'%s')
