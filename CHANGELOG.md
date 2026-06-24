@@ -1,3 +1,14 @@
+## 5.15.10
+24 June 2026
+
+- graceful handling of missing CI push-credential in generated version-bump workflows (#29)
+- - add credential preflight to github/gitlab/bitbucket templates: fail with a clear, actionable message by default (merge is unaffected; workflow runs post-merge)
+	  - add editable MAIASS_CI_FAIL_SILENTLY env var (YAML-only, default false) to skip-with-warning and keep the run green
+	  - keep MAIASS_DEVELOPBRANCH baked from .env.maiass (YAML-literal trigger); CI_FAIL_SILENTLY deliberately not a .env.maiass var to avoid dead-knob drift
+	  - fix CLAUDE.md typos: MAIASS_DEVELOP_BRANCH/MAIN_BRANCH -> MAIASS_DEVELOPBRANCH/MAINBRANCH
+- Co-authored-by: Tyler Durton <tyler@wipeyour.com>
+	Sync package-lock.json with bumped version
+
 ## 5.15.8
 25 June 2026
 
