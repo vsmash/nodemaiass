@@ -34,9 +34,13 @@ pipelines:
           name: MAIASS Version Bump
           image: node:20
           script:
+            # Bitbucket doesn't reliably export a step-level variables: block to
+            # the script, so these are exported here instead.
+            # Disable AI so CI runs consume no credits (the CLI also self-guards
+            # via CI detection, but keep this explicit and effective).
+            - export MAIASS_AI_MODE="off"
             # Edit to "true" to skip with a warning instead of failing when the
-            # push credential is missing. (Bitbucket doesn't reliably export a
-            # step-level variables: block to the script, so it's set here.)
+            # push credential is missing.
             - export MAIASS_CI_FAIL_SILENTLY="false"
             # Preflight: BB_USERNAME/BB_APP_PASSWORD are required to push the
             # bump back. Behaviour when missing is controlled by
@@ -66,5 +70,3 @@ pipelines:
             # Authenticate push via app password
             - git remote set-url origin "https://${BB_USERNAME}:${BB_APP_PASSWORD}@bitbucket.org/${BITBUCKET_REPO_FULL_NAME}.git"
             - maiass -a patch
-          variables:
-            MAIASS_AI_MODE: "off"  # Disable AI — no credits used in CI
