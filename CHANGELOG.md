@@ -1,3 +1,10 @@
+## 5.15.8
+25 June 2026
+
+- Flag prompt change as production rollback point
+- Made bullet normalizer content-preserving
+- Stopped commit prompt from leaking few-shot examples; normalized bullet format
+
 ## 5.15.6
 10 June 2026
 
