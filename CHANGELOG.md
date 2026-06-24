@@ -1,6 +1,11 @@
-## 5.15.10
+## 5.15.11
 24 June 2026
 
+- set MAIASS_AI_MODE inline in Bitbucket template (step variables: is a no-op) (#30)
+- - fix: export MAIASS_AI_MODE="off" in the script instead of the step-level variables: block, which Bitbucket does not reliably export to the script
+	  - remove the now-empty variables: block; AI-off in CI is now actually effective (not just belt-and-suspenders via CI self-guard)
+- Co-authored-by: Tyler Durton <tyler@wipeyour.com>
+	Sync package-lock.json with bumped version
 - graceful handling of missing CI push-credential in generated version-bump workflows (#29)
 - - add credential preflight to github/gitlab/bitbucket templates: fail with a clear, actionable message by default (merge is unaffected; workflow runs post-merge)
 	  - add editable MAIASS_CI_FAIL_SILENTLY env var (YAML-only, default false) to skip-with-warning and keep the run green
