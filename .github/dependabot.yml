@@ -1,0 +1,56 @@
+# Dependabot configuration for nodemaiass
+#
+# WHAT THIS FIXES over the default (config-less) behaviour:
+#   Grouping. The default opens one PR per package, which is how PR #27 ended
+#   up bumping vite alone while leaving postcss and nanoid unpatched. Grouping
+#   bundles a week's bumps into one reviewable PR.
+#
+# KNOWN GITHUB LIMITATION — read before assuming this controls everything:
+#   `target-branch` applies to VERSION updates only. Dependabot SECURITY
+#   updates are always raised against the repo default branch (main), and
+#   setting `target-branch` makes this entire block stop applying to them —
+#   so security PRs stay ungrouped and keep targeting main no matter what we
+#   put here. There is no config that changes this.
+#     https://docs.github.com/en/code-security/reference/supply-chain-security/dependabot-options-reference
+#
+#   Practical consequence: a Dependabot security PR against promote-only
+#   `main` should NOT be merged there. Either close it and let the weekly
+#   grouped version-update PR below sweep the fix into develop, or if it is
+#   genuinely urgent, treat it as a hotfix per CLAUDE.md (branch from main,
+#   land on main + staging + develop).
+#
+# ALSO NOTE: Dependabot reads this file from the DEFAULT branch (main). It
+# therefore has no effect until develop is promoted through staging to main.
+
+version: 2
+updates:
+  - package-ecosystem: "npm"
+    directory: "/"
+    # Version updates land on develop — the trunk. main is promote-only.
+    target-branch: "develop"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+      timezone: "Australia/Sydney"
+    open-pull-requests-limit: 5
+    commit-message:
+      prefix: "chore"
+      prefix-development: "chore"
+      include: "scope"
+    groups:
+      # Runtime deps are only chalk/dotenv/yargs, so this group is small and
+      # is the one worth actually reading.
+      production-dependencies:
+        dependency-type: "production"
+        update-types:
+          - "minor"
+          - "patch"
+      # Everything else is the vitest toolchain (vite, postcss, nanoid, ...).
+      development-dependencies:
+        dependency-type: "development"
+        update-types:
+          - "minor"
+          - "patch"
+    # Majors are deliberately left out of the groups above so they arrive as
+    # individual PRs and get individual review.
