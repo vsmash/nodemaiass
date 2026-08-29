@@ -1,0 +1,45 @@
+# Dependabot configuration for nodemaiass
+#
+# Two things this file fixes over the default (config-less) behaviour:
+#   1. target-branch: develop — by default Dependabot opens PRs against the
+#      repo default branch (main). main is promote-only in this project, so
+#      dependency PRs must land on develop like all other non-hotfix work.
+#   2. groups — the default opens one PR per package, which is how we ended up
+#      with a lone "bump vite" PR that left postcss and nanoid unpatched.
+#      Grouping bundles a week's bumps into one reviewable PR.
+
+version: 2
+updates:
+  - package-ecosystem: "npm"
+    directory: "/"
+    target-branch: "develop"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+      timezone: "Australia/Sydney"
+    open-pull-requests-limit: 5
+    commit-message:
+      prefix: "chore"
+      prefix-development: "chore"
+      include: "scope"
+    groups:
+      # Security patches land as one PR regardless of dep type — these are the
+      # ones we actually care about, since runtime deps here are only
+      # chalk/dotenv/yargs and everything else is the vitest toolchain.
+      security-updates:
+        applies-to: security-updates
+        patterns:
+          - "*"
+      production-dependencies:
+        applies-to: version-updates
+        dependency-type: "production"
+        update-types:
+          - "minor"
+          - "patch"
+      development-dependencies:
+        applies-to: version-updates
+        dependency-type: "development"
+        update-types:
+          - "minor"
+          - "patch"
