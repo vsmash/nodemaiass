@@ -1,3 +1,8 @@
+## 5.15.15
+11 October 2026
+
+- Synchronized package-lock.json with latest version.
+
 ## 5.15.14
 7 September 2026
 
