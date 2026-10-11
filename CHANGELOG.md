@@ -1,6 +1,13 @@
-## 5.15.15
+## 5.15.16
 11 October 2026
 
+- bump vitest to 4.1.11 and source-map-js to 1.2.2 for Dependabot alerts (#39)
+-   - clears 3 alerts raised after the v5.15.15 deploy: #32 @vitest/mocker, #33 vitest, #34 source-map-js
+	  - all dev-only vitest toolchain; published package ships chalk/dotenv/yargs only, so no end-user exposure
+	  - npm audit fix handled source-map-js but would not move vitest off 4.1.4 despite the caret range allowing 4.1.11; explicit npm install -D was needed
+	  - raise devDependency floors from 4.1.4 to 4.1.11 so a fresh npm install cannot resolve back into the vulnerable range
+	  - npm audit 0 vulnerabilities; 154/154 unit tests pass on the upgraded vitest
+	  - alerts read the default branch, so these clear on the next promotion to main, not on this merge
 - Synchronized package-lock.json with latest version.
 
 ## 5.15.14
