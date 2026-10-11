@@ -80,7 +80,7 @@
   "dependencies": {
     "chalk": "^5.4.1",
     "dotenv": "^16.4.5",
-    "yargs": "^17.7.2"
+    "yargs": "^18.2.0"
   },
   "devDependencies": {
     "@vitest/coverage-v8": "^4.1.11",
